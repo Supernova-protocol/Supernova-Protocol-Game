@@ -170,4 +170,6 @@ Any current browser with Canvas 2D and Web Audio (Chrome, Edge, Firefox, Safari)
 
 ## License
 
-Choose a license for your repo (MIT is a common choice) and add a `LICENSE` file.
+ ## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
