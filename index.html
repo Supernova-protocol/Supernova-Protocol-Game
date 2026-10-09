@@ -71,6 +71,21 @@ input{-webkit-user-select:text;user-select:text}
 .lb li.me .nm{color:var(--gold)}
 .lb li:first-child .rk{color:var(--gold);text-shadow:0 0 8px rgba(255,190,11,.7)}
 .lb .empty{color:var(--dim);justify-content:center;font-size:12px}
+.lb li .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb li .nm small{display:block;font-size:10px;letter-spacing:.06em;color:#8fb7c9;margin-top:2px;overflow:hidden;text-overflow:ellipsis}
+.lb li.me .nm small{color:#d9b46a}
+/* X sign-in — only signed runs reach the global board */
+.xauth{margin:-2px 0 14px;text-align:center}
+.xbtn{display:block;width:100%;padding:12px;border-radius:8px;font-size:12px;font-weight:800;letter-spacing:.16em;color:#0b0b0f;background:#f2f4f7;box-shadow:0 0 18px rgba(255,255,255,.15);transition:transform .12s}
+.xbtn:active{transform:scale(.97)}
+.xme{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:9px 10px;border:1px solid rgba(61,255,154,.35);border-radius:8px;background:rgba(61,255,154,.05);font-size:12px;letter-spacing:.1em}
+.xme .ok{color:#3dff9a;font-weight:800;letter-spacing:.2em;font-size:10px}
+.xme b{color:#fff;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.xme button{font-size:10px;letter-spacing:.2em;color:var(--dim);text-decoration:underline}
+.xnote{font-size:9.5px;letter-spacing:.16em;color:var(--dim);margin-top:6px;line-height:1.5}
+.gonet{text-align:center;font-size:11px;letter-spacing:.16em;color:#3dff9a;margin-top:6px;min-height:14px;line-height:1.5}
+.gonet.dim{color:var(--dim)}
+.gonet.bad{color:var(--red)}
 /* live leaderboard status (Supabase) */
 .lbhead{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .lbstat{font-size:9px;letter-spacing:.22em;color:var(--dim);white-space:nowrap}
@@ -83,6 +98,7 @@ input{-webkit-user-select:text;user-select:text}
 .newrec{text-align:center;color:var(--gold);letter-spacing:.3em;font-size:12px;animation:recPulse 1s infinite alternate;min-height:16px}
 @keyframes recPulse{from{opacity:.4}to{opacity:1;text-shadow:0 0 12px var(--gold)}}
 .foot-note{font-size:10px;color:var(--dim);letter-spacing:.14em;text-align:center;margin-top:12px;line-height:1.6}
+.foot-note a{color:var(--cyan);text-decoration:underline}
 
 /* ---------- HUD ---------- */
 #hud{position:fixed;inset:0;z-index:10;pointer-events:none;transition:opacity .45s ease}
@@ -402,6 +418,11 @@ body.touch #toast{bottom:calc(var(--sab) + 250px)}
   <div class="panel">
     <div class="brand" style="margin-bottom:10px"><div class="t1" style="font-size:clamp(28px,8vw,40px)">NOVA CORE</div><div class="t2">COMMAND HUB</div></div>
     <div class="callsign"><div class="label" style="margin:0">OPERATOR</div><div class="n" id="hubName">—</div><button id="btnChange">CHANGE CALLSIGN</button></div>
+    <div class="xauth" id="xAuth">
+      <button class="xbtn" id="btnXLogin">SIGN IN WITH X TO COMPETE</button>
+      <div class="xme hidden" id="xMe"><span class="ok">✓ VERIFIED</span><b id="xHandle">@—</b><button id="btnXOut">SIGN OUT</button></div>
+      <div class="xnote" id="xNote">ONLY RUNS SIGNED WITH AN X ACCOUNT REACH THE GLOBAL BOARD</div>
+    </div>
     <div class="statgrid">
       <div class="stat"><div class="k">PERSONAL BEST</div><div class="v gold" id="hubHs">0</div></div>
       <div class="stat"><div class="k">SHARD BANK</div><div class="v cyan" id="hubShards">◆ 0</div></div>
@@ -414,7 +435,7 @@ body.touch #toast{bottom:calc(var(--sab) + 250px)}
     <button class="btn purple" id="btnHubShop" style="letter-spacing:.12em">UPGRADE HUB ✦ FX LAB</button>
     <div class="row"><button class="btn ghost small" id="btnHubMute">SFX: ON</button><button class="btn ghost small" id="btnHubMusic">MUSIC: ON</button></div>
     <button class="btn ghost small" id="btnHubAssist">AIM ASSIST: ON</button>
-    <div class="foot-note">MANUAL AIM · JOYSTICK ON PHONE · HOLD MOUSE ON PC · ✸ NOVA WHEN CHARGED<br>TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK EVERY 3 LV<br>A BREACHED CORE KEEPS ONLY 75% OF ITS AUGMENTS</div>
+    <div class="foot-note">MANUAL AIM · JOYSTICK ON PHONE · HOLD MOUSE ON PC · ✸ NOVA WHEN CHARGED<br>TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK EVERY 3 LV<br>A BREACHED CORE KEEPS ONLY 75% OF ITS AUGMENTS<br><a href="terms.html">GIVEAWAY RULES</a> · <a href="privacy.html">PRIVACY</a></div>
   </div>
 </section>
 
@@ -425,6 +446,7 @@ body.touch #toast{bottom:calc(var(--sab) + 250px)}
     <div class="label" style="text-align:center;margin-top:10px">FINAL SCORE</div>
     <div class="go-score" id="goScore">0</div>
     <div class="newrec" id="goRec"></div>
+    <div class="gonet" id="goNet"></div>
     <div class="statgrid" style="margin-top:12px">
       <div class="stat"><div class="k">LEVEL</div><div class="v" id="goLv">1</div></div>
       <div class="stat"><div class="k">ASCENSION</div><div class="v" id="goAsc">DORMANT</div></div>
@@ -493,14 +515,15 @@ const store = {
 const KEY = { name: 'nova51_callsign', lb: 'nova51_leaderboard', mute: 'nova51_mute', music: 'nova51_music', assist: 'nova51_assist', prof: n => 'nova51_profile_' + n };
 
 /* =========================================================
-   SUPABASE — live global leaderboard
-   (table: public.leaderboard · columns: name, score, level, stage)
+   SUPABASE — X-verified global leaderboard
+   (runs are opened with rpc start_run · scores sent once with rpc submit_score · board = view leaderboard_best)
+   Database setup: supabase_setup.sql
    ========================================================= */
 const SUPABASE_URL = "https://iyiikhqckiznzskxzeur.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable__pihVhG4db77CaPgtkwdyw_-IAlY6D9";
 let sb = null;
 try {
-  sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: false, autoRefreshToken: false } }) : null;
+  sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { flowType: 'pkce', persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } }) : null;
 } catch (err) { console.error('Supabase init failed:', err); sb = null; }
 
 const STAGES = ['DORMANT', 'AWAKENING', 'DEFENSE STAR', 'FOCUS CORE', 'VOLATILITY PULSE', 'GOD CORE'];
@@ -886,38 +909,75 @@ function pushLocalBoard(entry) {
   const top = lb.slice(0, 5); store.set(KEY.lb, top);
   return top.indexOf(entry);
 }
-// Global board — uploads the run to Supabase and resolves to its global rank (1 = best), or -1 if offline / failed.
-async function pushLeaderboard(entry) {
-  if (!sb) return -1;
+/* ---------- X sign-in (Supabase Auth) — only runs signed with an X account reach the global board ---------- */
+let authUser = null, run = null;
+const xHandleRaw = u => { const m = (u && u.user_metadata) || {}; return m.user_name || m.preferred_username || null; };
+function renderAuth() {
+  const on = !!authUser, h = xHandleRaw(authUser);
+  $('btnXLogin').classList.toggle('hidden', on || !sb);
+  $('xMe').classList.toggle('hidden', !on);
+  if (on) $('xHandle').textContent = h ? '@' + h : 'X ACCOUNT';
+  $('xNote').textContent = !sb ? 'GLOBAL BOARD OFFLINE · PLAYING LOCALLY'
+    : on ? 'YOUR RUNS ARE SIGNED TO THIS X ACCOUNT' : 'ONLY RUNS SIGNED WITH AN X ACCOUNT REACH THE GLOBAL BOARD';
+}
+async function xLogin() {
+  if (!sb) return;
+  SFX.click();
+  const { error } = await sb.auth.signInWithOAuth({ provider: 'x', options: { redirectTo: location.origin + location.pathname } });
+  if (error) { console.error('X sign-in failed:', error); toast('X SIGN-IN FAILED'); }
+}
+async function xLogout() {
+  SFX.click();
+  try { if (sb) await sb.auth.signOut(); } catch (err) { console.error('Sign-out failed:', err); }
+  authUser = null; run = null; renderAuth(); queueBoardRefresh();
+}
+// The server notes when each signed-in run starts; the final score is sent once and checked there.
+function beginRankedRun() {
+  run = null;
+  if (!sb || !authUser) return;
+  const r = { id: null };
+  r.p = sb.rpc('start_run').then(({ data, error }) => { if (error) throw error; return (r.id = data); })
+    .catch(err => { console.error('start_run failed:', err); return null; });
+  run = r;
+}
+const REJECT_TXT = {
+  RUN_TOO_SHORT: 'RUN TOO SHORT TO RANK', LEVEL_TOO_FAST: 'REJECTED · LEVEL TOO FAST', TOO_MANY_KILLS: 'REJECTED · TOO MANY KILLS',
+  SCORE_TOO_HIGH: 'REJECTED · SCORE TOO HIGH', IMPOSSIBLE_STAGE: 'REJECTED · IMPOSSIBLE ASCENSION', RUN_EXPIRED: 'RUN EXPIRED · TOO LONG',
+  BAD_NAME: 'REJECTED · INVALID CALLSIGN', BAD_VALUES: 'REJECTED · INVALID RUN'
+};
+// resolves to { ok:true, rank, handle } or { ok:false, msg, bad }
+async function submitRun(entry) {
+  const r = run; run = null;
+  if (!sb) return { ok: false, msg: 'GLOBAL BOARD OFFLINE · SAVED LOCALLY' };
+  if (!r) return { ok: false, msg: authUser ? 'UNRANKED RUN' : 'UNRANKED · SIGN IN WITH X IN THE HUB TO COMPETE' };
+  if (entry.score <= 0) return { ok: false, msg: 'NO SCORE TO SUBMIT' };
+  const id = await r.p;
+  if (!id) return { ok: false, bad: true, msg: 'RUN NOT REGISTERED · CHECK CONNECTION' };
   try {
-    const { error } = await sb.from('leaderboard').insert([{
-      name: entry.name,
-      score: entry.score,
-      level: entry.level,
-      stage: entry.stage
-    }]);
+    const { data, error } = await sb.rpc('submit_score', { p_run: id, p_name: entry.name, p_score: entry.score, p_level: entry.level, p_stage: entry.stage, p_kills: entry.kills });
     if (error) throw error;
-    const { count, error: rankErr } = await sb.from('leaderboard').select('*', { count: 'exact', head: true }).gt('score', entry.score);
-    if (rankErr) throw rankErr;
-    return (count || 0) + 1;
+    if (!data || !data.ok) return { ok: false, bad: true, msg: REJECT_TXT[data && data.reason] || 'SCORE REJECTED' };
+    return { ok: true, rank: data.rank, handle: data.handle };
   } catch (err) {
-    console.error('Upload failed:', err);
-    return -1;
+    console.error('submit_score failed:', err);
+    return { ok: false, bad: true, msg: 'UPLOAD FAILED · ' + String((err && err.message) || 'ERROR').slice(0, 24).toUpperCase() };
   }
 }
 // Draws the hub top 5. Every value goes in via textContent, so names from the database can never inject HTML.
 function drawBoard(rows, online) {
   const ul = $('hubLb'), st = $('lbStat');
-  $('lbTitle').textContent = online ? '// GLOBAL TOP 5' : '// LOCAL TOP 5';
+  $('lbTitle').textContent = online ? '// VERIFIED TOP 5' : '// LOCAL TOP 5';
   st.textContent = online ? 'LIVE' : sb ? 'OFFLINE · LOCAL' : 'LOCAL ONLY';
   st.classList.toggle('live', online);
   ul.innerHTML = '';
   if (!rows.length) { ul.innerHTML = '<li class="empty">NO COMBAT RECORDS — BE THE FIRST</li>'; return; }
+  const myH = xHandleRaw(authUser);
   rows.forEach((e, i) => {
-    const li = document.createElement('li'); if (e.name === callsign) li.className = 'me';
+    const li = document.createElement('li'); if (myH && online ? e.x_handle === myH : e.name === callsign) li.className = 'me';
     li.innerHTML = '<span class="rk"></span><span class="nm"></span><span class="lv"></span><span class="sc"></span>';
     li.querySelector('.rk').textContent = '#' + (i + 1);
-    li.querySelector('.nm').textContent = String(e.name == null ? '???' : e.name).slice(0, 12);
+    const nm = li.querySelector('.nm'); nm.textContent = String(e.name == null ? '???' : e.name).slice(0, 12);
+    if (e.x_handle) { const sm = document.createElement('small'); sm.textContent = '@' + String(e.x_handle).slice(0, 20); nm.appendChild(sm); } // who really owns the run
     li.querySelector('.lv').textContent = 'LV ' + (Number(e.level) || 1);
     li.querySelector('.sc').textContent = fmt(Number(e.score) || 0);
     ul.appendChild(li);
@@ -929,7 +989,8 @@ async function loadLeaderboard() {
   if (!sb) { drawBoard(store.get(KEY.lb, []), false); return; }
   if (!$('hubLb').children.length) $('hubLb').innerHTML = '<li class="empty">SYNCING GLOBAL RECORDS…</li>';
   try {
-    const { data, error } = await sb.from('leaderboard').select('name, score, level').order('score', { ascending: false }).limit(5);
+    const { data, error } = await sb.from('leaderboard_best').select('name, x_handle, score, level')
+      .order('score', { ascending: false }).order('created_at', { ascending: true }).limit(5);
     if (error) throw error;
     if (req === lbReq) drawBoard(data || [], true);
   } catch (err) {
@@ -3291,7 +3352,8 @@ function refreshHub() {
   $('hubAsc').textContent = STAGES[profile.bestStage]; $('hubAsc').style.color = STAGE_COL[profile.bestStage];
   $('btnHubMute').textContent = 'SFX: ' + (SFX.muted ? 'OFF' : 'ON');
   $('btnHubMusic').textContent = 'MUSIC: ' + (MUSIC.on ? 'ON' : 'OFF');
-  loadLeaderboard(); // live global top 5 from Supabase (falls back to the local board when offline)
+  renderAuth();
+  loadLeaderboard(); // live verified top 5 from Supabase (falls back to the local board when offline)
 }
 function resetWorld() {
   enemies = []; bullets = []; eBullets = []; shards = []; parts = []; rings = []; texts = []; bolts = []; beams = [];
@@ -3325,6 +3387,7 @@ function startGame() {
   for (const k in hudCache) delete hudCache[k];
   $('hud').classList.remove('hidden');
   profile.runs++; saveProfile();
+  beginRankedRun(); // signed in with X → the server opens a verified run
   MUSIC.set('play'); SFX.levelUp(); dropInput();
   texts.push({ x: core.x, y: core.y - core.R * 4.4, txt: document.body.classList.contains('touch') ? 'DRAG THE STICK TO AIM & FIRE' : 'AIM WITH THE MOUSE · HOLD TO FIRE', col: '#7ffaff', size: 13, life: 3.5, max: 3.5 });
 }
@@ -3344,21 +3407,24 @@ function gameOver() {
   saveProfile();
   $('goDecay').innerHTML = lost.length ? '<div class="h">// NEURAL DECAY — ONLY 75% OF YOUR AUGMENTS SURVIVE</div>' + lost.map(([n, a, b]) => `<div class="l"><span>${n}</span><span>${a} → <b>${b}</b></span></div>`).join('')
     : '<div class="h">// NEURAL DECAY</div><div class="l"><span>NO PERMANENT AUGMENTS TO LOSE</span></div>';
-  // leaderboards: local copy right away, global upload to Supabase in the background
-  const entry = { name: callsign, score: fs, level, stage: core.stage, date: Date.now() };
+  // leaderboards: local copy right away · signed runs go to the server, which checks them before they count
+  const entry = { name: callsign, score: fs, level, stage: core.stage, kills, date: Date.now() };
   const localRank = pushLocalBoard(entry);
-  let globalRank = sb && fs > 0 ? 0 : -1, overShown = false; // 0 = uploading · -1 = offline / failed · ≥1 = global rank
-  const recText = () => rec ? (globalRank > 0 ? `★ NEW RECORD · GLOBAL #${globalRank} ★` : '★ NEW PERSONAL RECORD ★')
-    : globalRank > 0 ? `RANKED #${globalRank} GLOBALLY`
-    : globalRank === 0 ? 'UPLOADING TO GLOBAL BOARD…'
-    : localRank >= 0 ? `RANKED #${localRank + 1} ON LOCAL BOARD` : '';
-  if (globalRank === 0) pushLeaderboard(entry).then(r => { globalRank = r; if (overShown) $('goRec').textContent = recText(); queueBoardRefresh(); });
+  let net = { pending: !!(sb && run && fs > 0) }, overShown = false;
+  const recText = () => rec ? (net.ok ? `★ NEW RECORD · GLOBAL #${net.rank} ★` : '★ NEW PERSONAL RECORD ★')
+    : net.ok ? `RANKED #${net.rank} GLOBALLY` : localRank >= 0 ? `RANKED #${localRank + 1} ON LOCAL BOARD` : '';
+  const netText = () => net.pending ? 'VERIFYING RUN WITH SERVER…' : net.ok ? '✓ VERIFIED · SIGNED TO @' + (net.handle || 'X') : net.msg || '';
+  const showNet = () => {
+    $('goRec').textContent = recText(); const g = $('goNet'); g.textContent = netText();
+    g.classList.toggle('bad', !!net.bad); g.classList.toggle('dim', !net.pending && !net.ok && !net.bad);
+  };
+  submitRun(entry).then(res => { net = res; if (overShown) showNet(); if (res.ok) queueBoardRefresh(); });
   setTimeout(() => {
     $('hud').classList.add('hidden'); $('bossbar').classList.add('hidden');
     $('goScore').textContent = fmt(fs); $('goLv').textContent = level;
     $('goAsc').textContent = STAGES[core.stage]; $('goAsc').style.color = STAGE_COL[core.stage];
     $('goKills').textContent = fmt(kills); $('goShards').textContent = '◆ ' + fmt(runShards); $('goCombo').textContent = fmt(combo.best);
-    $('goRec').textContent = recText(); overShown = true;
+    showNet(); overShown = true;
     showScreen('scrOver');
   }, 1600);
 }
@@ -3490,11 +3556,25 @@ resize();
 if (sb) {
   try {
     sb.channel('leaderboard-live')
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'leaderboard' }, queueBoardRefresh)
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'scores' }, queueBoardRefresh)
       .subscribe();
   } catch (err) { console.error('Realtime subscribe failed:', err); }
   setInterval(() => { if (!document.hidden) queueBoardRefresh(); }, 30000);
+  // X sign-in: a failed sign-in comes back with an error in the URL; a successful one with a ?code= that Supabase swaps for a session
+  const back = new URLSearchParams(location.search + '&' + location.hash.replace(/^#/, ''));
+  if (back.get('error_description')) {
+    const msg = back.get('error_description'); history.replaceState(null, '', location.pathname);
+    setTimeout(() => toast('X SIGN-IN: ' + msg.toUpperCase().slice(0, 34)), 900);
+  }
+  sb.auth.onAuthStateChange((ev, session) => {
+    authUser = session ? session.user : null; renderAuth();
+    if (ev === 'SIGNED_IN' && /[?&]code=/.test(location.search)) history.replaceState(null, '', location.pathname);
+    if (ev === 'SIGNED_IN' || ev === 'SIGNED_OUT') queueBoardRefresh();
+  });
 }
+$('btnXLogin').addEventListener('click', () => { SFX.init(); xLogin(); });
+$('btnXOut').addEventListener('click', xLogout);
+renderAuth();
 if (callsign) { loadProfile(); goHub(); } else goLogin();
 requestAnimationFrame(frame);
 
