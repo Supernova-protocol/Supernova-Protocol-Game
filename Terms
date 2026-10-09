@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOVA CORE · Terms &amp; Giveaway Rules</title>
+<style>
+:root{--cyan:#00f3ff;--gold:#ffbe0b;--ink:#e8f9ff;--dim:#8a97ab;--bg:#05040e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 "Segoe UI","Helvetica Neue",Arial,system-ui,sans-serif}
+main{max-width:720px;margin:0 auto;padding:40px 16px 60px}
+h1{font-size:28px;letter-spacing:.06em;margin:0 0 4px;color:var(--cyan)}
+h2{font-size:17px;letter-spacing:.05em;margin:30px 0 8px;color:#c9a7ff}
+p,li{color:#cfd8e3}
+.meta{color:var(--dim);font-size:13px;margin-bottom:24px}
+.warn{border:1px solid rgba(255,190,11,.5);background:rgba(255,190,11,.06);border-radius:8px;padding:12px 14px;color:#ffe3a3}
+a{color:var(--cyan)}
+ol,ul{padding-left:20px}
+.back{display:inline-block;margin-top:30px;font-size:13px;letter-spacing:.1em}
+</style>
+</head>
+<body>
+<main>
+<h1>Terms &amp; Giveaway Rules</h1>
+<div class="meta">NOVA CORE: Protocol 51 · last updated October 10, 2026</div>
+
+<h2>Playing the game</h2>
+<ul>
+  <li>NOVA CORE is free to play.</li>
+  <li>Only runs played while signed in with X count for the global leaderboard. Each score is checked by our server before it appears.</li>
+  <li>We may change, pause or end the game or the leaderboard at any time.</li>
+  <li>NOVA CORE is not affiliated with, sponsored or endorsed by X Corp.</li>
+</ul>
+
+<h2>Giveaway</h2>
+<ol>
+  <li><b>Prizes:</b> $5 for 1st place, $5 for 2nd place, $5 for 3rd place ($15 total prize pool in crypto).</li>
+  <li><b>Winners:</b> the top 3 X accounts on the verified leaderboard at October 17, 2026, 17:00 ICT (10:00 UTC). Each X account counts once, with its best accepted run. If two scores are equal, the one set first ranks higher.</li>
+  <li><b>Who can enter:</b> anyone aged 16 or older where giveaways like this are allowed. The project organizers are excluded from winning prizes.</li>
+  <li><b>One person, one X account.</b> Using several accounts, bots or scripts, a modified game, bugs or exploits, or sending fake scores leads to disqualification. We can remove any score we believe was not played fairly.</li>
+  <li><b>Checking winners:</b> before a prize is handed out we review the top runs. We may ask a winner to show proof of play, for example a screen recording of a run.</li>
+  <li><b>Contact:</b> winners are messaged on X by @SupernovaLPad and must reply within 3 days. Otherwise the prize goes to the next place.</li>
+  <li><b>Delivery:</b> prizes are sent in crypto to a wallet address provided by the winner within 3 days of the winner replying.</li>
+</ol>
+
+<p class="warn">We will <b>never</b> ask you for a password, a seed phrase or a payment to receive a prize. Only messages from @SupernovaLPad are real.</p>
+
+<h2>Privacy</h2>
+<p>See the <a href="privacy.html">Privacy Policy</a> for what we store and why.</p>
+
+<h2>Contact</h2>
+<p>Supernova Launchpad · @SupernovaLPad</p>
+
+<a class="back" href="./">← BACK TO THE GAME</a>
+</main>
+</body>
+</html>
