@@ -71,6 +71,11 @@ input{-webkit-user-select:text;user-select:text}
 .lb li.me .nm{color:var(--gold)}
 .lb li:first-child .rk{color:var(--gold);text-shadow:0 0 8px rgba(255,190,11,.7)}
 .lb .empty{color:var(--dim);justify-content:center;font-size:12px}
+/* live leaderboard status (Supabase) */
+.lbhead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.lbstat{font-size:9px;letter-spacing:.22em;color:var(--dim);white-space:nowrap}
+.lbstat.live{color:#3dff9a;text-shadow:0 0 8px rgba(61,255,154,.7)}
+.lbstat.live::before{content:"● ";animation:recPulse 1s infinite alternate}
 .go-title{font-family:var(--sans);font-weight:900;font-size:clamp(30px,9vw,46px);text-align:center;color:var(--red);letter-spacing:.06em;
   text-shadow:0 0 22px rgba(255,0,85,.75);animation:goFlick 2.4s infinite}
 @keyframes goFlick{0%,100%{opacity:1}3%{opacity:.3}6%{opacity:1}52%{opacity:1}54%{opacity:.5}56%{opacity:1}}
@@ -138,6 +143,25 @@ input{-webkit-user-select:text;user-select:text}
 .novabtn.ready span{background:radial-gradient(circle,#fff3c4,#ffbe0b 60%,#ff8a00)}
 .novabtn.ready i{color:#1a0b00}
 @keyframes novaReady{0%,100%{box-shadow:0 0 12px rgba(255,190,11,.5)}50%{box-shadow:0 0 34px rgba(255,190,11,1),0 0 60px rgba(255,120,0,.5)}}
+/* ---------- Touch joystick (phones only) — drag to aim, pushed = fire ---------- */
+#stickWrap{display:none;justify-content:center;width:100%;margin-bottom:12px}
+body.touch #stickWrap{display:flex}
+.stick{position:relative;width:124px;height:124px;flex:none;border-radius:50%;pointer-events:auto;touch-action:none;opacity:.5;transition:opacity .15s,box-shadow .15s,border-color .15s;
+  background:radial-gradient(circle,rgba(0,243,255,.09) 0%,rgba(0,243,255,.03) 62%,rgba(157,78,221,.07) 100%);
+  border:1px solid rgba(0,243,255,.38);box-shadow:0 0 18px rgba(0,243,255,.1),inset 0 0 24px rgba(0,243,255,.07);
+  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.stick::before{content:"";position:absolute;inset:16px;border-radius:50%;border:1px dashed rgba(0,243,255,.22);pointer-events:none}
+.stick::after{content:"";position:absolute;left:50%;top:50%;width:4px;height:4px;margin:-2px;border-radius:50%;background:rgba(0,243,255,.55);pointer-events:none}
+.stick.on{opacity:.95;box-shadow:0 0 26px rgba(0,243,255,.25),inset 0 0 28px rgba(0,243,255,.12)}
+.stick.fire{border-color:rgba(255,190,11,.65)}
+.stick-knob{position:absolute;left:50%;top:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;z-index:2;pointer-events:none;
+  background:radial-gradient(circle at 38% 34%,rgba(255,255,255,.9) 0%,rgba(150,250,255,.55) 30%,rgba(0,243,255,.18) 72%);
+  border:1px solid rgba(200,255,255,.75);box-shadow:0 0 14px rgba(0,243,255,.55)}
+.stick.fire .stick-knob{background:radial-gradient(circle at 38% 34%,#fff 0%,rgba(255,220,120,.75) 32%,rgba(255,190,11,.25) 74%);border-color:rgba(255,230,160,.9);box-shadow:0 0 20px rgba(255,190,11,.75)}
+.stick-dir{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .12s}
+.stick-dir::before{content:"";position:absolute;left:50%;top:-13px;margin-left:-7px;border:7px solid transparent;border-bottom:10px solid #ffbe0b;border-top:0;filter:drop-shadow(0 0 4px #ffbe0b)}
+.stick.fire .stick-dir{opacity:1}
+body.touch #toast{bottom:calc(var(--sab) + 250px)}
 #banner{position:fixed;left:0;right:0;top:30%;z-index:15;text-align:center;pointer-events:none;opacity:0}
 #banner.show{animation:bannerIn 2.6s cubic-bezier(.2,.9,.2,1) both}
 #banner .b1{font-size:11px;letter-spacing:.6em;color:var(--cyan)}
@@ -312,6 +336,8 @@ input{-webkit-user-select:text;user-select:text}
 .buy.eq{border-color:var(--gold);color:#1a0b00;background:var(--gold)}
 .shop-foot{width:100%;max-width:560px}
 </style>
+<!-- Supabase client — powers the live global leaderboard -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <canvas id="game"></canvas>
@@ -336,6 +362,7 @@ input{-webkit-user-select:text;user-select:text}
   </div>
   <div id="volatility">&gt; VOLATILITY SPIKE DETECTED_<small>// PROXIMITY BREACH · CORE AT RISK</small></div>
   <div class="hud-bottom">
+    <div id="stickWrap"><div class="stick" id="stick" aria-label="Aim and fire"><i class="stick-dir" id="stickDir"></i><div class="stick-knob" id="stickKnob"></div></div></div>
     <div class="hpwrap">
       <div class="hplbl"><span>HULL <b id="hHpTxt">100</b></span><span class="sh">SHIELD <b id="hShTxt">20</b></span></div>
       <div class="hpbar"><div id="hHp"></div><div id="hSh"></div></div>
@@ -381,12 +408,13 @@ input{-webkit-user-select:text;user-select:text}
       <div class="stat"><div class="k">PEAK LEVEL</div><div class="v" id="hubLv">1</div></div>
       <div class="stat"><div class="k">MAX ASCENSION</div><div class="v" id="hubAsc">DORMANT</div></div>
     </div>
-    <div class="label">// LOCAL TOP 5</div>
+    <div class="label lbhead"><span id="lbTitle">// GLOBAL TOP 5</span><span class="lbstat" id="lbStat">SYNCING…</span></div>
     <ul class="lb" id="hubLb"></ul>
     <button class="btn" id="btnStart">[ START COMBAT ]</button>
     <button class="btn purple" id="btnHubShop" style="letter-spacing:.12em">UPGRADE HUB ✦ FX LAB</button>
     <div class="row"><button class="btn ghost small" id="btnHubMute">SFX: ON</button><button class="btn ghost small" id="btnHubMusic">MUSIC: ON</button></div>
-    <div class="foot-note">AUTO-AIM ENGAGED · DRAG TO OVERRIDE · ✸ NOVA WHEN CHARGED<br>TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK EVERY 3 LV<br>A BREACHED CORE KEEPS ONLY 75% OF ITS AUGMENTS</div>
+    <button class="btn ghost small" id="btnHubAssist">AIM ASSIST: ON</button>
+    <div class="foot-note">MANUAL AIM · JOYSTICK ON PHONE · HOLD MOUSE ON PC · ✸ NOVA WHEN CHARGED<br>TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK EVERY 3 LV<br>A BREACHED CORE KEEPS ONLY 75% OF ITS AUGMENTS</div>
   </div>
 </section>
 
@@ -416,6 +444,7 @@ input{-webkit-user-select:text;user-select:text}
     <div class="brand"><div class="t1" style="font-size:34px">PAUSED</div><div class="t2">SIMULATION FROZEN</div></div>
     <button class="btn" id="btnResume">[ RESUME ]</button>
     <button class="btn ghost" id="btnAbort">ABORT RUN</button>
+    <button class="btn ghost small" id="btnPauseAssist">AIM ASSIST: ON</button>
   </div>
 </section>
 
@@ -461,7 +490,19 @@ const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 };
-const KEY = { name: 'nova51_callsign', lb: 'nova51_leaderboard', mute: 'nova51_mute', music: 'nova51_music', prof: n => 'nova51_profile_' + n };
+const KEY = { name: 'nova51_callsign', lb: 'nova51_leaderboard', mute: 'nova51_mute', music: 'nova51_music', assist: 'nova51_assist', prof: n => 'nova51_profile_' + n };
+
+/* =========================================================
+   SUPABASE — live global leaderboard
+   (table: public.leaderboard · columns: name, score, level, stage)
+   ========================================================= */
+const SUPABASE_URL = "https://iyiikhqckiznzskxzeur.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable__pihVhG4db77CaPgtkwdyw_-IAlY6D9";
+let sb = null;
+try {
+  sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: false, autoRefreshToken: false } }) : null;
+} catch (err) { console.error('Supabase init failed:', err); sb = null; }
+
 const STAGES = ['DORMANT', 'AWAKENING', 'DEFENSE STAR', 'FOCUS CORE', 'VOLATILITY PULSE', 'GOD CORE'];
 const STAGE_COL = ['#00f3ff', '#00f3ff', '#b98cff', '#ffbe0b', '#ff0055', '#ffbe0b'];
 const STAGE_DESC = ['', 'TECH RINGS ONLINE · +12% DAMAGE · WEAVERS & SPLITTERS DETECTED', 'GEOMETRIC STAR SHIELD DEPLOYED · LANCERS & BULWARKS INBOUND',
@@ -839,10 +880,67 @@ function decayProfile() {
   run(SHOP_CORE, profile.shop); run(SHOP_SKILL, profile.skills);
   return lost;
 }
-function pushLeaderboard(entry) {
+// Local top 5 — kept as an offline fallback. Returns the local rank (0-based) or -1.
+function pushLocalBoard(entry) {
   const lb = store.get(KEY.lb, []); lb.push(entry); lb.sort((a, b) => b.score - a.score);
   const top = lb.slice(0, 5); store.set(KEY.lb, top);
   return top.indexOf(entry);
+}
+// Global board — uploads the run to Supabase and resolves to its global rank (1 = best), or -1 if offline / failed.
+async function pushLeaderboard(entry) {
+  if (!sb) return -1;
+  try {
+    const { error } = await sb.from('leaderboard').insert([{
+      name: entry.name,
+      score: entry.score,
+      level: entry.level,
+      stage: entry.stage
+    }]);
+    if (error) throw error;
+    const { count, error: rankErr } = await sb.from('leaderboard').select('*', { count: 'exact', head: true }).gt('score', entry.score);
+    if (rankErr) throw rankErr;
+    return (count || 0) + 1;
+  } catch (err) {
+    console.error('Upload failed:', err);
+    return -1;
+  }
+}
+// Draws the hub top 5. Every value goes in via textContent, so names from the database can never inject HTML.
+function drawBoard(rows, online) {
+  const ul = $('hubLb'), st = $('lbStat');
+  $('lbTitle').textContent = online ? '// GLOBAL TOP 5' : '// LOCAL TOP 5';
+  st.textContent = online ? 'LIVE' : sb ? 'OFFLINE · LOCAL' : 'LOCAL ONLY';
+  st.classList.toggle('live', online);
+  ul.innerHTML = '';
+  if (!rows.length) { ul.innerHTML = '<li class="empty">NO COMBAT RECORDS — BE THE FIRST</li>'; return; }
+  rows.forEach((e, i) => {
+    const li = document.createElement('li'); if (e.name === callsign) li.className = 'me';
+    li.innerHTML = '<span class="rk"></span><span class="nm"></span><span class="lv"></span><span class="sc"></span>';
+    li.querySelector('.rk').textContent = '#' + (i + 1);
+    li.querySelector('.nm').textContent = String(e.name == null ? '???' : e.name).slice(0, 12);
+    li.querySelector('.lv').textContent = 'LV ' + (Number(e.level) || 1);
+    li.querySelector('.sc').textContent = fmt(Number(e.score) || 0);
+    ul.appendChild(li);
+  });
+}
+let lbReq = 0, lbTimer = 0;
+async function loadLeaderboard() {
+  const req = ++lbReq;
+  if (!sb) { drawBoard(store.get(KEY.lb, []), false); return; }
+  if (!$('hubLb').children.length) $('hubLb').innerHTML = '<li class="empty">SYNCING GLOBAL RECORDS…</li>';
+  try {
+    const { data, error } = await sb.from('leaderboard').select('name, score, level').order('score', { ascending: false }).limit(5);
+    if (error) throw error;
+    if (req === lbReq) drawBoard(data || [], true);
+  } catch (err) {
+    console.error('Leaderboard fetch failed:', err);
+    if (req === lbReq) drawBoard(store.get(KEY.lb, []), false);
+  }
+}
+// refresh the board (debounced) — only while the Command Hub is on screen
+function queueBoardRefresh() {
+  clearTimeout(lbTimer);
+  lbTimer = setTimeout(() => { if ($('scrHub').classList.contains('active')) loadLeaderboard(); }, 300);
 }
 
 /* =========================================================
@@ -861,7 +959,13 @@ let spawnT = 0, waveT = 14, draftQueue = [], eid = 0, legends = 0, epicGiven = f
 let shake = 0, flash = 0, flashCol = '255,255,255', warp = 1, danger = 0, hurtV = 0, hitStop = 0, slowmo = 0, chroma = 0;
 let combo = { n: 0, t: 0, best: 0 }, overdrive = 0, novaCharge = 0, novaFx = null;
 let cine = null;
-const pointer = { down: false, x: 0, y: 0, manualUntil: 0 };
+const pointer = { down: false, hover: false, x: 0, y: 0 };
+// manual aiming — no auto-aim. The core only fires while the player aims (joystick, finger on the field, or mouse held).
+const STICK = { id: null, active: false, ang: -Math.PI / 2, mag: 0 };
+const STICK_DEAD = 0.2;   // the knob must leave the centre this far before the core fires
+const ASSIST_CONE = 0.2;  // ≈11°: only hostiles this close to where you aim get a nudge
+const ASSIST_PULL = 0.45; // bends the shot 45% of the way toward that hostile — a nudge, never a lock-on
+let aimAssist = store.get(KEY.assist, true), assistLock = null, aimFiring = false;
 const DRAFT_EVERY = 3;
 
 const xpNeed = L => Math.round(6 + 4.5 * L + 1.1 * Math.pow(L, 1.5));
@@ -1328,6 +1432,24 @@ function nearestTarget(x, y, defend) {
   if (boss && !boss.entering) { const d = (boss.x - x) ** 2 + (boss.y - y) ** 2 - boss.r * boss.r * 4; if (d < bd) best = boss; }
   return best;
 }
+// LIGHT AIM ASSIST — only bends a shot that is already aimed close to a hostile. It never picks targets on its own,
+// never turns the core, and never fires: no input = no shots.
+function assistTarget(a) {
+  const range = Math.hypot(W, H) * 0.62;
+  let best = null, bs = Infinity, ba = a;
+  const test = (o, r) => {
+    const d = Math.hypot(o.x - core.x, o.y - core.y);
+    if (d > range || d < core.R) return;
+    const tt = d / stats.bspeed, ta = Math.atan2(o.y + (o.vy || 0) * tt - core.y, o.x + (o.vx || 0) * tt - core.x);
+    const diff = Math.abs(angDiff(a, ta)), tol = ASSIST_CONE + Math.atan2(r, d);
+    if (diff > tol) return;
+    const s = diff / tol + d / range * 0.4;
+    if (s < bs) { bs = s; best = o; ba = ta; }
+  };
+  for (const e of enemies) if (!e.dead && e.x > -20 && e.x < W + 20 && e.y > -20 && e.y < H + 20) test(e, e.r);
+  if (boss && !boss.entering) test(boss, boss.r);
+  return best ? { t: best, a: ba } : null;
+}
 function fire() {
   const n = stats.multi, spr = n > 1 ? Math.min(0.14, 0.75 / n) : 0, sp = stats.bspeed, skin = profile.fx.shot;
   const dmg = stats.dmg * (overdrive > 0 ? 1.25 : 1);
@@ -1575,14 +1697,17 @@ function update(dt) {
     waveT = rand(18, 24);
   }
 
-  // aim + fire
-  const manual = pointer.down || realT < pointer.manualUntil;
-  let target = null, ta = core.aim;
-  if (manual) ta = Math.atan2(pointer.y - core.y, pointer.x - core.x);
-  else { target = nearestTarget(core.x, core.y, true); if (target) { const tt = Math.hypot(target.x - core.x, target.y - core.y) / stats.bspeed; ta = Math.atan2(target.y + (target.vy || 0) * tt - core.y, target.x + (target.vx || 0) * tt - core.x); } }
-  core.aim += clamp(angDiff(core.aim, ta), -16 * dt, 16 * dt);
+  // aim + fire — MANUAL ONLY: touch joystick, a finger on the field, or the mouse (hover aims, hold fires)
+  const stickOn = STICK.active && STICK.mag > STICK_DEAD;
+  aimFiring = stickOn || pointer.down;
+  let ta = core.aim;
+  if (stickOn) ta = STICK.ang;
+  else if (pointer.down || pointer.hover) ta = Math.atan2(pointer.y - core.y, pointer.x - core.x);
+  assistLock = null;
+  if (aimFiring && aimAssist) { const h = assistTarget(ta); if (h) { ta += angDiff(ta, h.a) * ASSIST_PULL; assistLock = h.t; } }
+  core.aim += clamp(angDiff(core.aim, ta), -24 * dt, 24 * dt);
   core.fireCd -= d;
-  const canFire = manual || (target && Math.abs(angDiff(core.aim, ta)) < 0.35);
+  const canFire = aimFiring && Math.abs(angDiff(core.aim, ta)) < 0.45; // no wasted shots while the barrel is still swinging round
   const rate = stats.rate * (overdrive > 0 ? 1.35 : 1);
   if (canFire) { let g = 0; while (core.fireCd <= 0 && g++ < 4) { fire(); core.fireCd += 1 / rate; } }
   else core.fireCd = Math.max(core.fireCd, 0);
@@ -1993,7 +2118,7 @@ function drawCore(x, y, R, stage, t, o = {}) {
 
   // ---- Aim chevron
   if (state === 'play' && !cine) {
-    const manual = pointer.down || realT < pointer.manualUntil, ar = R * (stage >= 2 ? 3.5 : 2.8);
+    const manual = aimFiring, ar = R * (stage >= 2 ? 3.5 : 2.8);
     ctx.rotate(core.aim); ctx.strokeStyle = manual ? '#ffbe0b' : 'rgba(0,243,255,0.7)'; ctx.lineWidth = 2;
     ctx.beginPath(); ctx.moveTo(ar, -6); ctx.lineTo(ar + 8, 0); ctx.lineTo(ar, 6); ctx.stroke();
   }
@@ -2500,6 +2625,15 @@ function drawFx() {
   }
   ctx.globalAlpha = 1;
 }
+// faint rotating brackets on the hostile the aim assist is nudging toward
+function drawAssistLock() {
+  const tg = assistLock; if (!tg || state !== 'play' || cine || tg.dead || tg.hp <= 0) return;
+  const r = tg.r * 1.55 + 4, k = r * 0.38;
+  ctx.save(); ctx.translate(tg.x, tg.y); ctx.rotate(realT * 1.5);
+  ctx.strokeStyle = 'rgba(220,255,255,0.7)'; ctx.lineWidth = 1.5; ctx.shadowColor = '#00f3ff'; ctx.shadowBlur = 6; ctx.beginPath();
+  for (let i = 0; i < 4; i++) { ctx.rotate(Math.PI / 2); ctx.moveTo(r - k, -r); ctx.lineTo(r, -r); ctx.lineTo(r, -r + k); }
+  ctx.stroke(); ctx.restore();
+}
 function drawWorld(o) {
   const t = realT;
   if (orbs.length) { ctx.strokeStyle = ORB_COL[orbTier()] + '22'; ctx.lineWidth = 1; ctx.beginPath(); ctx.ellipse(core.x, core.y, core.R * (3.55 + (core.stage >= 2 ? 0.3 : 0)), core.R * (3.55 + (core.stage >= 2 ? 0.3 : 0)) * 0.92, 0, 0, TAU); ctx.stroke(); }
@@ -2526,6 +2660,7 @@ function drawWorld(o) {
     }
     drawBoss(boss, t);
   }
+  drawAssistLock();
   ctx.globalCompositeOperation = 'lighter';
   for (const bm of beams) {
     const a = bm.life / bm.max;
@@ -2659,7 +2794,7 @@ function startAscension(x, y) {
   renderScene({ noCore: true, noShake: true });
   ctx = prev;
   cine = { t: 0, from, to, x, y, shards: makeShards(core.x, core.y), streaks: [], applied: false, lbOff: false, ended: false, lastGl: 0, whoosh: false, choir: false, tun: false };
-  pointer.down = false;
+  dropInput();
   if (modal === 'draft') { $('draft').classList.remove('active'); modal = null; paused = false; }
   $('hud').classList.add('cine'); $('lbTop').classList.add('on'); $('lbBot').classList.add('on');
   $('volatility').classList.remove('on');
@@ -2984,7 +3119,7 @@ function sparks(el, n) {
 }
 function openDraft() {
   const L = draftQueue[0];
-  modal = 'draft'; paused = true; pointer.down = false;
+  modal = 'draft'; paused = true; dropInput();
   $('dLvl').textContent = L;
   const pool = Object.keys(CARDS).filter(k => !CARDS[k].legOnly && !(CARDS[k].cap && CARDS[k].cap()));
   for (let i = pool.length - 1; i > 0; i--) { const j = (Math.random() * (i + 1)) | 0; [pool[i], pool[j]] = [pool[j], pool[i]]; }
@@ -3071,7 +3206,7 @@ $('btnReveal').addEventListener('click', () => { if (performance.now() >= draftL
 let shopFrom = 'game', shopTab = 'core';
 function openShop(from) {
   shopFrom = from;
-  if (from === 'game') { if (modal || cine || state !== 'play') return; modal = 'shop'; paused = true; pointer.down = false; }
+  if (from === 'game') { if (modal || cine || state !== 'play') return; modal = 'shop'; paused = true; dropInput(); }
   $('btnShopClose').textContent = from === 'game' ? '[ RETURN TO COMBAT ]' : '[ CLOSE ]';
   renderShop(true); showScreen('shop', true); SFX.click();
 }
@@ -3156,19 +3291,13 @@ function refreshHub() {
   $('hubAsc').textContent = STAGES[profile.bestStage]; $('hubAsc').style.color = STAGE_COL[profile.bestStage];
   $('btnHubMute').textContent = 'SFX: ' + (SFX.muted ? 'OFF' : 'ON');
   $('btnHubMusic').textContent = 'MUSIC: ' + (MUSIC.on ? 'ON' : 'OFF');
-  const lb = store.get(KEY.lb, []), ul = $('hubLb'); ul.innerHTML = '';
-  if (!lb.length) ul.innerHTML = '<li class="empty">NO COMBAT RECORDS — BE THE FIRST</li>';
-  lb.forEach((e, i) => {
-    const li = document.createElement('li'); if (e.name === callsign) li.className = 'me';
-    li.innerHTML = `<span class="rk">#${i + 1}</span><span class="nm"></span><span class="lv">LV ${e.level}</span><span class="sc">${fmt(e.score)}</span>`;
-    li.querySelector('.nm').textContent = e.name; ul.appendChild(li);
-  });
+  loadLeaderboard(); // live global top 5 from Supabase (falls back to the local board when offline)
 }
 function resetWorld() {
   enemies = []; bullets = []; eBullets = []; shards = []; parts = []; rings = []; texts = []; bolts = []; beams = [];
   boss = null; bossQueue = []; bossTriggered = {}; draftQueue = []; cine = null; echoes = 0;
   cam.zoom = 1; cam.rot = 0; warp = 1; danger = 0; overdrive = 0; novaCharge = 0; novaFx = null; hitStop = 0; slowmo = 0; chroma = 0; flash = 0;
-  combo = { n: 0, t: 0, best: 0 }; comps = []; legends = 0; epicGiven = false; legGiven = false; draftPhase = 'idle'; bossDelay = 0;
+  combo = { n: 0, t: 0, best: 0 }; comps = []; legends = 0; epicGiven = false; legGiven = false; draftPhase = 'idle'; bossDelay = 0; assistLock = null; aimFiring = false;
   ['hud'].forEach(id => $(id).classList.remove('cine'));
   $('lbTop').classList.remove('on'); $('lbBot').classList.remove('on'); $('cineSkip').classList.remove('on'); $('cineCap').textContent = '';
   $('bossbar').classList.add('hidden'); $('volatility').classList.remove('on');
@@ -3196,11 +3325,12 @@ function startGame() {
   for (const k in hudCache) delete hudCache[k];
   $('hud').classList.remove('hidden');
   profile.runs++; saveProfile();
-  MUSIC.set('play'); SFX.levelUp();
+  MUSIC.set('play'); SFX.levelUp(); dropInput();
+  texts.push({ x: core.x, y: core.y - core.R * 4.4, txt: document.body.classList.contains('touch') ? 'DRAG THE STICK TO AIM & FIRE' : 'AIM WITH THE MOUSE · HOLD TO FIRE', col: '#7ffaff', size: 13, life: 3.5, max: 3.5 });
 }
 function gameOver() {
   if (state !== 'play') return;
-  state = 'dead'; core.flash = 0;
+  state = 'dead'; core.flash = 0; dropInput(); assistLock = null; aimFiring = false;
   burst(core.x, core.y, 220, ['#00f3ff', '#9d4edd', '#ff0055', '#ffffff'], 640, 4);
   for (let i = 0; i < 5; i++) rings.push({ x: core.x, y: core.y, r: core.R, vr: 300 + i * 200, life: 1.4, max: 1.4, col: i % 2 ? '#ff0055' : '#00f3ff', w: 5 });
   shake = 30; flash = .8; flashCol = '255,0,85'; chroma = 1; SFX.gameOver(); MUSIC.set('menu');
@@ -3214,37 +3344,89 @@ function gameOver() {
   saveProfile();
   $('goDecay').innerHTML = lost.length ? '<div class="h">// NEURAL DECAY — ONLY 75% OF YOUR AUGMENTS SURVIVE</div>' + lost.map(([n, a, b]) => `<div class="l"><span>${n}</span><span>${a} → <b>${b}</b></span></div>`).join('')
     : '<div class="h">// NEURAL DECAY</div><div class="l"><span>NO PERMANENT AUGMENTS TO LOSE</span></div>';
-  const rank = pushLeaderboard({ name: callsign, score: fs, level, stage: core.stage, date: Date.now() });
+  // leaderboards: local copy right away, global upload to Supabase in the background
+  const entry = { name: callsign, score: fs, level, stage: core.stage, date: Date.now() };
+  const localRank = pushLocalBoard(entry);
+  let globalRank = sb && fs > 0 ? 0 : -1, overShown = false; // 0 = uploading · -1 = offline / failed · ≥1 = global rank
+  const recText = () => rec ? (globalRank > 0 ? `★ NEW RECORD · GLOBAL #${globalRank} ★` : '★ NEW PERSONAL RECORD ★')
+    : globalRank > 0 ? `RANKED #${globalRank} GLOBALLY`
+    : globalRank === 0 ? 'UPLOADING TO GLOBAL BOARD…'
+    : localRank >= 0 ? `RANKED #${localRank + 1} ON LOCAL BOARD` : '';
+  if (globalRank === 0) pushLeaderboard(entry).then(r => { globalRank = r; if (overShown) $('goRec').textContent = recText(); queueBoardRefresh(); });
   setTimeout(() => {
     $('hud').classList.add('hidden'); $('bossbar').classList.add('hidden');
     $('goScore').textContent = fmt(fs); $('goLv').textContent = level;
     $('goAsc').textContent = STAGES[core.stage]; $('goAsc').style.color = STAGE_COL[core.stage];
     $('goKills').textContent = fmt(kills); $('goShards').textContent = '◆ ' + fmt(runShards); $('goCombo').textContent = fmt(combo.best);
-    $('goRec').textContent = rec ? '★ NEW PERSONAL RECORD ★' : rank >= 0 ? `RANKED #${rank + 1} ON LOCAL BOARD` : '';
+    $('goRec').textContent = recText(); overShown = true;
     showScreen('scrOver');
   }, 1600);
 }
-function pauseGame() { if (state !== 'play' || modal || cine) return; modal = 'pause'; paused = true; pointer.down = false; showScreen('scrPause'); }
+function pauseGame() { if (state !== 'play' || modal || cine) return; modal = 'pause'; paused = true; dropInput(); showScreen('scrPause'); }
 function resumeGame() { showScreen('scrPause', false); modal = null; paused = false; if (draftQueue.length && !cine) openDraft(); }
 
 /* =========================================================
    INPUT
    ========================================================= */
+// field / mouse: a finger on the field aims at it and fires · the mouse aims by hovering and fires while held
 cv.addEventListener('pointerdown', e => {
   SFX.init();
+  if (e.pointerType === 'touch') document.body.classList.add('touch');
   if (cine) { skipCine(); return; }
   if (state !== 'play' || paused) return;
   pointer.down = true; pointer.x = e.clientX; pointer.y = e.clientY;
   try { cv.setPointerCapture(e.pointerId); } catch (_) {}
 });
-cv.addEventListener('pointermove', e => { if (!pointer.down) return; pointer.x = e.clientX; pointer.y = e.clientY; });
-const pUp = () => { if (pointer.down) { pointer.down = false; pointer.manualUntil = realT + 0.7; } };
+cv.addEventListener('pointermove', e => {
+  if (e.pointerType === 'mouse') { pointer.hover = true; pointer.x = e.clientX; pointer.y = e.clientY; return; }
+  if (!pointer.down) return; pointer.x = e.clientX; pointer.y = e.clientY;
+});
+const pUp = () => { pointer.down = false; };
 cv.addEventListener('pointerup', pUp); cv.addEventListener('pointercancel', pUp);
+cv.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') pointer.hover = false; });
+
+// touch joystick (phones): drag the knob to aim — once it leaves the centre the core fires in that direction
+const stickEl = $('stick'), knobEl = $('stickKnob'), stickDirEl = $('stickDir');
+function stickSet(e) {
+  const r = stickEl.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  let dx = e.clientX - cx, dy = e.clientY - cy; const max = r.width * 0.32, d = Math.hypot(dx, dy) || 1;
+  STICK.mag = Math.min(1, d / max);
+  if (d > max) { dx = dx / d * max; dy = dy / d * max; }
+  knobEl.style.transform = `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px)`;
+  const firing = STICK.mag > STICK_DEAD;
+  if (firing) { STICK.ang = Math.atan2(dy, dx); stickDirEl.style.transform = `rotate(${(STICK.ang + Math.PI / 2).toFixed(3)}rad)`; }
+  stickEl.classList.toggle('fire', firing);
+}
+function stickReset() {
+  STICK.id = null; STICK.active = false; STICK.mag = 0;
+  knobEl.style.transform = ''; stickEl.classList.remove('on', 'fire');
+}
+function dropInput() { pointer.down = false; stickReset(); }
+stickEl.addEventListener('pointerdown', e => {
+  e.preventDefault(); e.stopPropagation(); SFX.init(); document.body.classList.add('touch');
+  if (cine) { skipCine(); return; }
+  if (state !== 'play' || paused || STICK.id != null) return;
+  STICK.id = e.pointerId; STICK.active = true; stickEl.classList.add('on');
+  try { stickEl.setPointerCapture(e.pointerId); } catch (_) {}
+  stickSet(e);
+});
+stickEl.addEventListener('pointermove', e => { if (e.pointerId === STICK.id) stickSet(e); });
+const stickUp = e => { if (e.pointerId === STICK.id) stickReset(); };
+['pointerup', 'pointercancel', 'lostpointercapture'].forEach(ev => stickEl.addEventListener(ev, stickUp));
+
+// light aim assist — ON / OFF, remembered on this device
+function setAssist(v) {
+  aimAssist = v; store.set(KEY.assist, v); assistLock = null;
+  const t = 'AIM ASSIST: ' + (v ? 'ON' : 'OFF');
+  $('btnHubAssist').textContent = t; $('btnPauseAssist').textContent = t;
+}
+$('btnHubAssist').addEventListener('click', () => { SFX.init(); setAssist(!aimAssist); SFX.click(); });
+$('btnPauseAssist').addEventListener('click', () => { SFX.init(); setAssist(!aimAssist); SFX.click(); });
 document.addEventListener('touchmove', e => { if (!e.target.closest('.shop-list') && !e.target.closest('.panel')) e.preventDefault(); }, { passive: false });
 document.addEventListener('gesturestart', e => e.preventDefault());
 window.addEventListener('resize', resize);
 window.addEventListener('orientationchange', () => setTimeout(resize, 200));
-document.addEventListener('visibilitychange', () => { if (document.hidden) { pauseGame(); saveProfile(); } });
+document.addEventListener('visibilitychange', () => { if (document.hidden) { pauseGame(); saveProfile(); } else queueBoardRefresh(); });
 window.addEventListener('keydown', e => {
   if (e.key === 'Escape' || e.key === 'p') { if (modal === 'pause') resumeGame(); else pauseGame(); }
   if (e.key === ' ' && state === 'play') { e.preventDefault(); if (cine) skipCine(); else useNova(); }
@@ -3301,7 +3483,18 @@ function frame(ts) {
   if (state === 'play') updateHud();
 }
 profile = normProfile(defProfile());
+if ((window.matchMedia && matchMedia('(pointer: coarse)').matches) || navigator.maxTouchPoints > 0) document.body.classList.add('touch');
+setAssist(aimAssist);
 resize();
+// live leaderboard: Supabase Realtime pushes every new score; a slow poll covers the case where Realtime is off
+if (sb) {
+  try {
+    sb.channel('leaderboard-live')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'leaderboard' }, queueBoardRefresh)
+      .subscribe();
+  } catch (err) { console.error('Realtime subscribe failed:', err); }
+  setInterval(() => { if (!document.hidden) queueBoardRefresh(); }, 30000);
+}
 if (callsign) { loadProfile(); goHub(); } else goLogin();
 requestAnimationFrame(frame);
 
