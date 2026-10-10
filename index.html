@@ -74,7 +74,7 @@ input{-webkit-user-select:text;user-select:text}
 .lb li .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lb li .nm small{display:block;font-size:10px;letter-spacing:.06em;color:#8fb7c9;margin-top:2px;overflow:hidden;text-overflow:ellipsis}
 .lb li.me .nm small{color:#d9b46a}
-/* X sign-in — only signed runs reach the global board */
+/* Google sign-in — only signed runs reach the global board */
 .xauth{margin:-2px 0 14px;text-align:center}
 .xbtn{display:block;width:100%;padding:12px;border-radius:8px;font-size:12px;font-weight:800;letter-spacing:.16em;color:#0b0b0f;background:#f2f4f7;box-shadow:0 0 18px rgba(255,255,255,.15);transition:transform .12s}
 .xbtn:active{transform:scale(.97)}
@@ -418,10 +418,10 @@ body.touch #toast{bottom:calc(var(--sab) + 250px)}
   <div class="panel">
     <div class="brand" style="margin-bottom:10px"><div class="t1" style="font-size:clamp(28px,8vw,40px)">NOVA CORE</div><div class="t2">COMMAND HUB</div></div>
     <div class="callsign"><div class="label" style="margin:0">OPERATOR</div><div class="n" id="hubName">—</div><button id="btnChange">CHANGE CALLSIGN</button></div>
-    <div class="xauth" id="xAuth">
-      <button class="xbtn" id="btnXLogin">SIGN IN WITH X TO COMPETE</button>
-      <div class="xme hidden" id="xMe"><span class="ok">✓ VERIFIED</span><b id="xHandle">@—</b><button id="btnXOut">SIGN OUT</button></div>
-      <div class="xnote" id="xNote">ONLY RUNS SIGNED WITH AN X ACCOUNT REACH THE GLOBAL BOARD</div>
+    <div class="xauth" id="gAuth">
+      <button class="xbtn" id="btnGLogin">SIGN IN WITH GOOGLE TO COMPETE</button>
+      <div class="xme hidden" id="gMe"><span class="ok">✓ VERIFIED</span><b id="gName">—</b><button id="btnGOut">SIGN OUT</button></div>
+      <div class="xnote" id="gNote">ONLY SIGNED-IN RUNS REACH THE GLOBAL BOARD</div>
     </div>
     <div class="statgrid">
       <div class="stat"><div class="k">PERSONAL BEST</div><div class="v gold" id="hubHs">0</div></div>
@@ -515,7 +515,7 @@ const store = {
 const KEY = { name: 'nova51_callsign', lb: 'nova51_leaderboard', mute: 'nova51_mute', music: 'nova51_music', assist: 'nova51_assist', prof: n => 'nova51_profile_' + n };
 
 /* =========================================================
-   SUPABASE — X-verified global leaderboard
+   SUPABASE — verified global leaderboard (Sign in with Google)
    (runs are opened with rpc start_run · scores sent once with rpc submit_score · board = view leaderboard_best)
    Database setup: supabase_setup.sql
    ========================================================= */
@@ -909,24 +909,26 @@ function pushLocalBoard(entry) {
   const top = lb.slice(0, 5); store.set(KEY.lb, top);
   return top.indexOf(entry);
 }
-/* ---------- X sign-in (Supabase Auth) — only runs signed with an X account reach the global board ---------- */
+/* ---------- Google sign-in (Supabase Auth) — only signed-in runs reach the global board ---------- */
 let authUser = null, run = null;
-const xHandleRaw = u => { const m = (u && u.user_metadata) || {}; return m.user_name || m.preferred_username || null; };
+// short public ID (e.g. 7F3A) — the same tag the leaderboard and your admin winner list show
+const tagOf = id => id ? String(id).replace(/-/g, '').slice(0, 4).toUpperCase() : '';
+const firstName = u => { const m = (u && u.user_metadata) || {}; const n = String(m.full_name || m.name || '').trim(); return n ? n.split(/\s+/)[0].toUpperCase().slice(0, 12) : 'PLAYER'; };
 function renderAuth() {
-  const on = !!authUser, h = xHandleRaw(authUser);
-  $('btnXLogin').classList.toggle('hidden', on || !sb);
-  $('xMe').classList.toggle('hidden', !on);
-  if (on) $('xHandle').textContent = h ? '@' + h : 'X ACCOUNT';
-  $('xNote').textContent = !sb ? 'GLOBAL BOARD OFFLINE · PLAYING LOCALLY'
-    : on ? 'YOUR RUNS ARE SIGNED TO THIS X ACCOUNT' : 'ONLY RUNS SIGNED WITH AN X ACCOUNT REACH THE GLOBAL BOARD';
+  const on = !!authUser;
+  $('btnGLogin').classList.toggle('hidden', on || !sb);
+  $('gMe').classList.toggle('hidden', !on);
+  if (on) $('gName').textContent = firstName(authUser) + ' #' + tagOf(authUser.id);
+  $('gNote').textContent = !sb ? 'GLOBAL BOARD OFFLINE · PLAYING LOCALLY'
+    : on ? 'YOUR RUNS ARE SIGNED TO THIS GOOGLE ACCOUNT' : 'ONLY SIGNED-IN RUNS REACH THE GLOBAL BOARD';
 }
-async function xLogin() {
+async function gLogin() {
   if (!sb) return;
   SFX.click();
-  const { error } = await sb.auth.signInWithOAuth({ provider: 'x', options: { redirectTo: location.origin + location.pathname } });
-  if (error) { console.error('X sign-in failed:', error); toast('X SIGN-IN FAILED'); }
+  const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + location.pathname, queryParams: { prompt: 'select_account' } } });
+  if (error) { console.error('Google sign-in failed:', error); toast('GOOGLE SIGN-IN FAILED'); }
 }
-async function xLogout() {
+async function gLogout() {
   SFX.click();
   try { if (sb) await sb.auth.signOut(); } catch (err) { console.error('Sign-out failed:', err); }
   authUser = null; run = null; renderAuth(); queueBoardRefresh();
@@ -949,7 +951,7 @@ const REJECT_TXT = {
 async function submitRun(entry) {
   const r = run; run = null;
   if (!sb) return { ok: false, msg: 'GLOBAL BOARD OFFLINE · SAVED LOCALLY' };
-  if (!r) return { ok: false, msg: authUser ? 'UNRANKED RUN' : 'UNRANKED · SIGN IN WITH X IN THE HUB TO COMPETE' };
+  if (!r) return { ok: false, msg: authUser ? 'UNRANKED RUN' : 'UNRANKED · SIGN IN WITH GOOGLE IN THE HUB TO COMPETE' };
   if (entry.score <= 0) return { ok: false, msg: 'NO SCORE TO SUBMIT' };
   const id = await r.p;
   if (!id) return { ok: false, bad: true, msg: 'RUN NOT REGISTERED · CHECK CONNECTION' };
@@ -957,7 +959,7 @@ async function submitRun(entry) {
     const { data, error } = await sb.rpc('submit_score', { p_run: id, p_name: entry.name, p_score: entry.score, p_level: entry.level, p_stage: entry.stage, p_kills: entry.kills });
     if (error) throw error;
     if (!data || !data.ok) return { ok: false, bad: true, msg: REJECT_TXT[data && data.reason] || 'SCORE REJECTED' };
-    return { ok: true, rank: data.rank, handle: data.handle };
+    return { ok: true, rank: data.rank, tag: data.tag };
   } catch (err) {
     console.error('submit_score failed:', err);
     return { ok: false, bad: true, msg: 'UPLOAD FAILED · ' + String((err && err.message) || 'ERROR').slice(0, 24).toUpperCase() };
@@ -971,13 +973,13 @@ function drawBoard(rows, online) {
   st.classList.toggle('live', online);
   ul.innerHTML = '';
   if (!rows.length) { ul.innerHTML = '<li class="empty">NO COMBAT RECORDS — BE THE FIRST</li>'; return; }
-  const myH = xHandleRaw(authUser);
+  const myId = authUser && authUser.id;
   rows.forEach((e, i) => {
-    const li = document.createElement('li'); if (myH && online ? e.x_handle === myH : e.name === callsign) li.className = 'me';
+    const li = document.createElement('li'); if (myId && online ? e.user_id === myId : e.name === callsign) li.className = 'me';
     li.innerHTML = '<span class="rk"></span><span class="nm"></span><span class="lv"></span><span class="sc"></span>';
     li.querySelector('.rk').textContent = '#' + (i + 1);
     const nm = li.querySelector('.nm'); nm.textContent = String(e.name == null ? '???' : e.name).slice(0, 12);
-    if (e.x_handle) { const sm = document.createElement('small'); sm.textContent = '@' + String(e.x_handle).slice(0, 20); nm.appendChild(sm); } // who really owns the run
+    if (e.tag) { const sm = document.createElement('small'); sm.textContent = '#' + String(e.tag).slice(0, 6); nm.appendChild(sm); } // tells same-named players apart
     li.querySelector('.lv').textContent = 'LV ' + (Number(e.level) || 1);
     li.querySelector('.sc').textContent = fmt(Number(e.score) || 0);
     ul.appendChild(li);
@@ -989,7 +991,7 @@ async function loadLeaderboard() {
   if (!sb) { drawBoard(store.get(KEY.lb, []), false); return; }
   if (!$('hubLb').children.length) $('hubLb').innerHTML = '<li class="empty">SYNCING GLOBAL RECORDS…</li>';
   try {
-    const { data, error } = await sb.from('leaderboard_best').select('name, x_handle, score, level')
+    const { data, error } = await sb.from('leaderboard_best').select('user_id, tag, name, score, level')
       .order('score', { ascending: false }).order('created_at', { ascending: true }).limit(5);
     if (error) throw error;
     if (req === lbReq) drawBoard(data || [], true);
@@ -3387,7 +3389,7 @@ function startGame() {
   for (const k in hudCache) delete hudCache[k];
   $('hud').classList.remove('hidden');
   profile.runs++; saveProfile();
-  beginRankedRun(); // signed in with X → the server opens a verified run
+  beginRankedRun(); // signed in with Google → the server opens a verified run
   MUSIC.set('play'); SFX.levelUp(); dropInput();
   texts.push({ x: core.x, y: core.y - core.R * 4.4, txt: document.body.classList.contains('touch') ? 'DRAG THE STICK TO AIM & FIRE' : 'AIM WITH THE MOUSE · HOLD TO FIRE', col: '#7ffaff', size: 13, life: 3.5, max: 3.5 });
 }
@@ -3413,7 +3415,7 @@ function gameOver() {
   let net = { pending: !!(sb && run && fs > 0) }, overShown = false;
   const recText = () => rec ? (net.ok ? `★ NEW RECORD · GLOBAL #${net.rank} ★` : '★ NEW PERSONAL RECORD ★')
     : net.ok ? `RANKED #${net.rank} GLOBALLY` : localRank >= 0 ? `RANKED #${localRank + 1} ON LOCAL BOARD` : '';
-  const netText = () => net.pending ? 'VERIFYING RUN WITH SERVER…' : net.ok ? '✓ VERIFIED · SIGNED TO @' + (net.handle || 'X') : net.msg || '';
+  const netText = () => net.pending ? 'VERIFYING RUN WITH SERVER…' : net.ok ? '✓ VERIFIED · PLAYER #' + (net.tag || tagOf(authUser && authUser.id)) : net.msg || '';
   const showNet = () => {
     $('goRec').textContent = recText(); const g = $('goNet'); g.textContent = netText();
     g.classList.toggle('bad', !!net.bad); g.classList.toggle('dim', !net.pending && !net.ok && !net.bad);
@@ -3560,11 +3562,11 @@ if (sb) {
       .subscribe();
   } catch (err) { console.error('Realtime subscribe failed:', err); }
   setInterval(() => { if (!document.hidden) queueBoardRefresh(); }, 30000);
-  // X sign-in: a failed sign-in comes back with an error in the URL; a successful one with a ?code= that Supabase swaps for a session
+  // Google sign-in: a failed sign-in comes back with an error in the URL; a successful one with a ?code= that Supabase swaps for a session
   const back = new URLSearchParams(location.search + '&' + location.hash.replace(/^#/, ''));
   if (back.get('error_description')) {
     const msg = back.get('error_description'); history.replaceState(null, '', location.pathname);
-    setTimeout(() => toast('X SIGN-IN: ' + msg.toUpperCase().slice(0, 34)), 900);
+    setTimeout(() => toast('SIGN-IN: ' + msg.toUpperCase().slice(0, 36)), 900);
   }
   sb.auth.onAuthStateChange((ev, session) => {
     authUser = session ? session.user : null; renderAuth();
@@ -3572,8 +3574,8 @@ if (sb) {
     if (ev === 'SIGNED_IN' || ev === 'SIGNED_OUT') queueBoardRefresh();
   });
 }
-$('btnXLogin').addEventListener('click', () => { SFX.init(); xLogin(); });
-$('btnXOut').addEventListener('click', xLogout);
+$('btnGLogin').addEventListener('click', () => { SFX.init(); gLogin(); });
+$('btnGOut').addEventListener('click', gLogout);
 renderAuth();
 if (callsign) { loadProfile(); goHub(); } else goLogin();
 requestAnimationFrame(frame);
