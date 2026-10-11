@@ -318,6 +318,12 @@ body.touch #toast{bottom:calc(var(--sab) + 250px)}
 .decay .h{color:var(--red);letter-spacing:.3em;font-size:10px;margin-bottom:4px}
 .decay .l{display:flex;justify-content:space-between;color:#cfd8e3}.decay .l b{color:var(--red)}
 #hDraft{font-size:9px;letter-spacing:.26em;color:#c79bff;margin-top:3px;white-space:nowrap}
+#hThreat{font-size:9px;letter-spacing:.14em;color:#ff4d7a;margin-top:3px;white-space:nowrap;text-shadow:0 0 8px rgba(255,0,85,.6)}
+#hThreat:empty{display:none}
+#bossbar.apex .bb::after{display:none}
+#bossbar.apex .bn{flex-direction:column;align-items:center;gap:3px;letter-spacing:.24em}
+#bossbar.apex #bossPhase{color:#ffd166;opacity:.95;font-size:9px}
+#bossbar.apex #bossFill{background:linear-gradient(90deg,#ff8a00,#ff0055 55%,#b44dff);box-shadow:0 0 14px #ff0055}
 
 /* ---------- Shop ---------- */
 #shop{z-index:45;justify-content:flex-start;background:linear-gradient(180deg,rgba(4,2,12,.97),rgba(1,1,3,.985))}
@@ -388,6 +394,7 @@ html[lang="th"] body *{letter-spacing:0!important}
       <div class="xpbar"><div id="hXp"></div></div>
       <div id="hStage">CORE // DORMANT</div>
       <div id="hDraft"></div>
+      <div id="hThreat"></div>
       <div id="hCombo"></div>
     </div>
     <div class="hcell right"><div class="k" data-i18n="hud.score">SCORE</div><div class="v" id="hScore">0</div></div>
@@ -456,7 +463,7 @@ html[lang="th"] body *{letter-spacing:0!important}
     <button class="btn" id="btnStart" data-i18n="hub.start">[ START COMBAT ]</button>
     <button class="btn purple" id="btnHubShop" style="letter-spacing:.12em" data-i18n="hub.shop">UPGRADE HUB ✦ FX LAB</button>
     <button class="btn ghost small" id="btnHubSettings" data-i18n="hub.settings">⚙ SETTINGS · LANGUAGE</button>
-    <div class="foot-note"><span data-i18n="hub.foot1">MANUAL AIM · JOYSTICK ON PHONE · HOLD MOUSE ON PC · ✸ NOVA WHEN CHARGED</span><br><span data-i18n="hub.foot2">TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK EVERY 3 LV</span><br><span data-i18n="hub.foot3">A BREACHED CORE KEEPS 75% OF ITS CORE AUGMENTS · 90% IF YOU BEAT YOUR LAST RUN'S LEVEL · SKILLS ARE NEVER LOST</span><br><span data-i18n="hub.foot4">HOSTILES ARE 15% WEAKER UNTIL LV 50</span><br><a href="terms.html" data-legal="terms.html" data-i18n="hub.rules">GIVEAWAY RULES</a> · <a href="privacy.html" data-legal="privacy.html" data-i18n="hub.privacy">PRIVACY</a></div>
+    <div class="foot-note"><span data-i18n="hub.foot1">MANUAL AIM · JOYSTICK ON PHONE · HOLD MOUSE ON PC · ✸ NOVA WHEN CHARGED</span><br><span data-i18n="hub.foot2">TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · APEX TITANS EVERY 20 LV FROM 150 · OVERCLOCK EVERY 3 LV</span><br><span data-i18n="hub.foot3">A BREACHED CORE KEEPS 75% OF ITS CORE AUGMENTS · 90% IF YOU BEAT YOUR LAST RUN'S LEVEL · SKILLS ARE NEVER LOST</span><br><span data-i18n="hub.foot4">HOSTILES ARE 15% WEAKER UNTIL LV 50 · FROM LV 100 THEY GROW STRONGER EVERY 15 LV</span><br><a href="terms.html" data-legal="terms.html" data-i18n="hub.rules">GIVEAWAY RULES</a> · <a href="privacy.html" data-legal="privacy.html" data-i18n="hub.privacy">PRIVACY</a></div>
   </div>
 </section>
 
@@ -551,9 +558,9 @@ en: {
   "hub.pb": "PERSONAL BEST", "hub.bank": "SHARD BANK", "hub.peak": "PEAK LEVEL", "hub.maxAsc": "MAX ASCENSION",
   "hub.start": "[ START COMBAT ]", "hub.shop": "UPGRADE HUB ✦ FX LAB", "hub.settings": "⚙ SETTINGS · LANGUAGE",
   "hub.foot1": "MANUAL AIM · JOYSTICK ON PHONE · HOLD MOUSE ON PC · ✸ NOVA WHEN CHARGED",
-  "hub.foot2": "TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK EVERY 3 LV",
+  "hub.foot2": "TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · APEX TITANS EVERY 20 LV FROM 150 · OVERCLOCK EVERY 3 LV",
   "hub.foot3": "A BREACHED CORE KEEPS 75% OF ITS CORE AUGMENTS · 90% IF YOU BEAT YOUR LAST RUN'S LEVEL · SKILLS ARE NEVER LOST",
-  "hub.foot4": "HOSTILES ARE 15% WEAKER UNTIL LV 50",
+  "hub.foot4": "HOSTILES ARE 15% WEAKER UNTIL LV 50 · FROM LV 100 THEY GROW STRONGER EVERY 15 LV",
   "hub.rules": "GIVEAWAY RULES", "hub.privacy": "PRIVACY",
   "hub.pity": "✦ PITY PROTOCOL ACTIVE · −20% ON ALL CORE AUGMENTS · ENDS WITH YOUR NEXT RUN",
   "hub.pbStreak": "PERSONAL BEST MISSED {n}/3 IN A ROW · AT 3: ONE-TIME −20% ON CORE AUGMENTS",
@@ -659,7 +666,31 @@ en: {
   "cap.0": "> TITAN NODE NEUTRALISED · CRITICAL MASS REACHED", "cap.1": "> SIGNAL BREACH // REALITY LAYER COLLAPSING",
   "cap.2": "> ASCENSION PROTOCOL {n} — INITIATED", "cap.3": "> DIVING INTO THE PUPIL ▓▓▓▓▓▒▒░░",
   "cap.4": "> CROSSING THE EVENT HORIZON", "cap.5": "> FORM LOCK: {stage}",
-  "asc.complete": "ASCENSION {n} // COMPLETE"
+  "asc.complete": "ASCENSION {n} // COMPLETE",
+  "hud.threat": "☠ THREAT {n} · HP ×{hp} · DMG ×{dmg}",
+  "ban.threatTop": "// THREAT ESCALATION",
+  "ban.threat": "THREAT TIER {n}",
+  "ban.threatSub": "HOSTILES +{hp}% HP · +{dmg}% DAMAGE · NO HIT EXCEEDS {cap}% HULL",
+  "boss.apex": "APEX TITAN // {name}",
+  "boss.apexPhase": "PHASE {n}/3 // {phase}",
+  "boss.warnApex": "⚠ APEX TITAN INBOUND",
+  "boss.subApex": "{name} · 3 PHASES · LV {lv}",
+  "boss.shift": "PHASE {n}/3 · {phase}",
+  "boss.reflect": "SHIELD REFLECTS 50%",
+  "boss.resist": "SHOOT TO RESIST THE PULL",
+  "boss.crush": "GRAVITY CRUSH",
+  "apex.jug1": "ARMOR",
+  "apex.jug2": "TURRET MODE",
+  "apex.jug3": "EXPOSED CORE",
+  "apex.weaver1": "ILLUSION",
+  "apex.weaver2": "SWARM",
+  "apex.weaver3": "GRAVITY",
+  "apex.omega1": "TWIN BARRELS",
+  "apex.omega2": "SHIELD MATRIX",
+  "apex.omega3": "ENRAGE",
+  "ban.apexTop": "// APEX TITAN DOWN",
+  "ban.apex": "APEX SLAIN",
+  "ban.apexSub": "+15% DAMAGE FOR THIS RUN · SHIELDS FULL"
 },
 de: {
   "lang.name": "DEUTSCH",
@@ -679,9 +710,9 @@ de: {
   "hub.pb": "PERSÖNLICHER REKORD", "hub.bank": "SPLITTER-BANK", "hub.peak": "HÖCHSTES LEVEL", "hub.maxAsc": "MAX. AUFSTIEG",
   "hub.start": "[ KAMPF STARTEN ]", "hub.shop": "UPGRADE-HUB ✦ FX-LABOR", "hub.settings": "⚙ EINSTELLUNGEN · SPRACHE",
   "hub.foot1": "MANUELLES ZIELEN · JOYSTICK AM HANDY · MAUS GEDRÜCKT HALTEN AM PC · ✸ NOVA, WENN GELADEN",
-  "hub.foot2": "TITANENTORE BEI LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK ALLE 3 LV",
+  "hub.foot2": "TITANENTORE BEI LV 10 · 25 · 50 · 75 · 150 · APEX-TITANEN ALLE 20 LV AB 150 · OVERCLOCK ALLE 3 LV",
   "hub.foot3": "EIN DURCHBROCHENER KERN BEHÄLT 75% SEINER KERN-AUGMENTS · 90%, WENN DU DAS LEVEL DEINES LETZTEN RUNS ÜBERTRIFFST · SKILLS GEHEN NIE VERLOREN",
-  "hub.foot4": "GEGNER SIND BIS LV 50 UM 15% SCHWÄCHER",
+  "hub.foot4": "GEGNER SIND BIS LV 50 UM 15% SCHWÄCHER · AB LV 100 WERDEN SIE ALLE 15 LV STÄRKER",
   "hub.rules": "GEWINNSPIEL-REGELN", "hub.privacy": "DATENSCHUTZ",
   "hub.pity": "✦ PITY-PROTOKOLL AKTIV · −20% AUF ALLE KERN-AUGMENTS · ENDET MIT DEINEM NÄCHSTEN RUN",
   "hub.pbStreak": "PERSÖNLICHEN REKORD {n}/3 MAL IN FOLGE VERFEHLT · BEI 3: EINMALIG −20% AUF KERN-AUGMENTS",
@@ -787,7 +818,31 @@ de: {
   "cap.0": "> TITANENKNOTEN NEUTRALISIERT · KRITISCHE MASSE ERREICHT", "cap.1": "> SIGNALBRUCH // REALITÄTSEBENE KOLLABIERT",
   "cap.2": "> AUFSTIEGSPROTOKOLL {n} — EINGELEITET", "cap.3": "> TAUCHGANG IN DIE PUPILLE ▓▓▓▓▓▒▒░░",
   "cap.4": "> DURCHQUERE DEN EREIGNISHORIZONT", "cap.5": "> FORM FIXIERT: {stage}",
-  "asc.complete": "AUFSTIEG {n} // ABGESCHLOSSEN"
+  "asc.complete": "AUFSTIEG {n} // ABGESCHLOSSEN",
+  "hud.threat": "☠ BEDROHUNG {n} · HP ×{hp} · DMG ×{dmg}",
+  "ban.threatTop": "// BEDROHUNG STEIGT",
+  "ban.threat": "BEDROHUNGSSTUFE {n}",
+  "ban.threatSub": "GEGNER +{hp}% HP · +{dmg}% SCHADEN · KEIN TREFFER ÜBER {cap}% HÜLLE",
+  "boss.apex": "APEX-TITAN // {name}",
+  "boss.apexPhase": "PHASE {n}/3 // {phase}",
+  "boss.warnApex": "⚠ APEX-TITAN IM ANFLUG",
+  "boss.subApex": "{name} · 3 PHASEN · LV {lv}",
+  "boss.shift": "PHASE {n}/3 · {phase}",
+  "boss.reflect": "SCHILD REFLEKTIERT 50%",
+  "boss.resist": "SCHIESSEN GEGEN DEN SOG",
+  "boss.crush": "GRAVITATIONSDRUCK",
+  "apex.jug1": "PANZERUNG",
+  "apex.jug2": "GESCHÜTZMODUS",
+  "apex.jug3": "OFFENER KERN",
+  "apex.weaver1": "ILLUSION",
+  "apex.weaver2": "SCHWARM",
+  "apex.weaver3": "GRAVITATION",
+  "apex.omega1": "ZWILLINGSLÄUFE",
+  "apex.omega2": "SCHILDMATRIX",
+  "apex.omega3": "RASEREI",
+  "ban.apexTop": "// APEX-TITAN BESIEGT",
+  "ban.apex": "APEX ERLEGT",
+  "ban.apexSub": "+15% SCHADEN FÜR DIESEN RUN · SCHILDE VOLL"
 },
 fr: {
   "lang.name": "FRANÇAIS",
@@ -807,9 +862,9 @@ fr: {
   "hub.pb": "RECORD PERSONNEL", "hub.bank": "BANQUE D'ÉCLATS", "hub.peak": "NIVEAU MAX", "hub.maxAsc": "ASCENSION MAX",
   "hub.start": "[ LANCER LE COMBAT ]", "hub.shop": "HUB D'AMÉLIORATION ✦ LABO FX", "hub.settings": "⚙ PARAMÈTRES · LANGUE",
   "hub.foot1": "VISÉE MANUELLE · JOYSTICK SUR MOBILE · MAINTIENS LA SOURIS SUR PC · ✸ NOVA UNE FOIS CHARGÉE",
-  "hub.foot2": "PORTES DES TITANS AUX NIV 10 · 25 · 50 · 75 · 150 · OVERCLOCK TOUS LES 3 NIV",
+  "hub.foot2": "PORTES DES TITANS AUX NIV 10 · 25 · 50 · 75 · 150 · TITANS APEX TOUS LES 20 NIV DÈS 150 · OVERCLOCK TOUS LES 3 NIV",
   "hub.foot3": "UN NOYAU BRISÉ GARDE 75% DE SES AUGMENTS DE NOYAU · 90% SI TU DÉPASSES LE NIVEAU DE TA DERNIÈRE PARTIE · LES COMPÉTENCES NE SONT JAMAIS PERDUES",
-  "hub.foot4": "LES ENNEMIS SONT 15% PLUS FAIBLES JUSQU'AU NIV 50",
+  "hub.foot4": "LES ENNEMIS SONT 15% PLUS FAIBLES JUSQU'AU NIV 50 · DÈS LE NIV 100 ILS SE RENFORCENT TOUS LES 15 NIV",
   "hub.rules": "RÈGLES DU CONCOURS", "hub.privacy": "CONFIDENTIALITÉ",
   "hub.pity": "✦ PROTOCOLE DE CONSOLATION ACTIF · −20% SUR TOUS LES AUGMENTS DE NOYAU · PREND FIN AVEC TA PROCHAINE PARTIE",
   "hub.pbStreak": "RECORD PERSONNEL MANQUÉ {n}/3 FOIS DE SUITE · À 3 : −20% UNIQUE SUR LES AUGMENTS DE NOYAU",
@@ -915,7 +970,31 @@ fr: {
   "cap.0": "> NŒUD TITAN NEUTRALISÉ · MASSE CRITIQUE ATTEINTE", "cap.1": "> RUPTURE DU SIGNAL // LA COUCHE DE RÉALITÉ S'EFFONDRE",
   "cap.2": "> PROTOCOLE D'ASCENSION {n} — LANCÉ", "cap.3": "> PLONGÉE DANS LA PUPILLE ▓▓▓▓▓▒▒░░",
   "cap.4": "> FRANCHISSEMENT DE L'HORIZON DES ÉVÉNEMENTS", "cap.5": "> FORME VERROUILLÉE : {stage}",
-  "asc.complete": "ASCENSION {n} // TERMINÉE"
+  "asc.complete": "ASCENSION {n} // TERMINÉE",
+  "hud.threat": "☠ MENACE {n} · PV ×{hp} · DÉG ×{dmg}",
+  "ban.threatTop": "// MENACE EN HAUSSE",
+  "ban.threat": "NIVEAU DE MENACE {n}",
+  "ban.threatSub": "ENNEMIS +{hp}% PV · +{dmg}% DÉGÂTS · AUCUN COUP AU-DELÀ DE {cap}% DE COQUE",
+  "boss.apex": "TITAN APEX // {name}",
+  "boss.apexPhase": "PHASE {n}/3 // {phase}",
+  "boss.warnApex": "⚠ TITAN APEX EN APPROCHE",
+  "boss.subApex": "{name} · 3 PHASES · NIV {lv}",
+  "boss.shift": "PHASE {n}/3 · {phase}",
+  "boss.reflect": "LE BOUCLIER RENVOIE 50%",
+  "boss.resist": "TIRE POUR RÉSISTER À L'ATTRACTION",
+  "boss.crush": "ÉCRASEMENT GRAVITATIONNEL",
+  "apex.jug1": "BLINDAGE",
+  "apex.jug2": "MODE TOURELLE",
+  "apex.jug3": "NOYAU EXPOSÉ",
+  "apex.weaver1": "ILLUSION",
+  "apex.weaver2": "ESSAIM",
+  "apex.weaver3": "GRAVITÉ",
+  "apex.omega1": "CANONS JUMEAUX",
+  "apex.omega2": "MATRICE DE BOUCLIER",
+  "apex.omega3": "FUREUR",
+  "ban.apexTop": "// TITAN APEX VAINCU",
+  "ban.apex": "APEX ABATTU",
+  "ban.apexSub": "+15% DE DÉGÂTS POUR CETTE PARTIE · BOUCLIERS PLEINS"
 },
 es: {
   "lang.name": "ESPAÑOL",
@@ -935,9 +1014,9 @@ es: {
   "hub.pb": "RÉCORD PERSONAL", "hub.bank": "BANCO DE FRAGMENTOS", "hub.peak": "NIVEL MÁXIMO", "hub.maxAsc": "ASCENSIÓN MÁXIMA",
   "hub.start": "[ INICIAR COMBATE ]", "hub.shop": "CENTRO DE MEJORAS ✦ LAB FX", "hub.settings": "⚙ AJUSTES · IDIOMA",
   "hub.foot1": "PUNTERÍA MANUAL · JOYSTICK EN MÓVIL · MANTÉN PULSADO EL RATÓN EN PC · ✸ NOVA CUANDO ESTÉ CARGADA",
-  "hub.foot2": "PUERTAS DE TITÁN EN NV 10 · 25 · 50 · 75 · 150 · OVERCLOCK CADA 3 NV",
+  "hub.foot2": "PUERTAS DE TITÁN EN NV 10 · 25 · 50 · 75 · 150 · TITANES APEX CADA 20 NV DESDE EL 150 · OVERCLOCK CADA 3 NV",
   "hub.foot3": "UN NÚCLEO DESTRUIDO CONSERVA EL 75% DE SUS MEJORAS DE NÚCLEO · EL 90% SI SUPERAS EL NIVEL DE TU ÚLTIMA PARTIDA · LAS HABILIDADES NUNCA SE PIERDEN",
-  "hub.foot4": "LOS ENEMIGOS SON UN 15% MÁS DÉBILES HASTA EL NV 50",
+  "hub.foot4": "LOS ENEMIGOS SON UN 15% MÁS DÉBILES HASTA EL NV 50 · DESDE EL NV 100 SE FORTALECEN CADA 15 NV",
   "hub.rules": "BASES DEL SORTEO", "hub.privacy": "PRIVACIDAD",
   "hub.pity": "✦ PROTOCOLO DE CONSUELO ACTIVO · −20% EN TODAS LAS MEJORAS DE NÚCLEO · TERMINA CON TU PRÓXIMA PARTIDA",
   "hub.pbStreak": "RÉCORD PERSONAL FALLADO {n}/3 VECES SEGUIDAS · A LAS 3: −20% ÚNICO EN MEJORAS DE NÚCLEO",
@@ -1043,7 +1122,31 @@ es: {
   "cap.0": "> NODO TITÁN NEUTRALIZADO · MASA CRÍTICA ALCANZADA", "cap.1": "> BRECHA DE SEÑAL // LA CAPA DE REALIDAD SE DESMORONA",
   "cap.2": "> PROTOCOLO DE ASCENSIÓN {n} — INICIADO", "cap.3": "> INMERSIÓN EN LA PUPILA ▓▓▓▓▓▒▒░░",
   "cap.4": "> CRUZANDO EL HORIZONTE DE SUCESOS", "cap.5": "> FORMA FIJADA: {stage}",
-  "asc.complete": "ASCENSIÓN {n} // COMPLETADA"
+  "asc.complete": "ASCENSIÓN {n} // COMPLETADA",
+  "hud.threat": "☠ AMENAZA {n} · VIDA ×{hp} · DAÑO ×{dmg}",
+  "ban.threatTop": "// LA AMENAZA AUMENTA",
+  "ban.threat": "NIVEL DE AMENAZA {n}",
+  "ban.threatSub": "ENEMIGOS +{hp}% VIDA · +{dmg}% DAÑO · NINGÚN GOLPE SUPERA EL {cap}% DEL CASCO",
+  "boss.apex": "TITÁN APEX // {name}",
+  "boss.apexPhase": "FASE {n}/3 // {phase}",
+  "boss.warnApex": "⚠ TITÁN APEX EN CAMINO",
+  "boss.subApex": "{name} · 3 FASES · NV {lv}",
+  "boss.shift": "FASE {n}/3 · {phase}",
+  "boss.reflect": "EL ESCUDO REFLEJA EL 50%",
+  "boss.resist": "DISPARA PARA RESISTIR LA ATRACCIÓN",
+  "boss.crush": "APLASTAMIENTO GRAVITATORIO",
+  "apex.jug1": "BLINDAJE",
+  "apex.jug2": "MODO TORRETA",
+  "apex.jug3": "NÚCLEO EXPUESTO",
+  "apex.weaver1": "ILUSIÓN",
+  "apex.weaver2": "ENJAMBRE",
+  "apex.weaver3": "GRAVEDAD",
+  "apex.omega1": "CAÑONES GEMELOS",
+  "apex.omega2": "MATRIZ DE ESCUDO",
+  "apex.omega3": "FURIA",
+  "ban.apexTop": "// TITÁN APEX DERROTADO",
+  "ban.apex": "APEX ABATIDO",
+  "ban.apexSub": "+15% DE DAÑO EN ESTA PARTIDA · ESCUDOS AL MÁXIMO"
 },
 th: {
   "lang.name": "ไทย",
@@ -1063,9 +1166,9 @@ th: {
   "hub.pb": "สถิติส่วนตัว", "hub.bank": "คลังชาร์ด", "hub.peak": "เลเวลสูงสุด", "hub.maxAsc": "การยกระดับสูงสุด",
   "hub.start": "[ เริ่มการต่อสู้ ]", "hub.shop": "ศูนย์อัปเกรด ✦ แล็บ FX", "hub.settings": "⚙ ตั้งค่า · ภาษา",
   "hub.foot1": "เล็งเอง · จอยสติกบนมือถือ · กดเมาส์ค้างบนพีซี · ✸ ใช้โนวาเมื่อชาร์จเต็ม",
-  "hub.foot2": "ประตูไททันที่เลเวล 10 · 25 · 50 · 75 · 150 · โอเวอร์คล็อกทุก 3 เลเวล",
+  "hub.foot2": "ประตูไททันที่เลเวล 10 · 25 · 50 · 75 · 150 · ไททันเอเพ็กซ์ทุก 20 เลเวลตั้งแต่ 150 · โอเวอร์คล็อกทุก 3 เลเวล",
   "hub.foot3": "แกนที่ถูกทำลายจะเก็บอัปเกรดแกนไว้ 75% · 90% หากคุณทำเลเวลได้สูงกว่ารอบที่แล้ว · สกิลจะไม่หายไปเลย",
-  "hub.foot4": "ศัตรูอ่อนลง 15% จนถึงเลเวล 50",
+  "hub.foot4": "ศัตรูอ่อนลง 15% จนถึงเลเวล 50 · ตั้งแต่เลเวล 100 ศัตรูจะแกร่งขึ้นทุก 15 เลเวล",
   "hub.rules": "กติกาแจกรางวัล", "hub.privacy": "ความเป็นส่วนตัว",
   "hub.pity": "✦ โปรโตคอลปลอบใจทำงานอยู่ · ลด 20% สำหรับอัปเกรดแกนทั้งหมด · สิ้นสุดเมื่อจบรอบถัดไป",
   "hub.pbStreak": "พลาดสถิติส่วนตัว {n}/3 ครั้งติดต่อกัน · ครบ 3 ครั้ง: ลด 20% ครั้งเดียวสำหรับอัปเกรดแกน",
@@ -1171,7 +1274,31 @@ th: {
   "cap.0": "> ทำลายโหนดไททันแล้ว · ถึงมวลวิกฤต", "cap.1": "> สัญญาณรั่วไหล // ชั้นความเป็นจริงกำลังพังทลาย",
   "cap.2": "> โปรโตคอลยกระดับ {n} — เริ่มทำงาน", "cap.3": "> ดำดิ่งสู่รูม่านตา ▓▓▓▓▓▒▒░░",
   "cap.4": "> กำลังข้ามขอบฟ้าเหตุการณ์", "cap.5": "> ล็อกร่าง: {stage}",
-  "asc.complete": "การยกระดับ {n} // เสร็จสมบูรณ์"
+  "asc.complete": "การยกระดับ {n} // เสร็จสมบูรณ์",
+  "hud.threat": "☠ ภัยคุกคาม {n} · HP ×{hp} · DMG ×{dmg}",
+  "ban.threatTop": "// ภัยคุกคามเพิ่มขึ้น",
+  "ban.threat": "ระดับภัยคุกคาม {n}",
+  "ban.threatSub": "ศัตรู HP +{hp}% · ความเสียหาย +{dmg}% · ไม่มีการโจมตีใดเกิน {cap}% ของตัวถัง",
+  "boss.apex": "ไททันเอเพ็กซ์ // {name}",
+  "boss.apexPhase": "เฟส {n}/3 // {phase}",
+  "boss.warnApex": "⚠ ไททันเอเพ็กซ์กำลังมา",
+  "boss.subApex": "{name} · 3 เฟส · เลเวล {lv}",
+  "boss.shift": "เฟส {n}/3 · {phase}",
+  "boss.reflect": "โล่สะท้อน 50%",
+  "boss.resist": "ยิงเพื่อต้านแรงดึง",
+  "boss.crush": "แรงโน้มถ่วงบดขยี้",
+  "apex.jug1": "เกราะ",
+  "apex.jug2": "โหมดป้อมปืน",
+  "apex.jug3": "แกนเปลือย",
+  "apex.weaver1": "ภาพลวงตา",
+  "apex.weaver2": "ฝูงบอท",
+  "apex.weaver3": "แรงโน้มถ่วง",
+  "apex.omega1": "ลำกล้องคู่",
+  "apex.omega2": "เมทริกซ์โล่",
+  "apex.omega3": "คลั่ง",
+  "ban.apexTop": "// ล้มไททันเอเพ็กซ์แล้ว",
+  "ban.apex": "โค่นเอเพ็กซ์",
+  "ban.apexSub": "+15% ความเสียหายในรอบนี้ · โล่เต็ม"
 },
 tl: {
   "lang.name": "TAGALOG",
@@ -1191,9 +1318,9 @@ tl: {
   "hub.pb": "PERSONAL BEST", "hub.bank": "SHARD BANK", "hub.peak": "PINAKAMATAAS NA LEVEL", "hub.maxAsc": "PINAKAMATAAS NA ASCENSION",
   "hub.start": "[ SIMULAN ANG LABAN ]", "hub.shop": "UPGRADE HUB ✦ FX LAB", "hub.settings": "⚙ SETTINGS · WIKA",
   "hub.foot1": "MANWAL NA PAGTUTOK · JOYSTICK SA PHONE · PINDUTIN NANG MATAGAL ANG MOUSE SA PC · ✸ NOVA KAPAG PUNO NA",
-  "hub.foot2": "MGA TITAN GATE SA LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK KADA 3 LV",
+  "hub.foot2": "MGA TITAN GATE SA LV 10 · 25 · 50 · 75 · 150 · APEX TITAN KADA 20 LV MULA 150 · OVERCLOCK KADA 3 LV",
   "hub.foot3": "ANG NASIRANG CORE AY NAGTITIRA NG 75% NG MGA CORE AUGMENT NITO · 90% KUNG MALALAMPASAN MO ANG LEVEL NG HULING RUN MO · HINDI KAILANMAN NAWAWALA ANG MGA SKILL",
-  "hub.foot4": "MAS MAHINA NANG 15% ANG MGA KALABAN HANGGANG LV 50",
+  "hub.foot4": "MAS MAHINA NANG 15% ANG MGA KALABAN HANGGANG LV 50 · MULA LV 100 LUMALAKAS SILA KADA 15 LV",
   "hub.rules": "MGA PATAKARAN NG GIVEAWAY", "hub.privacy": "PRIVACY",
   "hub.pity": "✦ AKTIBO ANG PITY PROTOCOL · −20% SA LAHAT NG CORE AUGMENT · MATATAPOS SA SUSUNOD MONG RUN",
   "hub.pbStreak": "HINDI NAABOT ANG PERSONAL BEST NANG {n}/3 SUNOD-SUNOD · SA IKA-3: ISANG BESES NA −20% SA CORE AUGMENTS",
@@ -1299,7 +1426,31 @@ tl: {
   "cap.0": "> NA-NEUTRALISA ANG TITAN NODE · NAABOT ANG CRITICAL MASS", "cap.1": "> SIGNAL BREACH // GUMUGUHO ANG PATONG NG REALIDAD",
   "cap.2": "> ASCENSION PROTOCOL {n} — SINIMULAN", "cap.3": "> SUMISISID SA BALINTATAW ▓▓▓▓▓▒▒░░",
   "cap.4": "> TUMATAWID SA EVENT HORIZON", "cap.5": "> NAKA-LOCK ANG ANYO: {stage}",
-  "asc.complete": "ASCENSION {n} // TAPOS NA"
+  "asc.complete": "ASCENSION {n} // TAPOS NA",
+  "hud.threat": "☠ BANTA {n} · HP ×{hp} · DMG ×{dmg}",
+  "ban.threatTop": "// TUMATAAS ANG BANTA",
+  "ban.threat": "ANTAS NG BANTA {n}",
+  "ban.threatSub": "KALABAN +{hp}% HP · +{dmg}% PINSALA · WALANG TAMANG LALAMPAS SA {cap}% NG KASKO",
+  "boss.apex": "APEX TITAN // {name}",
+  "boss.apexPhase": "PHASE {n}/3 // {phase}",
+  "boss.warnApex": "⚠ PAPARATING ANG APEX TITAN",
+  "boss.subApex": "{name} · 3 PHASE · LV {lv}",
+  "boss.shift": "PHASE {n}/3 · {phase}",
+  "boss.reflect": "NAGBABALIK ANG KALASAG NG 50%",
+  "boss.resist": "BUMARIL PARA LABANAN ANG HILA",
+  "boss.crush": "DUROG SA GRABIDAD",
+  "apex.jug1": "BALUTI",
+  "apex.jug2": "TURRET MODE",
+  "apex.jug3": "NAKALANTAD NA CORE",
+  "apex.weaver1": "ILUSYON",
+  "apex.weaver2": "KUYOG",
+  "apex.weaver3": "GRABIDAD",
+  "apex.omega1": "KAMBAL NA BARIL",
+  "apex.omega2": "SHIELD MATRIX",
+  "apex.omega3": "GALIT",
+  "ban.apexTop": "// BUMAGSAK ANG APEX TITAN",
+  "ban.apex": "NATALO ANG APEX",
+  "ban.apexSub": "+15% PINSALA SA RUN NA ITO · PUNO ANG KALASAG"
 }
 };
 </script>
@@ -1383,6 +1534,11 @@ const BOSS_LEVELS = [10, 25, 50, 75, 150];
 // BOT BALANCE — while the player is below level 50 every hostile (Titans included) has 15% less HP and deals
 // 15% less damage. From level 50 on they are back at their original base values (living hostiles are restored too).
 const BOT_NERF_LV = 50, BOT_NERF = 0.85;
+// LATE-GAME THREAT — from LV 100, every 15 levels (100 · 115 · 130 · 145 …) normal bots gain +18% max HP and +15% damage.
+// The tiers compound forever (THREAT n → HP ×1.18ⁿ, damage ×1.15ⁿ). Fairness guard from LV 100: no single hit can take more
+// than 35% of your max hull (Titan attacks: 60%), so a full-health core can never be one-shot, and the Supernova still
+// erases every normal bot regardless of its HP.
+const LATE_START = 100, LATE_STEP = 15, LATE_HP = 1.18, LATE_DMG = 1.15, BOT_HIT_CAP = 0.35, BOSS_HIT_CAP = 0.6;
 
 /* =========================================================
    AUDIO — procedural SFX (Web Audio)
@@ -1882,7 +2038,7 @@ const stats = {};
 const newDraft = () => ({ dmg: 1, rate: 1, shield: 0, multi: 0, crit: 0, pierce: 0, chain: 0, orb: 0, lancer: 0, wisp: 0, aegis: 0, star: 0, hull: 0, nova: 0 });
 let draft = newDraft();
 let enemies = [], bullets = [], eBullets = [], shards = [], parts = [], rings = [], texts = [], bolts = [], beams = [], orbs = [], comps = [];
-let boss = null, bossQueue = [], bossTriggered = {}, echoes = 0;
+let boss = null, bossQueue = [], bossTriggered = {}, echoes = 0, threat = 0; // threat = highest THREAT tier announced this run
 let state = 'menu', paused = false, modal = null;
 let level = 1, xp = 0, score = 0, kills = 0, runShards = 0, gt = 0, realT = 0;
 let spawnT = 0, waveT = 14, draftQueue = [], eid = 0, legends = 0, epicGiven = false, legGiven = false;
@@ -1904,17 +2060,22 @@ const comboMul = () => 1 + Math.min(4, combo.n * 0.02);
 const orbTier = () => stats.orbLv <= 0 ? 0 : Math.min(5, Math.ceil(stats.orbLv / 2));
 // hostile strength multiplier: 0.85 below level 50 (HP & damage −15%) · 1.0 (original base values) from level 50 on
 const botScale = () => level < BOT_NERF_LV ? BOT_NERF : 1;
-// called on every level-up: hostiles still alive when the player reaches LV 50 get their full original HP back
+// THREAT tier: 0 below LV 100, then 1 at 100, 2 at 115, 3 at 130 … (endless)
+const threatTier = () => level < LATE_START ? 0 : Math.floor((level - LATE_START) / LATE_STEP) + 1;
+const lateHp = () => Math.pow(LATE_HP, threatTier());   // normal bots only — Titans have their own scaling
+const lateDmg = () => Math.pow(LATE_DMG, threatTier());
+// called on every level-up: living hostiles follow the current scale (LV 50 restores full strength; each THREAT tier
+// lifts HP and damage of the bots already on the field, so nobody is left behind at an old tier)
 function syncBotScale() {
-  const s = botScale();
-  const fix = u => {
+  const hs = botScale() * lateHp(), ds = lateDmg();
+  const fix = (u, s) => {
     if (!u || u.bs == null || u.bs === s) return;
     const k = s / u.bs; u.hp *= k; u.max *= k;
     if (u.shieldMax) { u.shieldHp *= k; u.shieldMax *= k; }
     u.bs = s;
   };
-  for (const e of enemies) fix(e);
-  fix(boss);
+  for (const e of enemies) { fix(e, hs); if (e.ds != null && e.ds !== ds) { e.dmg *= ds / e.ds; e.ds = ds; } }
+  fix(boss, botScale());
 }
 
 function recompute() {
@@ -1968,7 +2129,7 @@ function syncComps() {
 function edgePoint(angle, extra = 0) {
   const a = angle == null ? rand(0, TAU) : angle, c = Math.abs(Math.cos(a)) || 1e-6, s = Math.abs(Math.sin(a)) || 1e-6;
   const d = Math.min((W / 2) / c, (H / 2) / s) + 30 + extra;
-  return { x: core.x + Math.cos(a) * d, y: core.y + Math.sin(a) * d };
+  return { x: W / 2 + Math.cos(a) * d, y: H * 0.5 + Math.sin(a) * d }; // arena centre: stays off-screen even while the core is dragged
 }
 function pickType() {
   const st = core.stage, list = [];
@@ -1990,11 +2151,11 @@ function spawnEnemy(type, angle, o = {}) {
   const p = o.x != null ? { x: o.x, y: o.y } : edgePoint(angle, o.extra || 0);
   const L = level;
   const elite = o.elite != null ? o.elite : (key !== 'mite' && Math.random() < Math.min(0.18, 0.01 + L * 0.0015 + core.stage * 0.015));
-  const bs = botScale(), hp = T.hp * hpScale(L) * (1 + gt / 700) * (elite ? 2.8 : 1) * (o.hpMul || 1) * bs;
+  const bs = botScale() * lateHp(), ds = lateDmg(), hp = T.hp * hpScale(L) * (1 + gt / 700) * (elite ? 2.8 : 1) * (o.hpMul || 1) * bs;
   const e = {
-    id: ++eid, key, t: T, x: p.x, y: p.y, vx: 0, vy: 0, r: T.r * (elite ? 1.35 : 1), hp, max: hp, bs,
+    id: ++eid, key, t: T, x: p.x, y: p.y, vx: 0, vy: 0, r: T.r * (elite ? 1.35 : 1), hp, max: hp, bs, ds,
     spd: T.spd * (1 + Math.min(1, L * 0.012)) * rand(.88, 1.12) * (elite ? 0.9 : 1),
-    wob: rand(0, TAU), wf: rand(1.5, 3), rot: rand(0, TAU), flash: 0, dmg: T.dmg * (1 + L * 0.028) * (elite ? 1.45 : 1),
+    wob: rand(0, TAU), wf: rand(1.5, 3), rot: rand(0, TAU), flash: 0, dmg: T.dmg * (1 + L * 0.028) * (elite ? 1.45 : 1) * ds,
     elite, dead: false, cd: rand(1, 2.5), st: 0, charge: 0, alpha: 1, fuse: 0, age: 0, kick: 0,
     fcd: T.fire ? rand(T.fire.cd[0], T.fire.cd[1]) * 0.7 + 0.8 : 0, chg: 0, chgMax: 0, boost: 0, bcd: rand(0.6, 2.2), beh: o.beh || null, col: o.col || null, sw: o.sw || null,
     shieldHp: T.shield ? hp * T.shield : 0, shieldMax: T.shield ? hp * T.shield : 0
@@ -2097,7 +2258,7 @@ function updateEnemies(d) {
     }
     if (!moved) { e.vx = (nx - ny * lat) * sp; e.vy = (ny + nx * lat) * sp; e.x += e.vx * d; e.y += e.vy * d; }
     if (dist < core.R * 1.25 + e.r) {
-      damageCore(e.dmg, e.key + (e.elite ? '*' : '')); e.dead = true;
+      damageCore(e.dmg); e.dead = true;
       if (e.t.beh === 'bomber') { rings.push({ x: e.x, y: e.y, r: 8, vr: 520, life: .45, max: .45, col: '#ff6a00', w: 6 }); burst(e.x, e.y, 40, ['#ff6a00', '#ffbe0b', '#ffffff'], 380, 3.2); SFX.explode(true); }
       burst(e.x, e.y, 20, [e.col || e.t.col, '#ffffff'], 260, 2.6);
       rings.push({ x: e.x, y: e.y, r: 4, vr: 220, life: .35, max: .35, col: '#ff0055', w: 3 });
@@ -2121,7 +2282,7 @@ function spawnBoss(idx, echo = 0) {
   if (idx === 3) for (let i = 0; i < 16; i++) boss.segs.push({ x: boss.x, y: boss.y - i * 12, a: 0 });
   $('bossName').textContent = bossLabel(boss);
   $('bossPhase').textContent = bossPhaseLabel(boss);
-  $('bossbar').classList.remove('hidden');
+  $('bossbar').classList.remove('hidden'); $('bossbar').classList.remove('apex');
   $('warnTitle').textContent = echo ? loc('boss.warnEcho') : loc('boss.warn');
   $('warnSub').textContent = echo ? loc('boss.subEcho', { name: B.name, n: echo }) : loc('boss.subGate', { name: B.name, n: idx + 1 }) + (B.forms > 1 ? loc('boss.twoForms') : '');
   replay($('warn'), 'show');
@@ -2130,9 +2291,16 @@ function spawnBoss(idx, echo = 0) {
   SFX.bossSpawn(idx); MUSIC.set('boss'); shake = Math.max(shake, 14); warp = 3;
 }
 // boss bar labels (rebuilt on a language switch)
-const bossLabel = b => loc(b.echo ? 'boss.echo' : 'boss.titan', { n: b.echo, name: b.form === 2 ? b.B.name2 : b.B.name });
-const bossPhaseLabel = b => loc(b.B.forms > 1 ? (b.form === 2 ? 'boss.form2' : 'boss.form1') : (b.phase === 2 ? 'boss.phase2' : 'boss.phase1'));
-function nextBoss() { if (state === 'play' && !boss && !cine && !modal && bossQueue.length) { const [i, e] = bossQueue.shift(); spawnBoss(i, e); } }
+const bossLabel = b => b.apex ? loc('boss.apex', { name: apexName(b) }) : loc(b.echo ? 'boss.echo' : 'boss.titan', { n: b.echo, name: b.form === 2 ? b.B.name2 : b.B.name });
+const bossPhaseLabel = b => b.apex ? loc('boss.apexPhase', { n: b.ph + 1, phase: apexPhaseName(b) })
+  : loc(b.B.forms > 1 ? (b.form === 2 ? 'boss.form2' : 'boss.form1') : (b.phase === 2 ? 'boss.phase2' : 'boss.phase1'));
+// queue entries: [titanIndex, echo] for classic Titans · [-1, 0, apexIndex] for the three-phase Apex Titans
+function nextBoss() {
+  if (state === 'play' && !boss && !cine && !modal && bossQueue.length) {
+    const q = bossQueue.shift();
+    if (q[2] != null) spawnApex(q[2]); else spawnBoss(q[0], q[1]);
+  }
+}
 function updateSegs(b) {
   let px = b.x, py = b.y; const gap = b.r * 0.6;
   for (const s of b.segs) {
@@ -2172,6 +2340,7 @@ function transformBoss(b) {
   SFX.transform();
 }
 function updateBoss(d) {
+  if (boss.apex) { updateApex(boss, d); return; }
   const b = boss; b.t += d; b.rot += d * (0.6 + b.idx * 0.12) * (b.form === 2 ? 1.5 : 1); b.flash = Math.max(0, b.flash - d); b.shardA += d * 1.4;
   const rage = b.phase === 2 ? 1.35 : 1, B = b.B, F2 = b.form === 2;
   if (b.stun > 0) b.stun -= d;
@@ -2199,7 +2368,7 @@ function updateBoss(d) {
     else if (c.t >= c.dur) {
       b.charge = null;
       beams.push({ x: b.x, y: b.y, life: 0.5, max: 0.5, col: bossCol(b), w: b.r * 0.55 });
-      damageCore((20 + level * 0.5) * rage * (1 + b.echo * 0.2));
+      damageCore((20 + level * 0.5) * rage * (1 + b.echo * 0.2), true);
       SFX.beam(); shake = Math.max(shake, 18); chroma = 0.6;
     }
   }
@@ -2210,7 +2379,7 @@ function updateBoss(d) {
     else if (s.st === 2) {
       const a = Math.atan2(core.y - b.y, core.x - b.x); b.x += Math.cos(a) * (F2 ? 680 : 560) * d; b.y += Math.sin(a) * (F2 ? 680 : 560) * d;
       if (s.dealt >= s.need) breakBoss(b, loc('boss.deflected'));
-      else if (Math.hypot(core.x - b.x, core.y - b.y) < core.R * 1.4 + b.r * 0.6) { damageCore((26 + level * 0.6) * (1 + b.echo * 0.2)); s.st = 3; shake = 24; burst(b.x, b.y, 40, ['#ff1744', '#ffffff'], 300, 3); }
+      else if (Math.hypot(core.x - b.x, core.y - b.y) < core.R * 1.4 + b.r * 0.6) { damageCore((26 + level * 0.6) * (1 + b.echo * 0.2), true); s.st = 3; shake = 24; burst(b.x, b.y, 40, ['#ff1744', '#ffffff'], 300, 3); }
     } else if (s.st === 3) {
       const a = Math.atan2(b.y - core.y, b.x - core.x), dd = Math.hypot(b.x - core.x, b.y - core.y);
       if (dd < b.orbit * (s.left > 0 ? 0.75 : 1)) { b.x += Math.cos(a) * 340 * d; b.y += Math.sin(a) * 340 * d; }
@@ -2288,19 +2457,23 @@ function updateBoss(d) {
   }
 }
 // nova = true → the Supernova hit: always its exact share (no stun bonus) and it never refunds its own charge
+// Apex Titans: b.max is the CURRENT phase's health, so the Supernova (boss.max × 30% × NOVA AMPLITUDE) only ever takes
+// 30% of that phase — never of the whole three-phase pool — and the phase-shift window is invulnerable.
 function damageBoss(dmg, crit, x, y, nova) {
   const b = boss; if (!b || b.entering || b.trans > 0) return;
   if (b.stun > 0 && !nova) dmg *= 1.5;
+  if (b.apex) dmg = apexIncoming(b, dmg, x, y, nova);
   b.hp -= dmg; b.flash = 0.06;
   if (b.charge) b.charge.dealt += dmg;
   if (b.dash && b.dash.st && b.dash.st < 3) b.dash.dealt += dmg;
   if (crit || Math.random() < 0.12) dmgText(x, y, dmg, crit);
   if (!nova) novaCharge = Math.min(1, novaCharge + dmg / b.max * 0.18 * stats.novaGain);
-  if (b.hp <= 0) { if (b.form < b.B.forms) transformBoss(b); else killBoss(); }
+  if (b.hp <= 0) { if (b.apex) apexShift(b); else if (b.form < b.B.forms) transformBoss(b); else killBoss(); }
 }
 function killBoss() {
   const b = boss; boss = null; beams.length = 0;
   $('bossbar').classList.add('hidden');
+  if (b.apex) { killApex(b); return; }
   score += 5000 * (b.idx + 1) * (1 + level * 0.05) * (b.echo ? 1.5 : 1);
   burst(b.x, b.y, 110, [b.B.col, '#ffffff', '#ffbe0b', '#9d4edd'], 460, 4);
   rings.push({ x: b.x, y: b.y, r: 10, vr: 900, life: .8, max: .8, col: '#ffffff', w: 6 });
@@ -2316,6 +2489,253 @@ function killBoss() {
   for (const e of enemies) if (Math.hypot(e.x - core.x, e.y - core.y) < MIN * 0.45) killEnemy(e, true);
   MUSIC.set('play');
   setTimeout(nextBoss, 2500);
+}
+
+
+/* =========================================================
+   APEX TITANS — from LV 150 a three-phase Titan arrives every 20 levels:
+   150 AEGIS-7 JUGGERNAUT · 170 VOID WEAVER · 190 APEX OMEGA · then the trio
+   returns as MK 2, MK 3 … (+30% HP per rotation, faster and harder attacks).
+   Each phase has its OWN health bar (boss.max = current phase). When it is
+   emptied the Titan instantly shifts to the next phase: overflow damage is
+   discarded and the 0.9 s shift is invulnerable, so nothing can skip a phase.
+   ========================================================= */
+const APEX_START = 150, APEX_EVERY = 20, APEX_SHIFT = 0.9, APEX_HP_CYCLE = 1.3;
+const APEX = [ // split = share of the total health pool held by phase I / II / III
+  { id: 'jug',    name: 'AEGIS-7 JUGGERNAUT', col: '#ff8a00', col2: '#ffd166', rMul: 1.35, hpMul: 3.4, split: [0.46, 0.32, 0.22], sfx: 5 },
+  { id: 'weaver', name: 'VOID WEAVER',        col: '#b44dff', col2: '#00f3ff', rMul: 1.1,  hpMul: 3.1, split: [0.32, 0.32, 0.36], sfx: 6 },
+  { id: 'omega',  name: 'APEX OMEGA',         col: '#ff1744', col2: '#e8f9ff', rMul: 1.2,  hpMul: 3.6, split: [0.34, 0.33, 0.33], sfx: 7 }
+];
+const apexName = b => b.A.name + (b.cycle ? ' MK ' + (b.cycle + 1) : '');
+const apexPhaseName = b => loc('apex.' + b.A.id + (b.ph + 1));
+function spawnApex(k) {
+  const A = APEX[k % APEX.length], cycle = Math.floor(k / APEX.length), L = level;
+  const bs = botScale(), pool = 26 * L * L * A.hpMul * Math.pow(APEX_HP_CYCLE, cycle) * bs, max = pool * A.split[0];
+  const d = Math.hypot(W, H) / 2 + 90;
+  boss = {
+    apex: true, A, k, cycle, idx: -1, echo: 0, B: { name: A.name, col: A.col, col2: A.col2, forms: 1 },
+    ph: 0, pool, hp: max, max, bs, sc: 1 + L * 0.025 + cycle * 0.35,
+    x: core.x, y: core.y - d, ang: -Math.PI / 2, dist: d, orbit: Math.min(MIN * 0.37, 270), r: clamp(MIN * 0.07, 34, 60) * A.rMul,
+    rot: 0, t: 0, flash: 0, entering: true, dir: Math.random() < .5 ? 1 : -1, phase: 1, form: 1, trans: 0, transMax: APEX_SHIFT, stun: 0,
+    charge: null, dash: null, heads: [], segs: [], shardA: 0, fireCd: 2.2, atkCd: 3.5, spawnCd: 3, swarmCd: 5, ringCd: 2.6, spiral: 0,
+    burst: 0, burstCd: 0, pull: 0, crushCd: 0, decoys: [], tpCd: 1.4, reflCd: 0, flipCd: 1.2, trail: []
+  };
+  $('bossName').textContent = bossLabel(boss);
+  $('bossPhase').textContent = bossPhaseLabel(boss);
+  $('bossbar').classList.remove('hidden'); $('bossbar').classList.add('apex');
+  $('warnTitle').textContent = loc('boss.warnApex');
+  $('warnSub').textContent = loc('boss.subApex', { name: apexName(boss), lv: L });
+  replay($('warn'), 'show');
+  core.shield = stats.maxShield; core.shFlash = 0.6;
+  texts.push({ x: core.x, y: core.y + core.R * 3.4, txt: loc('float.shields'), col: '#c79bff', size: 12, life: 1.6, max: 1.6 });
+  SFX.bossSpawn(A.sfx); MUSIC.set('boss'); shake = Math.max(shake, 18); warp = 3.4;
+}
+// circles the Titan around the core · anchor = true: around the arena centre (used while it drags the core)
+function apexOrbit(b, d, spd, dist, anchor) {
+  b.ang += d * spd * b.dir; b.dist += (dist - b.dist) * Math.min(1, d * 2.5);
+  const cx = anchor ? W / 2 : core.x, cy = anchor ? H * 0.5 : core.y;
+  b.x = cx + Math.cos(b.ang) * b.dist; b.y = cy + Math.sin(b.ang) * b.dist;
+}
+const APEX_BULLETS = 280; // hard cap so bullet-hell phases stay readable and fast
+function apexShot(x, y, spd, dmg, o = {}) { if (eBullets.length < APEX_BULLETS) shootAt(x, y, spd, dmg, o); }
+function apexRing(x, y, n, spd, dmg, col, off = 0, r = 5) {
+  for (let i = 0; i < n && eBullets.length < APEX_BULLETS; i++) { const a = off + i / n * TAU; eBullets.push({ x, y, vx: Math.cos(a) * spd, vy: Math.sin(a) * spd, r, dmg, hp: 1, home: 0, col, age: 0 }); }
+}
+function omegaBarrels(b) { // world positions of Apex Omega's twin barrels (they always face the core)
+  const a = Math.atan2(core.y - b.y, core.x - b.x), px = -Math.sin(a), py = Math.cos(a), fx = Math.cos(a) * b.r * 0.55, fy = Math.sin(a) * b.r * 0.55, s = b.r * 1.05;
+  return [{ x: b.x + fx + px * s, y: b.y + fy + py * s }, { x: b.x + fx - px * s, y: b.y + fy - py * s }];
+}
+function updateApex(b, d) {
+  b.t += d; b.flash = Math.max(0, b.flash - d); b.rot += d * (0.4 + b.ph * 0.35); b.reflCd = Math.max(0, b.reflCd - d);
+  if (b.entering) {
+    b.dist -= d * 170; if (b.dist <= b.orbit) { b.dist = b.orbit; b.entering = false; }
+    b.x = core.x + Math.cos(b.ang) * b.dist; b.y = core.y + Math.sin(b.ang) * b.dist; return;
+  }
+  if (b.trans > 0) { // phase shift: invulnerable, shedding sparks
+    b.trans -= d;
+    if (Math.random() < 0.35) burst(b.x + rand(-b.r, b.r), b.y + rand(-b.r, b.r), 6, [apexCol(b), '#ffffff'], 260, 2.6, 'sq');
+    return;
+  }
+  const stun = b.stun > 0; if (stun) b.stun -= d;
+  const k = stun ? 0.25 : 1;
+  b.fireCd -= d * k; b.atkCd -= d * k; b.spawnCd -= d * k; b.swarmCd -= d * k; b.ringCd -= d * k;
+  if (b.A.id === 'jug') updJuggernaut(b, d, b.sc, b.ph, stun);
+  else if (b.A.id === 'weaver') updWeaver(b, d, b.sc, b.ph, stun);
+  else updOmega(b, d, b.sc, b.ph, stun);
+}
+function updJuggernaut(b, d, sc, P, stun) {
+  if (P === 0) { // I · ARMOR — crawls along its orbit and lobs heavy shells (5 hits to shoot one down)
+    apexOrbit(b, d, stun ? 0.01 : 0.06, b.orbit);
+    if (!stun && b.fireCd <= 0) {
+      const a = Math.atan2(core.y - b.y, core.x - b.x), mx = b.x + Math.cos(a) * b.r * 1.5, my = b.y + Math.sin(a) * b.r * 1.5;
+      apexShot(mx, my, 92, 15 * sc, { r: 13, hp: 5, home: 0.3, col: '#ff8a00', kind: 'shell' });
+      rings.push({ x: mx, y: my, r: 6, vr: 260, life: .3, max: .3, col: '#ffbe0b', w: 4 }); shake = Math.max(shake, 5); SFX.eshot(true);
+      b.fireCd = Math.max(0.9, 1.7 - b.cycle * 0.15);
+    }
+    if (b.spawnCd <= 0) { spawnEnemy('tank'); spawnEnemy('bulwark'); b.spawnCd = 9; }
+  } else if (P === 1) { // II · TURRET MODE — anchors in place and spins four barrels: spiral bullet hell + pulse rings
+    b.spiral += d * (1.9 + b.cycle * 0.2);
+    if (!stun && b.fireCd <= 0) {
+      for (let i = 0; i < 4 && eBullets.length < APEX_BULLETS; i++) {
+        const a = b.spiral + i * TAU / 4;
+        eBullets.push({ x: b.x + Math.cos(a) * b.r * 1.45, y: b.y + Math.sin(a) * b.r * 1.45, vx: Math.cos(a) * 150, vy: Math.sin(a) * 150, r: 4.5, dmg: 3 * sc, hp: 1, home: 0, col: '#ffbe0b', age: 0 });
+      }
+      b.fireCd = Math.max(0.06, 0.09 - b.cycle * 0.008); if (Math.random() < 0.3) SFX.bossShot();
+    }
+    if (!stun && b.ringCd <= 0) { apexRing(b.x, b.y, 18 + b.cycle * 2, 105, 4 * sc, '#ff8a00', b.t, 6); SFX.flare(); b.ringCd = 2.8; }
+  } else { // III · EXPOSED CORE — races around the core and rams it; shoot it during the wind-up to deflect the charge
+    if (!b.dash) {
+      apexOrbit(b, d, stun ? 0.2 : 1.15, b.orbit * 0.82);
+      if (!stun && b.atkCd <= 0) { const w = Math.max(0.5, 0.7 - b.cycle * 0.04); b.dash = { st: 1, t: 0, w, need: b.max * 0.03, dealt: 0 }; b.atkCd = Math.max(1.1, 1.8 - b.cycle * 0.15); SFX.charge(w); }
+    } else {
+      const s = b.dash; s.t += d;
+      if (s.st === 1) { // wind-up: it rears back (telegraph) — 3% of the phase bar in that window deflects the ram
+        const a = Math.atan2(b.y - core.y, b.x - core.x), dd = Math.hypot(b.x - core.x, b.y - core.y);
+        if (dd < b.orbit * 1.05) { b.x += Math.cos(a) * 150 * d; b.y += Math.sin(a) * 150 * d; }
+        b.x += rand(-1.5, 1.5); b.y += rand(-1.5, 1.5);
+        if (s.dealt >= s.need) breakBoss(b, loc('boss.deflected')); else if (s.t > s.w) { s.st = 2; s.t = 0; SFX.roar(); }
+      }
+      else if (s.st === 2) {
+        const a = Math.atan2(core.y - b.y, core.x - b.x); b.x += Math.cos(a) * 940 * d; b.y += Math.sin(a) * 940 * d;
+        if (s.dealt >= s.need) breakBoss(b, loc('boss.deflected'));
+        else if (Math.hypot(core.x - b.x, core.y - b.y) < core.R * 1.4 + b.r * 0.7) {
+          damageCore((30 + level * 0.75) * (1 + b.cycle * 0.25), true); s.st = 3; shake = 26; burst(b.x, b.y, 50, ['#ff3d00', '#ffbe0b', '#ffffff'], 340, 3.2); SFX.boom();
+        }
+      } else { // recoil back out to its orbit
+        const a = Math.atan2(b.y - core.y, b.x - core.x), dd = Math.hypot(b.x - core.x, b.y - core.y);
+        if (dd < b.orbit * 0.82) { b.x += Math.cos(a) * 520 * d; b.y += Math.sin(a) * 520 * d; }
+        else { b.ang = a; b.dist = dd; b.dash = null; }
+      }
+    }
+  }
+}
+function updWeaver(b, d, sc, P, stun) {
+  if (P === 0) { // I · ILLUSION — blinks to a new spot, leaves two decoys, fires homing orbs (decoys can't be hit)
+    b.tpCd -= d * (stun ? 0.25 : 1);
+    b.x = core.x + Math.cos(b.ang) * b.dist; b.y = core.y + Math.sin(b.ang) * b.dist;
+    if (b.tpCd <= 0) {
+      burst(b.x, b.y, 26, ['#b44dff', '#00f3ff', '#ffffff'], 260, 2.4, 'sq'); SFX.glitch();
+      b.ang = rand(0, TAU); b.dist = MIN * rand(0.26, 0.42);
+      b.x = core.x + Math.cos(b.ang) * b.dist; b.y = core.y + Math.sin(b.ang) * b.dist;
+      b.decoys = [0, 1].map(() => ({ ang: rand(0, TAU), dist: MIN * rand(0.26, 0.42) }));
+      burst(b.x, b.y, 26, ['#b44dff', '#00f3ff', '#ffffff'], 260, 2.4, 'sq'); rings.push({ x: b.x, y: b.y, r: b.r, vr: 320, life: .35, max: .35, col: '#b44dff', w: 4 });
+      if (!stun) {
+        for (let i = 0; i < 3; i++) apexShot(b.x, b.y, 125, 4.2 * sc, { off: (i - 1) * 0.5, r: 6, hp: 2, home: 1.6, col: '#d580ff' });
+        for (const dc of b.decoys) apexShot(core.x + Math.cos(dc.ang) * dc.dist, core.y + Math.sin(dc.ang) * dc.dist, 110, 3 * sc, { r: 5, hp: 1, home: 1.3, col: '#7ffaff' });
+        SFX.bossShot();
+      }
+      b.tpCd = Math.max(1.1, 1.8 - b.cycle * 0.15);
+    }
+  } else if (P === 1) { // II · SWARM — stops shooting and pours out mini suicide bots
+    apexOrbit(b, d, 0.12, b.orbit); b.decoys = [];
+    if (!stun && b.spawnCd <= 0 && enemies.length < 150) {
+      for (let i = 0; i < 2 + (b.cycle > 1 ? 1 : 0); i++) spawnEnemy('mite', null, { x: b.x + rand(-b.r, b.r), y: b.y + rand(-b.r, b.r), elite: false, col: '#d580ff' });
+      b.spawnCd = Math.max(0.2, 0.34 - b.cycle * 0.03);
+    }
+    if (!stun && b.swarmCd <= 0) { spawnSwarm(b.x, b.y, 10 + b.cycle * 2, b, '#d580ff'); b.swarmCd = 4.5; }
+  } else { // III · GRAVITY — drags the core toward itself (every hit you land pushes back) and lobs gravity bombs
+    apexOrbit(b, d, 0.07, b.orbit * 1.05, true);
+    if (!stun) b.pull = Math.min(1, b.pull + d * (0.15 + b.cycle * 0.02));
+    b.crushCd -= d;
+    if (b.pull >= 0.97 && b.crushCd <= 0) { // fully dragged in: the event horizon crushes the hull until you fight free
+      damageCore(7 * sc, true); b.crushCd = 0.5;
+      texts.push({ x: core.x, y: core.y - core.R * 2.6, txt: loc('boss.crush'), col: '#d580ff', size: 13, life: .8, max: .8 });
+    }
+    if (!stun && b.fireCd <= 0) {
+      for (let i = 0; i < 2; i++) apexShot(b.x, b.y, 72, 9 * sc, { off: (i - 0.5) * 0.9, r: 10, hp: 4, home: 2.2, col: '#b44dff', kind: 'grav' });
+      b.fireCd = Math.max(1.4, 2.3 - b.cycle * 0.2); SFX.flare();
+    }
+  }
+}
+function updOmega(b, d, sc, P, stun) {
+  if (P === 0) { // I · TWIN BARRELS — telegraphed twin lasers; deal enough damage during the wind-up to BREAK them
+    apexOrbit(b, d, stun ? 0.05 : 0.2, b.orbit);
+    if (b.charge) {
+      const c = b.charge; c.t += d;
+      if (c.dealt >= c.need) breakBoss(b, loc('boss.break'));
+      else if (c.t >= c.dur) {
+        b.charge = null;
+        for (const p of omegaBarrels(b)) beams.push({ x: p.x, y: p.y, life: 0.55, max: 0.55, col: '#ff1744', w: b.r * 0.5 });
+        damageCore((24 + level * 0.6) * (1 + b.cycle * 0.25), true);
+        SFX.beam(); shake = Math.max(shake, 22); chroma = 0.7;
+      }
+    } else if (!stun) {
+      if (b.fireCd <= 0) { for (const p of omegaBarrels(b)) apexShot(p.x, p.y, 240, 3.6 * sc, { r: 5, home: 0.2, col: '#ff4d6d' }); b.fireCd = 1.2; SFX.bossShot(); }
+      if (b.atkCd <= 0) { b.charge = { t: 0, dur: Math.max(1.1, 1.6 - b.cycle * 0.1), need: b.max * 0.06, dealt: 0, twin: true }; b.atkCd = 4.6; SFX.charge(b.charge.dur); }
+    }
+  } else if (P === 1) { // II · SHIELD MATRIX — a hex shield halves all damage and fires the blocked share back; 3-round bursts
+    apexOrbit(b, d, stun ? 0.04 : 0.16, b.orbit);
+    if (!stun && b.burst <= 0 && b.fireCd <= 0) { b.burst = 3; b.burstCd = 0; b.fireCd = 1.6; }
+    if (b.burst > 0) {
+      b.burstCd -= d;
+      if (b.burstCd <= 0) { for (let i = 0; i < 5; i++) apexShot(b.x, b.y, 215, 3.4 * sc, { off: (i - 2) * 0.13, r: 4.5, home: 0.15, col: '#7ffaff' }); b.burst--; b.burstCd = 0.13; SFX.eshot(false); }
+    }
+  } else { // III · ENRAGE — blinks red, whips around the core at full speed: rapid fire + ring bursts
+    if (!stun) { b.flipCd -= d; if (b.flipCd <= 0) { b.dir *= -1; b.flipCd = rand(1.0, 1.8); } }
+    apexOrbit(b, d, stun ? 0.2 : 1.75 + b.cycle * 0.1, b.orbit * (0.86 + 0.18 * Math.sin(b.t * 3.1)));
+    b.trail.push({ x: b.x, y: b.y, l: 0.22 }); if (b.trail.length > 10) b.trail.shift();
+    if (!stun && b.fireCd <= 0) { apexShot(b.x, b.y, 275, 2.7 * sc, { r: 4.5, home: 0.55, col: '#ff0033' }); b.fireCd = Math.max(0.08, 0.13 - b.cycle * 0.01); if (Math.random() < 0.4) SFX.bossShot(); }
+    if (!stun && b.ringCd <= 0) { apexRing(b.x, b.y, 14 + b.cycle * 2, 140, 3.6 * sc, '#ff2a4d', b.t); b.ringCd = 3.2; SFX.flare(); }
+  }
+  for (const tr of b.trail) tr.l -= d;
+  b.trail = b.trail.filter(tr => tr.l > 0);
+}
+// incoming damage rules per phase (the Supernova is exempt — it always takes its exact 30% of the current phase)
+function apexIncoming(b, dmg, x, y, nova) {
+  if (b.A.id === 'weaver' && b.ph === 2) b.pull = nova ? b.pull * 0.25 : Math.max(0, b.pull - dmg / b.max * 2.6);
+  if (nova || b.A.id !== 'omega' || b.ph !== 1) return dmg;
+  // SHIELD MATRIX: 50% of every hit is reflected — the Titan only takes half, and the shield fires a deflected bolt back
+  if (b.reflCd <= 0 && eBullets.length < APEX_BULLETS) {
+    const hx = x == null ? b.x : x, hy = y == null ? b.y : y, a = Math.atan2(core.y - hy, core.x - hx);
+    eBullets.push({ x: hx, y: hy, vx: Math.cos(a) * 300, vy: Math.sin(a) * 300, r: 4, dmg: 2.6 * b.sc, hp: 1, home: 0.35, col: '#7ffaff', age: 0, boss: 1 });
+    b.reflCd = 0.16;
+  }
+  return dmg * 0.5;
+}
+// a phase's health bar is empty → shift instantly to the next phase (fresh bar, new mechanics), or die after phase III
+function apexShift(b) {
+  if (b.ph >= 2) { killBoss(); return; }
+  b.ph++; b.max = b.pool * b.A.split[b.ph]; b.hp = b.max; // overflow damage is discarded on purpose
+  b.trans = APEX_SHIFT; b.transMax = APEX_SHIFT;
+  b.charge = null; b.dash = null; b.stun = 0; b.burst = 0; b.pull = 0; b.decoys = []; b.trail = [];
+  b.fireCd = 1.0; b.atkCd = 2.4; b.spawnCd = 1.2; b.swarmCd = 2.5; b.ringCd = 2; b.tpCd = 1;
+  b.ang = Math.atan2(b.y - core.y, b.x - core.x); b.dist = Math.hypot(b.x - core.x, b.y - core.y);
+  for (const o of eBullets) o.hp = 0;
+  $('bossPhase').textContent = bossPhaseLabel(b);
+  $('warnTitle').textContent = '⚠ ' + apexName(b); $('warnSub').textContent = loc('boss.shift', { n: b.ph + 1, phase: apexPhaseName(b) }); replay($('warn'), 'show');
+  flash = 0.7; flashCol = '255,60,90'; shake = 24; chroma = 0.9; hitStop = 0.12;
+  const col = apexCol(b);
+  burst(b.x, b.y, 110, [col, '#ffffff', b.A.col2], 480, 3.6, 'sq');
+  for (let i = 0; i < 3; i++) rings.push({ x: b.x, y: b.y, r: b.r, vr: 320 + i * 240, life: .8, max: .8, col: i % 2 ? '#ffffff' : col, w: 6 - i });
+  texts.push({ x: b.x, y: b.y - b.r * 2.1, txt: apexPhaseName(b), col, size: 20, life: 1.4, max: 1.4, pop: 1 });
+  SFX.transform();
+}
+function killApex(b) {
+  $('bossbar').classList.remove('apex');
+  score += 12000 * (1 + level * 0.05) * (1 + b.cycle * 0.5);
+  burst(b.x, b.y, 160, [b.A.col, '#ffffff', '#ffbe0b', b.A.col2], 560, 4.4);
+  for (let i = 0; i < 4; i++) rings.push({ x: b.x, y: b.y, r: 10, vr: 600 + i * 260, life: 1, max: 1, col: i % 2 ? '#ffffff' : b.A.col, w: 7 - i });
+  for (let i = 0; i < 48 + b.cycle * 10; i++) dropShard(b.x, b.y, 8 + b.cycle * 2, 12 + b.cycle * 4, 300);
+  for (const e of enemies) if (e.beh === 'swarm') killEnemy(e, true);
+  SFX.explode(true); SFX.impact();
+  if (state !== 'play') return;
+  flash = 1; flashCol = '255,235,200'; shake = 30; chroma = 1; hitStop = 0.3;
+  draft.dmg *= 1.15; recompute(); core.shield = stats.maxShield;
+  bannerShow(loc('ban.apexTop'), loc('ban.apex'), loc('ban.apexSub'), b.A.col);
+  for (const e of enemies) if (Math.hypot(e.x - core.x, e.y - core.y) < MIN * 0.5) killEnemy(e, true);
+  MUSIC.set('play');
+  setTimeout(nextBoss, 2500);
+}
+// Void Weaver gravity: the core is dragged toward the Titan (your damage pushes back) and springs home afterwards
+function pullCore(d) {
+  let gx = 0, gy = 0;
+  const b = boss;
+  if (b && b.apex && b.A.id === 'weaver' && b.ph === 2 && !b.entering && b.trans <= 0) {
+    const dx = b.x - W / 2, dy = b.y - H * 0.5, dd = Math.hypot(dx, dy) || 1, m = b.pull * Math.min(MIN * 0.24, dd * 0.55);
+    gx = dx / dd * m; gy = dy / dd * m;
+  }
+  const k = Math.min(1, d * 5);
+  core.x += (W / 2 + gx - core.x) * k; core.y += (H * 0.5 + gy - core.y) * k;
 }
 
 /* =========================================================
@@ -2515,9 +2935,11 @@ function killEnemy(e, silent) {
   if (e.elite) { hitStop = Math.max(hitStop, 0.05); chroma = Math.max(chroma, 0.35); shake = Math.max(shake, 7); SFX.elite(); }
   if (!silent) SFX.explode(false);
 }
-function damageCore(dmg) {
+// fromBoss = true for Titan attacks (their bullets are tagged in update())
+function damageCore(dmg, fromBoss = false) {
   if (state !== 'play' || cine) return;
   dmg *= botScale(); // every hit on the core comes from a hostile: −15% below LV 50, full damage from LV 50 on
+  if (level >= LATE_START && stats.maxHp) dmg = Math.min(dmg, stats.maxHp * (fromBoss ? BOSS_HIT_CAP : BOT_HIT_CAP)); // late-game fairness: never a one-shot from full hull
   core.lastHit = gt;
   if (core.shield > 0) { const a = Math.min(core.shield, dmg); core.shield -= a; dmg -= a; core.shFlash = .3; SFX.shieldHit(); }
   if (dmg > 0) {
@@ -2610,7 +3032,10 @@ function updateEBullets(d) {
     const dx = core.x - o.x, dy = core.y - o.y, dist = Math.hypot(dx, dy) || 1;
     if (o.home) { const sp = Math.hypot(o.vx, o.vy), want = Math.atan2(dy, dx), cur = Math.atan2(o.vy, o.vx), na = cur + clamp(angDiff(cur, want), -o.home * d, o.home * d); o.vx = Math.cos(na) * sp; o.vy = Math.sin(na) * sp; }
     o.x += o.vx * d; o.y += o.vy * d;
-    if (dist < core.R * 1.25) { damageCore(o.dmg, 'bullet'); o.hp = 0; burst(o.x, o.y, 12, [o.col || '#ff0055', '#ffbe0b'], 200); }
+    if (dist < core.R * 1.25) {
+      damageCore(o.dmg, !!o.boss); o.hp = 0; burst(o.x, o.y, 12, [o.col || '#ff0055', '#ffbe0b'], 200);
+      if (o.kind === 'grav') { rings.push({ x: o.x, y: o.y, r: 10, vr: 380, life: .45, max: .45, col: '#b44dff', w: 6 }); burst(o.x, o.y, 30, ['#b44dff', '#ffffff'], 300, 3); shake = Math.max(shake, 10); } // gravity bomb: area blast
+    }
     if (o.age > 14 || o.x < -250 || o.x > W + 250 || o.y < -250 || o.y > H + 250) o.hp = 0;
   }
   eBullets = eBullets.filter(o => o.hp > 0);
@@ -2669,8 +3094,11 @@ function update(dt) {
   updateOrbs(d); updateComps(d);
   updateBullets(d);
   updateEnemies(d);
+  const nb0 = eBullets.length;
   if (boss) updateBoss(d);
+  for (let i = nb0; i < eBullets.length; i++) eBullets[i].boss = 1; // Titan fire → Titan hit cap (60%) instead of the bot cap (35%)
   if (state !== 'play') return; // died this frame
+  pullCore(d);
   updateEBullets(d);
   updateShards(d);
   for (const bm of beams) bm.life -= dt;
@@ -2691,10 +3119,17 @@ function update(dt) {
     if (level % DRAFT_EVERY === 0) draftQueue.push(level);
     const bi = BOSS_LEVELS.indexOf(level);
     if (bi >= 0 && !bossTriggered[bi]) { bossTriggered[bi] = true; bossQueue.push([bi, 0]); bossDelay = 1.6; }
-    if (level > 150 && (level - 150) % 15 === 0) { echoes++; bossQueue.push([(Math.random() * 5) | 0, echoes]); bossDelay = 1.6; }
+    const apexLv = level >= APEX_START && (level - APEX_START) % APEX_EVERY === 0; // 150 · 170 · 190 · 210 …
+    if (apexLv) { bossQueue.push([-1, 0, (level - APEX_START) / APEX_EVERY]); bossDelay = 1.6; }
+    if (level > 150 && (level - 150) % 15 === 0 && !apexLv) { echoes++; bossQueue.push([(Math.random() * 5) | 0, echoes]); bossDelay = 1.6; } // an Apex level replaces that echo
   }
   if (lv) {
     recompute(); syncBotScale(); replay($('hLevel'), 'bump'); SFX.levelUp(); BG.pulse = 1;
+    const tt = threatTier();
+    if (tt > threat) { // a new THREAT tier was reached (LV 100, 115, 130 …)
+      threat = tt; SFX.elite();
+      bannerShow(loc('ban.threatTop'), loc('ban.threat', { n: tt }), loc('ban.threatSub', { hp: Math.round((LATE_HP - 1) * 100), dmg: Math.round((LATE_DMG - 1) * 100), cap: Math.round(BOT_HIT_CAP * 100) }), '#ff2a6d');
+    }
     rings.push({ x: core.x, y: core.y, r: core.R, vr: 600, life: .6, max: .6, col: '#00f3ff', w: 3 });
     texts.push({ x: core.x, y: core.y - core.R * 3.2, txt: loc('float.growth') + (level % DRAFT_EVERY ? loc('float.overclockIn', { n: DRAFT_EVERY - level % DRAFT_EVERY }) : ''), col: '#7ffaff', size: 11, life: 1.3, max: 1.3 });
   }
@@ -3279,6 +3714,7 @@ function drawEnemy(e) {
    ========================================================= */
 function bossCol(b) { if (b.form === 2) return ['#ff0055', '#ff0055', '#ff5a00', '#ffd0dc', '#ff2a4d'][b.idx]; return b.phase === 2 && b.idx < 2 ? '#ff0055' : b.B.col; }
 function drawBoss(b, t) {
+  if (b.apex) { drawApex(b, t); return; }
   const R = b.r, col = bossCol(b), col2 = b.B.col2, hit = b.flash > 0;
   ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = .45 + .2 * Math.sin(t * 4);
   ctx.drawImage(glow(col), b.x - R * 3.4, b.y - R * 3.4, R * 6.8, R * 6.8);
@@ -3369,8 +3805,13 @@ function drawBoss(b, t) {
     ctx.save(); ctx.translate(sh.x, sh.y); ctx.rotate(sh.a * 2); ctx.fillStyle = b.flash > 0 ? '#fff' : '#2a0e00'; ctx.strokeStyle = '#ffd166'; ctx.lineWidth = 1.5;
     ctx.beginPath(); ctx.moveTo(0, -9); ctx.lineTo(4, 0); ctx.lineTo(0, 9); ctx.lineTo(-4, 0); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore();
   }
+  drawBossOverlays(b, t, b.idx === 2 ? R * 1.9 : R * 1.6, col);
+}
+// shared by every Titan: transformation flare, stun ring, BREAK/DEFLECT meter and the mini health bar
+function drawBossOverlays(b, t, top, col) {
+  const R = b.r;
   if (b.trans > 0) {
-    const p = 1 - b.trans / 2.4;
+    const p = 1 - b.trans / (b.transMax || 2.4);
     ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 0.5 + 0.5 * Math.sin(t * 40);
     ctx.drawImage(glow('#ffffff'), b.x - R * (2 + p * 3), b.y - R * (2 + p * 3), R * (4 + p * 6), R * (4 + p * 6));
     ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2; ctx.beginPath();
@@ -3390,9 +3831,137 @@ function drawBoss(b, t) {
     ctx.fillStyle = '#ffbe0b'; ctx.font = 'bold 11px ui-monospace,Menlo,monospace'; ctx.textAlign = 'center';
     if (Math.sin(t * 12) > -0.3) ctx.fillText(b.dash ? loc('boss.shootDeflect') : loc('boss.shootBreak'), hx, hy + R * 1.55 + 16);
   }
-  const w = R * 2.6, f = clamp(b.hp / b.max, 0, 1), by = b.y - (b.idx === 2 ? R * 1.9 : R * 1.6) - 12;
+  const w = R * 2.6, f = clamp(b.hp / b.max, 0, 1), by = b.y - top - 12;
   ctx.fillStyle = 'rgba(255,0,85,0.2)'; ctx.fillRect(b.x - w / 2, by, w, 5);
   ctx.fillStyle = col; ctx.shadowColor = col; ctx.shadowBlur = 10; ctx.fillRect(b.x - w / 2, by, w * f, 5); ctx.shadowBlur = 0;
+}
+/* ---------- Apex Titans ---------- */
+function apexCol(b) {
+  if (b.A.id === 'jug') return ['#ff8a00', '#ffbe0b', '#ff3d00'][b.ph];
+  if (b.A.id === 'weaver') return ['#b44dff', '#d580ff', '#8a3dff'][b.ph];
+  return b.ph === 2 ? (Math.sin(b.t * 22) > 0 ? '#ff0033' : '#ff8a9a') : b.ph === 1 ? '#00f3ff' : '#ff1744';
+}
+function drawApex(b, t) {
+  const R = b.r, col = apexCol(b), body = b.flash > 0 ? '#ffffff' : 'rgba(16,0,10,0.94)';
+  ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = .45 + .2 * Math.sin(t * 4);
+  ctx.drawImage(glow(col), b.x - R * 3.8, b.y - R * 3.8, R * 7.6, R * 7.6);
+  ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+  if (b.A.id === 'jug') drawJuggernaut(b, t, R, col, body);
+  else if (b.A.id === 'weaver') drawWeaver(b, t, R, col, body);
+  else drawOmega(b, t, R, col, body);
+  drawBossOverlays(b, t, R * 1.8, col);
+  for (let i = 0; i < 3; i++) { ctx.fillStyle = i < b.ph ? 'rgba(255,255,255,0.18)' : col; ctx.fillRect(b.x - 14 + i * 10, b.y - R * 1.8 - 22, 7, 4); } // phase pips
+  const hint = b.trans > 0 ? '' : b.A.id === 'omega' && b.ph === 1 ? loc('boss.reflect') : b.A.id === 'weaver' && b.ph === 2 && b.pull > 0.35 ? loc('boss.resist') : '';
+  if (hint && !b.charge && !(b.dash && b.dash.st < 3) && Math.sin(t * 8) > -0.4) {
+    ctx.fillStyle = col; ctx.font = 'bold 11px ui-monospace,Menlo,monospace'; ctx.textAlign = 'center'; ctx.fillText(hint, b.x, b.y + R * 2.15 + 14);
+  }
+}
+function drawJuggernaut(b, t, R, col, body) {
+  const P = b.ph, aim = Math.atan2(core.y - b.y, core.x - b.x);
+  ctx.save(); ctx.translate(b.x, b.y); ctx.shadowColor = col; ctx.shadowBlur = 20;
+  if (P === 0) { // main siege cannon
+    ctx.save(); ctx.rotate(aim); ctx.fillStyle = body; ctx.strokeStyle = col; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.rect(R * 0.5, -R * 0.2, R * 1.1, R * 0.4); ctx.fill(); ctx.stroke(); ctx.fillStyle = col; ctx.fillRect(R * 1.5, -R * 0.24, R * 0.16, R * 0.48); ctx.restore();
+  } else if (P === 1) { // four spinning turret barrels
+    for (let i = 0; i < 4; i++) {
+      ctx.save(); ctx.rotate(b.spiral + i * TAU / 4); ctx.fillStyle = body; ctx.strokeStyle = col; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.rect(R * 0.55, -R * 0.12, R * 0.95, R * 0.24); ctx.fill(); ctx.stroke(); ctx.fillStyle = '#fff3c4'; ctx.fillRect(R * 1.42, -R * 0.08, R * 0.1, R * 0.16); ctx.restore();
+    }
+  }
+  ctx.save(); ctx.rotate(b.rot * 0.2); ctx.fillStyle = body; ctx.strokeStyle = col; ctx.lineWidth = 4;
+  if (P === 2) { // shattered hull around a molten heart
+    ctx.beginPath();
+    for (let i = 0; i < 16; i++) { const a = i / 16 * TAU, rr = R * (i % 2 ? 0.64 : 0.88 + 0.05 * Math.sin(t * 9 + i)); i ? ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr) : ctx.moveTo(Math.cos(a) * rr, Math.sin(a) * rr); }
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+  } else { poly(8, R); ctx.fill(); ctx.stroke(); ctx.lineWidth = 1.5; ctx.strokeStyle = col + '99'; poly(8, R * 0.7); ctx.stroke(); }
+  ctx.restore();
+  if (P === 0) for (let i = 0; i < 8; i++) { // bolted armour plates
+    const a = b.rot * 0.2 + i / 8 * TAU + TAU / 16; ctx.save(); ctx.rotate(a); ctx.translate(R * 1.16, 0);
+    ctx.fillStyle = b.flash > 0 ? '#ffffff' : '#2a1400'; ctx.strokeStyle = col; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.rect(-R * 0.15, -R * 0.34, R * 0.3, R * 0.68); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = col; ctx.fillRect(-2, -R * 0.24, 4, 4); ctx.fillRect(-2, R * 0.2, 4, 4); ctx.restore();
+  }
+  if (P === 1) { // anchor clamps: it is locked in place
+    ctx.strokeStyle = col + 'aa'; ctx.lineWidth = 2;
+    for (let i = 0; i < 3; i++) { const a = i / 3 * TAU + Math.PI / 2; ctx.beginPath(); ctx.moveTo(Math.cos(a) * R, Math.sin(a) * R); ctx.lineTo(Math.cos(a) * R * 1.7, Math.sin(a) * R * 1.7); ctx.stroke(); ctx.beginPath(); ctx.arc(Math.cos(a) * R * 1.75, Math.sin(a) * R * 1.75, 4, 0, TAU); ctx.stroke(); }
+  }
+  const pr = R * (P === 2 ? 0.46 + 0.08 * Math.sin(t * 14) : 0.24 + 0.03 * Math.sin(t * 5));
+  ctx.shadowBlur = 0; const g = ctx.createRadialGradient(0, 0, 0, 0, 0, pr * 1.7);
+  g.addColorStop(0, '#ffffff'); g.addColorStop(.35, P === 2 ? '#ffbe0b' : col); g.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, pr * 1.7, 0, TAU); ctx.fill();
+  ctx.restore();
+  if (P === 2 && b.dash && b.dash.st === 1) { // ram telegraph: dashed line to the core
+    ctx.save(); ctx.strokeStyle = '#ff3d00'; ctx.globalAlpha = 0.35 + 0.35 * Math.sin(t * 30); ctx.lineWidth = 3; ctx.setLineDash([10, 8]); ctx.lineDashOffset = -t * 120;
+    ctx.beginPath(); ctx.moveTo(b.x, b.y); ctx.lineTo(core.x, core.y); ctx.stroke(); ctx.restore();
+  }
+  if (P === 2 && b.dash && b.dash.st === 2) { ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 0.6; ctx.drawImage(glow('#ff3d00'), b.x - R * 2.4, b.y - R * 2.4, R * 4.8, R * 4.8); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; }
+}
+function weaverBody(x, y, R, col, body, t, rot, alpha, P) {
+  ctx.save(); ctx.translate(x, y); ctx.globalAlpha = alpha; ctx.shadowColor = col; ctx.shadowBlur = 16;
+  ctx.strokeStyle = col; ctx.lineWidth = 2.2;
+  for (let i = 0; i < 6; i++) { // woven tendrils
+    const a = rot + i * TAU / 6, w = Math.sin(t * 3 + i) * 0.5;
+    ctx.beginPath(); ctx.moveTo(Math.cos(a) * R * 0.6, Math.sin(a) * R * 0.6);
+    ctx.quadraticCurveTo(Math.cos(a + w) * R * 1.6, Math.sin(a + w) * R * 1.6, Math.cos(a + 0.6 + w) * R * 2.2, Math.sin(a + 0.6 + w) * R * 2.2); ctx.stroke();
+  }
+  ctx.fillStyle = body; ctx.lineWidth = 3;
+  for (const s of [0, Math.PI]) { ctx.save(); ctx.rotate((s ? -rot : rot) + s); poly(3, R); ctx.fill(); ctx.stroke(); ctx.restore(); } // hexagram
+  ctx.shadowBlur = 0; almond(R * 0.5, R * 0.28); ctx.fillStyle = '#05000a'; ctx.fill(); ctx.strokeStyle = '#00f3ff'; ctx.lineWidth = 1.5; ctx.stroke();
+  const ea = Math.atan2(core.y - y, core.x - x); ctx.fillStyle = P === 2 ? '#ffffff' : '#00f3ff';
+  ctx.beginPath(); ctx.arc(Math.cos(ea) * R * 0.14, Math.sin(ea) * R * 0.08, R * 0.11, 0, TAU); ctx.fill();
+  ctx.restore();
+}
+function drawWeaver(b, t, R, col, body) {
+  if (b.ph === 0) b.decoys.forEach((dc, i) => weaverBody(core.x + Math.cos(dc.ang) * dc.dist, core.y + Math.sin(dc.ang) * dc.dist, R, col, 'rgba(16,0,10,0.5)', t, b.rot, 0.28 + 0.14 * Math.sin(t * 17 + i * 2), 0));
+  if (b.ph === 1) { // spawning portal
+    ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(t * 1.5); ctx.strokeStyle = '#d580ff'; ctx.lineWidth = 2; ctx.setLineDash([8, 6]); ctx.globalAlpha = 0.7 + 0.3 * Math.sin(t * 6);
+    ctx.beginPath(); ctx.arc(0, 0, R * 1.9, 0, TAU); ctx.stroke(); ctx.setLineDash([]); ctx.restore(); ctx.globalAlpha = 1;
+  }
+  if (b.ph === 2) { // gravity well: accretion ring + streams dragging the core in
+    ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(-t * 2); ctx.scale(1, 0.42); ctx.strokeStyle = '#8a3dff'; ctx.lineWidth = 3; ctx.globalAlpha = 0.8;
+    ctx.beginPath(); ctx.arc(0, 0, R * 2.3, 0, TAU); ctx.stroke(); ctx.restore(); ctx.globalAlpha = 1;
+    if (b.pull > 0.02) {
+      const vx = b.x - core.x, vy = b.y - core.y, nl = Math.hypot(vx, vy) || 1, nx = -vy / nl, ny = vx / nl;
+      ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = '#b44dff'; ctx.lineWidth = 1.5;
+      for (let i = 0; i < 6; i++) {
+        const ph = (t * 1.6 + i / 6) % 1, off = (i - 2.5) * 10, sx = core.x + vx * ph, sy = core.y + vy * ph;
+        ctx.globalAlpha = b.pull * (1 - ph) * 0.8; ctx.beginPath(); ctx.moveTo(sx + nx * off, sy + ny * off); ctx.lineTo(sx + vx * 0.12 + nx * off * 0.7, sy + vy * 0.12 + ny * off * 0.7); ctx.stroke();
+      }
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    }
+  }
+  weaverBody(b.x, b.y, R, col, body, t, b.rot, 1, b.ph);
+}
+function drawOmega(b, t, R, col, body) {
+  const a = Math.atan2(core.y - b.y, core.x - b.x);
+  if (b.ph === 2) { ctx.globalCompositeOperation = 'lighter'; for (const tr of b.trail) { ctx.globalAlpha = tr.l * 2; ctx.drawImage(glow('#ff0033'), tr.x - R * 1.4, tr.y - R * 1.4, R * 2.8, R * 2.8); } ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; }
+  if (b.charge) { // twin-barrel telegraph
+    const p = b.charge.t / b.charge.dur;
+    for (const bp of omegaBarrels(b)) {
+      ctx.strokeStyle = '#ff1744'; ctx.globalAlpha = 0.25 + 0.55 * p * (0.6 + 0.4 * Math.sin(t * 30)); ctx.lineWidth = 1 + p * 9; ctx.setLineDash(p > 0.7 ? [] : [12, 10]);
+      ctx.beginPath(); ctx.moveTo(bp.x, bp.y); ctx.lineTo(core.x, core.y); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'lighter'; ctx.drawImage(glow('#ff1744'), bp.x - 14 - p * 14, bp.y - 14 - p * 14, 28 + p * 28, 28 + p * 28); ctx.globalCompositeOperation = 'source-over';
+    }
+  }
+  ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(a); ctx.shadowColor = col; ctx.shadowBlur = 18;
+  ctx.fillStyle = body; ctx.strokeStyle = col; ctx.lineWidth = 3;
+  for (const s of [-1, 1]) { // twin barrels
+    ctx.beginPath(); ctx.rect(-R * 0.25, s * R * 1.05 - R * 0.15, R * 1.35, R * 0.3); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-R * 0.1, s * R * 0.45); ctx.lineTo(R * 0.25, s * R * 0.92); ctx.stroke();
+  }
+  ctx.beginPath(); ctx.moveTo(R * 1.35, 0); ctx.lineTo(-R * 0.85, R * 0.95); ctx.lineTo(-R * 0.45, 0); ctx.lineTo(-R * 0.85, -R * 0.95); ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.lineWidth = 1.2; ctx.strokeStyle = col + 'aa'; ctx.beginPath(); ctx.moveTo(R * 0.9, 0); ctx.lineTo(-R * 0.3, R * 0.5); ctx.moveTo(R * 0.9, 0); ctx.lineTo(-R * 0.3, -R * 0.5); ctx.stroke();
+  ctx.shadowBlur = 0; const pr = R * (0.2 + 0.05 * Math.sin(t * 9)), g = ctx.createRadialGradient(R * 0.2, 0, 0, R * 0.2, 0, pr * 2);
+  g.addColorStop(0, '#ffffff'); g.addColorStop(.4, col); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(R * 0.2, 0, pr * 2, 0, TAU); ctx.fill();
+  ctx.restore();
+  if (b.ph === 1) { // hex shield matrix (brightens when it reflects)
+    ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(t * 0.4);
+    const sr = R * 2.05, pulse = 0.55 + 0.25 * Math.sin(t * 5) + (b.reflCd > 0.08 ? 0.3 : 0);
+    ctx.fillStyle = `rgba(0,243,255,${0.05 + 0.04 * Math.sin(t * 5)})`; ctx.strokeStyle = `rgba(127,250,255,${Math.min(1, pulse)})`; ctx.lineWidth = 2.5; poly(6, sr); ctx.fill(); ctx.stroke();
+    ctx.lineWidth = 1; ctx.strokeStyle = `rgba(0,243,255,${Math.min(1, pulse) * 0.45})`;
+    for (let i = 0; i < 6; i++) { const a2 = i / 6 * TAU; ctx.save(); ctx.translate(Math.cos(a2) * sr * 0.55, Math.sin(a2) * sr * 0.55); poly(6, sr * 0.24); ctx.stroke(); ctx.restore(); }
+    poly(6, sr * 0.24); ctx.stroke(); ctx.restore();
+  }
 }
 function drawLeviathan(b, t, col, body) {
   const R = b.r, n = b.segs.length;
@@ -3604,7 +4173,7 @@ function drawWorld(o) {
   }
   for (const e of enemies) drawEnemy(e);
   if (boss) {
-    if (boss.charge) {
+    if (boss.charge && !boss.apex) { // (Apex Omega draws its own twin-barrel telegraph)
       const p = boss.charge.t / boss.charge.dur, c = bossCol(boss);
       ctx.strokeStyle = c; ctx.globalAlpha = 0.25 + 0.5 * p * (0.6 + 0.4 * Math.sin(t * 30)); ctx.lineWidth = 1 + p * 6; ctx.setLineDash(p > 0.7 ? [] : [12, 10]);
       ctx.beginPath(); ctx.moveTo(boss.x, boss.y); ctx.lineTo(core.x, core.y); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
@@ -3631,10 +4200,14 @@ function drawWorld(o) {
     const gr = o2.kind === 'spore' ? o2.r * (3.4 + 0.6 * Math.sin(t * 9 + o2.x)) : o2.r * 3;
     ctx.drawImage(glow(c), o2.x - gr, o2.y - gr, gr * 2, gr * 2);
     if (o2.kind === 'spore') { ctx.strokeStyle = c; ctx.lineWidth = 1.2; ctx.beginPath(); for (let i = 0; i < 6; i++) { const a = i / 6 * TAU + t * 3; ctx.moveTo(o2.x + Math.cos(a) * o2.r * 0.7, o2.y + Math.sin(a) * o2.r * 0.7); ctx.lineTo(o2.x + Math.cos(a) * o2.r * 1.5, o2.y + Math.sin(a) * o2.r * 1.5); } ctx.stroke(); }
+    if (o2.kind === 'grav') { // gravity bomb: dark core with spinning event-horizon arcs
+      ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(o2.x, o2.y, o2.r * (1.5 + 0.2 * Math.sin(t * 10)), 0, TAU); ctx.stroke();
+      for (let i = 0; i < 3; i++) { const a = t * 4 + i * TAU / 3; ctx.beginPath(); ctx.arc(o2.x, o2.y, o2.r * 2.2, a, a + 0.8); ctx.stroke(); }
+    }
     if (pend) { ctx.strokeStyle = c; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(o2.x, o2.y, o2.r * 2.2, 0, TAU); ctx.stroke(); }
   }
   ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
-  for (const o2 of eBullets) { if (o2.kind === 'wave') continue; ctx.fillStyle = '#fff4f8'; ctx.beginPath(); ctx.arc(o2.x, o2.y, o2.r * 0.55, 0, TAU); ctx.fill(); }
+  for (const o2 of eBullets) { if (o2.kind === 'wave') continue; ctx.fillStyle = o2.kind === 'grav' ? '#0a0012' : '#fff4f8'; ctx.beginPath(); ctx.arc(o2.x, o2.y, o2.r * 0.55, 0, TAU); ctx.fill(); }
   drawBullets();
   if (o.sigil) drawSigil(core.x, core.y, core.R, o.sigil.col, o.sigil.a, realT);
   const tier = orbTier();
@@ -3998,6 +4571,8 @@ function updateHud() {
   setW('hXp', clamp(xp / xpNeed(level), 0, 1));
   setTxt('hStage', loc('hud.stage', { stage: stageName(core.stage) }) + (orbs.length ? ' · ' + orbs.length + '◉ ' + ORB_TIERS[orbTier()] : '') + (comps.length ? ' · ' + comps.length + '✦' : ''));
   setTxt('hDraft', loc('hud.overclockIn', { n: DRAFT_EVERY - level % DRAFT_EVERY }));
+  const th = threatTier();
+  setTxt('hThreat', th ? loc('hud.threat', { n: th, hp: lateHp().toFixed(2), dmg: lateDmg().toFixed(2) }) : '');
   setTxt('hHpTxt', Math.ceil(core.hp) + '/' + Math.round(stats.maxHp));
   setTxt('hShTxt', Math.floor(core.shield) + '/' + Math.round(stats.maxShield));
   setW('hHp', clamp(core.hp / stats.maxHp, 0, 1));
@@ -4264,12 +4839,13 @@ function renderPity() {
 }
 function resetWorld() {
   enemies = []; bullets = []; eBullets = []; shards = []; parts = []; rings = []; texts = []; bolts = []; beams = [];
-  boss = null; bossQueue = []; bossTriggered = {}; draftQueue = []; cine = null; echoes = 0;
+  boss = null; bossQueue = []; bossTriggered = {}; draftQueue = []; cine = null; echoes = 0; threat = 0;
+  core.x = W / 2; core.y = H * 0.5; // undo any gravity drag from a previous run
   cam.zoom = 1; cam.rot = 0; warp = 1; danger = 0; overdrive = 0; novaCharge = 0; novaFx = null; hitStop = 0; slowmo = 0; chroma = 0; flash = 0;
   combo = { n: 0, t: 0, best: 0 }; comps = []; legends = 0; epicGiven = false; legGiven = false; draftPhase = 'idle'; bossDelay = 0; assistLock = null; aimFiring = false;
   ['hud'].forEach(id => $(id).classList.remove('cine'));
   $('lbTop').classList.remove('on'); $('lbBot').classList.remove('on'); $('cineSkip').classList.remove('on'); $('cineCap').textContent = '';
-  $('bossbar').classList.add('hidden'); $('volatility').classList.remove('on');
+  $('bossbar').classList.add('hidden'); $('bossbar').classList.remove('apex'); $('volatility').classList.remove('on');
 }
 function goHub() {
   state = 'menu'; paused = false; modal = null; hideAll(); resetWorld();
