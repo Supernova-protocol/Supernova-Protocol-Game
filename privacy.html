@@ -13,20 +13,29 @@ h1{font-size:28px;letter-spacing:.06em;margin:0 0 4px;color:var(--cyan)}
 h2{font-size:17px;letter-spacing:.05em;margin:30px 0 8px;color:#c9a7ff}
 p,li{color:#cfd8e3}
 .meta{color:var(--dim);font-size:13px;margin-bottom:24px}
+.note{font-size:12.5px;color:var(--dim);border-left:2px solid rgba(0,243,255,.4);padding:4px 10px;margin:-8px 0 22px}
 a{color:var(--cyan)}
 ul{padding-left:20px}
 .back{display:inline-block;margin-top:30px;font-size:13px;letter-spacing:.1em}
+.langbar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 24px}
+.langbar a{font-size:11px;letter-spacing:.12em;padding:5px 9px;border:1px solid rgba(0,243,255,.3);border-radius:6px;text-decoration:none;color:var(--dim)}
+.langbar a.on{color:var(--cyan);border-color:var(--cyan);background:rgba(0,243,255,.1)}
+html[lang="th"] h1,html[lang="th"] h2,html[lang="th"] .back,html[lang="th"] .langbar a{letter-spacing:0}
 </style>
 </head>
 <body>
 <main>
+<nav class="langbar" id="langbar" aria-label="Language">
+  <a href="?lang=en" data-l="en">EN</a><a href="?lang=de" data-l="de">DE</a><a href="?lang=fr" data-l="fr">FR</a><a href="?lang=es" data-l="es">ES</a><a href="?lang=th" data-l="th">TH</a><a href="?lang=tl" data-l="tl">TL</a>
+</nav>
+<div id="doc">
 <h1>Privacy Policy</h1>
-<div class="meta">NOVA CORE: Protocol 51 · last updated 10 October 2026</div>
+<div class="meta">NOVA CORE: Protocol 51 · last updated 11 October 2026</div>
 
 <p>This page explains what NOVA CORE stores about you and why. Short version: we only keep what is needed to show a fair leaderboard and to contact giveaway winners.</p>
 
 <h2>When you just play</h2>
-<p>Your callsign, settings and upgrades are saved only in your own browser (local storage). Nothing is sent to us.</p>
+<p>Your callsign, settings (such as language, sound and aim assist), progress and upgrades are saved only in your own browser (local storage). Nothing is sent to us.</p>
 
 <h2>When you sign in with Google</h2>
 <p>Signing in with Google is optional. It is only needed for your scores to count on the global leaderboard and for giveaways. Google then shares with us:</p>
@@ -56,8 +65,188 @@ ul{padding-left:20px}
 
 <h2>Contact</h2>
 <p>Supernova Protocol · @SupernovaLPad on X</p>
+</div>
 
-<a class="back" href="./">← BACK TO THE GAME</a>
+<a class="back" id="back" href="./">← BACK TO THE GAME</a>
 </main>
+<script>
+// Localized versions — the language follows ?lang=…, then the game's saved language (nova51_lang), then the browser.
+(() => {
+  const LANGS = ['en', 'de', 'fr', 'es', 'th', 'tl'];
+  const TITLE = {
+    en: 'NOVA CORE · Privacy Policy', de: 'NOVA CORE · Datenschutzerklärung', fr: 'NOVA CORE · Politique de confidentialité',
+    es: 'NOVA CORE · Política de privacidad', th: 'NOVA CORE · นโยบายความเป็นส่วนตัว', tl: 'NOVA CORE · Patakaran sa Privacy'
+  };
+  const BACK = { en: '← BACK TO THE GAME', de: '← ZURÜCK ZUM SPIEL', fr: '← RETOUR AU JEU', es: '← VOLVER AL JUEGO', th: '← กลับไปที่เกม', tl: '← BUMALIK SA LARO' };
+  const DOCS = {
+de: `<h1>Datenschutzerklärung</h1>
+<div class="meta">NOVA CORE: Protocol 51 · zuletzt aktualisiert am 11. Oktober 2026</div>
+<p class="note">Diese Übersetzung dient nur der Orientierung. Bei Abweichungen gilt die englische Fassung.</p>
+<p>Diese Seite erklärt, was NOVA CORE über dich speichert und warum. Kurz gesagt: Wir speichern nur, was für eine faire Rangliste und für die Kontaktaufnahme mit Gewinnspiel-Gewinnern nötig ist.</p>
+<h2>Wenn du nur spielst</h2>
+<p>Dein Rufzeichen, deine Einstellungen (z. B. Sprache, Ton und Zielhilfe), dein Fortschritt und deine Upgrades werden nur in deinem eigenen Browser gespeichert (Local Storage). Nichts davon wird an uns gesendet.</p>
+<h2>Wenn du dich mit Google anmeldest</h2>
+<p>Die Anmeldung mit Google ist freiwillig. Sie ist nur nötig, damit deine Punkte in der globalen Rangliste zählen, und für Gewinnspiele. Google teilt uns dann Folgendes mit:</p>
+<ul>
+  <li>deinen Namen und dein Profilbild</li>
+  <li>deine E-Mail-Adresse</li>
+  <li>deine Google-Konto-ID (eine Nummer, die dein Konto identifiziert)</li>
+</ul>
+<p>Für jeden gewerteten Run speichern wir außerdem dein Rufzeichen, deine Punktzahl, dein Level, deine Abschüsse sowie Beginn und Ende des Runs.</p>
+<h2>Wofür wir die Daten nutzen</h2>
+<ul>
+  <li>Um die Rangliste anzuzeigen und nachzuweisen, welches Konto welche Punktzahl erzielt hat.</li>
+  <li>Um gefälschte oder ercheatete Punktzahlen zu erkennen und zu entfernen.</li>
+  <li>Um Gewinnspiel-Gewinner per E-Mail zu kontaktieren.</li>
+</ul>
+<p>Wir posten niemals etwas in deinem Namen, verkaufen deine Daten nie und nutzen sie nie für Werbung.</p>
+<h2>Was öffentlich ist</h2>
+<p>In der Rangliste kann jeder dein Rufzeichen, ein kurzes Spieler-Tag (z. B. #7F3A), deine Punktzahl und dein Level sehen. Dein Name und deine E-Mail-Adresse werden nie angezeigt.</p>
+<h2>Wo die Daten gespeichert werden</h2>
+<p>Ranglistendaten und Anmeldekonten werden bei unserem Datenbankanbieter Supabase gespeichert. Das Spiel selbst wird bei Vercel gehostet.</p>
+<h2>Löschung deiner Daten</h2>
+<p>Wenn du dein Konto und alle deine Punktzahlen löschen lassen möchtest, schreib @SupernovaLPad auf X. Wir löschen sie innerhalb von 30 Tagen.</p>
+<h2>Kontakt</h2>
+<p>Supernova Protocol · @SupernovaLPad auf X</p>`,
+fr: `<h1>Politique de confidentialité</h1>
+<div class="meta">NOVA CORE: Protocol 51 · dernière mise à jour le 11 octobre 2026</div>
+<p class="note">Cette traduction est fournie à titre indicatif. En cas de divergence, la version anglaise fait foi.</p>
+<p>Cette page explique ce que NOVA CORE enregistre à ton sujet et pourquoi. En bref : nous ne conservons que ce qui est nécessaire pour afficher un classement équitable et contacter les gagnants du concours.</p>
+<h2>Quand tu joues simplement</h2>
+<p>Ton indicatif, tes paramètres (comme la langue, le son et l'aide à la visée), ta progression et tes améliorations sont enregistrés uniquement dans ton propre navigateur (stockage local). Rien ne nous est envoyé.</p>
+<h2>Quand tu te connectes avec Google</h2>
+<p>La connexion avec Google est facultative. Elle n'est nécessaire que pour que tes scores comptent au classement mondial et pour les concours. Google nous transmet alors :</p>
+<ul>
+  <li>ton nom et ta photo de profil</li>
+  <li>ton adresse e-mail</li>
+  <li>l'identifiant de ton compte Google (un numéro qui identifie ton compte)</li>
+</ul>
+<p>Pour chaque partie classée, nous enregistrons aussi ton indicatif, ton score, ton niveau, tes éliminations, ainsi que l'heure de début et de fin de la partie.</p>
+<h2>Pourquoi nous les utilisons</h2>
+<ul>
+  <li>Pour afficher le classement et prouver quel compte a réalisé chaque score.</li>
+  <li>Pour repérer et supprimer les scores falsifiés ou obtenus en trichant.</li>
+  <li>Pour contacter les gagnants du concours par e-mail.</li>
+</ul>
+<p>Nous ne publions jamais rien à ta place, ne vendons jamais tes données et ne les utilisons jamais à des fins publicitaires.</p>
+<h2>Ce qui est public</h2>
+<p>Sur le classement, tout le monde peut voir ton indicatif, un court identifiant de joueur (comme #7F3A), ton score et ton niveau. Ton nom et ton adresse e-mail ne sont jamais affichés.</p>
+<h2>Où les données sont stockées</h2>
+<p>Les données du classement et les comptes de connexion sont stockés chez notre fournisseur de base de données, Supabase. Le jeu lui-même est hébergé sur Vercel.</p>
+<h2>Suppression de tes données</h2>
+<p>Pour faire supprimer ton compte et tous tes scores, envoie un message à @SupernovaLPad sur X. Nous les supprimons sous 30 jours.</p>
+<h2>Contact</h2>
+<p>Supernova Protocol · @SupernovaLPad sur X</p>`,
+es: `<h1>Política de privacidad</h1>
+<div class="meta">NOVA CORE: Protocol 51 · última actualización: 11 de octubre de 2026</div>
+<p class="note">Esta traducción se ofrece solo como referencia. Si difiere de la versión en inglés, prevalece la versión en inglés.</p>
+<p>Esta página explica qué guarda NOVA CORE sobre ti y por qué. En resumen: solo guardamos lo necesario para mostrar una clasificación justa y contactar con los ganadores del sorteo.</p>
+<h2>Cuando solo juegas</h2>
+<p>Tu indicativo, tus ajustes (como el idioma, el sonido y la ayuda de puntería), tu progreso y tus mejoras se guardan solo en tu propio navegador (almacenamiento local). No se nos envía nada.</p>
+<h2>Cuando inicias sesión con Google</h2>
+<p>Iniciar sesión con Google es opcional. Solo es necesario para que tus puntuaciones cuenten en la clasificación global y para los sorteos. En ese caso, Google comparte con nosotros:</p>
+<ul>
+  <li>tu nombre y tu foto de perfil</li>
+  <li>tu dirección de correo electrónico</li>
+  <li>el ID de tu cuenta de Google (un número que identifica tu cuenta)</li>
+</ul>
+<p>Para cada partida clasificada también guardamos tu indicativo, tu puntuación, tu nivel, tus bajas y cuándo empezó y terminó la partida.</p>
+<h2>Para qué lo usamos</h2>
+<ul>
+  <li>Para mostrar la clasificación y demostrar qué cuenta consiguió cada puntuación.</li>
+  <li>Para detectar y eliminar puntuaciones falsas o conseguidas con trampas.</li>
+  <li>Para contactar por correo electrónico con los ganadores del sorteo.</li>
+</ul>
+<p>Nunca publicamos nada en tu nombre, nunca vendemos tus datos y nunca los usamos para publicidad.</p>
+<h2>Qué es público</h2>
+<p>En la clasificación todo el mundo puede ver tu indicativo, una etiqueta corta de jugador (como #7F3A), tu puntuación y tu nivel. Tu nombre y tu correo electrónico nunca se muestran.</p>
+<h2>Dónde se guarda</h2>
+<p>Los datos de la clasificación y las cuentas de inicio de sesión se guardan en nuestro proveedor de bases de datos, Supabase. El juego en sí está alojado en Vercel.</p>
+<h2>Eliminar tus datos</h2>
+<p>Para que eliminemos tu cuenta y todas tus puntuaciones, envía un mensaje a @SupernovaLPad en X. Los eliminamos en un plazo de 30 días.</p>
+<h2>Contacto</h2>
+<p>Supernova Protocol · @SupernovaLPad en X</p>`,
+th: `<h1>นโยบายความเป็นส่วนตัว</h1>
+<div class="meta">NOVA CORE: Protocol 51 · อัปเดตล่าสุด 11 ตุลาคม 2026</div>
+<p class="note">คำแปลนี้จัดทำขึ้นเพื่อความสะดวกเท่านั้น หากมีความแตกต่างกัน ให้ถือฉบับภาษาอังกฤษเป็นหลัก</p>
+<p>หน้านี้อธิบายว่า NOVA CORE จัดเก็บข้อมูลอะไรเกี่ยวกับคุณและเพราะเหตุใด โดยสรุป: เราเก็บเฉพาะข้อมูลที่จำเป็นต่อการแสดงกระดานอันดับที่ยุติธรรมและการติดต่อผู้ชนะกิจกรรมแจกรางวัลเท่านั้น</p>
+<h2>เมื่อคุณแค่เล่นเกม</h2>
+<p>ชื่อเรียกขาน การตั้งค่า (เช่น ภาษา เสียง และระบบช่วยเล็ง) ความคืบหน้า และอัปเกรดของคุณจะถูกบันทึกไว้ในเบราว์เซอร์ของคุณเองเท่านั้น (local storage) ไม่มีข้อมูลใดถูกส่งมาถึงเรา</p>
+<h2>เมื่อคุณลงชื่อเข้าใช้ด้วย Google</h2>
+<p>การลงชื่อเข้าใช้ด้วย Google เป็นทางเลือก จำเป็นเฉพาะเมื่อต้องการให้คะแนนของคุณนับบนกระดานอันดับโลกและสำหรับกิจกรรมแจกรางวัลเท่านั้น จากนั้น Google จะแชร์ข้อมูลต่อไปนี้กับเรา:</p>
+<ul>
+  <li>ชื่อและรูปโปรไฟล์ของคุณ</li>
+  <li>ที่อยู่อีเมลของคุณ</li>
+  <li>ID บัญชี Google ของคุณ (หมายเลขที่ใช้ระบุบัญชีของคุณ)</li>
+</ul>
+<p>สำหรับทุกรอบที่จัดอันดับ เรายังจัดเก็บชื่อเรียกขาน คะแนน เลเวล จำนวนศัตรูที่กำจัด และเวลาเริ่มต้นและสิ้นสุดของรอบนั้นด้วย</p>
+<h2>เหตุผลที่เราใช้ข้อมูล</h2>
+<ul>
+  <li>เพื่อแสดงกระดานอันดับและพิสูจน์ว่าบัญชีใดทำคะแนนแต่ละรายการ</li>
+  <li>เพื่อตรวจจับและลบคะแนนปลอมหรือคะแนนที่ได้จากการโกง</li>
+  <li>เพื่อติดต่อผู้ชนะกิจกรรมแจกรางวัลทางอีเมล</li>
+</ul>
+<p>เราไม่โพสต์สิ่งใดแทนคุณ ไม่ขายข้อมูลของคุณ และไม่ใช้ข้อมูลของคุณเพื่อการโฆษณา</p>
+<h2>ข้อมูลที่เป็นสาธารณะ</h2>
+<p>บนกระดานอันดับ ทุกคนจะเห็นชื่อเรียกขาน แท็กผู้เล่นแบบสั้น (เช่น #7F3A) คะแนน และเลเวลของคุณ ชื่อและที่อยู่อีเมลของคุณจะไม่ถูกแสดงเลย</p>
+<h2>สถานที่จัดเก็บข้อมูล</h2>
+<p>ข้อมูลกระดานอันดับและบัญชีสำหรับลงชื่อเข้าใช้ถูกจัดเก็บไว้กับผู้ให้บริการฐานข้อมูลของเรา คือ Supabase ส่วนตัวเกมโฮสต์อยู่บน Vercel</p>
+<h2>การลบข้อมูลของคุณ</h2>
+<p>หากต้องการให้ลบบัญชีและคะแนนทั้งหมดของคุณ ส่งข้อความถึง @SupernovaLPad บน X เราจะลบข้อมูลภายใน 30 วัน</p>
+<h2>ติดต่อ</h2>
+<p>Supernova Protocol · @SupernovaLPad บน X</p>`,
+tl: `<h1>Patakaran sa Privacy</h1>
+<div class="meta">NOVA CORE: Protocol 51 · huling na-update noong 11 Oktubre 2026</div>
+<p class="note">Ibinibigay ang salin na ito para sa kaginhawahan lamang. Kung may pagkakaiba, ang bersyong Ingles ang masusunod.</p>
+<p>Ipinapaliwanag ng pahinang ito kung ano ang iniimbak ng NOVA CORE tungkol sa iyo at kung bakit. Sa madaling salita: iniingatan lang namin ang kailangan para makapagpakita ng patas na leaderboard at para makontak ang mga nanalo sa giveaway.</p>
+<h2>Kapag naglalaro ka lang</h2>
+<p>Ang iyong callsign, settings (gaya ng wika, tunog at aim assist), progreso at mga upgrade ay naka-save lang sa sarili mong browser (local storage). Walang ipinapadala sa amin.</p>
+<h2>Kapag nag-sign in ka gamit ang Google</h2>
+<p>Opsyonal ang pag-sign in gamit ang Google. Kailangan lang ito para mabilang ang iyong mga score sa global leaderboard at para sa mga giveaway. Ibabahagi naman sa amin ng Google ang:</p>
+<ul>
+  <li>iyong pangalan at profile picture</li>
+  <li>iyong email address</li>
+  <li>iyong Google account ID (isang numerong tumutukoy sa iyong account)</li>
+</ul>
+<p>Para sa bawat ranked na run, iniimbak din namin ang iyong callsign, score, level, kills, at kung kailan nagsimula at natapos ang run.</p>
+<h2>Bakit namin ito ginagamit</h2>
+<ul>
+  <li>Para ipakita ang leaderboard at patunayan kung aling account ang nakagawa ng bawat score.</li>
+  <li>Para matukoy at maalis ang mga peke o dinayang score.</li>
+  <li>Para makontak sa email ang mga nanalo sa giveaway.</li>
+</ul>
+<p>Hindi kami kailanman magpo-post ng anuman para sa iyo, hindi namin ibebenta ang iyong data, at hindi namin ito gagamitin para sa ads.</p>
+<h2>Ano ang pampubliko</h2>
+<p>Sa leaderboard, makikita ng lahat ang iyong callsign, isang maikling player tag (gaya ng #7F3A), ang iyong score at level. Hindi kailanman ipinapakita ang iyong pangalan at email address.</p>
+<h2>Saan ito iniimbak</h2>
+<p>Ang data ng leaderboard at mga sign-in account ay iniimbak sa aming database provider, ang Supabase. Ang laro mismo ay naka-host sa Vercel.</p>
+<h2>Pagbura ng iyong data</h2>
+<p>Para mabura ang iyong account at lahat ng iyong score, mag-message kay @SupernovaLPad sa X. Buburahin namin ang mga ito sa loob ng 30 araw.</p>
+<h2>Kontak</h2>
+<p>Supernova Protocol · @SupernovaLPad sa X</p>`
+  };
+  const doc = document.getElementById('doc'), EN = doc.innerHTML;
+  const saved = () => { try { return JSON.parse(localStorage.getItem('nova51_lang')); } catch (e) { return null; } };
+  const browser = () => { const c = String(navigator.language || 'en').toLowerCase().split('-')[0]; return c === 'fil' ? 'tl' : c; };
+  const q = new URLSearchParams(location.search).get('lang');
+  let lang = [q, saved(), browser()].find(l => LANGS.includes(l)) || 'en';
+  function show(l) {
+    lang = l;
+    doc.innerHTML = l === 'en' ? EN : DOCS[l];
+    document.documentElement.lang = l;
+    document.title = TITLE[l];
+    document.getElementById('back').textContent = BACK[l];
+    document.querySelectorAll('#langbar a').forEach(a => a.classList.toggle('on', a.dataset.l === l));
+  }
+  document.querySelectorAll('#langbar a').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    const l = a.dataset.l;
+    try { localStorage.setItem('nova51_lang', JSON.stringify(l)); } catch (err) {} // shared with the game's language setting
+    history.replaceState(null, '', '?lang=' + l);
+    show(l);
+  }));
+  show(lang);
+})();
+</script>
 </body>
 </html>
