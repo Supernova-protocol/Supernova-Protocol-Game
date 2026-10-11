@@ -13,14 +13,23 @@ h1{font-size:28px;letter-spacing:.06em;margin:0 0 4px;color:var(--cyan)}
 h2{font-size:17px;letter-spacing:.05em;margin:30px 0 8px;color:#c9a7ff}
 p,li{color:#cfd8e3}
 .meta{color:var(--dim);font-size:13px;margin-bottom:24px}
+.note{font-size:12.5px;color:var(--dim);border-left:2px solid rgba(0,243,255,.4);padding:4px 10px;margin:-8px 0 22px}
 .warn{border:1px solid rgba(255,190,11,.5);background:rgba(255,190,11,.06);border-radius:8px;padding:12px 14px;color:#ffe3a3}
 a{color:var(--cyan)}
 ol,ul{padding-left:20px}
 .back{display:inline-block;margin-top:30px;font-size:13px;letter-spacing:.1em}
+.langbar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 24px}
+.langbar a{font-size:11px;letter-spacing:.12em;padding:5px 9px;border:1px solid rgba(0,243,255,.3);border-radius:6px;text-decoration:none;color:var(--dim)}
+.langbar a.on{color:var(--cyan);border-color:var(--cyan);background:rgba(0,243,255,.1)}
+html[lang="th"] h1,html[lang="th"] h2,html[lang="th"] .back,html[lang="th"] .langbar a{letter-spacing:0}
 </style>
 </head>
 <body>
 <main>
+<nav class="langbar" id="langbar" aria-label="Language">
+  <a href="?lang=en" data-l="en">EN</a><a href="?lang=de" data-l="de">DE</a><a href="?lang=fr" data-l="fr">FR</a><a href="?lang=es" data-l="es">ES</a><a href="?lang=th" data-l="th">TH</a><a href="?lang=tl" data-l="tl">TL</a>
+</nav>
+<div id="doc">
 <h1>Terms &amp; Giveaway Rules</h1>
 <div class="meta">NOVA CORE: Protocol 51 · last updated 10 October 2026</div>
 
@@ -50,8 +59,169 @@ ol,ul{padding-left:20px}
 
 <h2>Contact</h2>
 <p>Supernova Protocol · @SupernovaLPad on X</p>
+</div>
 
-<a class="back" href="./">← BACK TO THE GAME</a>
+<a class="back" id="back" href="./">← BACK TO THE GAME</a>
 </main>
+<script>
+// Localized versions — the language follows ?lang=…, then the game's saved language (nova51_lang), then the browser.
+(() => {
+  const LANGS = ['en', 'de', 'fr', 'es', 'th', 'tl'];
+  const TITLE = {
+    en: 'NOVA CORE · Terms & Giveaway Rules', de: 'NOVA CORE · Nutzungsbedingungen & Gewinnspielregeln', fr: 'NOVA CORE · Conditions & règles du concours',
+    es: 'NOVA CORE · Términos y bases del sorteo', th: 'NOVA CORE · ข้อกำหนดและกติกาการแจกรางวัล', tl: 'NOVA CORE · Mga Tuntunin at Patakaran ng Giveaway'
+  };
+  const BACK = { en: '← BACK TO THE GAME', de: '← ZURÜCK ZUM SPIEL', fr: '← RETOUR AU JEU', es: '← VOLVER AL JUEGO', th: '← กลับไปที่เกม', tl: '← BUMALIK SA LARO' };
+  const DOCS = {
+de: `<h1>Nutzungsbedingungen &amp; Gewinnspielregeln</h1>
+<div class="meta">NOVA CORE: Protocol 51 · zuletzt aktualisiert am 10. Oktober 2026</div>
+<p class="note">Diese Übersetzung dient nur der Orientierung. Bei Abweichungen gilt die englische Fassung.</p>
+<h2>Das Spiel</h2>
+<ul>
+  <li>NOVA CORE ist kostenlos spielbar.</li>
+  <li>Nur Runs, die mit Google-Anmeldung gespielt wurden, zählen für die globale Rangliste. Jede Punktzahl wird von unserem Server geprüft, bevor sie erscheint.</li>
+  <li>Wir können das Spiel oder die Rangliste jederzeit ändern, pausieren oder beenden.</li>
+  <li>NOVA CORE steht in keiner Verbindung zu Google oder X Corp. und wird von diesen weder gesponsert noch unterstützt.</li>
+</ul>
+<h2>Gewinnspiel</h2>
+<ol>
+  <li><b>Preise:</b> 5 $ in Krypto, 5 $ in Krypto, 5 $ in Krypto.</li>
+  <li><b>Gewinner:</b> die Top 3 der verifizierten Rangliste am 17. Oktober 2026, 17:00 Uhr ICT (UTC+7). Runs zählen ab dem 10. Oktober 2026, 17:00 Uhr ICT. Jedes Google-Konto zählt einmal, mit seinem besten akzeptierten Run. Bei gleicher Punktzahl liegt die zuerst erzielte vorne.</li>
+  <li><b>Teilnahmeberechtigt:</b> alle ab 16 Jahren, sofern solche Gewinnspiele dort erlaubt sind. Die Veranstalter können nicht gewinnen.</li>
+  <li><b>Eine Person, ein Konto.</b> Die Nutzung mehrerer Konten, von Bots oder Skripten, eines veränderten Spiels, von Bugs oder Exploits oder das Einsenden gefälschter Punktzahlen führt zur Disqualifikation. Wir können jede Punktzahl entfernen, die unserer Ansicht nach nicht fair erspielt wurde.</li>
+  <li><b>Prüfung der Gewinner:</b> Bevor ein Preis vergeben wird, prüfen wir die besten Runs. Wir können einen Gewinner um einen Spielnachweis bitten, zum Beispiel eine Bildschirmaufnahme eines Runs.</li>
+  <li><b>Kontakt:</b> Die Gewinner werden auf X von @SupernovaLPad mit ihrem Rufzeichen und Spieler-Tag aus der Rangliste bekanntgegeben (zum Beispiel ACE #7F3A) und per E-Mail an die Adresse des Google-Kontos kontaktiert, mit dem sie gespielt haben. Sie müssen innerhalb von 7 Tagen antworten. Andernfalls geht der Preis an den nächsten Platz.</li>
+  <li><b>Zustellung:</b> Die Preise werden innerhalb von 7 Tagen nach der Antwort des Gewinners an eine Krypto-Wallet-Adresse gesendet, die der Gewinner uns mitteilt.</li>
+</ol>
+<p class="warn">Wir werden dich <b>niemals</b> nach einem Passwort, einer Seed-Phrase oder einer Zahlung fragen, damit du einen Preis erhältst. Nachrichten zu Preisen kommen nur von @SupernovaLPad auf X oder per E-Mail an das Google-Konto, mit dem du gespielt hast.</p>
+<h2>Datenschutz</h2>
+<p>In der <a href="privacy.html">Datenschutzerklärung</a> steht, was wir speichern und warum.</p>
+<h2>Kontakt</h2>
+<p>Supernova Protocol · @SupernovaLPad auf X</p>`,
+fr: `<h1>Conditions d'utilisation &amp; règles du concours</h1>
+<div class="meta">NOVA CORE: Protocol 51 · dernière mise à jour le 10 octobre 2026</div>
+<p class="note">Cette traduction est fournie à titre indicatif. En cas de divergence, la version anglaise fait foi.</p>
+<h2>Jouer au jeu</h2>
+<ul>
+  <li>NOVA CORE est gratuit.</li>
+  <li>Seules les parties jouées en étant connecté avec Google comptent pour le classement mondial. Chaque score est vérifié par notre serveur avant d'apparaître.</li>
+  <li>Nous pouvons modifier, suspendre ou arrêter le jeu ou le classement à tout moment.</li>
+  <li>NOVA CORE n'est ni affilié à Google ou X Corp., ni sponsorisé ou approuvé par eux.</li>
+</ul>
+<h2>Concours</h2>
+<ol>
+  <li><b>Lots :</b> 5 $ en crypto, 5 $ en crypto, 5 $ en crypto.</li>
+  <li><b>Gagnants :</b> les 3 premiers joueurs du classement vérifié le 17 octobre 2026 à 17:00 ICT (UTC+7). Les parties comptent à partir du 10 octobre 2026 à 17:00 ICT. Chaque compte Google compte une seule fois, avec sa meilleure partie acceptée. En cas d'égalité, le score réalisé en premier est classé devant.</li>
+  <li><b>Participants :</b> toute personne âgée de 16 ans ou plus, là où ce type de concours est autorisé. Les organisateurs ne peuvent pas gagner.</li>
+  <li><b>Une personne, un compte.</b> L'utilisation de plusieurs comptes, de bots ou de scripts, d'un jeu modifié, de bugs ou d'exploits, ou l'envoi de faux scores entraîne la disqualification. Nous pouvons retirer tout score dont nous estimons qu'il n'a pas été obtenu loyalement.</li>
+  <li><b>Vérification des gagnants :</b> avant de remettre un lot, nous examinons les meilleures parties. Nous pouvons demander à un gagnant une preuve de jeu, par exemple un enregistrement d'écran d'une partie.</li>
+  <li><b>Contact :</b> les gagnants sont annoncés sur X par @SupernovaLPad avec leur indicatif et leur identifiant de joueur tels qu'affichés au classement (par exemple ACE #7F3A), et sont contactés par e-mail à l'adresse du compte Google avec lequel ils ont joué. Ils doivent répondre sous 7 jours. Sinon, le lot revient à la place suivante.</li>
+  <li><b>Remise :</b> les lots sont envoyés, dans les 7 jours suivant la réponse du gagnant, à l'adresse de portefeuille crypto qu'il nous communique.</li>
+</ol>
+<p class="warn">Nous ne te demanderons <b>jamais</b> de mot de passe, de phrase de récupération (seed phrase) ni de paiement pour recevoir un lot. Les messages concernant les lots proviennent uniquement de @SupernovaLPad sur X ou d'un e-mail envoyé au compte Google avec lequel tu as joué.</p>
+<h2>Confidentialité</h2>
+<p>Consulte la <a href="privacy.html">Politique de confidentialité</a> pour savoir ce que nous enregistrons et pourquoi.</p>
+<h2>Contact</h2>
+<p>Supernova Protocol · @SupernovaLPad sur X</p>`,
+es: `<h1>Términos y bases del sorteo</h1>
+<div class="meta">NOVA CORE: Protocol 51 · última actualización: 10 de octubre de 2026</div>
+<p class="note">Esta traducción se ofrece solo como referencia. Si difiere de la versión en inglés, prevalece la versión en inglés.</p>
+<h2>Jugar al juego</h2>
+<ul>
+  <li>NOVA CORE es gratuito.</li>
+  <li>Solo las partidas jugadas con la sesión de Google iniciada cuentan para la clasificación global. Nuestro servidor comprueba cada puntuación antes de que aparezca.</li>
+  <li>Podemos cambiar, pausar o finalizar el juego o la clasificación en cualquier momento.</li>
+  <li>NOVA CORE no está afiliado, patrocinado ni respaldado por Google ni por X Corp.</li>
+</ul>
+<h2>Sorteo</h2>
+<ol>
+  <li><b>Premios:</b> 5 $ en cripto, 5 $ en cripto, 5 $ en cripto.</li>
+  <li><b>Ganadores:</b> los 3 primeros jugadores de la clasificación verificada el 17 de octubre de 2026 a las 17:00 ICT (UTC+7). Las partidas cuentan desde el 10 de octubre de 2026 a las 17:00 ICT. Cada cuenta de Google cuenta una sola vez, con su mejor partida aceptada. Si dos puntuaciones son iguales, queda por delante la que se consiguió primero.</li>
+  <li><b>Quién puede participar:</b> cualquier persona de 16 años o más donde este tipo de sorteos esté permitido. Los organizadores no pueden ganar.</li>
+  <li><b>Una persona, una cuenta.</b> Usar varias cuentas, bots o scripts, un juego modificado, errores o exploits, o enviar puntuaciones falsas supone la descalificación. Podemos eliminar cualquier puntuación que consideremos que no se ha conseguido de forma limpia.</li>
+  <li><b>Comprobación de ganadores:</b> antes de entregar un premio revisamos las mejores partidas. Podemos pedir a un ganador una prueba de juego, por ejemplo una grabación de pantalla de una partida.</li>
+  <li><b>Contacto:</b> los ganadores se anuncian en X a través de @SupernovaLPad con su indicativo y su etiqueta de jugador tal como aparecen en la clasificación (por ejemplo ACE #7F3A), y se les contacta por correo electrónico en la dirección de la cuenta de Google con la que jugaron. Deben responder en un plazo de 7 días. De lo contrario, el premio pasa al siguiente puesto.</li>
+  <li><b>Entrega:</b> los premios se envían, en un plazo de 7 días desde la respuesta del ganador, a la dirección de monedero cripto que este nos facilite.</li>
+</ol>
+<p class="warn"><b>Nunca</b> te pediremos una contraseña, una frase semilla ni un pago para recibir un premio. Los mensajes sobre premios solo llegan de @SupernovaLPad en X o por correo electrónico a la cuenta de Google con la que jugaste.</p>
+<h2>Privacidad</h2>
+<p>Consulta la <a href="privacy.html">Política de privacidad</a> para saber qué guardamos y por qué.</p>
+<h2>Contacto</h2>
+<p>Supernova Protocol · @SupernovaLPad en X</p>`,
+th: `<h1>ข้อกำหนดและกติกาการแจกรางวัล</h1>
+<div class="meta">NOVA CORE: Protocol 51 · อัปเดตล่าสุด 10 ตุลาคม 2026</div>
+<p class="note">คำแปลนี้จัดทำขึ้นเพื่อความสะดวกเท่านั้น หากมีความแตกต่างกัน ให้ถือฉบับภาษาอังกฤษเป็นหลัก</p>
+<h2>การเล่นเกม</h2>
+<ul>
+  <li>NOVA CORE เล่นได้ฟรี</li>
+  <li>เฉพาะรอบที่เล่นขณะลงชื่อเข้าใช้ด้วย Google เท่านั้นที่นับในกระดานอันดับโลก ทุกคะแนนจะถูกตรวจสอบโดยเซิร์ฟเวอร์ของเราก่อนแสดงผล</li>
+  <li>เราอาจเปลี่ยนแปลง หยุดชั่วคราว หรือยุติเกมหรือกระดานอันดับได้ทุกเมื่อ</li>
+  <li>NOVA CORE ไม่มีส่วนเกี่ยวข้อง ไม่ได้รับการสนับสนุน และไม่ได้รับการรับรองจาก Google หรือ X Corp.</li>
+</ul>
+<h2>การแจกรางวัล</h2>
+<ol>
+  <li><b>รางวัล:</b> คริปโตมูลค่า $5, คริปโตมูลค่า $5, คริปโตมูลค่า $5</li>
+  <li><b>ผู้ชนะ:</b> ผู้เล่น 3 อันดับแรกบนกระดานอันดับที่ยืนยันแล้ว ณ วันที่ 17 ตุลาคม 2026 เวลา 17:00 น. ICT (UTC+7) โดยนับรอบการเล่นตั้งแต่วันที่ 10 ตุลาคม 2026 เวลา 17:00 น. ICT บัญชี Google แต่ละบัญชีนับเพียงครั้งเดียว โดยใช้รอบที่ดีที่สุดที่ได้รับการยอมรับ หากคะแนนเท่ากัน ผู้ที่ทำคะแนนได้ก่อนจะได้อันดับสูงกว่า</li>
+  <li><b>ผู้มีสิทธิ์เข้าร่วม:</b> ผู้ที่มีอายุ 16 ปีขึ้นไปในพื้นที่ที่อนุญาตให้จัดกิจกรรมแจกรางวัลลักษณะนี้ ผู้จัดไม่มีสิทธิ์ได้รับรางวัล</li>
+  <li><b>หนึ่งคน หนึ่งบัญชี</b> การใช้หลายบัญชี บอทหรือสคริปต์ เกมที่ถูกดัดแปลง บั๊กหรือช่องโหว่ หรือการส่งคะแนนปลอม จะถูกตัดสิทธิ์ เราสามารถลบคะแนนใดก็ได้ที่เราเห็นว่าไม่ได้เล่นอย่างยุติธรรม</li>
+  <li><b>การตรวจสอบผู้ชนะ:</b> ก่อนมอบรางวัล เราจะตรวจสอบรอบที่ทำคะแนนสูงสุด เราอาจขอให้ผู้ชนะแสดงหลักฐานการเล่น เช่น วิดีโอบันทึกหน้าจอขณะเล่นหนึ่งรอบ</li>
+  <li><b>การติดต่อ:</b> ผู้ชนะจะได้รับการประกาศบน X โดย @SupernovaLPad พร้อมชื่อเรียกขานและแท็กผู้เล่นตามที่แสดงบนกระดานอันดับ (เช่น ACE #7F3A) และจะได้รับการติดต่อทางอีเมลตามที่อยู่ของบัญชี Google ที่ใช้เล่น ผู้ชนะต้องตอบกลับภายใน 7 วัน มิฉะนั้นรางวัลจะตกเป็นของอันดับถัดไป</li>
+  <li><b>การส่งมอบ:</b> รางวัลจะถูกส่งไปยังที่อยู่กระเป๋าคริปโตที่ผู้ชนะแจ้งแก่เรา ภายใน 7 วันหลังจากผู้ชนะตอบกลับ</li>
+</ol>
+<p class="warn">เรา<b>จะไม่มีวัน</b>ขอรหัสผ่าน seed phrase หรือการชำระเงินใด ๆ จากคุณเพื่อรับรางวัล ข้อความเกี่ยวกับรางวัลจะมาจาก @SupernovaLPad บน X หรือทางอีเมลไปยังบัญชี Google ที่คุณใช้เล่นเท่านั้น</p>
+<h2>ความเป็นส่วนตัว</h2>
+<p>ดู<a href="privacy.html">นโยบายความเป็นส่วนตัว</a>เพื่อดูว่าเราจัดเก็บข้อมูลอะไรและเพราะเหตุใด</p>
+<h2>ติดต่อ</h2>
+<p>Supernova Protocol · @SupernovaLPad บน X</p>`,
+tl: `<h1>Mga Tuntunin at Patakaran ng Giveaway</h1>
+<div class="meta">NOVA CORE: Protocol 51 · huling na-update noong 10 Oktubre 2026</div>
+<p class="note">Ibinibigay ang salin na ito para sa kaginhawahan lamang. Kung may pagkakaiba, ang bersyong Ingles ang masusunod.</p>
+<h2>Paglalaro</h2>
+<ul>
+  <li>Libre ang paglalaro ng NOVA CORE.</li>
+  <li>Tanging mga run na nilaro habang naka-sign in sa Google ang binibilang sa global leaderboard. Sinusuri ng aming server ang bawat score bago ito lumabas.</li>
+  <li>Maaari naming baguhin, i-pause o tapusin ang laro o ang leaderboard anumang oras.</li>
+  <li>Ang NOVA CORE ay hindi kaanib, hindi isinponsor at hindi inendorso ng Google o ng X Corp.</li>
+</ul>
+<h2>Giveaway</h2>
+<ol>
+  <li><b>Mga premyo:</b> $5 na crypto, $5 na crypto, $5 na crypto.</li>
+  <li><b>Mga mananalo:</b> ang top 3 na player sa beripikadong leaderboard sa 17 Oktubre 2026, 17:00 ICT (UTC+7). Binibilang ang mga run mula 10 Oktubre 2026, 17:00 ICT. Isang beses lang binibilang ang bawat Google account, gamit ang pinakamahusay nitong tinanggap na run. Kung magkapareho ang dalawang score, mas mataas ang ranggo ng naunang nakagawa nito.</li>
+  <li><b>Sino ang puwedeng sumali:</b> sinumang 16 taong gulang pataas kung saan pinapayagan ang ganitong giveaway. Hindi puwedeng manalo ang mga organizer.</li>
+  <li><b>Isang tao, isang account.</b> Ang paggamit ng maraming account, bot o script, binagong laro, bug o exploit, o pagpapadala ng pekeng score ay magreresulta sa diskwalipikasyon. Maaari naming alisin ang anumang score na sa tingin namin ay hindi nilaro nang patas.</li>
+  <li><b>Pagsusuri sa mga mananalo:</b> bago ibigay ang premyo, sinusuri namin ang mga nangungunang run. Maaari naming hingan ang mananalo ng patunay ng paglalaro, halimbawa ng screen recording ng isang run.</li>
+  <li><b>Kontak:</b> ang mga mananalo ay iaanunsyo sa X ng @SupernovaLPad kasama ang kanilang callsign at player tag gaya ng nasa leaderboard (halimbawa ACE #7F3A), at kokontakin sa email sa address ng Google account na ginamit nila sa paglalaro. Kailangan nilang sumagot sa loob ng 7 araw. Kung hindi, mapupunta ang premyo sa susunod na puwesto.</li>
+  <li><b>Pagpapadala:</b> ipinapadala ang mga premyo sa crypto wallet address na ibibigay sa amin ng mananalo, sa loob ng 7 araw mula nang sumagot ang mananalo.</li>
+</ol>
+<p class="warn"><b>Hindi kailanman</b> kami hihingi sa iyo ng password, seed phrase o bayad para matanggap ang premyo. Ang mga mensahe tungkol sa premyo ay manggagaling lang kay @SupernovaLPad sa X o sa email na ipinadala sa Google account na ginamit mo sa paglalaro.</p>
+<h2>Privacy</h2>
+<p>Tingnan ang <a href="privacy.html">Patakaran sa Privacy</a> para malaman kung ano ang iniimbak namin at bakit.</p>
+<h2>Kontak</h2>
+<p>Supernova Protocol · @SupernovaLPad sa X</p>`
+  };
+  const doc = document.getElementById('doc'), EN = doc.innerHTML;
+  const saved = () => { try { return JSON.parse(localStorage.getItem('nova51_lang')); } catch (e) { return null; } };
+  const browser = () => { const c = String(navigator.language || 'en').toLowerCase().split('-')[0]; return c === 'fil' ? 'tl' : c; };
+  const q = new URLSearchParams(location.search).get('lang');
+  let lang = [q, saved(), browser()].find(l => LANGS.includes(l)) || 'en';
+  function show(l) {
+    lang = l;
+    doc.innerHTML = l === 'en' ? EN : DOCS[l];
+    document.documentElement.lang = l;
+    document.title = TITLE[l];
+    document.getElementById('back').textContent = BACK[l];
+    document.querySelectorAll('#langbar a').forEach(a => a.classList.toggle('on', a.dataset.l === l));
+    doc.querySelectorAll('a[href^="privacy.html"]').forEach(a => { a.href = 'privacy.html?lang=' + l; }); // keep the language on the privacy page
+  }
+  document.querySelectorAll('#langbar a').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    const l = a.dataset.l;
+    try { localStorage.setItem('nova51_lang', JSON.stringify(l)); } catch (err) {} // shared with the game's language setting
+    history.replaceState(null, '', '?lang=' + l);
+    show(l);
+  }));
+  show(lang);
+})();
+</script>
 </body>
 </html>
