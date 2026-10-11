@@ -351,6 +351,26 @@ body.touch #toast{bottom:calc(var(--sab) + 250px)}
 .buy.max{border-color:var(--gold);color:var(--gold)}
 .buy.eq{border-color:var(--gold);color:#1a0b00;background:var(--gold)}
 .shop-foot{width:100%;max-width:560px}
+
+/* ---------- Settings hub · language ---------- */
+#scrSettings{z-index:50}
+.langgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.lang{display:flex;flex-direction:column;align-items:center;gap:3px;padding:11px 6px;border-radius:8px;border:1px solid rgba(0,243,255,.25);background:rgba(0,243,255,.04);
+  color:var(--ink);font-size:13px;font-weight:700;letter-spacing:.1em;transition:transform .12s}
+.lang small{font-size:9px;letter-spacing:.25em;color:var(--dim);font-weight:400}
+.lang:active{transform:scale(.97)}
+.lang.on{border-color:var(--cyan);color:var(--cyan);background:rgba(0,243,255,.14);box-shadow:0 0 16px rgba(0,243,255,.3)}
+.lang.on small{color:var(--cyan)}
+.setlbl{margin-top:4px}
+/* ---------- Pity Protocol (one-time core discount) ---------- */
+.pity{margin:0 0 12px;padding:9px 10px;border:1px solid rgba(255,190,11,.55);border-radius:8px;background:rgba(255,190,11,.07);color:var(--gold);
+  font-size:10.5px;letter-spacing:.12em;text-align:center;line-height:1.55;text-shadow:0 0 8px rgba(255,190,11,.45)}
+.pity.dim{border-color:rgba(255,255,255,.12);background:transparent;color:var(--dim);text-shadow:none}
+.buy s{display:block;font-size:10px;font-weight:400;opacity:.55;margin-top:1px}
+.decay .n{font-size:10.5px;letter-spacing:.08em;color:#cfd8e3;margin-top:4px;line-height:1.5}
+.decay .n.ok{color:#3dff9a}.decay .n.g{color:var(--gold);text-shadow:0 0 8px rgba(255,190,11,.5)}
+/* Thai script: wide letter-spacing tears stacked vowels and tone marks apart */
+html[lang="th"] body *{letter-spacing:0!important}
 </style>
 <!-- Supabase client — powers the live global leaderboard -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -361,33 +381,33 @@ body.touch #toast{bottom:calc(var(--sab) + 250px)}
 <!-- ================= HUD ================= -->
 <div id="hud" class="hidden">
   <div class="hud-top">
-    <div class="hcell"><div class="k">SHARDS</div><div class="v" id="hShards">◆ 0</div></div>
+    <div class="hcell"><div class="k" data-i18n="hud.shards">SHARDS</div><div class="v" id="hShards">◆ 0</div></div>
     <div class="hcenter">
-      <div class="k">LEVEL</div>
+      <div class="k" data-i18n="hud.level">LEVEL</div>
       <div id="hLevel">1</div>
       <div class="xpbar"><div id="hXp"></div></div>
       <div id="hStage">CORE // DORMANT</div>
       <div id="hDraft"></div>
       <div id="hCombo"></div>
     </div>
-    <div class="hcell right"><div class="k">SCORE</div><div class="v" id="hScore">0</div></div>
+    <div class="hcell right"><div class="k" data-i18n="hud.score">SCORE</div><div class="v" id="hScore">0</div></div>
   </div>
   <div id="bossbar" class="hidden">
     <div class="bn"><span id="bossName">TITAN NODE</span><span id="bossPhase">PHASE I</span></div>
     <div class="bb"><div id="bossFill"></div></div>
   </div>
-  <div id="volatility">&gt; VOLATILITY SPIKE DETECTED_<small>// PROXIMITY BREACH · CORE AT RISK</small></div>
+  <div id="volatility"><span data-i18n="hud.vol">&gt; VOLATILITY SPIKE DETECTED_</span><small data-i18n="hud.volSub">// PROXIMITY BREACH · CORE AT RISK</small></div>
   <div class="hud-bottom">
-    <div id="stickWrap"><div class="stick" id="stick" aria-label="Aim and fire"><i class="stick-dir" id="stickDir"></i><div class="stick-knob" id="stickKnob"></div></div></div>
+    <div id="stickWrap"><div class="stick" id="stick" aria-label="Aim and fire" data-i18n-aria="aria.stick"><i class="stick-dir" id="stickDir"></i><div class="stick-knob" id="stickKnob"></div></div></div>
     <div class="hpwrap">
-      <div class="hplbl"><span>HULL <b id="hHpTxt">100</b></span><span class="sh">SHIELD <b id="hShTxt">20</b></span></div>
+      <div class="hplbl"><span><span data-i18n="hud.hull">HULL</span> <b id="hHpTxt">100</b></span><span class="sh"><span data-i18n="hud.shield">SHIELD</span> <b id="hShTxt">20</b></span></div>
       <div class="hpbar"><div id="hHp"></div><div id="hSh"></div></div>
     </div>
     <div class="hbtns">
-      <button class="iconbtn" id="btnPause" aria-label="Pause">II</button>
-      <button class="novabtn" id="btnNova" aria-label="Nova Burst"><span><i>✸</i><b id="novaPct">0%</b></span></button>
-      <button class="hubbtn" id="btnShop">[ ACCESS UPGRADE HUB ]</button>
-      <button class="iconbtn" id="btnMute" aria-label="Sound">♪</button>
+      <button class="iconbtn" id="btnPause" aria-label="Pause" data-i18n-aria="aria.pause">II</button>
+      <button class="novabtn" id="btnNova" aria-label="Nova Burst" data-i18n-aria="aria.nova"><span><i>✸</i><b id="novaPct">0%</b></span></button>
+      <button class="hubbtn" id="btnShop" data-i18n="hud.hubBtn">[ ACCESS UPGRADE HUB ]</button>
+      <button class="iconbtn" id="btnMute" aria-label="Sound" data-i18n-aria="aria.sound">♪</button>
     </div>
   </div>
 </div>
@@ -399,98 +419,890 @@ body.touch #toast{bottom:calc(var(--sab) + 250px)}
 <div class="lbar" id="lbTop"></div>
 <div class="lbar" id="lbBot"></div>
 <div id="cineCap"></div>
-<div id="cineSkip">TAP TO SKIP ▸▸</div>
+<div id="cineSkip" data-i18n="cine.skip">TAP TO SKIP ▸▸</div>
 <div id="cineTitle"><div class="t0" id="ctT0">ASCENSION COMPLETE</div><div class="t1" id="ctT1">AWAKENING</div><div class="t2" id="ctT2"></div></div>
 
 <!-- ================= LOGIN ================= -->
 <section class="screen" id="scrLogin">
   <div class="panel">
     <div class="brand"><div class="t1">NOVA CORE</div><div class="t2">PROTOCOL 51</div></div>
-    <div class="label">&gt; ENTER OPERATOR CALLSIGN</div>
-    <input class="field" id="inName" maxlength="12" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="CALLSIGN">
+    <div class="label" data-i18n="login.prompt">&gt; ENTER OPERATOR CALLSIGN</div>
+    <input class="field" id="inName" maxlength="12" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="CALLSIGN" data-i18n-ph="login.ph">
     <div class="term" id="loginTerm">_awaiting neural handshake</div>
-    <button class="btn" id="btnLogin">[ AUTHENTICATE ]</button>
+    <button class="btn" id="btnLogin" data-i18n="login.btn">[ AUTHENTICATE ]</button>
+    <button class="btn ghost small" id="btnLoginSettings" data-i18n="login.lang">⚙ LANGUAGE</button>
   </div>
 </section>
 
 <!-- ================= COMMAND HUB ================= -->
 <section class="screen" id="scrHub">
   <div class="panel">
-    <div class="brand" style="margin-bottom:10px"><div class="t1" style="font-size:clamp(28px,8vw,40px)">NOVA CORE</div><div class="t2">COMMAND HUB</div></div>
-    <div class="callsign"><div class="label" style="margin:0">OPERATOR</div><div class="n" id="hubName">—</div><button id="btnChange">CHANGE CALLSIGN</button></div>
+    <div class="brand" style="margin-bottom:10px"><div class="t1" style="font-size:clamp(28px,8vw,40px)">NOVA CORE</div><div class="t2" data-i18n="hub.sub">COMMAND HUB</div></div>
+    <div class="callsign"><div class="label" style="margin:0" data-i18n="hub.operator">OPERATOR</div><div class="n" id="hubName">—</div><button id="btnChange" data-i18n="hub.change">CHANGE CALLSIGN</button></div>
     <div class="xauth" id="gAuth">
-      <button class="xbtn" id="btnGLogin">SIGN IN WITH GOOGLE TO COMPETE</button>
-      <div class="xme hidden" id="gMe"><span class="ok">✓ VERIFIED</span><b id="gName">—</b><button id="btnGOut">SIGN OUT</button></div>
+      <button class="xbtn" id="btnGLogin" data-i18n="hub.gLogin">SIGN IN WITH GOOGLE TO COMPETE</button>
+      <div class="xme hidden" id="gMe"><span class="ok" data-i18n="hub.verified">✓ VERIFIED</span><b id="gName">—</b><button id="btnGOut" data-i18n="hub.signOut">SIGN OUT</button></div>
       <div class="xnote" id="gNote">ONLY SIGNED-IN RUNS REACH THE GLOBAL BOARD</div>
     </div>
     <div class="statgrid">
-      <div class="stat"><div class="k">PERSONAL BEST</div><div class="v gold" id="hubHs">0</div></div>
-      <div class="stat"><div class="k">SHARD BANK</div><div class="v cyan" id="hubShards">◆ 0</div></div>
-      <div class="stat"><div class="k">PEAK LEVEL</div><div class="v" id="hubLv">1</div></div>
-      <div class="stat"><div class="k">MAX ASCENSION</div><div class="v" id="hubAsc">DORMANT</div></div>
+      <div class="stat"><div class="k" data-i18n="hub.pb">PERSONAL BEST</div><div class="v gold" id="hubHs">0</div></div>
+      <div class="stat"><div class="k" data-i18n="hub.bank">SHARD BANK</div><div class="v cyan" id="hubShards">◆ 0</div></div>
+      <div class="stat"><div class="k" data-i18n="hub.peak">PEAK LEVEL</div><div class="v" id="hubLv">1</div></div>
+      <div class="stat"><div class="k" data-i18n="hub.maxAsc">MAX ASCENSION</div><div class="v" id="hubAsc">DORMANT</div></div>
     </div>
+    <div class="pity hidden" id="hubPity"></div>
     <div class="label lbhead"><span id="lbTitle">// GLOBAL TOP 5</span><span class="lbstat" id="lbStat">SYNCING…</span></div>
     <ul class="lb" id="hubLb"></ul>
-    <button class="btn" id="btnStart">[ START COMBAT ]</button>
-    <button class="btn purple" id="btnHubShop" style="letter-spacing:.12em">UPGRADE HUB ✦ FX LAB</button>
-    <div class="row"><button class="btn ghost small" id="btnHubMute">SFX: ON</button><button class="btn ghost small" id="btnHubMusic">MUSIC: ON</button></div>
-    <button class="btn ghost small" id="btnHubAssist">AIM ASSIST: ON</button>
-    <div class="foot-note">MANUAL AIM · JOYSTICK ON PHONE · HOLD MOUSE ON PC · ✸ NOVA WHEN CHARGED<br>TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK EVERY 3 LV<br>A BREACHED CORE KEEPS ONLY 75% OF ITS AUGMENTS<br><a href="terms.html">GIVEAWAY RULES</a> · <a href="privacy.html">PRIVACY</a></div>
+    <button class="btn" id="btnStart" data-i18n="hub.start">[ START COMBAT ]</button>
+    <button class="btn purple" id="btnHubShop" style="letter-spacing:.12em" data-i18n="hub.shop">UPGRADE HUB ✦ FX LAB</button>
+    <button class="btn ghost small" id="btnHubSettings" data-i18n="hub.settings">⚙ SETTINGS · LANGUAGE</button>
+    <div class="foot-note"><span data-i18n="hub.foot1">MANUAL AIM · JOYSTICK ON PHONE · HOLD MOUSE ON PC · ✸ NOVA WHEN CHARGED</span><br><span data-i18n="hub.foot2">TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK EVERY 3 LV</span><br><span data-i18n="hub.foot3">A BREACHED CORE KEEPS 75% OF ITS CORE AUGMENTS · 90% IF YOU BEAT YOUR LAST RUN'S LEVEL · SKILLS ARE NEVER LOST</span><br><span data-i18n="hub.foot4">HOSTILES ARE 15% WEAKER UNTIL LV 50</span><br><a href="terms.html" data-legal="terms.html" data-i18n="hub.rules">GIVEAWAY RULES</a> · <a href="privacy.html" data-legal="privacy.html" data-i18n="hub.privacy">PRIVACY</a></div>
   </div>
 </section>
 
 <!-- ================= GAME OVER ================= -->
 <section class="screen" id="scrOver">
   <div class="panel">
-    <div class="go-title">CORE BREACHED</div>
-    <div class="label" style="text-align:center;margin-top:10px">FINAL SCORE</div>
+    <div class="go-title" data-i18n="go.title">CORE BREACHED</div>
+    <div class="label" style="text-align:center;margin-top:10px" data-i18n="go.final">FINAL SCORE</div>
     <div class="go-score" id="goScore">0</div>
     <div class="newrec" id="goRec"></div>
     <div class="gonet" id="goNet"></div>
     <div class="statgrid" style="margin-top:12px">
-      <div class="stat"><div class="k">LEVEL</div><div class="v" id="goLv">1</div></div>
-      <div class="stat"><div class="k">ASCENSION</div><div class="v" id="goAsc">DORMANT</div></div>
-      <div class="stat"><div class="k">KILLS</div><div class="v" id="goKills">0</div></div>
-      <div class="stat"><div class="k">BEST COMBO</div><div class="v gold" id="goCombo">0</div></div>
-      <div class="stat" style="grid-column:span 2"><div class="k">SHARDS RECOVERED</div><div class="v cyan" id="goShards">◆ 0</div></div>
+      <div class="stat"><div class="k" data-i18n="go.level">LEVEL</div><div class="v" id="goLv">1</div></div>
+      <div class="stat"><div class="k" data-i18n="go.asc">ASCENSION</div><div class="v" id="goAsc">DORMANT</div></div>
+      <div class="stat"><div class="k" data-i18n="go.kills">KILLS</div><div class="v" id="goKills">0</div></div>
+      <div class="stat"><div class="k" data-i18n="go.combo">BEST COMBO</div><div class="v gold" id="goCombo">0</div></div>
+      <div class="stat" style="grid-column:span 2"><div class="k" data-i18n="go.shards">SHARDS RECOVERED</div><div class="v cyan" id="goShards">◆ 0</div></div>
     </div>
     <div class="decay" id="goDecay"></div>
-    <button class="btn" id="btnRetry">[ REDEPLOY ]</button>
-    <button class="btn ghost" id="btnToHub">RETURN TO COMMAND HUB</button>
+    <button class="btn" id="btnRetry" data-i18n="go.retry">[ REDEPLOY ]</button>
+    <button class="btn ghost" id="btnToHub" data-i18n="go.hub">RETURN TO COMMAND HUB</button>
   </div>
 </section>
 
 <!-- ================= PAUSE ================= -->
 <section class="screen" id="scrPause">
   <div class="panel" style="text-align:center">
-    <div class="brand"><div class="t1" style="font-size:34px">PAUSED</div><div class="t2">SIMULATION FROZEN</div></div>
-    <button class="btn" id="btnResume">[ RESUME ]</button>
-    <button class="btn ghost" id="btnAbort">ABORT RUN</button>
-    <button class="btn ghost small" id="btnPauseAssist">AIM ASSIST: ON</button>
+    <div class="brand"><div class="t1" style="font-size:34px" data-i18n="pause.title">PAUSED</div><div class="t2" data-i18n="pause.sub">SIMULATION FROZEN</div></div>
+    <button class="btn" id="btnResume" data-i18n="pause.resume">[ RESUME ]</button>
+    <button class="btn ghost" id="btnAbort" data-i18n="pause.abort">ABORT RUN</button>
+    <div class="row"><button class="btn ghost small" id="btnPauseAssist">AIM ASSIST: ON</button><button class="btn ghost small" id="btnPauseSettings" data-i18n="pause.settings">⚙ SETTINGS</button></div>
+  </div>
+</section>
+
+<!-- ================= SETTINGS HUB (language · audio · controls) ================= -->
+<section class="screen" id="scrSettings">
+  <div class="panel">
+    <div class="brand" style="margin-bottom:12px"><div class="t1" style="font-size:clamp(26px,7.5vw,38px)" data-i18n="set.title">SETTINGS</div><div class="t2" data-i18n="set.sub">SYSTEM CONFIG</div></div>
+    <div class="label setlbl" data-i18n="set.lang">// LANGUAGE</div>
+    <div class="langgrid" id="langGrid"></div>
+    <div class="label setlbl" data-i18n="set.audio">// AUDIO</div>
+    <div class="row"><button class="btn ghost small" id="btnSetSfx" style="margin-top:0">SFX: ON</button><button class="btn ghost small" id="btnSetMusic" style="margin-top:0">MUSIC: ON</button></div>
+    <div class="label setlbl" style="margin-top:16px" data-i18n="set.controls">// CONTROLS</div>
+    <button class="btn ghost small" id="btnSetAssist" style="margin-top:0">AIM ASSIST: ON</button>
+    <button class="btn" id="btnSetBack" style="margin-top:18px" data-i18n="set.back">[ BACK ]</button>
   </div>
 </section>
 
 <!-- ================= DRAFT ================= -->
 <div class="modal" id="draft">
-  <div class="draft-head"><div class="tg">// SYSTEM OVERCLOCK</div><h2>LEVEL <span id="dLvl">3</span></h2><p id="dHint">TAP UNSTABLE CARDS TO OVERCHARGE · THEN REVEAL</p></div>
+  <div class="draft-head"><div class="tg" data-i18n="draft.tag">// SYSTEM OVERCLOCK</div><h2><span data-i18n="draft.level">LEVEL</span> <span id="dLvl">3</span></h2><p id="dHint">TAP UNSTABLE CARDS TO OVERCHARGE · THEN REVEAL</p></div>
   <div class="cards" id="cards"></div>
-  <button class="btn" id="btnReveal">[ REVEAL ]</button>
+  <button class="btn" id="btnReveal" data-i18n="draft.reveal">[ REVEAL ]</button>
 </div>
 
 <!-- ================= UPGRADE HUB ================= -->
 <section class="screen" id="shop">
   <div class="shop-head">
-    <div><div class="sub">// AUGMENT · SKILLS · FX</div><h2>UPGRADE HUB</h2></div>
-    <div class="bank"><div class="sub">SHARD BANK</div><div class="v" id="shopBank">◆ 0</div></div>
+    <div><div class="sub" data-i18n="shop.sub">// AUGMENT · SKILLS · FX</div><h2 data-i18n="shop.title">UPGRADE HUB</h2></div>
+    <div class="bank"><div class="sub" data-i18n="shop.bank">SHARD BANK</div><div class="v" id="shopBank">◆ 0</div></div>
   </div>
   <div class="tabs" id="shopTabs">
-    <button class="tab active" data-tab="core">CORE</button>
-    <button class="tab" data-tab="skills">SKILLS</button>
-    <button class="tab" data-tab="fx">FX LAB</button>
+    <button class="tab active" data-tab="core" data-i18n="shop.tabCore">CORE</button>
+    <button class="tab" data-tab="skills" data-i18n="shop.tabSkills">SKILLS</button>
+    <button class="tab" data-tab="fx" data-i18n="shop.tabFx">FX LAB</button>
   </div>
   <div class="shop-list" id="shopList"></div>
   <div class="shop-foot"><button class="btn" id="btnShopClose">[ RETURN TO COMBAT ]</button></div>
 </section>
+<script>
+/* =========================================================
+   LOCALIZATION STRINGS — English · Deutsch · Français · Español · ไทย · Tagalog
+   Used by loc(key, params) in the game script below. {name}-style tokens are filled at runtime.
+   To add a language: copy the "en" block, translate the values, and add its code to LANGS in the game script.
+   ========================================================= */
+window.NOVA_I18N = {
+en: {
+  "lang.name": "ENGLISH",
+  "hud.shards": "SHARDS", "hud.level": "LEVEL", "hud.score": "SCORE", "hud.hull": "HULL", "hud.shield": "SHIELD",
+  "hud.vol": "> VOLATILITY SPIKE DETECTED_", "hud.volSub": "// PROXIMITY BREACH · CORE AT RISK",
+  "hud.hubBtn": "[ ACCESS UPGRADE HUB ]", "hud.stage": "CORE // {stage}", "hud.overclockIn": "◈ OVERCLOCK IN {n} LV",
+  "hud.combo": "{n} COMBO", "hud.overdrive": "OVERDRIVE", "hud.nova": "NOVA",
+  "aria.pause": "Pause", "aria.nova": "Nova Burst", "aria.sound": "Sound", "aria.stick": "Aim and fire",
+  "cine.skip": "TAP TO SKIP ▸▸",
+  "login.prompt": "> ENTER OPERATOR CALLSIGN", "login.ph": "CALLSIGN", "login.idle": "_awaiting neural handshake",
+  "login.btn": "[ AUTHENTICATE ]", "login.lang": "⚙ LANGUAGE",
+  "login.err": "_error: callsign requires ≥ 2 chars [A-Z 0-9 _ -]", "login.ok": "_handshake verified. welcome, {name}",
+  "hub.sub": "COMMAND HUB", "hub.operator": "OPERATOR", "hub.change": "CHANGE CALLSIGN",
+  "hub.gLogin": "SIGN IN WITH GOOGLE TO COMPETE", "hub.verified": "✓ VERIFIED", "hub.signOut": "SIGN OUT",
+  "hub.noteOffline": "GLOBAL BOARD OFFLINE · PLAYING LOCALLY", "hub.noteOn": "YOUR RUNS ARE SIGNED TO THIS GOOGLE ACCOUNT",
+  "hub.noteOff": "ONLY SIGNED-IN RUNS REACH THE GLOBAL BOARD", "hub.player": "PLAYER",
+  "hub.pb": "PERSONAL BEST", "hub.bank": "SHARD BANK", "hub.peak": "PEAK LEVEL", "hub.maxAsc": "MAX ASCENSION",
+  "hub.start": "[ START COMBAT ]", "hub.shop": "UPGRADE HUB ✦ FX LAB", "hub.settings": "⚙ SETTINGS · LANGUAGE",
+  "hub.foot1": "MANUAL AIM · JOYSTICK ON PHONE · HOLD MOUSE ON PC · ✸ NOVA WHEN CHARGED",
+  "hub.foot2": "TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK EVERY 3 LV",
+  "hub.foot3": "A BREACHED CORE KEEPS 75% OF ITS CORE AUGMENTS · 90% IF YOU BEAT YOUR LAST RUN'S LEVEL · SKILLS ARE NEVER LOST",
+  "hub.foot4": "HOSTILES ARE 15% WEAKER UNTIL LV 50",
+  "hub.rules": "GIVEAWAY RULES", "hub.privacy": "PRIVACY",
+  "hub.pity": "✦ PITY PROTOCOL ACTIVE · −20% ON ALL CORE AUGMENTS · ENDS WITH YOUR NEXT RUN",
+  "hub.pbStreak": "PERSONAL BEST MISSED {n}/3 IN A ROW · AT 3: ONE-TIME −20% ON CORE AUGMENTS",
+  "lb.global": "// GLOBAL TOP 5", "lb.verified": "// VERIFIED TOP 5", "lb.local": "// LOCAL TOP 5", "lb.live": "LIVE",
+  "lb.offlineLocal": "OFFLINE · LOCAL", "lb.localOnly": "LOCAL ONLY", "lb.syncing": "SYNCING…",
+  "lb.syncingGlobal": "SYNCING GLOBAL RECORDS…", "lb.empty": "NO COMBAT RECORDS — BE THE FIRST", "lb.lv": "LV {n}",
+  "net.offline": "GLOBAL BOARD OFFLINE · SAVED LOCALLY", "net.unranked": "UNRANKED RUN",
+  "net.unrankedSign": "UNRANKED · SIGN IN WITH GOOGLE IN THE HUB TO COMPETE", "net.noScore": "NO SCORE TO SUBMIT",
+  "net.notReg": "RUN NOT REGISTERED · CHECK CONNECTION", "net.rejected": "SCORE REJECTED", "net.uploadFail": "UPLOAD FAILED · {err}",
+  "net.verifying": "VERIFYING RUN WITH SERVER…", "net.verified": "✓ VERIFIED · PLAYER #{tag}",
+  "net.gFail": "GOOGLE SIGN-IN FAILED", "net.signInErr": "SIGN-IN: {msg}",
+  "rej.RUN_TOO_SHORT": "RUN TOO SHORT TO RANK", "rej.LEVEL_TOO_FAST": "REJECTED · LEVEL TOO FAST",
+  "rej.TOO_MANY_KILLS": "REJECTED · TOO MANY KILLS", "rej.SCORE_TOO_HIGH": "REJECTED · SCORE TOO HIGH",
+  "rej.IMPOSSIBLE_STAGE": "REJECTED · IMPOSSIBLE ASCENSION", "rej.RUN_EXPIRED": "RUN EXPIRED · TOO LONG",
+  "rej.BAD_NAME": "REJECTED · INVALID CALLSIGN", "rej.BAD_VALUES": "REJECTED · INVALID RUN",
+  "go.title": "CORE BREACHED", "go.final": "FINAL SCORE", "go.level": "LEVEL", "go.asc": "ASCENSION", "go.kills": "KILLS",
+  "go.combo": "BEST COMBO", "go.shards": "SHARDS RECOVERED", "go.retry": "[ REDEPLOY ]", "go.hub": "RETURN TO COMMAND HUB",
+  "go.recGlobal": "★ NEW RECORD · GLOBAL #{n} ★", "go.recPersonal": "★ NEW PERSONAL RECORD ★",
+  "go.rankGlobal": "RANKED #{n} GLOBALLY", "go.rankLocal": "RANKED #{n} ON LOCAL BOARD",
+  "go.decayHead": "// NEURAL DECAY — {pct}% OF YOUR CORE AUGMENTS SURVIVE",
+  "go.decayBest": "▲ LV {lv} BEATS YOUR LAST RUN (LV {prev}) · 90% KEPT",
+  "go.decayNone": "NO CORE AUGMENTS LOST",
+  "go.skillsKept": "✓ SKILLS STAY INSTALLED · ORBS · LANCERS · WISPS · NOVA",
+  "go.pbReset": "★ PERSONAL BEST BEATEN · MISS STREAK RESET",
+  "go.pbMiss": "PERSONAL BEST MISSED {n}/3 IN A ROW", "go.pbMissMore": "PERSONAL BEST MISSED {n}× IN A ROW",
+  "go.pity": "✦ PITY PROTOCOL: ONE-TIME −20% ON ALL CORE AUGMENTS · ENDS WITH YOUR NEXT RUN",
+  "pause.title": "PAUSED", "pause.sub": "SIMULATION FROZEN", "pause.resume": "[ RESUME ]", "pause.abort": "ABORT RUN", "pause.settings": "⚙ SETTINGS",
+  "set.title": "SETTINGS", "set.sub": "SYSTEM CONFIG", "set.lang": "// LANGUAGE", "set.audio": "// AUDIO", "set.controls": "// CONTROLS",
+  "set.back": "[ BACK ]", "set.sfx": "SFX: {v}", "set.music": "MUSIC: {v}", "set.assist": "AIM ASSIST: {v}",
+  "set.on": "ON", "set.off": "OFF", "set.langSet": "LANGUAGE: ENGLISH",
+  "draft.tag": "// SYSTEM OVERCLOCK", "draft.level": "LEVEL", "draft.reveal": "[ REVEAL ]",
+  "draft.hintUnstable": "⚡ TAP UNSTABLE CARDS TO OVERCHARGE THEIR RARITY · THEN REVEAL", "draft.hintTap": "TAP A CARD OR REVEAL",
+  "draft.select": "SELECT AUGMENTATION", "draft.unstable": "⚡ UNSTABLE<br>TAP TO OVERCHARGE", "draft.legendary": "★ LEGENDARY ★",
+  "draft.stabilized": "STABILIZED", "draft.surge": "+ SURGE: full repair · overdrive · nova",
+  "rar.0": "COMMON", "rar.1": "UNCOMMON", "rar.2": "EPIC", "rar.3": "LEGENDARY",
+  "card.lv": "+{n} LV", "card.tier": "TIER {n}", "card.form": "{n}× {name} FORM", "card.formOne": "{name} FORM",
+  "card.orb": "{n} ORB · {tier} FORM", "card.orbs": "{n} ORBS · {tier} FORM",
+  "card.dmg.name": "PLASMA AMPLIFIER", "card.dmg.stat": "DAMAGE", "card.dmg.ds": "Multiplies core projectile damage. Your plasma grows thicker.",
+  "card.rate.name": "CYCLIC OVERCLOCK", "card.rate.stat": "FIRE RATE", "card.rate.ds": "Accelerates the emitter firing cycle.",
+  "card.shield.name": "AEGIS LATTICE", "card.shield.stat": "MAX SHIELD", "card.shield.ds": "Expands the shield matrix and fully recharges it.",
+  "card.multi.name": "SPLIT EMITTER", "card.multi.stat": "MULTI-SHOT", "card.multi.ds": "Fires additional projectiles in a spread.",
+  "card.crit.name": "NEURAL TARGETING", "card.crit.stat": "CRIT CHANCE", "card.crit.ds": "Crits deal 2× (2.5× above 30%). Golden sparks orbit the core.",
+  "card.pierce.name": "RAIL PENETRATOR", "card.pierce.stat": "PIERCE", "card.pierce.ds": "Projectiles punch through extra targets with comet tails.",
+  "card.chain.name": "ARC CONDUCTOR", "card.chain.stat": "CHAIN LIGHTNING", "card.chain.ds": "Hits can arc lightning into 2 nearby hostiles.",
+  "card.orb.name": "SENTINEL ORBS", "card.orb.stat": "COMPANION", "card.orb.ds": "Auto-firing orbs (max 5) that evolve every 2 levels.",
+  "card.lancer.name": "STAR LANCERS", "card.lancer.stat": "COMPANION", "card.lancer.ds": "Little stars on the outer orbit fire piercing lances (max 3).",
+  "card.wisp.name": "ARC WISPS", "card.wisp.stat": "COMPANION", "card.wisp.ds": "Crackling stars that zap chain lightning into nearby hostiles (max 3).",
+  "card.aegis.name": "AEGIS MOTES", "card.aegis.stat": "COMPANION", "card.aegis.ds": "Guardian motes circle close and shoot down enemy fire (max 4).",
+  "card.hull.name": "NANO REGENESIS", "card.hull.stat": "MAX HULL", "card.hull.ds": "Reinforces the hull and repairs the same amount.",
+  "card.nova.name": "NOVA CAPACITOR", "card.nova.stat": "NOVA CHARGE", "card.nova.ds": "Nova Burst charges faster.",
+  "card.star.name": "SUPERNOVA STAR", "card.star.stat": "LEGENDARY COMPANION", "card.star.ds": "A blazing golden star joins your orbit and hurls exploding flares. Every legendary copy evolves it.",
+  "orb.1": "single plasma bolts", "orb.2": "faster prism bolts", "orb.3": "twin shots + light halo", "orb.4": "piercing pulsar lances", "orb.5": "homing solar flares",
+  "shop.sub": "// AUGMENT · SKILLS · FX", "shop.title": "UPGRADE HUB", "shop.bank": "SHARD BANK",
+  "shop.tabCore": "CORE", "shop.tabSkills": "SKILLS", "shop.tabFx": "FX LAB",
+  "shop.return": "[ RETURN TO COMBAT ]", "shop.close": "[ CLOSE ]",
+  "shop.repair": "EMERGENCY REPAIR", "shop.repairDesc": "Restores your hull to 100% instantly (this run only)", "shop.repaired": "HULL FULLY RESTORED",
+  "shop.pity": "✦ PITY PROTOCOL · −20% ON ALL CORE AUGMENTS",
+  "shop.grpCore": "// PERMANENT CORE AUGMENTS", "shop.grpSkills": "// ACTIVE & AUTONOMOUS SKILLS · NEVER LOST",
+  "shop.grpShot": "// PROJECTILE SKINS", "shop.grpKill": "// KILL EFFECTS",
+  "shop.lv": "LV {n}", "shop.max": "MAX", "shop.maxed": "MAXED", "shop.next": "NEXT", "shop.maxOrbs": "MAXED · 5 SOLAR ORBS",
+  "shop.equipped": "EQUIPPED", "shop.equip": "EQUIP", "shop.unlocked": "{name} UNLOCKED", "shop.bought": "{name} → LV {n}",
+  "up.dmg.name": "CORE DAMAGE", "up.dmg.desc": "+8% base projectile damage",
+  "up.rate.name": "FIRE CYCLE", "up.rate.desc": "+6% base fire rate",
+  "up.hull.name": "HULL INTEGRITY", "up.hull.desc": "+15 max hull",
+  "up.shield.name": "SHIELD MATRIX", "up.shield.desc": "+10 max shield",
+  "up.regen.name": "REGEN CAPACITOR", "up.regen.desc": "+1.5 shield / sec",
+  "up.crit.name": "TARGETING SUITE", "up.crit.desc": "+2% critical hit chance",
+  "up.magnet.name": "SHARD MAGNET", "up.magnet.desc": "+18% pickup range",
+  "up.speed.name": "RAIL VELOCITY", "up.speed.desc": "+6% projectile speed",
+  "up.luck.name": "FORTUNE ENGINE", "up.luck.desc": "More Epic & Legendary cards, more unstable cards",
+  "up.yield.name": "SHARD REFINERY", "up.yield.desc": "+10% shards from every pickup",
+  "up.orb.name": "SENTINEL ORBS", "up.orb.desc": "Auto-firing orbs. +1 orb per level (max 5) · new form every 2 levels",
+  "up.lancer.name": "STAR LANCERS", "up.lancer.desc": "Little lance-firing stars on the outer orbit (max 3) · they evolve as you level them",
+  "up.wisp.name": "ARC WISPS", "up.wisp.desc": "Crackling stars that zap chain lightning (max 3) · evolve with level",
+  "up.novaPow.name": "NOVA AMPLITUDE", "up.novaPow.desc": "+20% Nova Burst power · base: wipes out all hostiles & rips 30% off a Titan's max HP",
+  "up.novaCharge.name": "NOVA REACTOR", "up.novaCharge.desc": "+12% Nova charge speed",
+  "skin.plasma.name": "PLASMA STREAK", "skin.plasma.desc": "Standard-issue core plasma, tinted by ascension",
+  "skin.prism.name": "PRISM LANCE", "skin.prism.desc": "Refracting tri-color lances with sparkle tails",
+  "skin.inferno.name": "INFERNO RAIL", "skin.inferno.desc": "Molten rounds that shed burning embers",
+  "skin.void.name": "VOID NEEDLE", "skin.void.desc": "Black-matter needles wrapped in violet distortion",
+  "skin.solar.name": "SOLAR LANCE", "skin.solar.desc": "Golden god-fire with white-hot cores",
+  "skin.burst.name": "NEON BURST", "skin.burst.desc": "Classic neon particle blast",
+  "skin.glitch.name": "GLITCH POP", "skin.glitch.desc": "Hostiles de-rez into RGB pixel noise",
+  "skin.supernova.name": "SUPERNOVA", "skin.supernova.desc": "Star-flare rays and a blinding ring",
+  "skin.singularity.name": "SINGULARITY", "skin.singularity.desc": "Hostiles implode into micro black holes",
+  "stage.0": "DORMANT", "stage.1": "AWAKENING", "stage.2": "DEFENSE STAR", "stage.3": "FOCUS CORE", "stage.4": "VOLATILITY PULSE", "stage.5": "GOD CORE",
+  "stage.desc.1": "TECH RINGS ONLINE · +12% DAMAGE · WEAVERS & SPLITTERS DETECTED",
+  "stage.desc.2": "GEOMETRIC STAR SHIELD DEPLOYED · LANCERS & BULWARKS INBOUND",
+  "stage.desc.3": "FOCUS TRIANGLES LOCKED IN THE PUPIL · PHANTOMS & HIVES AWAKEN",
+  "stage.desc.4": "CRIMSON PULSAR AURA UNLEASHED · WRAITHS & BOMBERS HUNT",
+  "stage.desc.5": "GOLDEN SPHERES ORBIT · THE EYE BURNS · YOU ARE THE GOD CORE",
+  "boss.titan": "TITAN NODE // {name}", "boss.echo": "ECHO {n} // {name}",
+  "boss.phase1": "PHASE I", "boss.phase2": "PHASE II // ENRAGED", "boss.form1": "FORM I", "boss.form2": "FORM II",
+  "boss.warn": "⚠ TITAN NODE INBOUND", "boss.warnEcho": "⚠ TITAN ECHO DETECTED",
+  "boss.subGate": "{name} · ASCENSION GATE {n}/5", "boss.subEcho": "{name} · RESONANCE {n}", "boss.twoForms": " · TWO FORMS",
+  "boss.shell": "THE TITAN SHEDS ITS SHELL · SECOND FORM", "boss.enraged": "ENRAGED",
+  "boss.break": "BREAK!", "boss.deflected": "DEFLECTED!", "boss.shootBreak": "SHOOT TO BREAK", "boss.shootDeflect": "SHOOT TO DEFLECT",
+  "float.shields": "SHIELDS RECHARGED", "float.comboLost": "COMBO LOST", "float.growth": "CORE GROWTH +3% DMG",
+  "float.overclockIn": " · OVERCLOCK IN {n}", "float.hintTouch": "DRAG THE STICK TO AIM & FIRE", "float.hintMouse": "AIM WITH THE MOUSE · HOLD TO FIRE",
+  "ban.echoTop": "// ECHO PURGED", "ban.echo": "OVERCHARGE", "ban.echoSub": "+10% DAMAGE FOR THIS RUN",
+  "ban.comboTop": "// COMBO ×{n}", "ban.overdrive": "OVERDRIVE", "ban.overdriveSub": "FIRE RATE +35% · DAMAGE +25%",
+  "ban.legTop": "// LEGENDARY SURGE", "ban.leg": "LEGENDARY", "ban.legSub": "FULL REPAIR · OVERDRIVE · NOVA +40%",
+  "cap.0": "> TITAN NODE NEUTRALISED · CRITICAL MASS REACHED", "cap.1": "> SIGNAL BREACH // REALITY LAYER COLLAPSING",
+  "cap.2": "> ASCENSION PROTOCOL {n} — INITIATED", "cap.3": "> DIVING INTO THE PUPIL ▓▓▓▓▓▒▒░░",
+  "cap.4": "> CROSSING THE EVENT HORIZON", "cap.5": "> FORM LOCK: {stage}",
+  "asc.complete": "ASCENSION {n} // COMPLETE"
+},
+de: {
+  "lang.name": "DEUTSCH",
+  "hud.shards": "SPLITTER", "hud.level": "LEVEL", "hud.score": "PUNKTE", "hud.hull": "HÜLLE", "hud.shield": "SCHILD",
+  "hud.vol": "> VOLATILITÄTSSPITZE ERKANNT_", "hud.volSub": "// NÄHERUNGSALARM · KERN IN GEFAHR",
+  "hud.hubBtn": "[ UPGRADE-HUB ÖFFNEN ]", "hud.stage": "KERN // {stage}", "hud.overclockIn": "◈ OVERCLOCK IN {n} LV",
+  "hud.combo": "{n} COMBO", "hud.overdrive": "OVERDRIVE", "hud.nova": "NOVA",
+  "aria.pause": "Pause", "aria.nova": "Nova-Stoß", "aria.sound": "Ton", "aria.stick": "Zielen und feuern",
+  "cine.skip": "TIPPEN ZUM ÜBERSPRINGEN ▸▸",
+  "login.prompt": "> RUFZEICHEN DES OPERATORS EINGEBEN", "login.ph": "RUFZEICHEN", "login.idle": "_warte auf neuronalen Handshake",
+  "login.btn": "[ AUTHENTIFIZIEREN ]", "login.lang": "⚙ SPRACHE",
+  "login.err": "_fehler: rufzeichen braucht ≥ 2 zeichen [A-Z 0-9 _ -]", "login.ok": "_handshake bestätigt. willkommen, {name}",
+  "hub.sub": "KOMMANDOZENTRALE", "hub.operator": "OPERATOR", "hub.change": "RUFZEICHEN ÄNDERN",
+  "hub.gLogin": "MIT GOOGLE ANMELDEN UND MITKÄMPFEN", "hub.verified": "✓ VERIFIZIERT", "hub.signOut": "ABMELDEN",
+  "hub.noteOffline": "GLOBALE RANGLISTE OFFLINE · LOKALES SPIEL", "hub.noteOn": "DEINE RUNS SIND MIT DIESEM GOOGLE-KONTO SIGNIERT",
+  "hub.noteOff": "NUR ANGEMELDETE RUNS KOMMEN IN DIE GLOBALE RANGLISTE", "hub.player": "SPIELER",
+  "hub.pb": "PERSÖNLICHER REKORD", "hub.bank": "SPLITTER-BANK", "hub.peak": "HÖCHSTES LEVEL", "hub.maxAsc": "MAX. AUFSTIEG",
+  "hub.start": "[ KAMPF STARTEN ]", "hub.shop": "UPGRADE-HUB ✦ FX-LABOR", "hub.settings": "⚙ EINSTELLUNGEN · SPRACHE",
+  "hub.foot1": "MANUELLES ZIELEN · JOYSTICK AM HANDY · MAUS GEDRÜCKT HALTEN AM PC · ✸ NOVA, WENN GELADEN",
+  "hub.foot2": "TITANENTORE BEI LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK ALLE 3 LV",
+  "hub.foot3": "EIN DURCHBROCHENER KERN BEHÄLT 75% SEINER KERN-AUGMENTS · 90%, WENN DU DAS LEVEL DEINES LETZTEN RUNS ÜBERTRIFFST · SKILLS GEHEN NIE VERLOREN",
+  "hub.foot4": "GEGNER SIND BIS LV 50 UM 15% SCHWÄCHER",
+  "hub.rules": "GEWINNSPIEL-REGELN", "hub.privacy": "DATENSCHUTZ",
+  "hub.pity": "✦ PITY-PROTOKOLL AKTIV · −20% AUF ALLE KERN-AUGMENTS · ENDET MIT DEINEM NÄCHSTEN RUN",
+  "hub.pbStreak": "PERSÖNLICHEN REKORD {n}/3 MAL IN FOLGE VERFEHLT · BEI 3: EINMALIG −20% AUF KERN-AUGMENTS",
+  "lb.global": "// GLOBALE TOP 5", "lb.verified": "// VERIFIZIERTE TOP 5", "lb.local": "// LOKALE TOP 5", "lb.live": "LIVE",
+  "lb.offlineLocal": "OFFLINE · LOKAL", "lb.localOnly": "NUR LOKAL", "lb.syncing": "SYNCHRONISIERE…",
+  "lb.syncingGlobal": "SYNCHRONISIERE GLOBALE REKORDE…", "lb.empty": "NOCH KEINE KAMPFDATEN — SEI DER ERSTE", "lb.lv": "LV {n}",
+  "net.offline": "GLOBALE RANGLISTE OFFLINE · LOKAL GESPEICHERT", "net.unranked": "UNGEWERTETER RUN",
+  "net.unrankedSign": "UNGEWERTET · MELDE DICH IM HUB MIT GOOGLE AN, UM MITZUKÄMPFEN", "net.noScore": "KEINE PUNKTE ZUM EINREICHEN",
+  "net.notReg": "RUN NICHT REGISTRIERT · VERBINDUNG PRÜFEN", "net.rejected": "PUNKTZAHL ABGELEHNT", "net.uploadFail": "UPLOAD FEHLGESCHLAGEN · {err}",
+  "net.verifying": "SERVER PRÜFT DEN RUN…", "net.verified": "✓ VERIFIZIERT · SPIELER #{tag}",
+  "net.gFail": "GOOGLE-ANMELDUNG FEHLGESCHLAGEN", "net.signInErr": "ANMELDUNG: {msg}",
+  "rej.RUN_TOO_SHORT": "RUN ZU KURZ FÜR DIE WERTUNG", "rej.LEVEL_TOO_FAST": "ABGELEHNT · LEVEL ZU SCHNELL",
+  "rej.TOO_MANY_KILLS": "ABGELEHNT · ZU VIELE ABSCHÜSSE", "rej.SCORE_TOO_HIGH": "ABGELEHNT · PUNKTZAHL ZU HOCH",
+  "rej.IMPOSSIBLE_STAGE": "ABGELEHNT · UNMÖGLICHER AUFSTIEG", "rej.RUN_EXPIRED": "RUN ABGELAUFEN · ZU LANG",
+  "rej.BAD_NAME": "ABGELEHNT · UNGÜLTIGES RUFZEICHEN", "rej.BAD_VALUES": "ABGELEHNT · UNGÜLTIGER RUN",
+  "go.title": "KERN DURCHBROCHEN", "go.final": "ENDPUNKTZAHL", "go.level": "LEVEL", "go.asc": "AUFSTIEG", "go.kills": "ABSCHÜSSE",
+  "go.combo": "BESTE COMBO", "go.shards": "GESAMMELTE SPLITTER", "go.retry": "[ ERNEUT EINSETZEN ]", "go.hub": "ZURÜCK ZUR KOMMANDOZENTRALE",
+  "go.recGlobal": "★ NEUER REKORD · GLOBAL #{n} ★", "go.recPersonal": "★ NEUER PERSÖNLICHER REKORD ★",
+  "go.rankGlobal": "GLOBAL AUF PLATZ #{n}", "go.rankLocal": "PLATZ #{n} IN DER LOKALEN RANGLISTE",
+  "go.decayHead": "// NEURALER VERFALL — {pct}% DEINER KERN-AUGMENTS BLEIBEN",
+  "go.decayBest": "▲ LV {lv} SCHLÄGT DEINEN LETZTEN RUN (LV {prev}) · 90% BLEIBEN",
+  "go.decayNone": "KEINE KERN-AUGMENTS VERLOREN",
+  "go.skillsKept": "✓ SKILLS BLEIBEN INSTALLIERT · ORBS · LANZER · IRRLICHTER · NOVA",
+  "go.pbReset": "★ PERSÖNLICHER REKORD GEBROCHEN · FEHLSERIE ZURÜCKGESETZT",
+  "go.pbMiss": "PERSÖNLICHEN REKORD {n}/3 MAL IN FOLGE VERFEHLT", "go.pbMissMore": "PERSÖNLICHEN REKORD {n}× IN FOLGE VERFEHLT",
+  "go.pity": "✦ PITY-PROTOKOLL: EINMALIG −20% AUF ALLE KERN-AUGMENTS · ENDET MIT DEINEM NÄCHSTEN RUN",
+  "pause.title": "PAUSIERT", "pause.sub": "SIMULATION EINGEFROREN", "pause.resume": "[ FORTSETZEN ]", "pause.abort": "RUN ABBRECHEN", "pause.settings": "⚙ EINSTELLUNGEN",
+  "set.title": "EINSTELLUNGEN", "set.sub": "SYSTEMKONFIGURATION", "set.lang": "// SPRACHE", "set.audio": "// AUDIO", "set.controls": "// STEUERUNG",
+  "set.back": "[ ZURÜCK ]", "set.sfx": "SFX: {v}", "set.music": "MUSIK: {v}", "set.assist": "ZIELHILFE: {v}",
+  "set.on": "AN", "set.off": "AUS", "set.langSet": "SPRACHE: DEUTSCH",
+  "draft.tag": "// SYSTEM-OVERCLOCK", "draft.level": "LEVEL", "draft.reveal": "[ AUFDECKEN ]",
+  "draft.hintUnstable": "⚡ TIPPE INSTABILE KARTEN AN, UM IHRE SELTENHEIT ZU ÜBERLADEN · DANN AUFDECKEN", "draft.hintTap": "TIPPE EINE KARTE AN ODER DECKE AUF",
+  "draft.select": "AUGMENTIERUNG WÄHLEN", "draft.unstable": "⚡ INSTABIL<br>TIPPEN ZUM ÜBERLADEN", "draft.legendary": "★ LEGENDÄR ★",
+  "draft.stabilized": "STABILISIERT", "draft.surge": "+ WOGE: volle Reparatur · Overdrive · Nova",
+  "rar.0": "GEWÖHNLICH", "rar.1": "UNGEWÖHNLICH", "rar.2": "EPISCH", "rar.3": "LEGENDÄR",
+  "card.lv": "+{n} LV", "card.tier": "STUFE {n}", "card.form": "{n}× {name}-FORM", "card.formOne": "{name}-FORM",
+  "card.orb": "{n} ORB · {tier}-FORM", "card.orbs": "{n} ORBS · {tier}-FORM",
+  "card.dmg.name": "PLASMA-VERSTÄRKER", "card.dmg.stat": "SCHADEN", "card.dmg.ds": "Vervielfacht den Schaden deiner Kerngeschosse. Dein Plasma wird dichter.",
+  "card.rate.name": "ZYKLUS-OVERCLOCK", "card.rate.stat": "FEUERRATE", "card.rate.ds": "Beschleunigt den Feuerzyklus des Emitters.",
+  "card.shield.name": "AEGIS-GITTER", "card.shield.stat": "MAX. SCHILD", "card.shield.ds": "Erweitert die Schildmatrix und lädt sie vollständig auf.",
+  "card.multi.name": "SPLIT-EMITTER", "card.multi.stat": "MEHRFACHSCHUSS", "card.multi.ds": "Feuert zusätzliche Geschosse in einem Fächer.",
+  "card.crit.name": "NEURALE ZIELERFASSUNG", "card.crit.stat": "KRIT-CHANCE", "card.crit.ds": "Krits verursachen 2× Schaden (2,5× über 30%). Goldene Funken umkreisen den Kern.",
+  "card.pierce.name": "SCHIENEN-DURCHSCHLAG", "card.pierce.stat": "DURCHSCHLAG", "card.pierce.ds": "Geschosse durchschlagen zusätzliche Ziele und ziehen Kometenschweife.",
+  "card.chain.name": "BOGEN-LEITER", "card.chain.stat": "KETTENBLITZ", "card.chain.ds": "Treffer können Blitze auf 2 nahe Gegner überspringen lassen.",
+  "card.orb.name": "WÄCHTER-ORBS", "card.orb.stat": "BEGLEITER", "card.orb.ds": "Selbstfeuernde Orbs (max. 5), die sich alle 2 Level weiterentwickeln.",
+  "card.lancer.name": "STERNENLANZER", "card.lancer.stat": "BEGLEITER", "card.lancer.ds": "Kleine Sterne auf der äußeren Umlaufbahn feuern durchschlagende Lanzen (max. 3).",
+  "card.wisp.name": "BOGEN-IRRLICHTER", "card.wisp.stat": "BEGLEITER", "card.wisp.ds": "Knisternde Sterne, die Kettenblitze in nahe Gegner jagen (max. 3).",
+  "card.aegis.name": "AEGIS-PARTIKEL", "card.aegis.stat": "BEGLEITER", "card.aegis.ds": "Wächterpartikel kreisen dicht um den Kern und schießen feindliches Feuer ab (max. 4).",
+  "card.hull.name": "NANO-REGENESE", "card.hull.stat": "MAX. HÜLLE", "card.hull.ds": "Verstärkt die Hülle und repariert dieselbe Menge.",
+  "card.nova.name": "NOVA-KONDENSATOR", "card.nova.stat": "NOVA-LADUNG", "card.nova.ds": "Der Nova-Stoß lädt sich schneller auf.",
+  "card.star.name": "SUPERNOVA-STERN", "card.star.stat": "LEGENDÄRER BEGLEITER", "card.star.ds": "Ein lodernder goldener Stern tritt deiner Umlaufbahn bei und schleudert explodierende Flares. Jede legendäre Kopie entwickelt ihn weiter.",
+  "orb.1": "einzelne Plasmabolzen", "orb.2": "schnellere Prismabolzen", "orb.3": "Doppelschüsse + Lichthalo", "orb.4": "durchschlagende Pulsar-Lanzen", "orb.5": "zielsuchende Solar-Flares",
+  "shop.sub": "// AUGMENTS · SKILLS · FX", "shop.title": "UPGRADE-HUB", "shop.bank": "SPLITTER-BANK",
+  "shop.tabCore": "KERN", "shop.tabSkills": "SKILLS", "shop.tabFx": "FX-LABOR",
+  "shop.return": "[ ZURÜCK IN DEN KAMPF ]", "shop.close": "[ SCHLIESSEN ]",
+  "shop.repair": "NOTREPARATUR", "shop.repairDesc": "Stellt deine Hülle sofort zu 100% wieder her (nur dieser Run)", "shop.repaired": "HÜLLE VOLLSTÄNDIG REPARIERT",
+  "shop.pity": "✦ PITY-PROTOKOLL · −20% AUF ALLE KERN-AUGMENTS",
+  "shop.grpCore": "// PERMANENTE KERN-AUGMENTS", "shop.grpSkills": "// AKTIVE & AUTONOME SKILLS · GEHEN NIE VERLOREN",
+  "shop.grpShot": "// GESCHOSS-SKINS", "shop.grpKill": "// ABSCHUSS-EFFEKTE",
+  "shop.lv": "LV {n}", "shop.max": "MAX", "shop.maxed": "MAXIMIERT", "shop.next": "NÄCHSTES", "shop.maxOrbs": "MAXIMIERT · 5 SOLAR-ORBS",
+  "shop.equipped": "AUSGERÜSTET", "shop.equip": "AUSRÜSTEN", "shop.unlocked": "{name} FREIGESCHALTET", "shop.bought": "{name} → LV {n}",
+  "up.dmg.name": "KERNSCHADEN", "up.dmg.desc": "+8% Basis-Geschossschaden",
+  "up.rate.name": "FEUERZYKLUS", "up.rate.desc": "+6% Basis-Feuerrate",
+  "up.hull.name": "HÜLLENINTEGRITÄT", "up.hull.desc": "+15 max. Hülle",
+  "up.shield.name": "SCHILDMATRIX", "up.shield.desc": "+10 max. Schild",
+  "up.regen.name": "REGENERATIONS-KONDENSATOR", "up.regen.desc": "+1,5 Schild / Sek.",
+  "up.crit.name": "ZIEL-SUITE", "up.crit.desc": "+2% kritische Trefferchance",
+  "up.magnet.name": "SPLITTER-MAGNET", "up.magnet.desc": "+18% Einsammelreichweite",
+  "up.speed.name": "SCHIENEN-TEMPO", "up.speed.desc": "+6% Geschossgeschwindigkeit",
+  "up.luck.name": "GLÜCKSMASCHINE", "up.luck.desc": "Mehr epische & legendäre Karten, mehr instabile Karten",
+  "up.yield.name": "SPLITTER-RAFFINERIE", "up.yield.desc": "+10% Splitter aus jedem Fund",
+  "up.orb.name": "WÄCHTER-ORBS", "up.orb.desc": "Selbstfeuernde Orbs. +1 Orb pro Level (max. 5) · neue Form alle 2 Level",
+  "up.lancer.name": "STERNENLANZER", "up.lancer.desc": "Kleine lanzenfeuernde Sterne auf der äußeren Umlaufbahn (max. 3) · sie entwickeln sich mit jedem Level",
+  "up.wisp.name": "BOGEN-IRRLICHTER", "up.wisp.desc": "Knisternde Sterne mit Kettenblitzen (max. 3) · entwickeln sich mit dem Level",
+  "up.novaPow.name": "NOVA-AMPLITUDE", "up.novaPow.desc": "+20% Nova-Stoß-Stärke · Basis: vernichtet alle Gegner & reißt einem Titanen 30% seiner Max-HP weg",
+  "up.novaCharge.name": "NOVA-REAKTOR", "up.novaCharge.desc": "+12% Nova-Ladegeschwindigkeit",
+  "skin.plasma.name": "PLASMASTREIFEN", "skin.plasma.desc": "Standard-Kernplasma, gefärbt nach Aufstieg",
+  "skin.prism.name": "PRISMALANZE", "skin.prism.desc": "Brechende dreifarbige Lanzen mit Funkelschweif",
+  "skin.inferno.name": "INFERNO-SCHIENE", "skin.inferno.desc": "Geschmolzene Geschosse, die brennende Glut versprühen",
+  "skin.void.name": "LEERENNADEL", "skin.void.desc": "Nadeln aus schwarzer Materie, gehüllt in violette Verzerrung",
+  "skin.solar.name": "SOLARLANZE", "skin.solar.desc": "Goldenes Götterfeuer mit weißglühenden Kernen",
+  "skin.burst.name": "NEON-EXPLOSION", "skin.burst.desc": "Klassische Neon-Partikelexplosion",
+  "skin.glitch.name": "GLITCH-POP", "skin.glitch.desc": "Gegner zerfallen in RGB-Pixelrauschen",
+  "skin.supernova.name": "SUPERNOVA", "skin.supernova.desc": "Sternflare-Strahlen und ein blendender Ring",
+  "skin.singularity.name": "SINGULARITÄT", "skin.singularity.desc": "Gegner implodieren zu winzigen schwarzen Löchern",
+  "stage.0": "RUHEND", "stage.1": "ERWACHEN", "stage.2": "VERTEIDIGUNGSSTERN", "stage.3": "FOKUSKERN", "stage.4": "VOLATILITÄTSPULS", "stage.5": "GOTTKERN",
+  "stage.desc.1": "TECH-RINGE ONLINE · +12% SCHADEN · WEBER & SPALTER ERKANNT",
+  "stage.desc.2": "GEOMETRISCHER STERNENSCHILD AKTIV · LANZER & BOLLWERKE IM ANFLUG",
+  "stage.desc.3": "FOKUSDREIECKE IN DER PUPILLE FIXIERT · PHANTOME & NESTER ERWACHEN",
+  "stage.desc.4": "PURPURNE PULSAR-AURA ENTFESSELT · GEISTER & BOMBER JAGEN",
+  "stage.desc.5": "GOLDENE SPHÄREN KREISEN · DAS AUGE BRENNT · DU BIST DER GOTTKERN",
+  "boss.titan": "TITANENKNOTEN // {name}", "boss.echo": "ECHO {n} // {name}",
+  "boss.phase1": "PHASE I", "boss.phase2": "PHASE II // RASEND", "boss.form1": "FORM I", "boss.form2": "FORM II",
+  "boss.warn": "⚠ TITANENKNOTEN IM ANFLUG", "boss.warnEcho": "⚠ TITANEN-ECHO ERKANNT",
+  "boss.subGate": "{name} · AUFSTIEGSTOR {n}/5", "boss.subEcho": "{name} · RESONANZ {n}", "boss.twoForms": " · ZWEI FORMEN",
+  "boss.shell": "DER TITAN SPRENGT SEINE HÜLLE · ZWEITE FORM", "boss.enraged": "RASEND",
+  "boss.break": "GEBROCHEN!", "boss.deflected": "ABGEWEHRT!", "boss.shootBreak": "SCHIESSEN ZUM BRECHEN", "boss.shootDeflect": "SCHIESSEN ZUM ABWEHREN",
+  "float.shields": "SCHILDE AUFGELADEN", "float.comboLost": "COMBO VERLOREN", "float.growth": "KERNWACHSTUM +3% SCHADEN",
+  "float.overclockIn": " · OVERCLOCK IN {n}", "float.hintTouch": "STICK ZIEHEN ZUM ZIELEN & FEUERN", "float.hintMouse": "MIT DER MAUS ZIELEN · GEDRÜCKT HALTEN ZUM FEUERN",
+  "ban.echoTop": "// ECHO GETILGT", "ban.echo": "ÜBERLADUNG", "ban.echoSub": "+10% SCHADEN FÜR DIESEN RUN",
+  "ban.comboTop": "// COMBO ×{n}", "ban.overdrive": "OVERDRIVE", "ban.overdriveSub": "FEUERRATE +35% · SCHADEN +25%",
+  "ban.legTop": "// LEGENDÄRE WOGE", "ban.leg": "LEGENDÄR", "ban.legSub": "VOLLE REPARATUR · OVERDRIVE · NOVA +40%",
+  "cap.0": "> TITANENKNOTEN NEUTRALISIERT · KRITISCHE MASSE ERREICHT", "cap.1": "> SIGNALBRUCH // REALITÄTSEBENE KOLLABIERT",
+  "cap.2": "> AUFSTIEGSPROTOKOLL {n} — EINGELEITET", "cap.3": "> TAUCHGANG IN DIE PUPILLE ▓▓▓▓▓▒▒░░",
+  "cap.4": "> DURCHQUERE DEN EREIGNISHORIZONT", "cap.5": "> FORM FIXIERT: {stage}",
+  "asc.complete": "AUFSTIEG {n} // ABGESCHLOSSEN"
+},
+fr: {
+  "lang.name": "FRANÇAIS",
+  "hud.shards": "ÉCLATS", "hud.level": "NIVEAU", "hud.score": "SCORE", "hud.hull": "COQUE", "hud.shield": "BOUCLIER",
+  "hud.vol": "> PIC DE VOLATILITÉ DÉTECTÉ_", "hud.volSub": "// INTRUSION DE PROXIMITÉ · NOYAU EN DANGER",
+  "hud.hubBtn": "[ HUB D'AMÉLIORATION ]", "hud.stage": "NOYAU // {stage}", "hud.overclockIn": "◈ OVERCLOCK DANS {n} NIV",
+  "hud.combo": "{n} COMBO", "hud.overdrive": "SURRÉGIME", "hud.nova": "NOVA",
+  "aria.pause": "Pause", "aria.nova": "Salve Nova", "aria.sound": "Son", "aria.stick": "Viser et tirer",
+  "cine.skip": "TOUCHE POUR PASSER ▸▸",
+  "login.prompt": "> ENTRE TON INDICATIF D'OPÉRATEUR", "login.ph": "INDICATIF", "login.idle": "_en attente de liaison neuronale",
+  "login.btn": "[ S'AUTHENTIFIER ]", "login.lang": "⚙ LANGUE",
+  "login.err": "_erreur : l'indicatif requiert ≥ 2 caractères [A-Z 0-9 _ -]", "login.ok": "_liaison vérifiée. bienvenue, {name}",
+  "hub.sub": "CENTRE DE COMMANDEMENT", "hub.operator": "OPÉRATEUR", "hub.change": "CHANGER D'INDICATIF",
+  "hub.gLogin": "CONNEXION GOOGLE POUR PARTICIPER", "hub.verified": "✓ VÉRIFIÉ", "hub.signOut": "DÉCONNEXION",
+  "hub.noteOffline": "CLASSEMENT MONDIAL HORS LIGNE · PARTIE LOCALE", "hub.noteOn": "TES PARTIES SONT SIGNÉES AVEC CE COMPTE GOOGLE",
+  "hub.noteOff": "SEULES LES PARTIES CONNECTÉES COMPTENT AU CLASSEMENT MONDIAL", "hub.player": "JOUEUR",
+  "hub.pb": "RECORD PERSONNEL", "hub.bank": "BANQUE D'ÉCLATS", "hub.peak": "NIVEAU MAX", "hub.maxAsc": "ASCENSION MAX",
+  "hub.start": "[ LANCER LE COMBAT ]", "hub.shop": "HUB D'AMÉLIORATION ✦ LABO FX", "hub.settings": "⚙ PARAMÈTRES · LANGUE",
+  "hub.foot1": "VISÉE MANUELLE · JOYSTICK SUR MOBILE · MAINTIENS LA SOURIS SUR PC · ✸ NOVA UNE FOIS CHARGÉE",
+  "hub.foot2": "PORTES DES TITANS AUX NIV 10 · 25 · 50 · 75 · 150 · OVERCLOCK TOUS LES 3 NIV",
+  "hub.foot3": "UN NOYAU BRISÉ GARDE 75% DE SES AUGMENTS DE NOYAU · 90% SI TU DÉPASSES LE NIVEAU DE TA DERNIÈRE PARTIE · LES COMPÉTENCES NE SONT JAMAIS PERDUES",
+  "hub.foot4": "LES ENNEMIS SONT 15% PLUS FAIBLES JUSQU'AU NIV 50",
+  "hub.rules": "RÈGLES DU CONCOURS", "hub.privacy": "CONFIDENTIALITÉ",
+  "hub.pity": "✦ PROTOCOLE DE CONSOLATION ACTIF · −20% SUR TOUS LES AUGMENTS DE NOYAU · PREND FIN AVEC TA PROCHAINE PARTIE",
+  "hub.pbStreak": "RECORD PERSONNEL MANQUÉ {n}/3 FOIS DE SUITE · À 3 : −20% UNIQUE SUR LES AUGMENTS DE NOYAU",
+  "lb.global": "// TOP 5 MONDIAL", "lb.verified": "// TOP 5 VÉRIFIÉ", "lb.local": "// TOP 5 LOCAL", "lb.live": "EN DIRECT",
+  "lb.offlineLocal": "HORS LIGNE · LOCAL", "lb.localOnly": "LOCAL UNIQUEMENT", "lb.syncing": "SYNCHRO…",
+  "lb.syncingGlobal": "SYNCHRONISATION DES RECORDS MONDIAUX…", "lb.empty": "AUCUN COMBAT ENREGISTRÉ — SOIS LE PREMIER", "lb.lv": "NIV {n}",
+  "net.offline": "CLASSEMENT MONDIAL HORS LIGNE · ENREGISTRÉ EN LOCAL", "net.unranked": "PARTIE NON CLASSÉE",
+  "net.unrankedSign": "NON CLASSÉE · CONNECTE-TOI AVEC GOOGLE DANS LE HUB POUR PARTICIPER", "net.noScore": "AUCUN SCORE À ENVOYER",
+  "net.notReg": "PARTIE NON ENREGISTRÉE · VÉRIFIE TA CONNEXION", "net.rejected": "SCORE REFUSÉ", "net.uploadFail": "ÉCHEC DE L'ENVOI · {err}",
+  "net.verifying": "VÉRIFICATION DE LA PARTIE PAR LE SERVEUR…", "net.verified": "✓ VÉRIFIÉ · JOUEUR #{tag}",
+  "net.gFail": "ÉCHEC DE LA CONNEXION GOOGLE", "net.signInErr": "CONNEXION : {msg}",
+  "rej.RUN_TOO_SHORT": "PARTIE TROP COURTE POUR ÊTRE CLASSÉE", "rej.LEVEL_TOO_FAST": "REFUSÉ · NIVEAU TROP RAPIDE",
+  "rej.TOO_MANY_KILLS": "REFUSÉ · TROP D'ÉLIMINATIONS", "rej.SCORE_TOO_HIGH": "REFUSÉ · SCORE TROP ÉLEVÉ",
+  "rej.IMPOSSIBLE_STAGE": "REFUSÉ · ASCENSION IMPOSSIBLE", "rej.RUN_EXPIRED": "PARTIE EXPIRÉE · TROP LONGUE",
+  "rej.BAD_NAME": "REFUSÉ · INDICATIF INVALIDE", "rej.BAD_VALUES": "REFUSÉ · PARTIE INVALIDE",
+  "go.title": "NOYAU BRISÉ", "go.final": "SCORE FINAL", "go.level": "NIVEAU", "go.asc": "ASCENSION", "go.kills": "ÉLIMINATIONS",
+  "go.combo": "MEILLEUR COMBO", "go.shards": "ÉCLATS RÉCUPÉRÉS", "go.retry": "[ REDÉPLOYER ]", "go.hub": "RETOUR AU CENTRE DE COMMANDEMENT",
+  "go.recGlobal": "★ NOUVEAU RECORD · MONDIAL #{n} ★", "go.recPersonal": "★ NOUVEAU RECORD PERSONNEL ★",
+  "go.rankGlobal": "CLASSÉ #{n} MONDIAL", "go.rankLocal": "CLASSÉ #{n} AU CLASSEMENT LOCAL",
+  "go.decayHead": "// DÉCLIN NEURONAL — {pct}% DE TES AUGMENTS DE NOYAU SURVIVENT",
+  "go.decayBest": "▲ NIV {lv} BAT TA DERNIÈRE PARTIE (NIV {prev}) · 90% CONSERVÉS",
+  "go.decayNone": "AUCUN AUGMENT DE NOYAU PERDU",
+  "go.skillsKept": "✓ LES COMPÉTENCES RESTENT INSTALLÉES · ORBES · LANCIERS · FEUX FOLLETS · NOVA",
+  "go.pbReset": "★ RECORD PERSONNEL BATTU · SÉRIE D'ÉCHECS REMISE À ZÉRO",
+  "go.pbMiss": "RECORD PERSONNEL MANQUÉ {n}/3 FOIS DE SUITE", "go.pbMissMore": "RECORD PERSONNEL MANQUÉ {n}× DE SUITE",
+  "go.pity": "✦ PROTOCOLE DE CONSOLATION : −20% UNIQUE SUR TOUS LES AUGMENTS DE NOYAU · PREND FIN AVEC TA PROCHAINE PARTIE",
+  "pause.title": "PAUSE", "pause.sub": "SIMULATION FIGÉE", "pause.resume": "[ REPRENDRE ]", "pause.abort": "ABANDONNER LA PARTIE", "pause.settings": "⚙ PARAMÈTRES",
+  "set.title": "PARAMÈTRES", "set.sub": "CONFIGURATION SYSTÈME", "set.lang": "// LANGUE", "set.audio": "// AUDIO", "set.controls": "// COMMANDES",
+  "set.back": "[ RETOUR ]", "set.sfx": "EFFETS : {v}", "set.music": "MUSIQUE : {v}", "set.assist": "AIDE À LA VISÉE : {v}",
+  "set.on": "ACTIVÉ", "set.off": "DÉSACTIVÉ", "set.langSet": "LANGUE : FRANÇAIS",
+  "draft.tag": "// OVERCLOCK SYSTÈME", "draft.level": "NIVEAU", "draft.reveal": "[ RÉVÉLER ]",
+  "draft.hintUnstable": "⚡ TOUCHE LES CARTES INSTABLES POUR SURCHARGER LEUR RARETÉ · PUIS RÉVÈLE", "draft.hintTap": "TOUCHE UNE CARTE OU RÉVÈLE",
+  "draft.select": "CHOISIS UNE AUGMENTATION", "draft.unstable": "⚡ INSTABLE<br>TOUCHE POUR SURCHARGER", "draft.legendary": "★ LÉGENDAIRE ★",
+  "draft.stabilized": "STABILISÉE", "draft.surge": "+ DÉFERLEMENT : réparation totale · surrégime · nova",
+  "rar.0": "COMMUNE", "rar.1": "PEU COMMUNE", "rar.2": "ÉPIQUE", "rar.3": "LÉGENDAIRE",
+  "card.lv": "+{n} NIV", "card.tier": "RANG {n}", "card.form": "{n}× FORME {name}", "card.formOne": "FORME {name}",
+  "card.orb": "{n} ORBE · FORME {tier}", "card.orbs": "{n} ORBES · FORME {tier}",
+  "card.dmg.name": "AMPLIFICATEUR PLASMA", "card.dmg.stat": "DÉGÂTS", "card.dmg.ds": "Multiplie les dégâts des projectiles du noyau. Ton plasma s'épaissit.",
+  "card.rate.name": "OVERCLOCK CYCLIQUE", "card.rate.stat": "CADENCE DE TIR", "card.rate.ds": "Accélère le cycle de tir de l'émetteur.",
+  "card.shield.name": "TREILLIS AEGIS", "card.shield.stat": "BOUCLIER MAX", "card.shield.ds": "Étend la matrice du bouclier et la recharge entièrement.",
+  "card.multi.name": "ÉMETTEUR DIVISÉ", "card.multi.stat": "TIR MULTIPLE", "card.multi.ds": "Tire des projectiles supplémentaires en éventail.",
+  "card.crit.name": "CIBLAGE NEURONAL", "card.crit.stat": "CHANCE DE CRITIQUE", "card.crit.ds": "Les critiques infligent 2× (2,5× au-delà de 30%). Des étincelles dorées orbitent autour du noyau.",
+  "card.pierce.name": "PÉNÉTRATEUR RAIL", "card.pierce.stat": "PERFORATION", "card.pierce.ds": "Les projectiles transpercent des cibles supplémentaires avec des queues de comète.",
+  "card.chain.name": "CONDUCTEUR D'ARC", "card.chain.stat": "ÉCLAIR EN CHAÎNE", "card.chain.ds": "Les tirs peuvent projeter un éclair sur 2 ennemis proches.",
+  "card.orb.name": "ORBES SENTINELLES", "card.orb.stat": "COMPAGNON", "card.orb.ds": "Orbes à tir automatique (max 5) qui évoluent tous les 2 niveaux.",
+  "card.lancer.name": "LANCIERS STELLAIRES", "card.lancer.stat": "COMPAGNON", "card.lancer.ds": "De petites étoiles sur l'orbite extérieure tirent des lances perforantes (max 3).",
+  "card.wisp.name": "FEUX FOLLETS D'ARC", "card.wisp.stat": "COMPAGNON", "card.wisp.ds": "Des étoiles crépitantes foudroient les ennemis proches d'éclairs en chaîne (max 3).",
+  "card.aegis.name": "PARTICULES AEGIS", "card.aegis.stat": "COMPAGNON", "card.aegis.ds": "Des particules gardiennes tournent tout près et abattent les tirs ennemis (max 4).",
+  "card.hull.name": "NANO-RÉGÉNÉRATION", "card.hull.stat": "COQUE MAX", "card.hull.ds": "Renforce la coque et la répare d'autant.",
+  "card.nova.name": "CONDENSATEUR NOVA", "card.nova.stat": "CHARGE NOVA", "card.nova.ds": "La salve Nova se charge plus vite.",
+  "card.star.name": "ÉTOILE SUPERNOVA", "card.star.stat": "COMPAGNON LÉGENDAIRE", "card.star.ds": "Une étoile dorée flamboyante rejoint ton orbite et lance des fusées explosives. Chaque copie légendaire la fait évoluer.",
+  "orb.1": "traits de plasma simples", "orb.2": "traits prismatiques plus rapides", "orb.3": "tirs doubles + halo de lumière", "orb.4": "lances pulsar perforantes", "orb.5": "fusées solaires à tête chercheuse",
+  "shop.sub": "// AUGMENTS · COMPÉTENCES · FX", "shop.title": "HUB D'AMÉLIORATION", "shop.bank": "BANQUE D'ÉCLATS",
+  "shop.tabCore": "NOYAU", "shop.tabSkills": "COMPÉTENCES", "shop.tabFx": "LABO FX",
+  "shop.return": "[ RETOUR AU COMBAT ]", "shop.close": "[ FERMER ]",
+  "shop.repair": "RÉPARATION D'URGENCE", "shop.repairDesc": "Restaure instantanément ta coque à 100% (cette partie seulement)", "shop.repaired": "COQUE ENTIÈREMENT RESTAURÉE",
+  "shop.pity": "✦ PROTOCOLE DE CONSOLATION · −20% SUR TOUS LES AUGMENTS DE NOYAU",
+  "shop.grpCore": "// AUGMENTS DE NOYAU PERMANENTS", "shop.grpSkills": "// COMPÉTENCES ACTIVES & AUTONOMES · JAMAIS PERDUES",
+  "shop.grpShot": "// SKINS DE PROJECTILES", "shop.grpKill": "// EFFETS D'ÉLIMINATION",
+  "shop.lv": "NIV {n}", "shop.max": "MAX", "shop.maxed": "MAXIMUM", "shop.next": "SUIVANT", "shop.maxOrbs": "MAXIMUM · 5 ORBES SOLAIRES",
+  "shop.equipped": "ÉQUIPÉ", "shop.equip": "ÉQUIPER", "shop.unlocked": "{name} DÉBLOQUÉ", "shop.bought": "{name} → NIV {n}",
+  "up.dmg.name": "DÉGÂTS DU NOYAU", "up.dmg.desc": "+8% de dégâts de base des projectiles",
+  "up.rate.name": "CYCLE DE TIR", "up.rate.desc": "+6% de cadence de tir de base",
+  "up.hull.name": "INTÉGRITÉ DE LA COQUE", "up.hull.desc": "+15 de coque max",
+  "up.shield.name": "MATRICE DE BOUCLIER", "up.shield.desc": "+10 de bouclier max",
+  "up.regen.name": "CONDENSATEUR DE RÉGÉNÉRATION", "up.regen.desc": "+1,5 bouclier / s",
+  "up.crit.name": "SUITE DE CIBLAGE", "up.crit.desc": "+2% de chance de coup critique",
+  "up.magnet.name": "AIMANT À ÉCLATS", "up.magnet.desc": "+18% de portée de ramassage",
+  "up.speed.name": "VÉLOCITÉ RAIL", "up.speed.desc": "+6% de vitesse des projectiles",
+  "up.luck.name": "MOTEUR DE FORTUNE", "up.luck.desc": "Plus de cartes épiques & légendaires, plus de cartes instables",
+  "up.yield.name": "RAFFINERIE D'ÉCLATS", "up.yield.desc": "+10% d'éclats à chaque ramassage",
+  "up.orb.name": "ORBES SENTINELLES", "up.orb.desc": "Orbes à tir automatique. +1 orbe par niveau (max 5) · nouvelle forme tous les 2 niveaux",
+  "up.lancer.name": "LANCIERS STELLAIRES", "up.lancer.desc": "Petites étoiles lanceuses de lances sur l'orbite extérieure (max 3) · elles évoluent avec leur niveau",
+  "up.wisp.name": "FEUX FOLLETS D'ARC", "up.wisp.desc": "Étoiles crépitantes à éclairs en chaîne (max 3) · évoluent avec le niveau",
+  "up.novaPow.name": "AMPLITUDE NOVA", "up.novaPow.desc": "+20% de puissance de la salve Nova · base : anéantit tous les ennemis & arrache 30% des PV max d'un Titan",
+  "up.novaCharge.name": "RÉACTEUR NOVA", "up.novaCharge.desc": "+12% de vitesse de charge Nova",
+  "skin.plasma.name": "TRAÎNÉE PLASMA", "skin.plasma.desc": "Plasma de noyau réglementaire, teinté selon l'ascension",
+  "skin.prism.name": "LANCE PRISMATIQUE", "skin.prism.desc": "Lances tricolores réfractées à traînées scintillantes",
+  "skin.inferno.name": "RAIL INFERNAL", "skin.inferno.desc": "Projectiles en fusion qui sèment des braises",
+  "skin.void.name": "AIGUILLE DU VIDE", "skin.void.desc": "Aiguilles de matière noire enveloppées d'une distorsion violette",
+  "skin.solar.name": "LANCE SOLAIRE", "skin.solar.desc": "Feu divin doré aux cœurs chauffés à blanc",
+  "skin.burst.name": "EXPLOSION NÉON", "skin.burst.desc": "Explosion de particules néon classique",
+  "skin.glitch.name": "GLITCH POP", "skin.glitch.desc": "Les ennemis se désintègrent en bruit de pixels RVB",
+  "skin.supernova.name": "SUPERNOVA", "skin.supernova.desc": "Rayons stellaires et anneau aveuglant",
+  "skin.singularity.name": "SINGULARITÉ", "skin.singularity.desc": "Les ennemis implosent en micro trous noirs",
+  "stage.0": "DORMANT", "stage.1": "ÉVEIL", "stage.2": "ÉTOILE DÉFENSIVE", "stage.3": "NOYAU DE FOCUS", "stage.4": "PULSATION VOLATILE", "stage.5": "NOYAU DIVIN",
+  "stage.desc.1": "ANNEAUX TECH EN LIGNE · +12% DE DÉGÂTS · TISSEURS & DIVISEURS DÉTECTÉS",
+  "stage.desc.2": "BOUCLIER STELLAIRE GÉOMÉTRIQUE DÉPLOYÉ · LANCIERS & REMPARTS EN APPROCHE",
+  "stage.desc.3": "TRIANGLES DE FOCUS VERROUILLÉS DANS LA PUPILLE · FANTÔMES & RUCHES S'ÉVEILLENT",
+  "stage.desc.4": "AURA PULSAR CRAMOISIE DÉCHAÎNÉE · SPECTRES & BOMBARDIERS EN CHASSE",
+  "stage.desc.5": "SPHÈRES DORÉES EN ORBITE · L'ŒIL BRÛLE · TU ES LE NOYAU DIVIN",
+  "boss.titan": "NŒUD TITAN // {name}", "boss.echo": "ÉCHO {n} // {name}",
+  "boss.phase1": "PHASE I", "boss.phase2": "PHASE II // ENRAGÉ", "boss.form1": "FORME I", "boss.form2": "FORME II",
+  "boss.warn": "⚠ NŒUD TITAN EN APPROCHE", "boss.warnEcho": "⚠ ÉCHO DE TITAN DÉTECTÉ",
+  "boss.subGate": "{name} · PORTE D'ASCENSION {n}/5", "boss.subEcho": "{name} · RÉSONANCE {n}", "boss.twoForms": " · DEUX FORMES",
+  "boss.shell": "LE TITAN BRISE SA CARAPACE · SECONDE FORME", "boss.enraged": "ENRAGÉ",
+  "boss.break": "BRISÉ !", "boss.deflected": "DÉVIÉ !", "boss.shootBreak": "TIRE POUR BRISER", "boss.shootDeflect": "TIRE POUR DÉVIER",
+  "float.shields": "BOUCLIERS RECHARGÉS", "float.comboLost": "COMBO PERDU", "float.growth": "CROISSANCE DU NOYAU +3% DÉGÂTS",
+  "float.overclockIn": " · OVERCLOCK DANS {n}", "float.hintTouch": "GLISSE LE STICK POUR VISER & TIRER", "float.hintMouse": "VISE AVEC LA SOURIS · MAINTIENS POUR TIRER",
+  "ban.echoTop": "// ÉCHO PURGÉ", "ban.echo": "SURCHARGE", "ban.echoSub": "+10% DE DÉGÂTS POUR CETTE PARTIE",
+  "ban.comboTop": "// COMBO ×{n}", "ban.overdrive": "SURRÉGIME", "ban.overdriveSub": "CADENCE +35% · DÉGÂTS +25%",
+  "ban.legTop": "// DÉFERLEMENT LÉGENDAIRE", "ban.leg": "LÉGENDAIRE", "ban.legSub": "RÉPARATION TOTALE · SURRÉGIME · NOVA +40%",
+  "cap.0": "> NŒUD TITAN NEUTRALISÉ · MASSE CRITIQUE ATTEINTE", "cap.1": "> RUPTURE DU SIGNAL // LA COUCHE DE RÉALITÉ S'EFFONDRE",
+  "cap.2": "> PROTOCOLE D'ASCENSION {n} — LANCÉ", "cap.3": "> PLONGÉE DANS LA PUPILLE ▓▓▓▓▓▒▒░░",
+  "cap.4": "> FRANCHISSEMENT DE L'HORIZON DES ÉVÉNEMENTS", "cap.5": "> FORME VERROUILLÉE : {stage}",
+  "asc.complete": "ASCENSION {n} // TERMINÉE"
+},
+es: {
+  "lang.name": "ESPAÑOL",
+  "hud.shards": "FRAGMENTOS", "hud.level": "NIVEL", "hud.score": "PUNTOS", "hud.hull": "CASCO", "hud.shield": "ESCUDO",
+  "hud.vol": "> PICO DE VOLATILIDAD DETECTADO_", "hud.volSub": "// BRECHA DE PROXIMIDAD · NÚCLEO EN PELIGRO",
+  "hud.hubBtn": "[ CENTRO DE MEJORAS ]", "hud.stage": "NÚCLEO // {stage}", "hud.overclockIn": "◈ OVERCLOCK EN {n} NV",
+  "hud.combo": "{n} COMBO", "hud.overdrive": "FRENESÍ", "hud.nova": "NOVA",
+  "aria.pause": "Pausa", "aria.nova": "Estallido Nova", "aria.sound": "Sonido", "aria.stick": "Apuntar y disparar",
+  "cine.skip": "TOCA PARA SALTAR ▸▸",
+  "login.prompt": "> INTRODUCE TU INDICATIVO DE OPERADOR", "login.ph": "INDICATIVO", "login.idle": "_esperando enlace neuronal",
+  "login.btn": "[ AUTENTICAR ]", "login.lang": "⚙ IDIOMA",
+  "login.err": "_error: el indicativo requiere ≥ 2 caracteres [A-Z 0-9 _ -]", "login.ok": "_enlace verificado. bienvenido, {name}",
+  "hub.sub": "CENTRO DE MANDO", "hub.operator": "OPERADOR", "hub.change": "CAMBIAR INDICATIVO",
+  "hub.gLogin": "INICIA SESIÓN CON GOOGLE PARA COMPETIR", "hub.verified": "✓ VERIFICADO", "hub.signOut": "CERRAR SESIÓN",
+  "hub.noteOffline": "CLASIFICACIÓN GLOBAL SIN CONEXIÓN · JUGANDO EN LOCAL", "hub.noteOn": "TUS PARTIDAS ESTÁN FIRMADAS CON ESTA CUENTA DE GOOGLE",
+  "hub.noteOff": "SOLO LAS PARTIDAS CON SESIÓN INICIADA ENTRAN EN LA CLASIFICACIÓN GLOBAL", "hub.player": "JUGADOR",
+  "hub.pb": "RÉCORD PERSONAL", "hub.bank": "BANCO DE FRAGMENTOS", "hub.peak": "NIVEL MÁXIMO", "hub.maxAsc": "ASCENSIÓN MÁXIMA",
+  "hub.start": "[ INICIAR COMBATE ]", "hub.shop": "CENTRO DE MEJORAS ✦ LAB FX", "hub.settings": "⚙ AJUSTES · IDIOMA",
+  "hub.foot1": "PUNTERÍA MANUAL · JOYSTICK EN MÓVIL · MANTÉN PULSADO EL RATÓN EN PC · ✸ NOVA CUANDO ESTÉ CARGADA",
+  "hub.foot2": "PUERTAS DE TITÁN EN NV 10 · 25 · 50 · 75 · 150 · OVERCLOCK CADA 3 NV",
+  "hub.foot3": "UN NÚCLEO DESTRUIDO CONSERVA EL 75% DE SUS MEJORAS DE NÚCLEO · EL 90% SI SUPERAS EL NIVEL DE TU ÚLTIMA PARTIDA · LAS HABILIDADES NUNCA SE PIERDEN",
+  "hub.foot4": "LOS ENEMIGOS SON UN 15% MÁS DÉBILES HASTA EL NV 50",
+  "hub.rules": "BASES DEL SORTEO", "hub.privacy": "PRIVACIDAD",
+  "hub.pity": "✦ PROTOCOLO DE CONSUELO ACTIVO · −20% EN TODAS LAS MEJORAS DE NÚCLEO · TERMINA CON TU PRÓXIMA PARTIDA",
+  "hub.pbStreak": "RÉCORD PERSONAL FALLADO {n}/3 VECES SEGUIDAS · A LAS 3: −20% ÚNICO EN MEJORAS DE NÚCLEO",
+  "lb.global": "// TOP 5 GLOBAL", "lb.verified": "// TOP 5 VERIFICADO", "lb.local": "// TOP 5 LOCAL", "lb.live": "EN VIVO",
+  "lb.offlineLocal": "SIN CONEXIÓN · LOCAL", "lb.localOnly": "SOLO LOCAL", "lb.syncing": "SINCRONIZANDO…",
+  "lb.syncingGlobal": "SINCRONIZANDO RÉCORDS GLOBALES…", "lb.empty": "SIN REGISTROS DE COMBATE — SÉ EL PRIMERO", "lb.lv": "NV {n}",
+  "net.offline": "CLASIFICACIÓN GLOBAL SIN CONEXIÓN · GUARDADO EN LOCAL", "net.unranked": "PARTIDA SIN CLASIFICAR",
+  "net.unrankedSign": "SIN CLASIFICAR · INICIA SESIÓN CON GOOGLE EN EL CENTRO DE MANDO PARA COMPETIR", "net.noScore": "NO HAY PUNTUACIÓN QUE ENVIAR",
+  "net.notReg": "PARTIDA NO REGISTRADA · REVISA LA CONEXIÓN", "net.rejected": "PUNTUACIÓN RECHAZADA", "net.uploadFail": "ERROR AL SUBIR · {err}",
+  "net.verifying": "EL SERVIDOR ESTÁ VERIFICANDO LA PARTIDA…", "net.verified": "✓ VERIFICADO · JUGADOR #{tag}",
+  "net.gFail": "ERROR AL INICIAR SESIÓN CON GOOGLE", "net.signInErr": "INICIO DE SESIÓN: {msg}",
+  "rej.RUN_TOO_SHORT": "PARTIDA DEMASIADO CORTA PARA CLASIFICAR", "rej.LEVEL_TOO_FAST": "RECHAZADA · NIVEL DEMASIADO RÁPIDO",
+  "rej.TOO_MANY_KILLS": "RECHAZADA · DEMASIADAS BAJAS", "rej.SCORE_TOO_HIGH": "RECHAZADA · PUNTUACIÓN DEMASIADO ALTA",
+  "rej.IMPOSSIBLE_STAGE": "RECHAZADA · ASCENSIÓN IMPOSIBLE", "rej.RUN_EXPIRED": "PARTIDA CADUCADA · DEMASIADO LARGA",
+  "rej.BAD_NAME": "RECHAZADA · INDICATIVO NO VÁLIDO", "rej.BAD_VALUES": "RECHAZADA · PARTIDA NO VÁLIDA",
+  "go.title": "NÚCLEO DESTRUIDO", "go.final": "PUNTUACIÓN FINAL", "go.level": "NIVEL", "go.asc": "ASCENSIÓN", "go.kills": "BAJAS",
+  "go.combo": "MEJOR COMBO", "go.shards": "FRAGMENTOS RECUPERADOS", "go.retry": "[ REDESPLEGAR ]", "go.hub": "VOLVER AL CENTRO DE MANDO",
+  "go.recGlobal": "★ NUEVO RÉCORD · GLOBAL #{n} ★", "go.recPersonal": "★ NUEVO RÉCORD PERSONAL ★",
+  "go.rankGlobal": "PUESTO #{n} GLOBAL", "go.rankLocal": "PUESTO #{n} EN LA CLASIFICACIÓN LOCAL",
+  "go.decayHead": "// DEGRADACIÓN NEURONAL — SOBREVIVE EL {pct}% DE TUS MEJORAS DE NÚCLEO",
+  "go.decayBest": "▲ NV {lv} SUPERA TU ÚLTIMA PARTIDA (NV {prev}) · SE CONSERVA EL 90%",
+  "go.decayNone": "NO SE PERDIÓ NINGUNA MEJORA DE NÚCLEO",
+  "go.skillsKept": "✓ LAS HABILIDADES SIGUEN INSTALADAS · ORBES · LANCEROS · FUEGOS FATUOS · NOVA",
+  "go.pbReset": "★ RÉCORD PERSONAL SUPERADO · RACHA DE FALLOS REINICIADA",
+  "go.pbMiss": "RÉCORD PERSONAL FALLADO {n}/3 VECES SEGUIDAS", "go.pbMissMore": "RÉCORD PERSONAL FALLADO {n}× SEGUIDAS",
+  "go.pity": "✦ PROTOCOLO DE CONSUELO: −20% ÚNICO EN TODAS LAS MEJORAS DE NÚCLEO · TERMINA CON TU PRÓXIMA PARTIDA",
+  "pause.title": "EN PAUSA", "pause.sub": "SIMULACIÓN CONGELADA", "pause.resume": "[ REANUDAR ]", "pause.abort": "ABANDONAR PARTIDA", "pause.settings": "⚙ AJUSTES",
+  "set.title": "AJUSTES", "set.sub": "CONFIGURACIÓN DEL SISTEMA", "set.lang": "// IDIOMA", "set.audio": "// AUDIO", "set.controls": "// CONTROLES",
+  "set.back": "[ VOLVER ]", "set.sfx": "EFECTOS: {v}", "set.music": "MÚSICA: {v}", "set.assist": "AYUDA DE PUNTERÍA: {v}",
+  "set.on": "SÍ", "set.off": "NO", "set.langSet": "IDIOMA: ESPAÑOL",
+  "draft.tag": "// OVERCLOCK DEL SISTEMA", "draft.level": "NIVEL", "draft.reveal": "[ REVELAR ]",
+  "draft.hintUnstable": "⚡ TOCA LAS CARTAS INESTABLES PARA SOBRECARGAR SU RAREZA · LUEGO REVELA", "draft.hintTap": "TOCA UNA CARTA O REVELA",
+  "draft.select": "ELIGE UNA MEJORA", "draft.unstable": "⚡ INESTABLE<br>TOCA PARA SOBRECARGAR", "draft.legendary": "★ LEGENDARIA ★",
+  "draft.stabilized": "ESTABILIZADA", "draft.surge": "+ OLEADA: reparación total · frenesí · nova",
+  "rar.0": "COMÚN", "rar.1": "POCO COMÚN", "rar.2": "ÉPICA", "rar.3": "LEGENDARIA",
+  "card.lv": "+{n} NV", "card.tier": "GRADO {n}", "card.form": "{n}× FORMA {name}", "card.formOne": "FORMA {name}",
+  "card.orb": "{n} ORBE · FORMA {tier}", "card.orbs": "{n} ORBES · FORMA {tier}",
+  "card.dmg.name": "AMPLIFICADOR DE PLASMA", "card.dmg.stat": "DAÑO", "card.dmg.ds": "Multiplica el daño de los proyectiles del núcleo. Tu plasma se vuelve más denso.",
+  "card.rate.name": "OVERCLOCK CÍCLICO", "card.rate.stat": "CADENCIA", "card.rate.ds": "Acelera el ciclo de disparo del emisor.",
+  "card.shield.name": "RETÍCULA ÉGIDA", "card.shield.stat": "ESCUDO MÁX.", "card.shield.ds": "Amplía la matriz del escudo y la recarga por completo.",
+  "card.multi.name": "EMISOR DIVIDIDO", "card.multi.stat": "DISPARO MÚLTIPLE", "card.multi.ds": "Dispara proyectiles adicionales en abanico.",
+  "card.crit.name": "PUNTERÍA NEURAL", "card.crit.stat": "PROB. DE CRÍTICO", "card.crit.ds": "Los críticos hacen 2× (2,5× por encima del 30%). Chispas doradas orbitan el núcleo.",
+  "card.pierce.name": "PENETRADOR DE RIEL", "card.pierce.stat": "PERFORACIÓN", "card.pierce.ds": "Los proyectiles atraviesan objetivos extra con estelas de cometa.",
+  "card.chain.name": "CONDUCTOR DE ARCO", "card.chain.stat": "RAYO EN CADENA", "card.chain.ds": "Los impactos pueden lanzar rayos a 2 enemigos cercanos.",
+  "card.orb.name": "ORBES CENTINELA", "card.orb.stat": "COMPAÑERO", "card.orb.ds": "Orbes de disparo automático (máx. 5) que evolucionan cada 2 niveles.",
+  "card.lancer.name": "LANCEROS ESTELARES", "card.lancer.stat": "COMPAÑERO", "card.lancer.ds": "Pequeñas estrellas en la órbita exterior disparan lanzas perforantes (máx. 3).",
+  "card.wisp.name": "FUEGOS FATUOS DE ARCO", "card.wisp.stat": "COMPAÑERO", "card.wisp.ds": "Estrellas chisporroteantes que lanzan rayos en cadena a enemigos cercanos (máx. 3).",
+  "card.aegis.name": "MOTAS ÉGIDA", "card.aegis.stat": "COMPAÑERO", "card.aegis.ds": "Motas guardianas giran muy cerca y derriban el fuego enemigo (máx. 4).",
+  "card.hull.name": "NANORREGÉNESIS", "card.hull.stat": "CASCO MÁX.", "card.hull.ds": "Refuerza el casco y lo repara en la misma cantidad.",
+  "card.nova.name": "CONDENSADOR NOVA", "card.nova.stat": "CARGA NOVA", "card.nova.ds": "El Estallido Nova se carga más rápido.",
+  "card.star.name": "ESTRELLA SUPERNOVA", "card.star.stat": "COMPAÑERO LEGENDARIO", "card.star.ds": "Una estrella dorada en llamas se une a tu órbita y lanza bengalas explosivas. Cada copia legendaria la hace evolucionar.",
+  "orb.1": "rayos de plasma simples", "orb.2": "rayos prismáticos más rápidos", "orb.3": "disparos dobles + halo de luz", "orb.4": "lanzas púlsar perforantes", "orb.5": "bengalas solares teledirigidas",
+  "shop.sub": "// MEJORAS · HABILIDADES · FX", "shop.title": "CENTRO DE MEJORAS", "shop.bank": "BANCO DE FRAGMENTOS",
+  "shop.tabCore": "NÚCLEO", "shop.tabSkills": "HABILIDADES", "shop.tabFx": "LAB FX",
+  "shop.return": "[ VOLVER AL COMBATE ]", "shop.close": "[ CERRAR ]",
+  "shop.repair": "REPARACIÓN DE EMERGENCIA", "shop.repairDesc": "Restaura tu casco al 100% al instante (solo esta partida)", "shop.repaired": "CASCO TOTALMENTE RESTAURADO",
+  "shop.pity": "✦ PROTOCOLO DE CONSUELO · −20% EN TODAS LAS MEJORAS DE NÚCLEO",
+  "shop.grpCore": "// MEJORAS DE NÚCLEO PERMANENTES", "shop.grpSkills": "// HABILIDADES ACTIVAS Y AUTÓNOMAS · NUNCA SE PIERDEN",
+  "shop.grpShot": "// ASPECTOS DE PROYECTIL", "shop.grpKill": "// EFECTOS DE ELIMINACIÓN",
+  "shop.lv": "NV {n}", "shop.max": "MÁX", "shop.maxed": "AL MÁXIMO", "shop.next": "SIGUIENTE", "shop.maxOrbs": "AL MÁXIMO · 5 ORBES SOLARES",
+  "shop.equipped": "EQUIPADO", "shop.equip": "EQUIPAR", "shop.unlocked": "{name} DESBLOQUEADO", "shop.bought": "{name} → NV {n}",
+  "up.dmg.name": "DAÑO DEL NÚCLEO", "up.dmg.desc": "+8% de daño base de los proyectiles",
+  "up.rate.name": "CICLO DE DISPARO", "up.rate.desc": "+6% de cadencia base",
+  "up.hull.name": "INTEGRIDAD DEL CASCO", "up.hull.desc": "+15 de casco máx.",
+  "up.shield.name": "MATRIZ DE ESCUDO", "up.shield.desc": "+10 de escudo máx.",
+  "up.regen.name": "CONDENSADOR DE REGENERACIÓN", "up.regen.desc": "+1,5 de escudo / s",
+  "up.crit.name": "SISTEMA DE PUNTERÍA", "up.crit.desc": "+2% de probabilidad de crítico",
+  "up.magnet.name": "IMÁN DE FRAGMENTOS", "up.magnet.desc": "+18% de alcance de recogida",
+  "up.speed.name": "VELOCIDAD DE RIEL", "up.speed.desc": "+6% de velocidad de proyectil",
+  "up.luck.name": "MOTOR DE FORTUNA", "up.luck.desc": "Más cartas épicas y legendarias, más cartas inestables",
+  "up.yield.name": "REFINERÍA DE FRAGMENTOS", "up.yield.desc": "+10% de fragmentos en cada recogida",
+  "up.orb.name": "ORBES CENTINELA", "up.orb.desc": "Orbes de disparo automático. +1 orbe por nivel (máx. 5) · nueva forma cada 2 niveles",
+  "up.lancer.name": "LANCEROS ESTELARES", "up.lancer.desc": "Pequeñas estrellas lanzadoras en la órbita exterior (máx. 3) · evolucionan al subirlas de nivel",
+  "up.wisp.name": "FUEGOS FATUOS DE ARCO", "up.wisp.desc": "Estrellas chisporroteantes con rayos en cadena (máx. 3) · evolucionan con el nivel",
+  "up.novaPow.name": "AMPLITUD NOVA", "up.novaPow.desc": "+20% de potencia del Estallido Nova · base: arrasa a todos los enemigos y arranca el 30% de la vida máx. de un Titán",
+  "up.novaCharge.name": "REACTOR NOVA", "up.novaCharge.desc": "+12% de velocidad de carga Nova",
+  "skin.plasma.name": "ESTELA DE PLASMA", "skin.plasma.desc": "Plasma de núcleo reglamentario, teñido según la ascensión",
+  "skin.prism.name": "LANZA PRISMA", "skin.prism.desc": "Lanzas tricolor refractadas con estelas brillantes",
+  "skin.inferno.name": "RIEL INFERNAL", "skin.inferno.desc": "Proyectiles fundidos que sueltan brasas ardientes",
+  "skin.void.name": "AGUJA DEL VACÍO", "skin.void.desc": "Agujas de materia oscura envueltas en distorsión violeta",
+  "skin.solar.name": "LANZA SOLAR", "skin.solar.desc": "Fuego divino dorado con núcleos al rojo blanco",
+  "skin.burst.name": "ESTALLIDO NEÓN", "skin.burst.desc": "Clásica explosión de partículas de neón",
+  "skin.glitch.name": "GLITCH POP", "skin.glitch.desc": "Los enemigos se desintegran en ruido de píxeles RGB",
+  "skin.supernova.name": "SUPERNOVA", "skin.supernova.desc": "Rayos estelares y un anillo cegador",
+  "skin.singularity.name": "SINGULARIDAD", "skin.singularity.desc": "Los enemigos implosionan en microagujeros negros",
+  "stage.0": "LATENTE", "stage.1": "DESPERTAR", "stage.2": "ESTRELLA DEFENSIVA", "stage.3": "NÚCLEO DE ENFOQUE", "stage.4": "PULSO VOLÁTIL", "stage.5": "NÚCLEO DIVINO",
+  "stage.desc.1": "ANILLOS TECNOLÓGICOS ACTIVOS · +12% DE DAÑO · TEJEDORES Y DIVISORES DETECTADOS",
+  "stage.desc.2": "ESCUDO ESTELAR GEOMÉTRICO DESPLEGADO · LANCEROS Y BALUARTES EN CAMINO",
+  "stage.desc.3": "TRIÁNGULOS DE ENFOQUE FIJADOS EN LA PUPILA · DESPIERTAN FANTASMAS Y COLMENAS",
+  "stage.desc.4": "AURA PÚLSAR CARMESÍ DESATADA · ESPECTROS Y BOMBARDEROS AL ACECHO",
+  "stage.desc.5": "ESFERAS DORADAS EN ÓRBITA · EL OJO ARDE · ERES EL NÚCLEO DIVINO",
+  "boss.titan": "NODO TITÁN // {name}", "boss.echo": "ECO {n} // {name}",
+  "boss.phase1": "FASE I", "boss.phase2": "FASE II // ENFURECIDO", "boss.form1": "FORMA I", "boss.form2": "FORMA II",
+  "boss.warn": "⚠ NODO TITÁN EN CAMINO", "boss.warnEcho": "⚠ ECO DE TITÁN DETECTADO",
+  "boss.subGate": "{name} · PUERTA DE ASCENSIÓN {n}/5", "boss.subEcho": "{name} · RESONANCIA {n}", "boss.twoForms": " · DOS FORMAS",
+  "boss.shell": "EL TITÁN SE DESPRENDE DE SU CORAZA · SEGUNDA FORMA", "boss.enraged": "ENFURECIDO",
+  "boss.break": "¡ROTO!", "boss.deflected": "¡DESVIADO!", "boss.shootBreak": "DISPARA PARA ROMPER", "boss.shootDeflect": "DISPARA PARA DESVIAR",
+  "float.shields": "ESCUDOS RECARGADOS", "float.comboLost": "COMBO PERDIDO", "float.growth": "CRECIMIENTO DEL NÚCLEO +3% DAÑO",
+  "float.overclockIn": " · OVERCLOCK EN {n}", "float.hintTouch": "ARRASTRA EL STICK PARA APUNTAR Y DISPARAR", "float.hintMouse": "APUNTA CON EL RATÓN · MANTÉN PULSADO PARA DISPARAR",
+  "ban.echoTop": "// ECO PURGADO", "ban.echo": "SOBRECARGA", "ban.echoSub": "+10% DE DAÑO EN ESTA PARTIDA",
+  "ban.comboTop": "// COMBO ×{n}", "ban.overdrive": "FRENESÍ", "ban.overdriveSub": "CADENCIA +35% · DAÑO +25%",
+  "ban.legTop": "// OLEADA LEGENDARIA", "ban.leg": "LEGENDARIA", "ban.legSub": "REPARACIÓN TOTAL · FRENESÍ · NOVA +40%",
+  "cap.0": "> NODO TITÁN NEUTRALIZADO · MASA CRÍTICA ALCANZADA", "cap.1": "> BRECHA DE SEÑAL // LA CAPA DE REALIDAD SE DESMORONA",
+  "cap.2": "> PROTOCOLO DE ASCENSIÓN {n} — INICIADO", "cap.3": "> INMERSIÓN EN LA PUPILA ▓▓▓▓▓▒▒░░",
+  "cap.4": "> CRUZANDO EL HORIZONTE DE SUCESOS", "cap.5": "> FORMA FIJADA: {stage}",
+  "asc.complete": "ASCENSIÓN {n} // COMPLETADA"
+},
+th: {
+  "lang.name": "ไทย",
+  "hud.shards": "ชาร์ด", "hud.level": "เลเวล", "hud.score": "คะแนน", "hud.hull": "ตัวถัง", "hud.shield": "โล่",
+  "hud.vol": "> ตรวจพบความผันผวนพุ่งสูง_", "hud.volSub": "// ศัตรูประชิดตัว · แกนกลางตกอยู่ในอันตราย",
+  "hud.hubBtn": "[ เปิดศูนย์อัปเกรด ]", "hud.stage": "แกน // {stage}", "hud.overclockIn": "◈ โอเวอร์คล็อกในอีก {n} เลเวล",
+  "hud.combo": "{n} คอมโบ", "hud.overdrive": "โอเวอร์ไดรฟ์", "hud.nova": "โนวา",
+  "aria.pause": "หยุดชั่วคราว", "aria.nova": "โนวาเบิร์สต์", "aria.sound": "เสียง", "aria.stick": "เล็งและยิง",
+  "cine.skip": "แตะเพื่อข้าม ▸▸",
+  "login.prompt": "> ป้อนชื่อเรียกขานของผู้ควบคุม", "login.ph": "ชื่อเรียกขาน", "login.idle": "_กำลังรอการเชื่อมต่อประสาท",
+  "login.btn": "[ ยืนยันตัวตน ]", "login.lang": "⚙ ภาษา",
+  "login.err": "_ข้อผิดพลาด: ชื่อเรียกขานต้องมีอย่างน้อย 2 ตัวอักษร [A-Z 0-9 _ -]", "login.ok": "_ยืนยันการเชื่อมต่อแล้ว ยินดีต้อนรับ {name}",
+  "hub.sub": "ศูนย์บัญชาการ", "hub.operator": "ผู้ควบคุม", "hub.change": "เปลี่ยนชื่อเรียกขาน",
+  "hub.gLogin": "ลงชื่อเข้าใช้ด้วย Google เพื่อแข่งขัน", "hub.verified": "✓ ยืนยันแล้ว", "hub.signOut": "ออกจากระบบ",
+  "hub.noteOffline": "กระดานโลกออฟไลน์ · กำลังเล่นแบบออฟไลน์", "hub.noteOn": "รอบการเล่นของคุณผูกกับบัญชี Google นี้",
+  "hub.noteOff": "เฉพาะรอบที่ลงชื่อเข้าใช้เท่านั้นที่ขึ้นกระดานโลก", "hub.player": "ผู้เล่น",
+  "hub.pb": "สถิติส่วนตัว", "hub.bank": "คลังชาร์ด", "hub.peak": "เลเวลสูงสุด", "hub.maxAsc": "การยกระดับสูงสุด",
+  "hub.start": "[ เริ่มการต่อสู้ ]", "hub.shop": "ศูนย์อัปเกรด ✦ แล็บ FX", "hub.settings": "⚙ ตั้งค่า · ภาษา",
+  "hub.foot1": "เล็งเอง · จอยสติกบนมือถือ · กดเมาส์ค้างบนพีซี · ✸ ใช้โนวาเมื่อชาร์จเต็ม",
+  "hub.foot2": "ประตูไททันที่เลเวล 10 · 25 · 50 · 75 · 150 · โอเวอร์คล็อกทุก 3 เลเวล",
+  "hub.foot3": "แกนที่ถูกทำลายจะเก็บอัปเกรดแกนไว้ 75% · 90% หากคุณทำเลเวลได้สูงกว่ารอบที่แล้ว · สกิลจะไม่หายไปเลย",
+  "hub.foot4": "ศัตรูอ่อนลง 15% จนถึงเลเวล 50",
+  "hub.rules": "กติกาแจกรางวัล", "hub.privacy": "ความเป็นส่วนตัว",
+  "hub.pity": "✦ โปรโตคอลปลอบใจทำงานอยู่ · ลด 20% สำหรับอัปเกรดแกนทั้งหมด · สิ้นสุดเมื่อจบรอบถัดไป",
+  "hub.pbStreak": "พลาดสถิติส่วนตัว {n}/3 ครั้งติดต่อกัน · ครบ 3 ครั้ง: ลด 20% ครั้งเดียวสำหรับอัปเกรดแกน",
+  "lb.global": "// 5 อันดับแรกของโลก", "lb.verified": "// 5 อันดับแรกที่ยืนยันแล้ว", "lb.local": "// 5 อันดับแรกในเครื่อง", "lb.live": "สด",
+  "lb.offlineLocal": "ออฟไลน์ · ในเครื่อง", "lb.localOnly": "ในเครื่องเท่านั้น", "lb.syncing": "กำลังซิงก์…",
+  "lb.syncingGlobal": "กำลังซิงก์สถิติโลก…", "lb.empty": "ยังไม่มีบันทึกการต่อสู้ — มาเป็นคนแรกสิ", "lb.lv": "LV {n}",
+  "net.offline": "กระดานโลกออฟไลน์ · บันทึกไว้ในเครื่อง", "net.unranked": "รอบที่ไม่จัดอันดับ",
+  "net.unrankedSign": "ไม่จัดอันดับ · ลงชื่อเข้าใช้ด้วย Google ที่ศูนย์บัญชาการเพื่อแข่งขัน", "net.noScore": "ไม่มีคะแนนให้ส่ง",
+  "net.notReg": "รอบนี้ไม่ได้ลงทะเบียน · ตรวจสอบการเชื่อมต่อ", "net.rejected": "คะแนนถูกปฏิเสธ", "net.uploadFail": "อัปโหลดล้มเหลว · {err}",
+  "net.verifying": "เซิร์ฟเวอร์กำลังตรวจสอบรอบนี้…", "net.verified": "✓ ยืนยันแล้ว · ผู้เล่น #{tag}",
+  "net.gFail": "ลงชื่อเข้าใช้ Google ไม่สำเร็จ", "net.signInErr": "การลงชื่อเข้าใช้: {msg}",
+  "rej.RUN_TOO_SHORT": "รอบสั้นเกินไปที่จะจัดอันดับ", "rej.LEVEL_TOO_FAST": "ถูกปฏิเสธ · เลเวลขึ้นเร็วเกินไป",
+  "rej.TOO_MANY_KILLS": "ถูกปฏิเสธ · กำจัดศัตรูมากเกินไป", "rej.SCORE_TOO_HIGH": "ถูกปฏิเสธ · คะแนนสูงเกินไป",
+  "rej.IMPOSSIBLE_STAGE": "ถูกปฏิเสธ · การยกระดับที่เป็นไปไม่ได้", "rej.RUN_EXPIRED": "รอบหมดอายุ · นานเกินไป",
+  "rej.BAD_NAME": "ถูกปฏิเสธ · ชื่อเรียกขานไม่ถูกต้อง", "rej.BAD_VALUES": "ถูกปฏิเสธ · รอบไม่ถูกต้อง",
+  "go.title": "แกนถูกเจาะทะลวง", "go.final": "คะแนนสุดท้าย", "go.level": "เลเวล", "go.asc": "การยกระดับ", "go.kills": "กำจัด",
+  "go.combo": "คอมโบสูงสุด", "go.shards": "ชาร์ดที่เก็บได้", "go.retry": "[ ลงสนามอีกครั้ง ]", "go.hub": "กลับสู่ศูนย์บัญชาการ",
+  "go.recGlobal": "★ สถิติใหม่ · อันดับโลก #{n} ★", "go.recPersonal": "★ สถิติส่วนตัวใหม่ ★",
+  "go.rankGlobal": "อันดับ #{n} ของโลก", "go.rankLocal": "อันดับ #{n} บนกระดานในเครื่อง",
+  "go.decayHead": "// การเสื่อมสลายของระบบประสาท — อัปเกรดแกนคงเหลือ {pct}%",
+  "go.decayBest": "▲ เลเวล {lv} ชนะรอบที่แล้ว (เลเวล {prev}) · เก็บไว้ 90%",
+  "go.decayNone": "ไม่สูญเสียอัปเกรดแกน",
+  "go.skillsKept": "✓ สกิลยังติดตั้งอยู่ · ออร์บ · แลนเซอร์ · วิสป์ · โนวา",
+  "go.pbReset": "★ ทำลายสถิติส่วนตัวแล้ว · รีเซ็ตตัวนับการพลาด",
+  "go.pbMiss": "พลาดสถิติส่วนตัว {n}/3 ครั้งติดต่อกัน", "go.pbMissMore": "พลาดสถิติส่วนตัว {n} ครั้งติดต่อกัน",
+  "go.pity": "✦ โปรโตคอลปลอบใจ: ลด 20% ครั้งเดียวสำหรับอัปเกรดแกนทั้งหมด · สิ้นสุดเมื่อจบรอบถัดไป",
+  "pause.title": "หยุดชั่วคราว", "pause.sub": "การจำลองถูกหยุดนิ่ง", "pause.resume": "[ เล่นต่อ ]", "pause.abort": "ยกเลิกรอบนี้", "pause.settings": "⚙ ตั้งค่า",
+  "set.title": "ตั้งค่า", "set.sub": "การกำหนดค่าระบบ", "set.lang": "// ภาษา", "set.audio": "// เสียง", "set.controls": "// การควบคุม",
+  "set.back": "[ ย้อนกลับ ]", "set.sfx": "เอฟเฟกต์เสียง: {v}", "set.music": "เพลง: {v}", "set.assist": "ช่วยเล็ง: {v}",
+  "set.on": "เปิด", "set.off": "ปิด", "set.langSet": "ภาษา: ไทย",
+  "draft.tag": "// โอเวอร์คล็อกระบบ", "draft.level": "เลเวล", "draft.reveal": "[ เปิดการ์ด ]",
+  "draft.hintUnstable": "⚡ แตะการ์ดที่ไม่เสถียรเพื่อเพิ่มระดับความหายาก · แล้วเปิดการ์ด", "draft.hintTap": "แตะการ์ดหรือกดเปิดการ์ด",
+  "draft.select": "เลือกการเสริมพลัง", "draft.unstable": "⚡ ไม่เสถียร<br>แตะเพื่อโอเวอร์ชาร์จ", "draft.legendary": "★ ตำนาน ★",
+  "draft.stabilized": "เสถียรแล้ว", "draft.surge": "+ พลังพุ่งพล่าน: ซ่อมเต็ม · โอเวอร์ไดรฟ์ · โนวา",
+  "rar.0": "ธรรมดา", "rar.1": "ไม่ธรรมดา", "rar.2": "มหากาพย์", "rar.3": "ตำนาน",
+  "card.lv": "+{n} เลเวล", "card.tier": "ระดับ {n}", "card.form": "{n}× ร่าง {name}", "card.formOne": "ร่าง {name}",
+  "card.orb": "{n} ออร์บ · ร่าง {tier}", "card.orbs": "{n} ออร์บ · ร่าง {tier}",
+  "card.dmg.name": "เครื่องขยายพลาสมา", "card.dmg.stat": "ความเสียหาย", "card.dmg.ds": "เพิ่มความเสียหายของกระสุนแกนแบบทวีคูณ พลาสมาของคุณจะหนาขึ้น",
+  "card.rate.name": "โอเวอร์คล็อกรอบยิง", "card.rate.stat": "อัตรายิง", "card.rate.ds": "เร่งรอบการยิงของตัวปล่อยพลังงาน",
+  "card.shield.name": "โครงข่ายอีจิส", "card.shield.stat": "โล่สูงสุด", "card.shield.ds": "ขยายเมทริกซ์โล่และชาร์จโล่จนเต็ม",
+  "card.multi.name": "ตัวปล่อยแยกลำ", "card.multi.stat": "ยิงหลายนัด", "card.multi.ds": "ยิงกระสุนเพิ่มเติมกระจายเป็นรูปพัด",
+  "card.crit.name": "ระบบเล็งประสาท", "card.crit.stat": "โอกาสคริติคอล", "card.crit.ds": "คริติคอลสร้างความเสียหาย 2× (2.5× เมื่อเกิน 30%) ประกายทองโคจรรอบแกน",
+  "card.pierce.name": "ตัวเจาะราง", "card.pierce.stat": "เจาะทะลุ", "card.pierce.ds": "กระสุนเจาะทะลุเป้าหมายเพิ่มเติม พร้อมหางดาวหาง",
+  "card.chain.name": "ตัวนำสายฟ้า", "card.chain.stat": "สายฟ้าลูกโซ่", "card.chain.ds": "การโจมตีอาจปล่อยสายฟ้าไปยังศัตรูใกล้เคียง 2 ตัว",
+  "card.orb.name": "ออร์บผู้พิทักษ์", "card.orb.stat": "ผู้ช่วย", "card.orb.ds": "ออร์บยิงอัตโนมัติ (สูงสุด 5) ที่พัฒนาร่างทุก 2 เลเวล",
+  "card.lancer.name": "แลนเซอร์ดวงดาว", "card.lancer.stat": "ผู้ช่วย", "card.lancer.ds": "ดาวดวงน้อยบนวงโคจรชั้นนอกยิงหอกเจาะทะลุ (สูงสุด 3)",
+  "card.wisp.name": "วิสป์สายฟ้า", "card.wisp.stat": "ผู้ช่วย", "card.wisp.ds": "ดาวประกายไฟที่ช็อตสายฟ้าลูกโซ่ใส่ศัตรูใกล้เคียง (สูงสุด 3)",
+  "card.aegis.name": "ละอองอีจิส", "card.aegis.stat": "ผู้ช่วย", "card.aegis.ds": "ละอองผู้พิทักษ์วนรอบระยะใกล้และยิงสกัดกระสุนศัตรู (สูงสุด 4)",
+  "card.hull.name": "นาโนฟื้นฟู", "card.hull.stat": "ตัวถังสูงสุด", "card.hull.ds": "เสริมความแข็งแรงตัวถังและซ่อมแซมในปริมาณเท่ากัน",
+  "card.nova.name": "ตัวเก็บประจุโนวา", "card.nova.stat": "การชาร์จโนวา", "card.nova.ds": "โนวาเบิร์สต์ชาร์จเร็วขึ้น",
+  "card.star.name": "ดาวซูเปอร์โนวา", "card.star.stat": "ผู้ช่วยระดับตำนาน", "card.star.ds": "ดาวทองลุกโชนเข้าร่วมวงโคจรของคุณและขว้างพลุระเบิด การ์ดตำนานทุกใบจะพัฒนาร่างของมัน",
+  "orb.1": "ลูกพลาสมาเดี่ยว", "orb.2": "ลูกปริซึมที่เร็วขึ้น", "orb.3": "ยิงคู่ + รัศมีแสง", "orb.4": "หอกพัลซาร์เจาะทะลุ", "orb.5": "พลุสุริยะติดตามเป้า",
+  "shop.sub": "// อัปเกรด · สกิล · FX", "shop.title": "ศูนย์อัปเกรด", "shop.bank": "คลังชาร์ด",
+  "shop.tabCore": "แกน", "shop.tabSkills": "สกิล", "shop.tabFx": "แล็บ FX",
+  "shop.return": "[ กลับสู่การต่อสู้ ]", "shop.close": "[ ปิด ]",
+  "shop.repair": "ซ่อมฉุกเฉิน", "shop.repairDesc": "ฟื้นฟูตัวถังเต็ม 100% ทันที (เฉพาะรอบนี้)", "shop.repaired": "ซ่อมตัวถังเต็มแล้ว",
+  "shop.pity": "✦ โปรโตคอลปลอบใจ · ลด 20% สำหรับอัปเกรดแกนทั้งหมด",
+  "shop.grpCore": "// อัปเกรดแกนถาวร", "shop.grpSkills": "// สกิลแอ็กทีฟและอัตโนมัติ · ไม่มีวันหาย",
+  "shop.grpShot": "// สกินกระสุน", "shop.grpKill": "// เอฟเฟกต์ตอนกำจัด",
+  "shop.lv": "LV {n}", "shop.max": "สูงสุด", "shop.maxed": "เต็มแล้ว", "shop.next": "ถัดไป", "shop.maxOrbs": "เต็มแล้ว · ออร์บสุริยะ 5 ลูก",
+  "shop.equipped": "สวมใส่อยู่", "shop.equip": "สวมใส่", "shop.unlocked": "ปลดล็อก {name} แล้ว", "shop.bought": "{name} → LV {n}",
+  "up.dmg.name": "ความเสียหายแกน", "up.dmg.desc": "+8% ความเสียหายพื้นฐานของกระสุน",
+  "up.rate.name": "รอบการยิง", "up.rate.desc": "+6% อัตรายิงพื้นฐาน",
+  "up.hull.name": "ความแข็งแรงตัวถัง", "up.hull.desc": "+15 ตัวถังสูงสุด",
+  "up.shield.name": "เมทริกซ์โล่", "up.shield.desc": "+10 โล่สูงสุด",
+  "up.regen.name": "ตัวเก็บประจุฟื้นฟู", "up.regen.desc": "+1.5 โล่ / วินาที",
+  "up.crit.name": "ชุดระบบเล็ง", "up.crit.desc": "+2% โอกาสคริติคอล",
+  "up.magnet.name": "แม่เหล็กชาร์ด", "up.magnet.desc": "+18% ระยะเก็บไอเท็ม",
+  "up.speed.name": "ความเร็วราง", "up.speed.desc": "+6% ความเร็วกระสุน",
+  "up.luck.name": "เครื่องยนต์โชคลาภ", "up.luck.desc": "การ์ดมหากาพย์และตำนานมากขึ้น การ์ดไม่เสถียรมากขึ้น",
+  "up.yield.name": "โรงกลั่นชาร์ด", "up.yield.desc": "+10% ชาร์ดจากการเก็บทุกครั้ง",
+  "up.orb.name": "ออร์บผู้พิทักษ์", "up.orb.desc": "ออร์บยิงอัตโนมัติ +1 ออร์บต่อเลเวล (สูงสุด 5) · ร่างใหม่ทุก 2 เลเวล",
+  "up.lancer.name": "แลนเซอร์ดวงดาว", "up.lancer.desc": "ดาวยิงหอกดวงน้อยบนวงโคจรชั้นนอก (สูงสุด 3) · พัฒนาร่างเมื่ออัปเลเวล",
+  "up.wisp.name": "วิสป์สายฟ้า", "up.wisp.desc": "ดาวประกายไฟยิงสายฟ้าลูกโซ่ (สูงสุด 3) · พัฒนาตามเลเวล",
+  "up.novaPow.name": "แอมพลิจูดโนวา", "up.novaPow.desc": "+20% พลังโนวาเบิร์สต์ · พื้นฐาน: กวาดล้างศัตรูทั้งหมด และลด HP สูงสุดของไททัน 30%",
+  "up.novaCharge.name": "เครื่องปฏิกรณ์โนวา", "up.novaCharge.desc": "+12% ความเร็วชาร์จโนวา",
+  "skin.plasma.name": "ลำพลาสมา", "skin.plasma.desc": "พลาสมามาตรฐานของแกน เปลี่ยนสีตามการยกระดับ",
+  "skin.prism.name": "หอกปริซึม", "skin.prism.desc": "หอกสามสีหักเหแสงพร้อมหางระยิบระยับ",
+  "skin.inferno.name": "รางนรกเพลิง", "skin.inferno.desc": "กระสุนหลอมเหลวที่โปรยถ่านไฟ",
+  "skin.void.name": "เข็มสุญญตา", "skin.void.desc": "เข็มสสารมืดห่อหุ้มด้วยการบิดเบือนสีม่วง",
+  "skin.solar.name": "หอกสุริยะ", "skin.solar.desc": "ไฟเทพสีทองพร้อมแกนร้อนขาว",
+  "skin.burst.name": "ระเบิดนีออน", "skin.burst.desc": "ระเบิดอนุภาคนีออนแบบคลาสสิก",
+  "skin.glitch.name": "กลิตช์ป๊อป", "skin.glitch.desc": "ศัตรูสลายเป็นสัญญาณรบกวนพิกเซล RGB",
+  "skin.supernova.name": "ซูเปอร์โนวา", "skin.supernova.desc": "ลำแสงดาวและวงแหวนแสบตา",
+  "skin.singularity.name": "ภาวะเอกฐาน", "skin.singularity.desc": "ศัตรูยุบตัวเป็นหลุมดำจิ๋ว",
+  "stage.0": "หลับใหล", "stage.1": "ตื่นรู้", "stage.2": "ดาวป้องกัน", "stage.3": "แกนโฟกัส", "stage.4": "พัลส์ผันผวน", "stage.5": "แกนเทพ",
+  "stage.desc.1": "วงแหวนเทคออนไลน์ · ความเสียหาย +12% · ตรวจพบวีฟเวอร์และสปลิตเตอร์",
+  "stage.desc.2": "กางโล่ดาวเรขาคณิตแล้ว · แลนเซอร์และบูลวาร์กกำลังมา",
+  "stage.desc.3": "สามเหลี่ยมโฟกัสล็อกในรูม่านตา · แฟนธอมและรังผึ้งตื่นขึ้น",
+  "stage.desc.4": "ปลดปล่อยออร่าพัลซาร์สีเลือด · เรธและบอมเบอร์ออกล่า",
+  "stage.desc.5": "ทรงกลมทองโคจรรอบ · ดวงตาลุกโชน · คุณคือแกนเทพ",
+  "boss.titan": "โหนดไททัน // {name}", "boss.echo": "เสียงสะท้อน {n} // {name}",
+  "boss.phase1": "เฟส I", "boss.phase2": "เฟส II // คลั่ง", "boss.form1": "ร่าง I", "boss.form2": "ร่าง II",
+  "boss.warn": "⚠ โหนดไททันกำลังมา", "boss.warnEcho": "⚠ ตรวจพบเสียงสะท้อนไททัน",
+  "boss.subGate": "{name} · ประตูยกระดับ {n}/5", "boss.subEcho": "{name} · การสั่นพ้อง {n}", "boss.twoForms": " · สองร่าง",
+  "boss.shell": "ไททันสลัดเปลือก · ร่างที่สอง", "boss.enraged": "คลั่ง",
+  "boss.break": "แตก!", "boss.deflected": "สะท้อนกลับ!", "boss.shootBreak": "ยิงเพื่อทำลาย", "boss.shootDeflect": "ยิงเพื่อสะท้อน",
+  "float.shields": "ชาร์จโล่แล้ว", "float.comboLost": "คอมโบขาด", "float.growth": "แกนเติบโต +3% ความเสียหาย",
+  "float.overclockIn": " · โอเวอร์คล็อกในอีก {n}", "float.hintTouch": "ลากจอยสติกเพื่อเล็งและยิง", "float.hintMouse": "เล็งด้วยเมาส์ · กดค้างเพื่อยิง",
+  "ban.echoTop": "// กำจัดเสียงสะท้อนแล้ว", "ban.echo": "โอเวอร์ชาร์จ", "ban.echoSub": "+10% ความเสียหายในรอบนี้",
+  "ban.comboTop": "// คอมโบ ×{n}", "ban.overdrive": "โอเวอร์ไดรฟ์", "ban.overdriveSub": "อัตรายิง +35% · ความเสียหาย +25%",
+  "ban.legTop": "// พลังตำนานพุ่งพล่าน", "ban.leg": "ตำนาน", "ban.legSub": "ซ่อมเต็ม · โอเวอร์ไดรฟ์ · โนวา +40%",
+  "cap.0": "> ทำลายโหนดไททันแล้ว · ถึงมวลวิกฤต", "cap.1": "> สัญญาณรั่วไหล // ชั้นความเป็นจริงกำลังพังทลาย",
+  "cap.2": "> โปรโตคอลยกระดับ {n} — เริ่มทำงาน", "cap.3": "> ดำดิ่งสู่รูม่านตา ▓▓▓▓▓▒▒░░",
+  "cap.4": "> กำลังข้ามขอบฟ้าเหตุการณ์", "cap.5": "> ล็อกร่าง: {stage}",
+  "asc.complete": "การยกระดับ {n} // เสร็จสมบูรณ์"
+},
+tl: {
+  "lang.name": "TAGALOG",
+  "hud.shards": "SHARDS", "hud.level": "LEVEL", "hud.score": "PUNTOS", "hud.hull": "KASKO", "hud.shield": "KALASAG",
+  "hud.vol": "> BIGLANG PAGTAAS NG PANGANIB_", "hud.volSub": "// MALAPIT NA ANG KALABAN · NANGANGANIB ANG CORE",
+  "hud.hubBtn": "[ BUKSAN ANG UPGRADE HUB ]", "hud.stage": "CORE // {stage}", "hud.overclockIn": "◈ OVERCLOCK SA LOOB NG {n} LV",
+  "hud.combo": "{n} COMBO", "hud.overdrive": "OVERDRIVE", "hud.nova": "NOVA",
+  "aria.pause": "I-pause", "aria.nova": "Nova Burst", "aria.sound": "Tunog", "aria.stick": "Tumutok at bumaril",
+  "cine.skip": "PINDUTIN PARA LAKTAWAN ▸▸",
+  "login.prompt": "> ILAGAY ANG IYONG CALLSIGN BILANG OPERATOR", "login.ph": "CALLSIGN", "login.idle": "_naghihintay ng neural handshake",
+  "login.btn": "[ MAG-AUTHENTICATE ]", "login.lang": "⚙ WIKA",
+  "login.err": "_error: kailangan ng callsign ng ≥ 2 karakter [A-Z 0-9 _ -]", "login.ok": "_na-verify ang handshake. maligayang pagdating, {name}",
+  "hub.sub": "COMMAND HUB", "hub.operator": "OPERATOR", "hub.change": "PALITAN ANG CALLSIGN",
+  "hub.gLogin": "MAG-SIGN IN SA GOOGLE PARA MAKIPAGLABAN", "hub.verified": "✓ BERIPIKADO", "hub.signOut": "MAG-SIGN OUT",
+  "hub.noteOffline": "OFFLINE ANG GLOBAL BOARD · LOKAL NA LARO", "hub.noteOn": "NAKAPIRMA SA GOOGLE ACCOUNT NA ITO ANG MGA RUN MO",
+  "hub.noteOff": "TANGING MGA NAKA-SIGN IN NA RUN ANG NAKAKAPASOK SA GLOBAL BOARD", "hub.player": "PLAYER",
+  "hub.pb": "PERSONAL BEST", "hub.bank": "SHARD BANK", "hub.peak": "PINAKAMATAAS NA LEVEL", "hub.maxAsc": "PINAKAMATAAS NA ASCENSION",
+  "hub.start": "[ SIMULAN ANG LABAN ]", "hub.shop": "UPGRADE HUB ✦ FX LAB", "hub.settings": "⚙ SETTINGS · WIKA",
+  "hub.foot1": "MANWAL NA PAGTUTOK · JOYSTICK SA PHONE · PINDUTIN NANG MATAGAL ANG MOUSE SA PC · ✸ NOVA KAPAG PUNO NA",
+  "hub.foot2": "MGA TITAN GATE SA LV 10 · 25 · 50 · 75 · 150 · OVERCLOCK KADA 3 LV",
+  "hub.foot3": "ANG NASIRANG CORE AY NAGTITIRA NG 75% NG MGA CORE AUGMENT NITO · 90% KUNG MALALAMPASAN MO ANG LEVEL NG HULING RUN MO · HINDI KAILANMAN NAWAWALA ANG MGA SKILL",
+  "hub.foot4": "MAS MAHINA NANG 15% ANG MGA KALABAN HANGGANG LV 50",
+  "hub.rules": "MGA PATAKARAN NG GIVEAWAY", "hub.privacy": "PRIVACY",
+  "hub.pity": "✦ AKTIBO ANG PITY PROTOCOL · −20% SA LAHAT NG CORE AUGMENT · MATATAPOS SA SUSUNOD MONG RUN",
+  "hub.pbStreak": "HINDI NAABOT ANG PERSONAL BEST NANG {n}/3 SUNOD-SUNOD · SA IKA-3: ISANG BESES NA −20% SA CORE AUGMENTS",
+  "lb.global": "// GLOBAL TOP 5", "lb.verified": "// BERIPIKADONG TOP 5", "lb.local": "// LOKAL NA TOP 5", "lb.live": "LIVE",
+  "lb.offlineLocal": "OFFLINE · LOKAL", "lb.localOnly": "LOKAL LANG", "lb.syncing": "NAGSI-SYNC…",
+  "lb.syncingGlobal": "NAGSI-SYNC NG MGA GLOBAL RECORD…", "lb.empty": "WALA PANG COMBAT RECORD — IKAW ANG MAUNA", "lb.lv": "LV {n}",
+  "net.offline": "OFFLINE ANG GLOBAL BOARD · NAI-SAVE NANG LOKAL", "net.unranked": "HINDI RANKED NA RUN",
+  "net.unrankedSign": "HINDI RANKED · MAG-SIGN IN SA GOOGLE SA HUB PARA MAKIPAGLABAN", "net.noScore": "WALANG SCORE NA MAIPAPASA",
+  "net.notReg": "HINDI NAREHISTRO ANG RUN · TINGNAN ANG KONEKSYON", "net.rejected": "TINANGGIHAN ANG SCORE", "net.uploadFail": "NABIGO ANG PAG-UPLOAD · {err}",
+  "net.verifying": "BINEBERIPIKA NG SERVER ANG RUN…", "net.verified": "✓ BERIPIKADO · PLAYER #{tag}",
+  "net.gFail": "NABIGO ANG GOOGLE SIGN-IN", "net.signInErr": "SIGN-IN: {msg}",
+  "rej.RUN_TOO_SHORT": "MASYADONG MAIKLI ANG RUN PARA MA-RANK", "rej.LEVEL_TOO_FAST": "TINANGGIHAN · MASYADONG MABILIS ANG LEVEL",
+  "rej.TOO_MANY_KILLS": "TINANGGIHAN · SOBRANG DAMI NG KILLS", "rej.SCORE_TOO_HIGH": "TINANGGIHAN · MASYADONG MATAAS ANG SCORE",
+  "rej.IMPOSSIBLE_STAGE": "TINANGGIHAN · IMPOSIBLENG ASCENSION", "rej.RUN_EXPIRED": "EXPIRED ANG RUN · MASYADONG MATAGAL",
+  "rej.BAD_NAME": "TINANGGIHAN · DI-WASTONG CALLSIGN", "rej.BAD_VALUES": "TINANGGIHAN · DI-WASTONG RUN",
+  "go.title": "NASIRA ANG CORE", "go.final": "HULING SCORE", "go.level": "LEVEL", "go.asc": "ASCENSION", "go.kills": "KILLS",
+  "go.combo": "PINAKAMAHUSAY NA COMBO", "go.shards": "NAKUHANG SHARDS", "go.retry": "[ MULING I-DEPLOY ]", "go.hub": "BUMALIK SA COMMAND HUB",
+  "go.recGlobal": "★ BAGONG RECORD · GLOBAL #{n} ★", "go.recPersonal": "★ BAGONG PERSONAL RECORD ★",
+  "go.rankGlobal": "RANK #{n} SA BUONG MUNDO", "go.rankLocal": "RANK #{n} SA LOKAL NA BOARD",
+  "go.decayHead": "// NEURAL DECAY — {pct}% NG MGA CORE AUGMENT MO ANG NATIRA",
+  "go.decayBest": "▲ NALAMPASAN NG LV {lv} ANG HULING RUN MO (LV {prev}) · 90% ANG NATIRA",
+  "go.decayNone": "WALANG NAWALANG CORE AUGMENT",
+  "go.skillsKept": "✓ NANANATILI ANG MGA SKILL · ORBS · LANCERS · WISPS · NOVA",
+  "go.pbReset": "★ NALAMPASAN ANG PERSONAL BEST · NA-RESET ANG MISS STREAK",
+  "go.pbMiss": "HINDI NAABOT ANG PERSONAL BEST NANG {n}/3 SUNOD-SUNOD", "go.pbMissMore": "HINDI NAABOT ANG PERSONAL BEST NANG {n}× SUNOD-SUNOD",
+  "go.pity": "✦ PITY PROTOCOL: ISANG BESES NA −20% SA LAHAT NG CORE AUGMENT · MATATAPOS SA SUSUNOD MONG RUN",
+  "pause.title": "NAKA-PAUSE", "pause.sub": "NAKAHINTO ANG SIMULATION", "pause.resume": "[ ITULOY ]", "pause.abort": "ITIGIL ANG RUN", "pause.settings": "⚙ SETTINGS",
+  "set.title": "SETTINGS", "set.sub": "SYSTEM CONFIG", "set.lang": "// WIKA", "set.audio": "// AUDIO", "set.controls": "// KONTROL",
+  "set.back": "[ BUMALIK ]", "set.sfx": "SFX: {v}", "set.music": "MUSIKA: {v}", "set.assist": "AIM ASSIST: {v}",
+  "set.on": "ON", "set.off": "OFF", "set.langSet": "WIKA: TAGALOG",
+  "draft.tag": "// SYSTEM OVERCLOCK", "draft.level": "LEVEL", "draft.reveal": "[ IBUNYAG ]",
+  "draft.hintUnstable": "⚡ PINDUTIN ANG MGA HINDI MATATAG NA CARD PARA I-OVERCHARGE ANG RARITY · SAKA IBUNYAG", "draft.hintTap": "PUMILI NG CARD O IBUNYAG",
+  "draft.select": "PUMILI NG AUGMENTATION", "draft.unstable": "⚡ HINDI MATATAG<br>PINDUTIN PARA I-OVERCHARGE", "draft.legendary": "★ MAALAMAT ★",
+  "draft.stabilized": "NAPATATAG", "draft.surge": "+ SURGE: buong pagkumpuni · overdrive · nova",
+  "rar.0": "KARANIWAN", "rar.1": "DI-KARANIWAN", "rar.2": "EPIKO", "rar.3": "MAALAMAT",
+  "card.lv": "+{n} LV", "card.tier": "TIER {n}", "card.form": "{n}× ANYONG {name}", "card.formOne": "ANYONG {name}",
+  "card.orb": "{n} ORB · ANYONG {tier}", "card.orbs": "{n} ORB · ANYONG {tier}",
+  "card.dmg.name": "PAMPALAKAS NG PLASMA", "card.dmg.stat": "PINSALA", "card.dmg.ds": "Pinararami ang pinsala ng mga bala ng core. Kumakapal ang iyong plasma.",
+  "card.rate.name": "SIKLONG OVERCLOCK", "card.rate.stat": "BILIS NG PAGBARIL", "card.rate.ds": "Pinabibilis ang siklo ng pagbaril ng emitter.",
+  "card.shield.name": "AEGIS LATTICE", "card.shield.stat": "MAX NA KALASAG", "card.shield.ds": "Pinalalawak ang shield matrix at pinupuno itong muli.",
+  "card.multi.name": "HATING EMITTER", "card.multi.stat": "MARAMIHANG BARIL", "card.multi.ds": "Nagpapaputok ng dagdag na bala nang pakalat.",
+  "card.crit.name": "NEURAL NA PAGTUTOK", "card.crit.stat": "TSANSA NG CRIT", "card.crit.ds": "Ang crit ay 2× (2.5× kapag lampas 30%). Umiikot sa core ang mga gintong kislap.",
+  "card.pierce.name": "TUMATAGOS NA RILES", "card.pierce.stat": "PAGTAGOS", "card.pierce.ds": "Tumatagos ang mga bala sa dagdag na target na may buntot ng kometa.",
+  "card.chain.name": "DALUYAN NG KIDLAT", "card.chain.stat": "KADENANG KIDLAT", "card.chain.ds": "Maaaring tumalon ang kidlat sa 2 kalapit na kalaban.",
+  "card.orb.name": "MGA BANTAY NA ORB", "card.orb.stat": "KASAMA", "card.orb.ds": "Kusang bumabaril na mga orb (max 5) na nag-e-evolve kada 2 level.",
+  "card.lancer.name": "MGA STAR LANCER", "card.lancer.stat": "KASAMA", "card.lancer.ds": "Maliliit na bituin sa panlabas na orbit na bumabaril ng tumatagos na sibat (max 3).",
+  "card.wisp.name": "MGA ARC WISP", "card.wisp.stat": "KASAMA", "card.wisp.ds": "Kumikislap na mga bituin na tumatama ng kadenang kidlat sa kalapit na kalaban (max 3).",
+  "card.aegis.name": "MGA AEGIS MOTE", "card.aegis.stat": "KASAMA", "card.aegis.ds": "Mga bantay na mote na umiikot nang malapit at bumabaril sa putok ng kalaban (max 4).",
+  "card.hull.name": "NANO REGENESIS", "card.hull.stat": "MAX NA KASKO", "card.hull.ds": "Pinatitibay ang kasko at kinukumpuni ito sa parehong dami.",
+  "card.nova.name": "NOVA CAPACITOR", "card.nova.stat": "NOVA CHARGE", "card.nova.ds": "Mas mabilis mag-charge ang Nova Burst.",
+  "card.star.name": "BITUING SUPERNOVA", "card.star.stat": "MAALAMAT NA KASAMA", "card.star.ds": "Isang nagliliyab na gintong bituin ang sasali sa iyong orbit at magbabato ng sumasabog na flare. Bawat maalamat na kopya ay nagpapa-evolve dito.",
+  "orb.1": "iisang plasma bolt", "orb.2": "mas mabibilis na prism bolt", "orb.3": "dobleng putok + halo ng liwanag", "orb.4": "tumatagos na pulsar lance", "orb.5": "naghahanap na solar flare",
+  "shop.sub": "// AUGMENT · SKILLS · FX", "shop.title": "UPGRADE HUB", "shop.bank": "SHARD BANK",
+  "shop.tabCore": "CORE", "shop.tabSkills": "SKILLS", "shop.tabFx": "FX LAB",
+  "shop.return": "[ BUMALIK SA LABAN ]", "shop.close": "[ ISARA ]",
+  "shop.repair": "EMERGENCY NA PAGKUMPUNI", "shop.repairDesc": "Ibinabalik agad sa 100% ang iyong kasko (sa run na ito lang)", "shop.repaired": "BUONG NAIBALIK ANG KASKO",
+  "shop.pity": "✦ PITY PROTOCOL · −20% SA LAHAT NG CORE AUGMENT",
+  "shop.grpCore": "// PERMANENTENG CORE AUGMENTS", "shop.grpSkills": "// AKTIBO AT AWTONOMONG SKILLS · HINDI NAWAWALA",
+  "shop.grpShot": "// MGA SKIN NG BALA", "shop.grpKill": "// MGA KILL EFFECT",
+  "shop.lv": "LV {n}", "shop.max": "MAX", "shop.maxed": "MAXED", "shop.next": "SUSUNOD", "shop.maxOrbs": "MAXED · 5 SOLAR ORB",
+  "shop.equipped": "SUOT", "shop.equip": "ISUOT", "shop.unlocked": "NA-UNLOCK ANG {name}", "shop.bought": "{name} → LV {n}",
+  "up.dmg.name": "PINSALA NG CORE", "up.dmg.desc": "+8% base na pinsala ng bala",
+  "up.rate.name": "SIKLO NG PAGBARIL", "up.rate.desc": "+6% base na bilis ng pagbaril",
+  "up.hull.name": "TIBAY NG KASKO", "up.hull.desc": "+15 max na kasko",
+  "up.shield.name": "SHIELD MATRIX", "up.shield.desc": "+10 max na kalasag",
+  "up.regen.name": "REGEN CAPACITOR", "up.regen.desc": "+1.5 kalasag / seg",
+  "up.crit.name": "TARGETING SUITE", "up.crit.desc": "+2% tsansa ng critical hit",
+  "up.magnet.name": "SHARD MAGNET", "up.magnet.desc": "+18% abot ng pagpulot",
+  "up.speed.name": "RAIL VELOCITY", "up.speed.desc": "+6% bilis ng bala",
+  "up.luck.name": "MAKINA NG SWERTE", "up.luck.desc": "Mas maraming Epiko at Maalamat na card, mas maraming hindi matatag na card",
+  "up.yield.name": "SHARD REFINERY", "up.yield.desc": "+10% shards sa bawat pagpulot",
+  "up.orb.name": "MGA BANTAY NA ORB", "up.orb.desc": "Kusang bumabaril na mga orb. +1 orb kada level (max 5) · bagong anyo kada 2 level",
+  "up.lancer.name": "MGA STAR LANCER", "up.lancer.desc": "Maliliit na bituing bumabaril ng sibat sa panlabas na orbit (max 3) · nag-e-evolve habang nilele-level up",
+  "up.wisp.name": "MGA ARC WISP", "up.wisp.desc": "Kumikislap na mga bituin na may kadenang kidlat (max 3) · nag-e-evolve kasabay ng level",
+  "up.novaPow.name": "NOVA AMPLITUDE", "up.novaPow.desc": "+20% lakas ng Nova Burst · base: winawasak ang lahat ng kalaban at binabawasan ng 30% ang max HP ng Titan",
+  "up.novaCharge.name": "NOVA REACTOR", "up.novaCharge.desc": "+12% bilis ng Nova charge",
+  "skin.plasma.name": "PLASMA STREAK", "skin.plasma.desc": "Karaniwang plasma ng core, kulay ayon sa ascension",
+  "skin.prism.name": "PRISM LANCE", "skin.prism.desc": "Tatlong-kulay na lance na may kumikinang na buntot",
+  "skin.inferno.name": "INFERNO RAIL", "skin.inferno.desc": "Tunaw na mga bala na nagkakalat ng nagbabagang uling",
+  "skin.void.name": "VOID NEEDLE", "skin.void.desc": "Mga karayom ng itim na materya na balot ng lilang distorsyon",
+  "skin.solar.name": "SOLAR LANCE", "skin.solar.desc": "Gintong apoy ng diyos na may puting-init na core",
+  "skin.burst.name": "NEON BURST", "skin.burst.desc": "Klasikong pagsabog ng neon na particle",
+  "skin.glitch.name": "GLITCH POP", "skin.glitch.desc": "Nagkakawatak-watak ang kalaban sa RGB na pixel noise",
+  "skin.supernova.name": "SUPERNOVA", "skin.supernova.desc": "Mga sinag ng bituin at nakasisilaw na singsing",
+  "skin.singularity.name": "SINGULARITY", "skin.singularity.desc": "Nag-iimplode ang kalaban sa maliliit na black hole",
+  "stage.0": "NATUTULOG", "stage.1": "PAGGISING", "stage.2": "BITUING TAGAPAGTANGGOL", "stage.3": "CORE NG POKUS", "stage.4": "PULSO NG PANGANIB", "stage.5": "DIYOS NA CORE",
+  "stage.desc.1": "ONLINE ANG MGA TECH RING · +12% PINSALA · NATUKLASAN ANG MGA WEAVER AT SPLITTER",
+  "stage.desc.2": "NAKALADLAD ANG GEOMETRIC STAR SHIELD · PAPARATING ANG MGA LANCER AT BULWARK",
+  "stage.desc.3": "NAKA-LOCK SA BALINTATAW ANG MGA FOCUS TRIANGLE · GUMIGISING ANG MGA PHANTOM AT HIVE",
+  "stage.desc.4": "PINAKAWALAN ANG PULANG PULSAR AURA · NANGANGASO ANG MGA WRAITH AT BOMBER",
+  "stage.desc.5": "UMIIKOT ANG MGA GINTONG GLOBO · NAGLILIYAB ANG MATA · IKAW ANG DIYOS NA CORE",
+  "boss.titan": "TITAN NODE // {name}", "boss.echo": "ECHO {n} // {name}",
+  "boss.phase1": "PHASE I", "boss.phase2": "PHASE II // GALIT NA GALIT", "boss.form1": "ANYO I", "boss.form2": "ANYO II",
+  "boss.warn": "⚠ PAPARATING ANG TITAN NODE", "boss.warnEcho": "⚠ NATUKLASAN ANG TITAN ECHO",
+  "boss.subGate": "{name} · ASCENSION GATE {n}/5", "boss.subEcho": "{name} · RESONANCE {n}", "boss.twoForms": " · DALAWANG ANYO",
+  "boss.shell": "HINUBAD NG TITAN ANG KANYANG BALUTI · IKALAWANG ANYO", "boss.enraged": "GALIT NA GALIT",
+  "boss.break": "NABASAG!", "boss.deflected": "NAILIHIS!", "boss.shootBreak": "BARILIN PARA BASAGIN", "boss.shootDeflect": "BARILIN PARA ILIHIS",
+  "float.shields": "NA-RECHARGE ANG KALASAG", "float.comboLost": "NAWALA ANG COMBO", "float.growth": "PAGLAGO NG CORE +3% PINSALA",
+  "float.overclockIn": " · OVERCLOCK SA {n}", "float.hintTouch": "I-DRAG ANG STICK PARA TUMUTOK AT BUMARIL", "float.hintMouse": "TUMUTOK GAMIT ANG MOUSE · PINDUTIN NANG MATAGAL PARA BUMARIL",
+  "ban.echoTop": "// NALINIS ANG ECHO", "ban.echo": "OVERCHARGE", "ban.echoSub": "+10% PINSALA SA RUN NA ITO",
+  "ban.comboTop": "// COMBO ×{n}", "ban.overdrive": "OVERDRIVE", "ban.overdriveSub": "BILIS NG PAGBARIL +35% · PINSALA +25%",
+  "ban.legTop": "// MAALAMAT NA SURGE", "ban.leg": "MAALAMAT", "ban.legSub": "BUONG PAGKUMPUNI · OVERDRIVE · NOVA +40%",
+  "cap.0": "> NA-NEUTRALISA ANG TITAN NODE · NAABOT ANG CRITICAL MASS", "cap.1": "> SIGNAL BREACH // GUMUGUHO ANG PATONG NG REALIDAD",
+  "cap.2": "> ASCENSION PROTOCOL {n} — SINIMULAN", "cap.3": "> SUMISISID SA BALINTATAW ▓▓▓▓▓▒▒░░",
+  "cap.4": "> TUMATAWID SA EVENT HORIZON", "cap.5": "> NAKA-LOCK ANG ANYO: {stage}",
+  "asc.complete": "ASCENSION {n} // TAPOS NA"
+}
+};
+</script>
 <script>
 (() => {
 "use strict";
@@ -512,7 +1324,46 @@ const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 };
-const KEY = { name: 'nova51_callsign', lb: 'nova51_leaderboard', mute: 'nova51_mute', music: 'nova51_music', assist: 'nova51_assist', prof: n => 'nova51_profile_' + n };
+const KEY = { name: 'nova51_callsign', lb: 'nova51_leaderboard', mute: 'nova51_mute', music: 'nova51_music', assist: 'nova51_assist', lang: 'nova51_lang', prof: n => 'nova51_profile_' + n };
+
+/* =========================================================
+   LOCALIZATION — EN · DE · FR · ES · TH · TL
+   Every string lives in window.NOVA_I18N (script block above). loc(key, params) looks a key up in the
+   active language, falls back to English and fills {placeholders}. Static HTML is labelled with
+   data-i18n (text), data-i18n-ph (placeholder) and data-i18n-aria (aria-label) attributes.
+   ========================================================= */
+const I18N = window.NOVA_I18N || { en: {} };
+const LANGS = ['en', 'de', 'fr', 'es', 'th', 'tl'];
+function detectLang() {
+  const list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
+  for (const l of list) { const c = String(l).toLowerCase().split('-')[0]; if (c === 'fil') return 'tl'; if (LANGS.includes(c)) return c; }
+  return 'en';
+}
+let lang = store.get(KEY.lang, null);
+if (!LANGS.includes(lang)) lang = detectLang();
+function loc(key, p) {
+  let s = I18N[lang] && I18N[lang][key];
+  if (s == null) s = I18N.en && I18N.en[key];
+  if (s == null) return key;
+  return p ? s.replace(/\{(\w+)\}/g, (m, k) => p[k] != null ? p[k] : m) : s;
+}
+function applyI18n() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = loc(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = loc(el.dataset.i18nPh); });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', loc(el.dataset.i18nAria)); });
+  document.querySelectorAll('a[data-legal]').forEach(a => { a.href = a.dataset.legal + '?lang=' + lang; }); // legal pages open in the same language
+}
+// splits text into user-perceived characters, so Thai vowels & tone marks stay on their consonant
+let segmenter = null, segLang = '';
+function graphemes(str) {
+  try {
+    if (window.Intl && Intl.Segmenter) { if (segLang !== lang) { segmenter = new Intl.Segmenter(lang, { granularity: 'grapheme' }); segLang = lang; } return Array.from(segmenter.segment(str), x => x.segment); }
+  } catch (e) {}
+  return Array.from(str);
+}
+const stageName = i => loc('stage.' + i);
+const rarN = r => loc('rar.' + r);
 
 /* =========================================================
    SUPABASE — verified global leaderboard (Sign in with Google)
@@ -526,12 +1377,12 @@ try {
   sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { flowType: 'pkce', persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } }) : null;
 } catch (err) { console.error('Supabase init failed:', err); sb = null; }
 
-const STAGES = ['DORMANT', 'AWAKENING', 'DEFENSE STAR', 'FOCUS CORE', 'VOLATILITY PULSE', 'GOD CORE'];
+// ascension stages 0–5 · names & descriptions are localized (stage.N · stage.desc.N)
 const STAGE_COL = ['#00f3ff', '#00f3ff', '#b98cff', '#ffbe0b', '#ff0055', '#ffbe0b'];
-const STAGE_DESC = ['', 'TECH RINGS ONLINE · +12% DAMAGE · WEAVERS & SPLITTERS DETECTED', 'GEOMETRIC STAR SHIELD DEPLOYED · LANCERS & BULWARKS INBOUND',
-  'FOCUS TRIANGLES LOCKED IN THE PUPIL · PHANTOMS & HIVES AWAKEN', 'CRIMSON PULSAR AURA UNLEASHED · WRAITHS & BOMBERS HUNT',
-  'GOLDEN SPHERES ORBIT · THE EYE BURNS · YOU ARE THE GOD CORE'];
 const BOSS_LEVELS = [10, 25, 50, 75, 150];
+// BOT BALANCE — while the player is below level 50 every hostile (Titans included) has 15% less HP and deals
+// 15% less damage. From level 50 on they are back at their original base values (living hostiles are restored too).
+const BOT_NERF_LV = 50, BOT_NERF = 0.85;
 
 /* =========================================================
    AUDIO — procedural SFX (Web Audio)
@@ -815,26 +1666,27 @@ const BOSSES = [
   { name: 'OMEGA SERAPH', col: '#ffbe0b', col2: '#ffffff', hpMul: 1.5,  rMul: 1.25, forms: 2, name2: 'OMEGA ABYSS' }
 ];
 const RAR = ['common', 'uncommon', 'epic', 'legendary'];
-const RAR_N = ['COMMON', 'UNCOMMON', 'EPIC', 'LEGENDARY'];
 const RAR_COL = ['#9aa4b2', '#00f3ff', '#b77bff', '#ffbe0b'];
 const pct = v => '+' + Math.round(v * 100) + '%';
-const lvl = v => '+' + v + ' LV';
+const lvl = v => loc('card.lv', { n: v });
+// card name / stat / description are localized: card.<key>.name · card.<key>.stat · card.<key>.ds
 const CARDS = {
-  dmg:    { name: 'PLASMA AMPLIFIER', stat: 'DAMAGE', vals: [0.12, 0.2, 0.35, 0.65], f: pct, ds: 'Multiplies core projectile damage. Your plasma grows thicker.', apply: v => { draft.dmg *= 1 + v; } },
-  rate:   { name: 'CYCLIC OVERCLOCK', stat: 'FIRE RATE', vals: [0.1, 0.17, 0.28, 0.5], f: pct, ds: 'Accelerates the emitter firing cycle.', apply: v => { draft.rate *= 1 + v; }, cap: () => stats.rate >= 22 },
-  shield: { name: 'AEGIS LATTICE', stat: 'MAX SHIELD', vals: [20, 35, 60, 110], f: v => '+' + v, ds: 'Expands the shield matrix and fully recharges it.', apply: v => { draft.shield += v; core.shield = 1e9; } },
-  multi:  { name: 'SPLIT EMITTER', stat: 'MULTI-SHOT', vals: [1, 1, 2, 3], f: v => '+' + v, ds: 'Fires additional projectiles in a spread.', apply: v => { draft.multi += v; }, cap: () => stats.multi >= 9, min: 1 },
-  crit:   { name: 'NEURAL TARGETING', stat: 'CRIT CHANCE', vals: [0.04, 0.07, 0.12, 0.22], f: pct, ds: 'Crits deal 2× (2.5× above 30%). Golden sparks orbit the core.', apply: v => { draft.crit += v; }, cap: () => stats.crit >= 0.75 },
-  pierce: { name: 'RAIL PENETRATOR', stat: 'PIERCE', vals: [1, 1, 1, 2], f: v => '+' + v, ds: 'Projectiles punch through extra targets with comet tails.', apply: v => { draft.pierce += v; }, cap: () => stats.pierce >= 5, min: 1 },
-  chain:  { name: 'ARC CONDUCTOR', stat: 'CHAIN LIGHTNING', vals: [0.08, 0.12, 0.18, 0.32], f: pct, ds: 'Hits can arc lightning into 2 nearby hostiles.', apply: v => { draft.chain += v; }, cap: () => stats.chain >= 0.6 },
-  orb:    { name: 'SENTINEL ORBS', stat: 'COMPANION', vals: [1, 1, 2, 3], f: lvl, ds: 'Auto-firing orbs (max 5) that evolve every 2 levels.', apply: v => { draft.orb += v; }, cap: () => stats.orbLv >= 10, min: 1 },
-  lancer: { name: 'STAR LANCERS', stat: 'COMPANION', vals: [1, 1, 2, 3], f: lvl, ds: 'Little stars on the outer orbit fire piercing lances (max 3).', apply: v => { draft.lancer += v; }, cap: () => stats.lancerLv >= 8, min: 1 },
-  wisp:   { name: 'ARC WISPS', stat: 'COMPANION', vals: [1, 1, 2, 3], f: lvl, ds: 'Crackling stars that zap chain lightning into nearby hostiles (max 3).', apply: v => { draft.wisp += v; }, cap: () => stats.wispLv >= 8, min: 1 },
-  aegis:  { name: 'AEGIS MOTES', stat: 'COMPANION', vals: [1, 1, 2, 3], f: lvl, ds: 'Guardian motes circle close and shoot down enemy fire (max 4).', apply: v => { draft.aegis += v; }, cap: () => stats.aegisLv >= 6 },
-  hull:   { name: 'NANO REGENESIS', stat: 'MAX HULL', vals: [25, 40, 70, 120], f: v => '+' + v, ds: 'Reinforces the hull and repairs the same amount.', apply: v => { draft.hull += v; core.hp += v; } },
-  nova:   { name: 'NOVA CAPACITOR', stat: 'NOVA CHARGE', vals: [0.15, 0.25, 0.4, 0.7], f: pct, ds: 'Nova Burst charges faster.', apply: v => { draft.nova += v; } },
-  star:   { name: 'SUPERNOVA STAR', stat: 'LEGENDARY COMPANION', vals: [1, 1, 1, 1], legOnly: true, f: () => 'TIER ' + Math.min(5, stats.starLv + 1), ds: 'A blazing golden star joins your orbit and hurls exploding flares. Every legendary copy evolves it.', apply: () => { draft.star += 1; }, cap: () => stats.starLv >= 5 }
+  dmg:    { vals: [0.12, 0.2, 0.35, 0.65], f: pct, apply: v => { draft.dmg *= 1 + v; } },
+  rate:   { vals: [0.1, 0.17, 0.28, 0.5], f: pct, apply: v => { draft.rate *= 1 + v; }, cap: () => stats.rate >= 22 },
+  shield: { vals: [20, 35, 60, 110], f: v => '+' + v, apply: v => { draft.shield += v; core.shield = 1e9; } },
+  multi:  { vals: [1, 1, 2, 3], f: v => '+' + v, apply: v => { draft.multi += v; }, cap: () => stats.multi >= 9, min: 1 },
+  crit:   { vals: [0.04, 0.07, 0.12, 0.22], f: pct, apply: v => { draft.crit += v; }, cap: () => stats.crit >= 0.75 },
+  pierce: { vals: [1, 1, 1, 2], f: v => '+' + v, apply: v => { draft.pierce += v; }, cap: () => stats.pierce >= 5, min: 1 },
+  chain:  { vals: [0.08, 0.12, 0.18, 0.32], f: pct, apply: v => { draft.chain += v; }, cap: () => stats.chain >= 0.6 },
+  orb:    { vals: [1, 1, 2, 3], f: lvl, apply: v => { draft.orb += v; }, cap: () => stats.orbLv >= 10, min: 1 },
+  lancer: { vals: [1, 1, 2, 3], f: lvl, apply: v => { draft.lancer += v; }, cap: () => stats.lancerLv >= 8, min: 1 },
+  wisp:   { vals: [1, 1, 2, 3], f: lvl, apply: v => { draft.wisp += v; }, cap: () => stats.wispLv >= 8, min: 1 },
+  aegis:  { vals: [1, 1, 2, 3], f: lvl, apply: v => { draft.aegis += v; }, cap: () => stats.aegisLv >= 6 },
+  hull:   { vals: [25, 40, 70, 120], f: v => '+' + v, apply: v => { draft.hull += v; core.hp += v; } },
+  nova:   { vals: [0.15, 0.25, 0.4, 0.7], f: pct, apply: v => { draft.nova += v; } },
+  star:   { vals: [1, 1, 1, 1], legOnly: true, f: () => loc('card.tier', { n: Math.min(5, stats.starLv + 1) }), apply: () => { draft.star += 1; }, cap: () => stats.starLv >= 5 }
 };
+const cardTxt = (k, f) => loc('card.' + k + '.' + f);
 // companions ("little stars that shoot for you")
 const COMP = {
   lancer: { max: 8, n: lv => Math.min(3, Math.ceil(lv / 2)), orbit: 5.2, spin: 0.42, col: '#eafcff', names: ['', 'SHARD', 'SHARD', 'PRISM', 'PRISM', 'AURORA', 'AURORA', 'ZENITH', 'ZENITH'] },
@@ -842,65 +1694,81 @@ const COMP = {
   aegis:  { max: 6, n: lv => Math.min(4, lv), orbit: 2.05, spin: 2.3, col: '#c77dff', names: ['', 'MOTE', 'MOTE', 'WARD', 'WARD', 'BASTION', 'BASTION'] },
   star:   { max: 5, n: lv => lv > 0 ? 1 : 0, orbit: 6.3, spin: 0.22, col: '#ffbe0b', names: ['', 'EMBER', 'BLAZE', 'CORONA', 'PULSAR', 'SUPERNOVA'] }
 };
+// names & descriptions are localized: up.<id>.name · up.<id>.desc
+// CORE = permanent Core Abilities (decay on death) · SKILL = never lost on death
 const SHOP_CORE = [
-  { id: 'dmg',    name: 'CORE DAMAGE',     desc: '+8% base projectile damage', max: 25, base: 34, g: 1.40 },
-  { id: 'rate',   name: 'FIRE CYCLE',      desc: '+6% base fire rate', max: 20, base: 42, g: 1.42 },
-  { id: 'hull',   name: 'HULL INTEGRITY',  desc: '+15 max hull', max: 20, base: 30, g: 1.38 },
-  { id: 'shield', name: 'SHIELD MATRIX',   desc: '+10 max shield', max: 20, base: 36, g: 1.40 },
-  { id: 'regen',  name: 'REGEN CAPACITOR', desc: '+1.5 shield / sec', max: 15, base: 50, g: 1.44 },
-  { id: 'crit',   name: 'TARGETING SUITE', desc: '+2% critical hit chance', max: 15, base: 60, g: 1.46 },
-  { id: 'magnet', name: 'SHARD MAGNET',    desc: '+18% pickup range', max: 10, base: 26, g: 1.48 },
-  { id: 'speed',  name: 'RAIL VELOCITY',   desc: '+6% projectile speed', max: 10, base: 26, g: 1.44 },
-  { id: 'luck',   name: 'FORTUNE ENGINE',  desc: 'More Epic & Legendary cards, more unstable cards', max: 10, base: 80, g: 1.55 },
-  { id: 'yield',  name: 'SHARD REFINERY',  desc: '+10% shards from every pickup', max: 10, base: 70, g: 1.55 }
+  { id: 'dmg',    max: 25, base: 34, g: 1.40 },
+  { id: 'rate',   max: 20, base: 42, g: 1.42 },
+  { id: 'hull',   max: 20, base: 30, g: 1.38 },
+  { id: 'shield', max: 20, base: 36, g: 1.40 },
+  { id: 'regen',  max: 15, base: 50, g: 1.44 },
+  { id: 'crit',   max: 15, base: 60, g: 1.46 },
+  { id: 'magnet', max: 10, base: 26, g: 1.48 },
+  { id: 'speed',  max: 10, base: 26, g: 1.44 },
+  { id: 'luck',   max: 10, base: 80, g: 1.55 },
+  { id: 'yield',  max: 10, base: 70, g: 1.55 }
 ];
 const SHOP_SKILL = [
-  { id: 'orb',        name: 'SENTINEL ORBS',  desc: 'Auto-firing orbs. +1 orb per level (max 5) · new form every 2 levels', max: 10, base: 110, g: 1.6 },
-  { id: 'lancer',     name: 'STAR LANCERS',   desc: 'Little lance-firing stars on the outer orbit (max 3) · they evolve as you level them', max: 8, base: 130, g: 1.62 },
-  { id: 'wisp',       name: 'ARC WISPS',      desc: 'Crackling stars that zap chain lightning (max 3) · evolve with level', max: 8, base: 140, g: 1.62 },
-  { id: 'novaPow',    name: 'NOVA AMPLITUDE', desc: '+20% Nova Burst damage', max: 10, base: 90, g: 1.5 },
-  { id: 'novaCharge', name: 'NOVA REACTOR',   desc: '+12% Nova charge speed', max: 10, base: 70, g: 1.5 }
+  { id: 'orb',        max: 10, base: 110, g: 1.6 },
+  { id: 'lancer',     max: 8,  base: 130, g: 1.62 },
+  { id: 'wisp',       max: 8,  base: 140, g: 1.62 },
+  { id: 'novaPow',    max: 10, base: 90,  g: 1.5 },
+  { id: 'novaCharge', max: 10, base: 70,  g: 1.5 }
 ];
+const upName = it => loc('up.' + it.id + '.name'), upDesc = it => loc('up.' + it.id + '.desc');
 const shopCost = (it, lv) => Math.round(it.base * Math.pow(it.g, lv));
-const DECAY = 0.75; // share of permanent augment levels kept after a death
+// DEATH PENALTY — only CORE augments decay. Skills (Sentinel Orbs, Star Lancers, Arc Wisps, Nova Amplitude, Nova Reactor) are never lost.
+const DECAY = 0.75;      // default share of CORE augment levels kept after a death
+const DECAY_BEST = 0.90; // kept instead when the run reached a higher level than the previous run
+// PITY PROTOCOL — missing your own personal best 3 runs in a row grants a one-time −20% on every CORE augment
+const PITY_FAILS = 3, PITY_DISCOUNT = 0.2;
+// ECONOMY — every shard pickup dropped by a destroyed hostile is worth 2 (was 1)
+const KILL_SHARD = 2;
 const ORB_TIERS = ['—', 'SPARK', 'PRISM', 'HALO', 'PULSAR', 'SOLAR'];
 const ORB_COL = ['#00f3ff', '#00f3ff', '#c77dff', '#bff9ff', '#ff2a6d', '#ffbe0b'];
-const ORB_DESC = ['', 'single plasma bolts', 'faster prism bolts', 'twin shots + light halo', 'piercing pulsar lances', 'homing solar flares'];
+// orb form descriptions are localized: orb.1 … orb.5
+// FX names & descriptions are localized: skin.<id>.name · skin.<id>.desc
 const FX_ITEMS = {
   shot: [
-    { id: 'plasma',  name: 'PLASMA STREAK', desc: 'Standard-issue core plasma, tinted by ascension', cost: 0,   sw: 'linear-gradient(135deg,#00f3ff,#9d4edd)' },
-    { id: 'prism',   name: 'PRISM LANCE',   desc: 'Refracting tri-color lances with sparkle tails', cost: 190, sw: 'linear-gradient(135deg,#00f3ff,#ffffff,#c77dff)' },
-    { id: 'inferno', name: 'INFERNO RAIL',  desc: 'Molten rounds that shed burning embers', cost: 350, sw: 'linear-gradient(135deg,#ff2a00,#ffbe0b)' },
-    { id: 'void',    name: 'VOID NEEDLE',   desc: 'Black-matter needles wrapped in violet distortion', cost: 540, sw: 'radial-gradient(circle,#000 30%,#9d4edd 75%)' },
-    { id: 'solar',   name: 'SOLAR LANCE',   desc: 'Golden god-fire with white-hot cores', cost: 830, sw: 'linear-gradient(135deg,#fff3c4,#ffbe0b,#ff8a00)' }
+    { id: 'plasma',  cost: 0,   sw: 'linear-gradient(135deg,#00f3ff,#9d4edd)' },
+    { id: 'prism',   cost: 190, sw: 'linear-gradient(135deg,#00f3ff,#ffffff,#c77dff)' },
+    { id: 'inferno', cost: 350, sw: 'linear-gradient(135deg,#ff2a00,#ffbe0b)' },
+    { id: 'void',    cost: 540, sw: 'radial-gradient(circle,#000 30%,#9d4edd 75%)' },
+    { id: 'solar',   cost: 830, sw: 'linear-gradient(135deg,#fff3c4,#ffbe0b,#ff8a00)' }
   ],
   kill: [
-    { id: 'burst',       name: 'NEON BURST',  desc: 'Classic neon particle blast', cost: 0,   sw: 'radial-gradient(circle,#fff,#ff0055 60%,#000)' },
-    { id: 'glitch',      name: 'GLITCH POP',  desc: 'Hostiles de-rez into RGB pixel noise', cost: 260, sw: 'linear-gradient(90deg,#ff0055 33%,#00f3ff 33% 66%,#fff 66%)' },
-    { id: 'supernova',   name: 'SUPERNOVA',   desc: 'Star-flare rays and a blinding ring', cost: 450, sw: 'radial-gradient(circle,#fff 10%,#ffbe0b 40%,#ff0055 70%,#000)' },
-    { id: 'singularity', name: 'SINGULARITY', desc: 'Hostiles implode into micro black holes', cost: 670, sw: 'radial-gradient(circle,#000 35%,#9d4edd 55%,#00f3ff 70%,#000)' }
+    { id: 'burst',       cost: 0,   sw: 'radial-gradient(circle,#fff,#ff0055 60%,#000)' },
+    { id: 'glitch',      cost: 260, sw: 'linear-gradient(90deg,#ff0055 33%,#00f3ff 33% 66%,#fff 66%)' },
+    { id: 'supernova',   cost: 450, sw: 'radial-gradient(circle,#fff 10%,#ffbe0b 40%,#ff0055 70%,#000)' },
+    { id: 'singularity', cost: 670, sw: 'radial-gradient(circle,#000 35%,#9d4edd 55%,#00f3ff 70%,#000)' }
   ]
 };
+const skinName = it => loc('skin.' + it.id + '.name'), skinDesc = it => loc('skin.' + it.id + '.desc');
 
 /* =========================================================
    PROFILE / LEADERBOARD
    ========================================================= */
 let callsign = store.get(KEY.name, '');
 let profile = null;
-function defProfile() { return { shards: 0, hs: 0, bestLevel: 1, bestStage: 0, bestCombo: 0, runs: 0, shop: {}, skills: {}, fx: { owned: ['plasma', 'burst'], shot: 'plasma', kill: 'burst' } }; }
+// lastLevel = level reached in the previous run (null before the first run)
+// hsFails   = runs in a row that missed the PERSONAL best · pity / pityRun = the one-time −20% core discount
+function defProfile() { return { shards: 0, hs: 0, bestLevel: 1, bestStage: 0, bestCombo: 0, runs: 0, lastLevel: null, hsFails: 0, pity: false, pityRun: 0, shop: {}, skills: {}, fx: { owned: ['plasma', 'burst'], shot: 'plasma', kill: 'burst' } }; }
 function normProfile(p) {
   SHOP_CORE.forEach(s => { if (typeof p.shop[s.id] !== 'number') p.shop[s.id] = 0; });
   SHOP_SKILL.forEach(s => { if (typeof p.skills[s.id] !== 'number') p.skills[s.id] = 0; });
   if (!p.fx || !Array.isArray(p.fx.owned)) p.fx = defProfile().fx;
+  if (typeof p.lastLevel !== 'number') p.lastLevel = null;
+  if (typeof p.hsFails !== 'number') p.hsFails = 0;
+  if (typeof p.pityRun !== 'number') p.pityRun = 0;
+  p.pity = !!p.pity;
   return p;
 }
 function loadProfile() { const d = defProfile(), s = store.get(KEY.prof(callsign), {}); profile = normProfile(Object.assign(d, s, { shop: Object.assign({}, s.shop), skills: Object.assign({}, s.skills) })); }
 const saveProfile = () => { if (callsign && profile) store.set(KEY.prof(callsign), profile); };
-// Neural decay: a breached core only restores 75% of its permanent augments
-function decayProfile() {
+// Neural decay: a breached core keeps `keep` (75% / 90%) of its CORE augments · skills are never touched
+function decayProfile(keep) {
   const lost = [];
-  const run = (list, bag) => list.forEach(it => { const a = bag[it.id], b = Math.round(a * DECAY); if (b < a) { lost.push([it.name, a, b]); bag[it.id] = b; } });
-  run(SHOP_CORE, profile.shop); run(SHOP_SKILL, profile.skills);
+  SHOP_CORE.forEach(it => { const a = profile.shop[it.id], b = Math.round(a * keep); if (b < a) { lost.push([it.id, a, b]); profile.shop[it.id] = b; } });
   return lost;
 }
 // Local top 5 — kept as an offline fallback. Returns the local rank (0-based) or -1.
@@ -913,20 +1781,19 @@ function pushLocalBoard(entry) {
 let authUser = null, run = null;
 // short public ID (e.g. 7F3A) — the same tag the leaderboard and your admin winner list show
 const tagOf = id => id ? String(id).replace(/-/g, '').slice(0, 4).toUpperCase() : '';
-const firstName = u => { const m = (u && u.user_metadata) || {}; const n = String(m.full_name || m.name || '').trim(); return n ? n.split(/\s+/)[0].toUpperCase().slice(0, 12) : 'PLAYER'; };
+const firstName = u => { const m = (u && u.user_metadata) || {}; const n = String(m.full_name || m.name || '').trim(); return n ? n.split(/\s+/)[0].toUpperCase().slice(0, 12) : loc('hub.player'); };
 function renderAuth() {
   const on = !!authUser;
   $('btnGLogin').classList.toggle('hidden', on || !sb);
   $('gMe').classList.toggle('hidden', !on);
   if (on) $('gName').textContent = firstName(authUser) + ' #' + tagOf(authUser.id);
-  $('gNote').textContent = !sb ? 'GLOBAL BOARD OFFLINE · PLAYING LOCALLY'
-    : on ? 'YOUR RUNS ARE SIGNED TO THIS GOOGLE ACCOUNT' : 'ONLY SIGNED-IN RUNS REACH THE GLOBAL BOARD';
+  $('gNote').textContent = !sb ? loc('hub.noteOffline') : on ? loc('hub.noteOn') : loc('hub.noteOff');
 }
 async function gLogin() {
   if (!sb) return;
   SFX.click();
   const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + location.pathname, queryParams: { prompt: 'select_account' } } });
-  if (error) { console.error('Google sign-in failed:', error); toast('GOOGLE SIGN-IN FAILED'); }
+  if (error) { console.error('Google sign-in failed:', error); toast(loc('net.gFail')); }
 }
 async function gLogout() {
   SFX.click();
@@ -942,37 +1809,36 @@ function beginRankedRun() {
     .catch(err => { console.error('start_run failed:', err); return null; });
   run = r;
 }
-const REJECT_TXT = {
-  RUN_TOO_SHORT: 'RUN TOO SHORT TO RANK', LEVEL_TOO_FAST: 'REJECTED · LEVEL TOO FAST', TOO_MANY_KILLS: 'REJECTED · TOO MANY KILLS',
-  SCORE_TOO_HIGH: 'REJECTED · SCORE TOO HIGH', IMPOSSIBLE_STAGE: 'REJECTED · IMPOSSIBLE ASCENSION', RUN_EXPIRED: 'RUN EXPIRED · TOO LONG',
-  BAD_NAME: 'REJECTED · INVALID CALLSIGN', BAD_VALUES: 'REJECTED · INVALID RUN'
-};
+// server rejection reasons → localized text (rej.<CODE>)
+const REJECT_CODES = ['RUN_TOO_SHORT', 'LEVEL_TOO_FAST', 'TOO_MANY_KILLS', 'SCORE_TOO_HIGH', 'IMPOSSIBLE_STAGE', 'RUN_EXPIRED', 'BAD_NAME', 'BAD_VALUES'];
 // resolves to { ok:true, rank, handle } or { ok:false, msg, bad }
 async function submitRun(entry) {
   const r = run; run = null;
-  if (!sb) return { ok: false, msg: 'GLOBAL BOARD OFFLINE · SAVED LOCALLY' };
-  if (!r) return { ok: false, msg: authUser ? 'UNRANKED RUN' : 'UNRANKED · SIGN IN WITH GOOGLE IN THE HUB TO COMPETE' };
-  if (entry.score <= 0) return { ok: false, msg: 'NO SCORE TO SUBMIT' };
+  if (!sb) return { ok: false, msg: loc('net.offline') };
+  if (!r) return { ok: false, msg: authUser ? loc('net.unranked') : loc('net.unrankedSign') };
+  if (entry.score <= 0) return { ok: false, msg: loc('net.noScore') };
   const id = await r.p;
-  if (!id) return { ok: false, bad: true, msg: 'RUN NOT REGISTERED · CHECK CONNECTION' };
+  if (!id) return { ok: false, bad: true, msg: loc('net.notReg') };
   try {
     const { data, error } = await sb.rpc('submit_score', { p_run: id, p_name: entry.name, p_score: entry.score, p_level: entry.level, p_stage: entry.stage, p_kills: entry.kills });
     if (error) throw error;
-    if (!data || !data.ok) return { ok: false, bad: true, msg: REJECT_TXT[data && data.reason] || 'SCORE REJECTED' };
+    if (!data || !data.ok) return { ok: false, bad: true, msg: REJECT_CODES.includes(data && data.reason) ? loc('rej.' + data.reason) : loc('net.rejected') };
     return { ok: true, rank: data.rank, tag: data.tag };
   } catch (err) {
     console.error('submit_score failed:', err);
-    return { ok: false, bad: true, msg: 'UPLOAD FAILED · ' + String((err && err.message) || 'ERROR').slice(0, 24).toUpperCase() };
+    return { ok: false, bad: true, msg: loc('net.uploadFail', { err: String((err && err.message) || 'ERROR').slice(0, 24).toUpperCase() }) };
   }
 }
 // Draws the hub top 5. Every value goes in via textContent, so names from the database can never inject HTML.
+let lbLast = null; // last drawn board — redrawn in place when the language changes
 function drawBoard(rows, online) {
+  lbLast = { rows, online };
   const ul = $('hubLb'), st = $('lbStat');
-  $('lbTitle').textContent = online ? '// VERIFIED TOP 5' : '// LOCAL TOP 5';
-  st.textContent = online ? 'LIVE' : sb ? 'OFFLINE · LOCAL' : 'LOCAL ONLY';
+  $('lbTitle').textContent = online ? loc('lb.verified') : loc('lb.local');
+  st.textContent = online ? loc('lb.live') : sb ? loc('lb.offlineLocal') : loc('lb.localOnly');
   st.classList.toggle('live', online);
   ul.innerHTML = '';
-  if (!rows.length) { ul.innerHTML = '<li class="empty">NO COMBAT RECORDS — BE THE FIRST</li>'; return; }
+  if (!rows.length) { ul.innerHTML = '<li class="empty"></li>'; ul.firstChild.textContent = loc('lb.empty'); return; }
   const myId = authUser && authUser.id;
   rows.forEach((e, i) => {
     const li = document.createElement('li'); if (myId && online ? e.user_id === myId : e.name === callsign) li.className = 'me';
@@ -980,7 +1846,7 @@ function drawBoard(rows, online) {
     li.querySelector('.rk').textContent = '#' + (i + 1);
     const nm = li.querySelector('.nm'); nm.textContent = String(e.name == null ? '???' : e.name).slice(0, 12);
     if (e.tag) { const sm = document.createElement('small'); sm.textContent = '#' + String(e.tag).slice(0, 6); nm.appendChild(sm); } // tells same-named players apart
-    li.querySelector('.lv').textContent = 'LV ' + (Number(e.level) || 1);
+    li.querySelector('.lv').textContent = loc('lb.lv', { n: Number(e.level) || 1 });
     li.querySelector('.sc').textContent = fmt(Number(e.score) || 0);
     ul.appendChild(li);
   });
@@ -989,7 +1855,8 @@ let lbReq = 0, lbTimer = 0;
 async function loadLeaderboard() {
   const req = ++lbReq;
   if (!sb) { drawBoard(store.get(KEY.lb, []), false); return; }
-  if (!$('hubLb').children.length) $('hubLb').innerHTML = '<li class="empty">SYNCING GLOBAL RECORDS…</li>';
+  if (!lbLast) { $('lbTitle').textContent = loc('lb.global'); $('lbStat').textContent = loc('lb.syncing'); }
+  if (!$('hubLb').children.length) { $('hubLb').innerHTML = '<li class="empty"></li>'; $('hubLb').firstChild.textContent = loc('lb.syncingGlobal'); }
   try {
     const { data, error } = await sb.from('leaderboard_best').select('user_id, tag, name, score, level')
       .order('score', { ascending: false }).order('created_at', { ascending: true }).limit(5);
@@ -1035,6 +1902,20 @@ const xpNeed = L => Math.round(6 + 4.5 * L + 1.1 * Math.pow(L, 1.5));
 const hpScale = L => 1 + 0.11 * (L - 1) + 0.0065 * (L - 1) * (L - 1);
 const comboMul = () => 1 + Math.min(4, combo.n * 0.02);
 const orbTier = () => stats.orbLv <= 0 ? 0 : Math.min(5, Math.ceil(stats.orbLv / 2));
+// hostile strength multiplier: 0.85 below level 50 (HP & damage −15%) · 1.0 (original base values) from level 50 on
+const botScale = () => level < BOT_NERF_LV ? BOT_NERF : 1;
+// called on every level-up: hostiles still alive when the player reaches LV 50 get their full original HP back
+function syncBotScale() {
+  const s = botScale();
+  const fix = u => {
+    if (!u || u.bs == null || u.bs === s) return;
+    const k = s / u.bs; u.hp *= k; u.max *= k;
+    if (u.shieldMax) { u.shieldHp *= k; u.shieldMax *= k; }
+    u.bs = s;
+  };
+  for (const e of enemies) fix(e);
+  fix(boss);
+}
 
 function recompute() {
   const s = profile.shop, k = profile.skills, st = core.stage;
@@ -1109,9 +1990,9 @@ function spawnEnemy(type, angle, o = {}) {
   const p = o.x != null ? { x: o.x, y: o.y } : edgePoint(angle, o.extra || 0);
   const L = level;
   const elite = o.elite != null ? o.elite : (key !== 'mite' && Math.random() < Math.min(0.18, 0.01 + L * 0.0015 + core.stage * 0.015));
-  const hp = T.hp * hpScale(L) * (1 + gt / 700) * (elite ? 2.8 : 1) * (o.hpMul || 1);
+  const bs = botScale(), hp = T.hp * hpScale(L) * (1 + gt / 700) * (elite ? 2.8 : 1) * (o.hpMul || 1) * bs;
   const e = {
-    id: ++eid, key, t: T, x: p.x, y: p.y, vx: 0, vy: 0, r: T.r * (elite ? 1.35 : 1), hp, max: hp,
+    id: ++eid, key, t: T, x: p.x, y: p.y, vx: 0, vy: 0, r: T.r * (elite ? 1.35 : 1), hp, max: hp, bs,
     spd: T.spd * (1 + Math.min(1, L * 0.012)) * rand(.88, 1.12) * (elite ? 0.9 : 1),
     wob: rand(0, TAU), wf: rand(1.5, 3), rot: rand(0, TAU), flash: 0, dmg: T.dmg * (1 + L * 0.028) * (elite ? 1.45 : 1),
     elite, dead: false, cd: rand(1, 2.5), st: 0, charge: 0, alpha: 1, fuse: 0, age: 0, kick: 0,
@@ -1230,24 +2111,27 @@ function updateEnemies(d) {
    ========================================================= */
 function spawnBoss(idx, echo = 0) {
   const B = BOSSES[idx], L = echo ? level : BOSS_LEVELS[idx];
-  const hp = 26 * L * L * B.hpMul * (echo ? Math.pow(1.3, echo) : 1);
+  const bs = botScale(), hp = 26 * L * L * B.hpMul * (echo ? Math.pow(1.3, echo) : 1) * bs;
   const d = Math.hypot(W, H) / 2 + 90;
   boss = {
     idx, echo, B, x: core.x, y: core.y - d, ang: -Math.PI / 2, dist: d, orbit: Math.min(MIN * 0.37, 270),
-    r: clamp(MIN * 0.07, 34, 60) * B.rMul, hp, max: hp, rot: 0, t: 0, fireCd: 3, atkCd: 5, spawnCd: 6, swarmCd: 7, seq: 0, atk: 0,
+    r: clamp(MIN * 0.07, 34, 60) * B.rMul, hp, max: hp, bs, rot: 0, t: 0, fireCd: 3, atkCd: 5, spawnCd: 6, swarmCd: 7, seq: 0, atk: 0,
     flash: 0, entering: true, dir: Math.random() < .5 ? 1 : -1, phase: 1, form: 1, trans: 0, stun: 0, charge: null, dash: null, spiralT: 0, spiral: 0, heads: [], segs: [], shardA: 0
   };
   if (idx === 3) for (let i = 0; i < 16; i++) boss.segs.push({ x: boss.x, y: boss.y - i * 12, a: 0 });
-  $('bossName').textContent = (echo ? 'ECHO ' + echo + ' // ' : 'TITAN NODE // ') + B.name;
-  $('bossPhase').textContent = B.forms > 1 ? 'FORM I' : 'PHASE I';
+  $('bossName').textContent = bossLabel(boss);
+  $('bossPhase').textContent = bossPhaseLabel(boss);
   $('bossbar').classList.remove('hidden');
-  $('warnTitle').textContent = echo ? '⚠ TITAN ECHO DETECTED' : '⚠ TITAN NODE INBOUND';
-  $('warnSub').textContent = echo ? B.name + ' · RESONANCE ' + echo : B.name + ' · ASCENSION GATE ' + (idx + 1) + '/5' + (B.forms > 1 ? ' · TWO FORMS' : '');
+  $('warnTitle').textContent = echo ? loc('boss.warnEcho') : loc('boss.warn');
+  $('warnSub').textContent = echo ? loc('boss.subEcho', { name: B.name, n: echo }) : loc('boss.subGate', { name: B.name, n: idx + 1 }) + (B.forms > 1 ? loc('boss.twoForms') : '');
   replay($('warn'), 'show');
   core.shield = stats.maxShield; core.shFlash = 0.6;
-  texts.push({ x: core.x, y: core.y + core.R * 3.4, txt: 'SHIELDS RECHARGED', col: '#c79bff', size: 12, life: 1.6, max: 1.6 });
+  texts.push({ x: core.x, y: core.y + core.R * 3.4, txt: loc('float.shields'), col: '#c79bff', size: 12, life: 1.6, max: 1.6 });
   SFX.bossSpawn(idx); MUSIC.set('boss'); shake = Math.max(shake, 14); warp = 3;
 }
+// boss bar labels (rebuilt on a language switch)
+const bossLabel = b => loc(b.echo ? 'boss.echo' : 'boss.titan', { n: b.echo, name: b.form === 2 ? b.B.name2 : b.B.name });
+const bossPhaseLabel = b => loc(b.B.forms > 1 ? (b.form === 2 ? 'boss.form2' : 'boss.form1') : (b.phase === 2 ? 'boss.phase2' : 'boss.phase1'));
 function nextBoss() { if (state === 'play' && !boss && !cine && !modal && bossQueue.length) { const [i, e] = bossQueue.shift(); spawnBoss(i, e); } }
 function updateSegs(b) {
   let px = b.x, py = b.y; const gap = b.r * 0.6;
@@ -1279,9 +2163,9 @@ function transformBoss(b) {
   b.fireCd = 2.6; b.atkCd = 4; b.spawnCd = 6; b.swarmCd = 5;
   for (const o of eBullets) o.hp = 0;
   if (b.idx === 3) { const last = b.segs[b.segs.length - 1]; for (let i = 0; i < 6; i++) b.segs.push({ x: last.x, y: last.y, a: last.a }); }
-  $('bossName').textContent = (b.echo ? 'ECHO ' + b.echo + ' // ' : 'TITAN NODE // ') + b.B.name2;
-  $('bossPhase').textContent = 'FORM II';
-  $('warnTitle').textContent = '⚠ ' + b.B.name2; $('warnSub').textContent = 'THE TITAN SHEDS ITS SHELL · SECOND FORM'; replay($('warn'), 'show');
+  $('bossName').textContent = bossLabel(b);
+  $('bossPhase').textContent = bossPhaseLabel(b);
+  $('warnTitle').textContent = '⚠ ' + b.B.name2; $('warnSub').textContent = loc('boss.shell'); replay($('warn'), 'show');
   flash = 0.9; flashCol = '255,40,90'; shake = 30; chroma = 1; hitStop = 0.2;
   burst(b.x, b.y, 140, [b.B.col, '#ffffff', '#ff0055', b.B.col2], 520, 4, 'sq');
   for (let i = 0; i < 4; i++) rings.push({ x: b.x, y: b.y, r: b.r, vr: 300 + i * 220, life: 1, max: 1, col: i % 2 ? '#ffffff' : '#ff0055', w: 6 - i });
@@ -1304,14 +2188,14 @@ function updateBoss(d) {
   if (b.entering || b.stun > 0) return;
   if (B.forms === 1 && b.phase === 1 && b.hp < b.max * 0.5) {
     b.phase = 2; SFX.roar(); shake = 18; flash = 0.5; flashCol = '255,0,85'; chroma = 0.7; hitStop = 0.12;
-    $('bossPhase').textContent = 'PHASE II // ENRAGED';
-    texts.push({ x: b.x, y: b.y - b.r * 2, txt: 'ENRAGED', col: '#ff0055', size: 22, life: 1.3, max: 1.3, pop: 1 });
+    $('bossPhase').textContent = bossPhaseLabel(b);
+    texts.push({ x: b.x, y: b.y - b.r * 2, txt: loc('boss.enraged'), col: '#ff0055', size: 22, life: 1.3, max: 1.3, pop: 1 });
     rings.push({ x: b.x, y: b.y, r: b.r, vr: 600, life: .7, max: .7, col: '#ff0055', w: 6 });
   }
   // ----- break-able beam charge (Obelisk & Seraph) -----
   if (b.charge) {
     const c = b.charge; c.t += d;
-    if (c.dealt >= c.need) breakBoss(b, 'BREAK!');
+    if (c.dealt >= c.need) breakBoss(b, loc('boss.break'));
     else if (c.t >= c.dur) {
       b.charge = null;
       beams.push({ x: b.x, y: b.y, life: 0.5, max: 0.5, col: bossCol(b), w: b.r * 0.55 });
@@ -1322,10 +2206,10 @@ function updateBoss(d) {
   // ----- Leviathan dash (form II dashes twice) -----
   if (b.dash) {
     const s = b.dash; s.t += d;
-    if (s.st === 1) { if (s.dealt >= s.need) breakBoss(b, 'DEFLECTED!'); else if (s.t > (F2 ? 0.85 : 1.1)) { s.st = 2; s.t = 0; SFX.roar(); } }
+    if (s.st === 1) { if (s.dealt >= s.need) breakBoss(b, loc('boss.deflected')); else if (s.t > (F2 ? 0.85 : 1.1)) { s.st = 2; s.t = 0; SFX.roar(); } }
     else if (s.st === 2) {
       const a = Math.atan2(core.y - b.y, core.x - b.x); b.x += Math.cos(a) * (F2 ? 680 : 560) * d; b.y += Math.sin(a) * (F2 ? 680 : 560) * d;
-      if (s.dealt >= s.need) breakBoss(b, 'DEFLECTED!');
+      if (s.dealt >= s.need) breakBoss(b, loc('boss.deflected'));
       else if (Math.hypot(core.x - b.x, core.y - b.y) < core.R * 1.4 + b.r * 0.6) { damageCore((26 + level * 0.6) * (1 + b.echo * 0.2)); s.st = 3; shake = 24; burst(b.x, b.y, 40, ['#ff1744', '#ffffff'], 300, 3); }
     } else if (s.st === 3) {
       const a = Math.atan2(b.y - core.y, b.x - core.x), dd = Math.hypot(b.x - core.x, b.y - core.y);
@@ -1403,14 +2287,15 @@ function updateBoss(d) {
       break;
   }
 }
-function damageBoss(dmg, crit, x, y) {
+// nova = true → the Supernova hit: always its exact share (no stun bonus) and it never refunds its own charge
+function damageBoss(dmg, crit, x, y, nova) {
   const b = boss; if (!b || b.entering || b.trans > 0) return;
-  if (b.stun > 0) dmg *= 1.5;
+  if (b.stun > 0 && !nova) dmg *= 1.5;
   b.hp -= dmg; b.flash = 0.06;
   if (b.charge) b.charge.dealt += dmg;
   if (b.dash && b.dash.st && b.dash.st < 3) b.dash.dealt += dmg;
   if (crit || Math.random() < 0.12) dmgText(x, y, dmg, crit);
-  novaCharge = Math.min(1, novaCharge + dmg / b.max * 0.18 * stats.novaGain);
+  if (!nova) novaCharge = Math.min(1, novaCharge + dmg / b.max * 0.18 * stats.novaGain);
   if (b.hp <= 0) { if (b.form < b.B.forms) transformBoss(b); else killBoss(); }
 }
 function killBoss() {
@@ -1427,7 +2312,7 @@ function killBoss() {
   if (!b.echo && core.stage < 5) { startAscension(b.x, b.y); return; }
   flash = 1; flashCol = '255,240,200'; shake = 26; chroma = 1; hitStop = 0.25;
   draft.dmg *= 1.1; recompute();
-  bannerShow('// ECHO PURGED', 'OVERCHARGE', '+10% DAMAGE FOR THIS RUN', '#ffbe0b');
+  bannerShow(loc('ban.echoTop'), loc('ban.echo'), loc('ban.echoSub'), '#ffbe0b');
   for (const e of enemies) if (Math.hypot(e.x - core.x, e.y - core.y) < MIN * 0.45) killEnemy(e, true);
   MUSIC.set('play');
   setTimeout(nextBoss, 2500);
@@ -1443,9 +2328,9 @@ function burst(x, y, n, cols, spd, size = 2.5, type) {
     parts.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: l, max: l, col: cols[i % cols.length], sz: rand(.6, 1.4) * size, type });
   }
 }
-function dropShard(x, y, val, xpv, spd = 120) {
+function dropShard(x, y, val, xpv, spd = 120, big = val >= 2) {
   const a = rand(0, TAU), s = rand(30, spd);
-  shards.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, val, xp: xpv, age: 0, rot: rand(0, TAU), big: val >= 2 });
+  shards.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, val, xp: xpv, age: 0, rot: rand(0, TAU), big });
 }
 function dmgText(x, y, v, crit) {
   if (texts.length > 40) texts.shift();
@@ -1612,12 +2497,13 @@ function chainArc(from, dmg, n = 2, col) {
 function killEnemy(e, silent) {
   if (e.dead) return; e.dead = true; kills++;
   combo.n++; combo.t = 2.6; if (combo.n > combo.best) combo.best = combo.n;
-  if (combo.n % 50 === 0) { overdrive = 6; SFX.overdrive(); bannerShow('// COMBO ×' + combo.n, 'OVERDRIVE', 'FIRE RATE +35% · DAMAGE +25%', '#ffbe0b'); flash = 0.25; flashCol = '255,190,11'; }
+  if (combo.n % 50 === 0) { overdrive = 6; SFX.overdrive(); bannerShow(loc('ban.comboTop', { n: combo.n }), loc('ban.overdrive'), loc('ban.overdriveSub'), '#ffbe0b'); flash = 0.25; flashCol = '255,190,11'; }
   else if (combo.n % 10 === 0) SFX.combo(combo.n);
   score += e.t.sc * (1 + level * 0.06) * comboMul() * (e.elite ? 4 : 1);
   killFx(e);
   const xpv = e.t.xp * (1 + level * 0.1) * (e.elite ? 3 : 1), n = e.t.sh * (e.elite ? 3 : 1);
-  if (n === 0) xp += xpv; else for (let i = 0; i < n; i++) dropShard(e.x, e.y, e.elite ? 2 : 1, xpv / n);
+  // 2 shards per pickup (elite pickups 4) — KILL_SHARD doubles the old 1-shard reward of every kill
+  if (n === 0) xp += xpv; else for (let i = 0; i < n; i++) dropShard(e.x, e.y, (e.elite ? 2 : 1) * KILL_SHARD, xpv / n, 120, e.elite);
   novaCharge = Math.min(1, novaCharge + 0.008 * stats.novaGain * (e.elite ? 3 : 1));
   if (e.t.split) for (let i = 0; i < 3; i++) spawnEnemy('mite', null, { x: e.x + rand(-8, 8), y: e.y + rand(-8, 8), elite: false });
   if (e.t.beh === 'bomber') {
@@ -1631,29 +2517,32 @@ function killEnemy(e, silent) {
 }
 function damageCore(dmg) {
   if (state !== 'play' || cine) return;
+  dmg *= botScale(); // every hit on the core comes from a hostile: −15% below LV 50, full damage from LV 50 on
   core.lastHit = gt;
   if (core.shield > 0) { const a = Math.min(core.shield, dmg); core.shield -= a; dmg -= a; core.shFlash = .3; SFX.shieldHit(); }
   if (dmg > 0) {
     core.hp -= dmg; core.flash = .25; hurtV = 1; chroma = Math.max(chroma, 0.45); shake = Math.max(shake, 8 + dmg * 0.3); SFX.damage();
-    if (combo.n >= 10) texts.push({ x: core.x, y: core.y - core.R * 4, txt: 'COMBO LOST', col: '#ff0055', size: 13, life: 1, max: 1 });
+    if (combo.n >= 10) texts.push({ x: core.x, y: core.y - core.R * 4, txt: loc('float.comboLost'), col: '#ff0055', size: 13, life: 1, max: 1 });
     combo.n = 0; combo.t = 0;
     texts.push({ x: core.x + rand(-20, 20), y: core.y - core.R * 2.8, txt: '-' + Math.round(dmg), col: '#ff0055', size: 16, life: 1, max: 1 });
   }
   if (core.hp <= 0) { core.hp = 0; gameOver(); }
 }
+// SUPERNOVA (Nova Burst) — the ultimate. Base strength:
+//  · standard hostiles: every one of them is destroyed outright (1-shot, shields ignored, elites included)
+//  · Titans: exactly 30% of the boss's max HP · NOVA AMPLITUDE scales this (+20% per level → stats.novaDmg)
+const NOVA_BOSS_PCT = 0.30;
 function useNova() {
   if (state !== 'play' || paused || cine || novaCharge < 1) return;
   novaCharge = 0; novaFx = { t: 0 }; slowmo = 0.6; flash = 0.75; flashCol = '255,225,160'; shake = 22; chroma = 1;
   SFX.nova();
-  // a shockwave, not a screen-wipe: damage is capped per target so tough hostiles survive it
-  const base = stats.dmg * 9 * stats.novaDmg;
-  for (const e of enemies) {
+  for (const e of enemies) { // the loop also reaches mites split off by hostiles destroyed in this same blast
     if (e.dead) continue;
-    const dx = e.x - core.x, dy = e.y - core.y, d = Math.hypot(dx, dy) || 1, push = Math.min(150, 90000 / (d * d) + 30);
-    e.hp -= Math.min(base, e.max * (e.elite ? 0.22 : 0.45)); e.shieldHp *= 0.5; e.flash = .2; e.x += dx / d * push; e.y += dy / d * push;
-    if (e.hp <= 0) killEnemy(e, true);
+    e.shieldHp = 0; e.hp = 0; e.flash = .2;
+    killEnemy(e, true);
   }
-  if (boss && !boss.entering) damageBoss(Math.min(stats.dmg * 18 * stats.novaDmg, boss.max * 0.04), true, boss.x, boss.y);
+  if (boss && !boss.entering) damageBoss(boss.max * NOVA_BOSS_PCT * stats.novaDmg, true, boss.x, boss.y, true);
+  novaCharge = 0; // kills made by the blast never refund the Supernova's own charge
   for (const o of eBullets) if (o.hp > 0) { o.hp = 0; burst(o.x, o.y, 5, ['#ffbe0b', '#ffffff'], 120, 2); }
   for (let i = 0; i < 5; i++) rings.push({ x: core.x, y: core.y, r: core.R, vr: 700 + i * 300, life: 1.1, max: 1.1, col: i % 2 ? '#ffffff' : '#ffbe0b', w: 7 - i });
   burst(core.x, core.y, 160, ['#ffbe0b', '#ffffff', '#ff8a00', STAGE_COL[core.stage]], 700, 3.5);
@@ -1664,7 +2553,7 @@ function legendSurge() {
   flash = 0.9; flashCol = '255,200,60'; chroma = 0.8; slowmo = 0.5; shake = 14;
   for (let i = 0; i < 4; i++) rings.push({ x: core.x, y: core.y, r: core.R, vr: 380 + i * 240, life: 1.2, max: 1.2, col: i % 2 ? '#fff3c4' : '#ffbe0b', w: 6 - i });
   burst(core.x, core.y, 130, ['#ffbe0b', '#fff3c4', '#ffffff'], 540, 3.2);
-  bannerShow('// LEGENDARY SURGE', 'LEGENDARY', 'FULL REPAIR · OVERDRIVE · NOVA +40%', '#ffbe0b');
+  bannerShow(loc('ban.legTop'), loc('ban.leg'), loc('ban.legSub'), '#ffbe0b');
 }
 function flareBoom(b) {
   const R = 55 + 8 * stats.starLv;
@@ -1805,9 +2694,9 @@ function update(dt) {
     if (level > 150 && (level - 150) % 15 === 0) { echoes++; bossQueue.push([(Math.random() * 5) | 0, echoes]); bossDelay = 1.6; }
   }
   if (lv) {
-    recompute(); replay($('hLevel'), 'bump'); SFX.levelUp(); BG.pulse = 1;
+    recompute(); syncBotScale(); replay($('hLevel'), 'bump'); SFX.levelUp(); BG.pulse = 1;
     rings.push({ x: core.x, y: core.y, r: core.R, vr: 600, life: .6, max: .6, col: '#00f3ff', w: 3 });
-    texts.push({ x: core.x, y: core.y - core.R * 3.2, txt: 'CORE GROWTH +3% DMG' + (level % DRAFT_EVERY ? ' · OVERCLOCK IN ' + (DRAFT_EVERY - level % DRAFT_EVERY) : ''), col: '#7ffaff', size: 11, life: 1.3, max: 1.3 });
+    texts.push({ x: core.x, y: core.y - core.R * 3.2, txt: loc('float.growth') + (level % DRAFT_EVERY ? loc('float.overclockIn', { n: DRAFT_EVERY - level % DRAFT_EVERY }) : ''), col: '#7ffaff', size: 11, life: 1.3, max: 1.3 });
   }
   if (draftQueue.length && !modal && !cine) openDraft();
   else if (bossQueue.length && !boss && !cine && !modal) { bossDelay -= d; if (bossDelay <= 0) nextBoss(); }
@@ -2499,7 +3388,7 @@ function drawBoss(b, t) {
     ctx.strokeStyle = 'rgba(255,190,11,0.25)'; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(hx, hy, R * 1.55, 0, TAU); ctx.stroke();
     ctx.strokeStyle = '#ffbe0b'; ctx.shadowColor = '#ffbe0b'; ctx.shadowBlur = 10; ctx.beginPath(); ctx.arc(hx, hy, R * 1.55, -Math.PI / 2, -Math.PI / 2 + TAU * f); ctx.stroke(); ctx.shadowBlur = 0;
     ctx.fillStyle = '#ffbe0b'; ctx.font = 'bold 11px ui-monospace,Menlo,monospace'; ctx.textAlign = 'center';
-    if (Math.sin(t * 12) > -0.3) ctx.fillText(b.dash ? 'SHOOT TO DEFLECT' : 'SHOOT TO BREAK', hx, hy + R * 1.55 + 16);
+    if (Math.sin(t * 12) > -0.3) ctx.fillText(b.dash ? loc('boss.shootDeflect') : loc('boss.shootBreak'), hx, hy + R * 1.55 + 16);
   }
   const w = R * 2.6, f = clamp(b.hp / b.max, 0, 1), by = b.y - (b.idx === 2 ? R * 1.9 : R * 1.6) - 12;
   ctx.fillStyle = 'rgba(255,0,85,0.2)'; ctx.fillRect(b.x - w / 2, by, w, 5);
@@ -2816,12 +3705,12 @@ function render() {
 const CINE = { GL_A: 0.55, GL_B: 1.95, ZOOM_A: 1.2, ZOOM_B: 2.6, MORPH_A: 2.6, MORPH_B: 3.6, DIVE_A: 3.4, DIVE_B: 4.35, TUN_A: 4.0, FLASH: 5.3, OUT_B: 6.6, LB_OFF: 6.7, END: 7.4 };
 let snapCv = null, scanPat = null;
 const CAPS = [
-  [0.45, () => '> TITAN NODE NEUTRALISED · CRITICAL MASS REACHED'],
-  [1.25, () => '> SIGNAL BREACH // REALITY LAYER COLLAPSING'],
-  [2.35, () => '> ASCENSION PROTOCOL 0' + cine.to + ' — INITIATED'],
-  [3.25, () => '> DIVING INTO THE PUPIL ▓▓▓▓▓▒▒░░'],
-  [4.15, () => '> CROSSING THE EVENT HORIZON'],
-  [4.75, () => '> FORM LOCK: ' + STAGES[cine.to]]
+  [0.45, () => loc('cap.0')],
+  [1.25, () => loc('cap.1')],
+  [2.35, () => loc('cap.2', { n: '0' + cine.to })],
+  [3.25, () => loc('cap.3')],
+  [4.15, () => loc('cap.4')],
+  [4.75, () => loc('cap.5', { stage: stageName(cine.to) })]
 ];
 const GLYPHS = '✦◇△▽○◎✧◈◆▲';
 const zoomTarget = () => clamp((Math.min(W, H * 0.8) * 0.36) / (core.R * 0.7), 3, 9);
@@ -2864,13 +3753,16 @@ function startAscension(x, y) {
   MUSIC.set('cine'); SFX.scatter();
   shake = 0; flash = 1; flashCol = '255,255,255'; hitStop = 0; slowmo = 0; chroma = 0;
 }
+const capCache = { src: '', g: [] };
 function caption(t) {
   let cur = null, st = 0;
   for (const [ts, f] of CAPS) if (t >= ts) { cur = f; st = ts; }
   const el = $('cineCap');
   if (!cur || t >= CINE.FLASH) { if (el.textContent) el.textContent = ''; return; }
-  const full = cur(), n = Math.min(full.length, Math.floor((t - st) * 48));
-  const s = full.slice(0, n) + (Math.sin(t * 20) > 0 ? '█' : ' ');
+  const full = cur();
+  if (capCache.src !== full) { capCache.src = full; capCache.g = graphemes(full); } // typewriter steps whole characters (Thai-safe)
+  const n = Math.min(capCache.g.length, Math.floor((t - st) * 48));
+  const s = capCache.g.slice(0, n).join('') + (Math.sin(t * 20) > 0 ? '█' : ' ');
   if (el.textContent !== s) el.textContent = s;
 }
 function updateCine(dt) {
@@ -2914,11 +3806,11 @@ function applyAscension() {
   for (let i = 0; i < 6; i++) rings.push({ x: core.x, y: core.y, r: core.R, vr: 420 + i * 240, life: 1.5, max: 1.5, col: i % 2 ? '#ffffff' : col, w: 7 - i });
   burst(core.x, core.y, 180, [col, '#ffffff', '#9d4edd'], 640, 3.4);
   SFX.impact();
-  const tt = $('ctT1'), name = STAGES[core.stage];
-  tt.innerHTML = name.split('').map((ch, i) => `<span style="--i:${i}">${ch === ' ' ? '&nbsp;' : ch}</span>`).join('');
+  const tt = $('ctT1'), name = stageName(core.stage);
+  tt.innerHTML = graphemes(name).map((ch, i) => `<span style="--i:${i}">${ch === ' ' ? '&nbsp;' : ch}</span>`).join('');
   tt.style.color = col; tt.style.textShadow = `0 0 24px ${col},0 0 60px ${col},3px 0 0 rgba(255,0,85,.6),-3px 0 0 rgba(0,243,255,.6)`;
-  $('ctT0').textContent = 'ASCENSION ' + ['', 'I', 'II', 'III', 'IV', 'V'][core.stage] + ' // COMPLETE';
-  $('ctT2').textContent = STAGE_DESC[core.stage];
+  $('ctT0').textContent = loc('asc.complete', { n: ['', 'I', 'II', 'III', 'IV', 'V'][core.stage] });
+  $('ctT2').textContent = loc('stage.desc.' + core.stage);
   replay($('cineTitle'), 'show');
   $('cineCap').textContent = ''; $('cineSkip').classList.remove('on');
 }
@@ -3104,8 +3996,8 @@ function updateHud() {
   setTxt('hLevel', String(level));
   setTxt('hScore', fmt(score));
   setW('hXp', clamp(xp / xpNeed(level), 0, 1));
-  setTxt('hStage', 'CORE // ' + STAGES[core.stage] + (orbs.length ? ' · ' + orbs.length + '◉ ' + ORB_TIERS[orbTier()] : '') + (comps.length ? ' · ' + comps.length + '✦' : ''));
-  setTxt('hDraft', '◈ OVERCLOCK IN ' + (DRAFT_EVERY - level % DRAFT_EVERY) + ' LV');
+  setTxt('hStage', loc('hud.stage', { stage: stageName(core.stage) }) + (orbs.length ? ' · ' + orbs.length + '◉ ' + ORB_TIERS[orbTier()] : '') + (comps.length ? ' · ' + comps.length + '✦' : ''));
+  setTxt('hDraft', loc('hud.overclockIn', { n: DRAFT_EVERY - level % DRAFT_EVERY }));
   setTxt('hHpTxt', Math.ceil(core.hp) + '/' + Math.round(stats.maxHp));
   setTxt('hShTxt', Math.floor(core.shield) + '/' + Math.round(stats.maxShield));
   setW('hHp', clamp(core.hp / stats.maxHp, 0, 1));
@@ -3116,12 +4008,12 @@ function updateHud() {
   const cOn = combo.n >= 5 || overdrive > 0, hc = $('hCombo');
   if (hudCache.con !== cOn) { hudCache.con = cOn; hc.classList.toggle('on', cOn); }
   if (cOn) {
-    const html = (combo.n >= 5 ? `×${comboMul().toFixed(2)} · ${combo.n} COMBO` : '') + (overdrive > 0 ? '<span class="od">OVERDRIVE</span>' : '');
+    const html = (combo.n >= 5 ? `×${comboMul().toFixed(2)} · ${loc('hud.combo', { n: combo.n })}` : '') + (overdrive > 0 ? `<span class="od">${loc('hud.overdrive')}</span>` : '');
     if (hudCache.ch !== html) { hudCache.ch = html; hc.innerHTML = html; }
     const tens = Math.floor(combo.n / 10); if (hudCache.tens !== tens) { hudCache.tens = tens; if (tens > 0) replay(hc, 'pop'); }
   }
   const np = Math.floor(novaCharge * 100), ready = np >= 100;
-  setTxt('novaPct', ready ? 'NOVA' : np + '%');
+  setTxt('novaPct', ready ? loc('hud.nova') : np + '%');
   if (hudCache.np !== np) { hudCache.np = np; $('btnNova').style.setProperty('--c', (np / 100).toFixed(2)); }
   if (hudCache.nr !== ready) { hudCache.nr = ready; $('btnNova').classList.toggle('ready', ready); }
 }
@@ -3158,19 +4050,19 @@ function rollRarity(L) {
 }
 let draftLock = 0, draftCards = [], draftPhase = 'idle', draftSlots = [];
 function cardDesc(k, v, r) {
-  if (k === 'orb') { const nl = Math.min(10, stats.orbLv + v), tr = Math.min(5, Math.ceil(nl / 2)); return `→ <b>${Math.min(5, nl)} ORB${nl > 1 ? 'S' : ''} · ${ORB_TIERS[tr]} FORM</b> — ${ORB_DESC[tr]}.`; }
-  if (k === 'lancer' || k === 'wisp' || k === 'aegis') { const C = COMP[k], nl = Math.min(C.max, compLv(k) + v); return CARDS[k].ds + ` → <b>${C.n(nl)}× ${C.names[nl]} FORM</b>.`; }
-  if (k === 'star') return CARDS.star.ds + ` → <b>${COMP.star.names[Math.min(5, stats.starLv + 1)]} FORM</b>.`;
-  return CARDS[k].ds;
+  if (k === 'orb') { const nl = Math.min(10, stats.orbLv + v), tr = Math.min(5, Math.ceil(nl / 2)); return `→ <b>${loc(nl > 1 ? 'card.orbs' : 'card.orb', { n: Math.min(5, nl), tier: ORB_TIERS[tr] })}</b> — ${loc('orb.' + tr)}.`; }
+  if (k === 'lancer' || k === 'wisp' || k === 'aegis') { const C = COMP[k], nl = Math.min(C.max, compLv(k) + v); return cardTxt(k, 'ds') + ` → <b>${loc('card.form', { n: C.n(nl), name: C.names[nl] })}</b>.`; }
+  if (k === 'star') return cardTxt('star', 'ds') + ` → <b>${loc('card.formOne', { name: COMP.star.names[Math.min(5, stats.starLv + 1)] })}</b>.`;
+  return cardTxt(k, 'ds');
 }
 function fillFront(el, p) {
   const C = CARDS[p.k], v = C.vals[p.r], f = el.querySelector('.front');
   f.className = 'face card front r-' + RAR[p.r];
-  f.innerHTML = `<div class="ico">${ICONS[p.k]}</div><div class="mid"><div class="rar">${RAR_N[p.r]}</div><div class="nm">${C.name}</div><div class="st">${C.stat}</div><div class="val">${C.f(v)}</div><div class="ds">${cardDesc(p.k, v, p.r)}${p.r === 3 ? ' <b>+ SURGE: full repair · overdrive · nova</b>' : ''}</div></div>`;
+  f.innerHTML = `<div class="ico">${ICONS[p.k]}</div><div class="mid"><div class="rar">${rarN(p.r)}</div><div class="nm">${cardTxt(p.k, 'name')}</div><div class="st">${cardTxt(p.k, 'stat')}</div><div class="val">${C.f(v)}</div><div class="ds">${cardDesc(p.k, v, p.r)}${p.r === 3 ? ' <b>' + loc('draft.surge') + '</b>' : ''}</div></div>`;
 }
 function setRarity(el, p) {
   el.className = el.className.replace(/\br-\w+/g, '').trim() + ' r-' + RAR[p.r];
-  el.querySelector('.brar').textContent = RAR_N[p.r];
+  el.querySelector('.brar').textContent = rarN(p.r);
   el.classList.toggle('unstable', !!p.unstable);
 }
 function legendFlash() { const f = document.createElement('div'); f.className = 'legend-flash'; document.body.appendChild(f); setTimeout(() => f.remove(), 1200); }
@@ -3201,13 +4093,13 @@ function openDraft() {
     const el = document.createElement('div');
     el.className = 'slot r-' + RAR[p.r] + (p.unstable ? ' unstable' : '') + (p.r === 3 ? ' dealtLeg' : '');
     el.style.animationDelay = (i * 0.14) + 's';
-    el.innerHTML = `<div class="inner"><div class="face back"><div class="logo">${EYE_LOGO}</div><div class="txt"><div class="brar">${RAR_N[p.r]}</div>` +
-      `<div class="oc"><svg viewBox="0 0 36 36"><circle class="bg" cx="18" cy="18" r="15"/><circle class="fg" cx="18" cy="18" r="15"/></svg><span>⚡ UNSTABLE<br>TAP TO OVERCHARGE</span></div></div><div class="msg"></div></div><div class="face card front"></div></div>`;
+    el.innerHTML = `<div class="inner"><div class="face back"><div class="logo">${EYE_LOGO}</div><div class="txt"><div class="brar">${rarN(p.r)}</div>` +
+      `<div class="oc"><svg viewBox="0 0 36 36"><circle class="bg" cx="18" cy="18" r="15"/><circle class="fg" cx="18" cy="18" r="15"/></svg><span>${loc('draft.unstable')}</span></div></div><div class="msg"></div></div><div class="face card front"></div></div>`;
     el.addEventListener('click', () => onSlot(i));
     wrap.appendChild(el); draftSlots.push(el);
     setTimeout(() => { SFX.deal(); if (p.r === 3) { legendFlash(); SFX.surge(3); } }, 150 + i * 140);
   });
-  $('dHint').textContent = picks.some(p => p.unstable) ? '⚡ TAP UNSTABLE CARDS TO OVERCHARGE THEIR RARITY · THEN REVEAL' : 'TAP A CARD OR REVEAL';
+  $('dHint').textContent = picks.some(p => p.unstable) ? loc('draft.hintUnstable') : loc('draft.hintTap');
   $('btnReveal').classList.remove('hidden');
   $('draft').classList.add('active');
   draftLock = performance.now() + 700;
@@ -3228,16 +4120,16 @@ function overcharge(p, el) {
     p.r++; if (p.r === 3 && !CARDS.star.cap() && !draftCards.some(q => q.k === 'star') && Math.random() < 0.3) p.k = 'star';
     p.unstable = p.r < 3 && Math.random() < 0.4;
     setRarity(el, p); replay(el, 'surge'); SFX.surge(p.r); sparks(el, 14);
-    cardMsg(el, p.r === 3 ? '★ LEGENDARY ★' : '▲ ' + RAR_N[p.r]);
+    cardMsg(el, p.r === 3 ? loc('draft.legendary') : '▲ ' + rarN(p.r));
     if (p.r === 3) { legendFlash(); SFX.legendary(); }
   } else {
-    p.unstable = false; setRarity(el, p); replay(el, 'fizzle'); SFX.fizzle(); cardMsg(el, 'STABILIZED');
+    p.unstable = false; setRarity(el, p); replay(el, 'fizzle'); SFX.fizzle(); cardMsg(el, loc('draft.stabilized'));
   }
-  if (!draftCards.some(q => q.unstable)) $('dHint').textContent = 'TAP A CARD OR REVEAL';
+  if (!draftCards.some(q => q.unstable)) $('dHint').textContent = loc('draft.hintTap');
 }
 function reveal() {
   if (draftPhase !== 'charge' || modal !== 'draft') return;
-  draftPhase = 'reveal'; $('btnReveal').classList.add('hidden'); $('dHint').textContent = 'SELECT AUGMENTATION';
+  draftPhase = 'reveal'; $('btnReveal').classList.add('hidden'); $('dHint').textContent = loc('draft.select');
   if (draftCards.some(p => p.r >= 2)) epicGiven = true;
   if (draftCards.some(p => p.r === 3)) legGiven = true;
   draftSlots.forEach((el, i) => setTimeout(() => {
@@ -3255,7 +4147,7 @@ function choose(p, el) {
   recompute(); SFX.pick(p.r);
   draftQueue.shift();
   $('draft').classList.remove('active'); modal = null; paused = false;
-  texts.push({ x: core.x, y: core.y - core.R * 3.4, txt: C.name + ' ' + C.f(v), col: RAR_COL[p.r], size: 15, life: 1.4, max: 1.4, pop: 1 });
+  texts.push({ x: core.x, y: core.y - core.R * 3.4, txt: cardTxt(p.k, 'name') + ' ' + C.f(v), col: RAR_COL[p.r], size: 15, life: 1.4, max: 1.4, pop: 1 });
   if (p.r === 3) legendSurge();
   if (['orb', 'lancer', 'wisp', 'aegis', 'star'].includes(p.k)) { const col = p.k === 'orb' ? ORB_COL[orbTier()] : COMP[p.k].col; burst(core.x, core.y, 40, [col, '#ffffff'], 300, 2.4); rings.push({ x: core.x, y: core.y, r: core.R, vr: 300, life: .5, max: .5, col, w: 3 }); }
   if (draftQueue.length) { setTimeout(() => { if (state === 'play' && !modal && !cine) openDraft(); }, 300); return; }
@@ -3270,10 +4162,14 @@ let shopFrom = 'game', shopTab = 'core';
 function openShop(from) {
   shopFrom = from;
   if (from === 'game') { if (modal || cine || state !== 'play') return; modal = 'shop'; paused = true; dropInput(); }
-  $('btnShopClose').textContent = from === 'game' ? '[ RETURN TO COMBAT ]' : '[ CLOSE ]';
+  $('btnShopClose').textContent = from === 'game' ? loc('shop.return') : loc('shop.close');
   renderShop(true); showScreen('shop', true); SFX.click();
 }
 const repairCost = () => Math.round(40 + level * 10);
+// PITY PROTOCOL discount — applies to every CORE augment while active
+const pityOn = () => !!(profile && profile.pity);
+const coreCost = (it, lv) => { const c = shopCost(it, lv); return pityOn() ? Math.round(c * (1 - PITY_DISCOUNT)) : c; };
+const priceTag = (cost, full) => '◆ ' + fmt(cost) + (full > cost ? '<s>◆ ' + fmt(full) + '</s>' : '');
 function itemRow(o, i, anim) {
   const row = document.createElement('div');
   row.className = 'item' + (o.cls ? ' ' + o.cls : '');
@@ -3291,36 +4187,38 @@ function renderShop(anim) {
   const grp = txt => { const d = document.createElement('div'); d.className = 'grp'; d.textContent = txt; list.appendChild(d); };
   if (shopTab === 'core') {
     if (shopFrom === 'game') {
+      // EMERGENCY REPAIR — full restoration: the hull is refilled to 100% of its maximum
       const cost = repairCost(), can = profile.shards >= cost && core.hp < stats.maxHp;
-      add({ name: 'EMERGENCY REPAIR', desc: 'Restore 40% hull instantly (this run only)', btn: '◆ ' + fmt(cost), btnCls: can ? '' : 'no',
-        onBuy: () => { if (!can) return SFX.deny(); profile.shards -= cost; core.hp = Math.min(stats.maxHp, core.hp + stats.maxHp * 0.4); saveProfile(); SFX.buy(); toast('HULL RESTORED'); renderShop(false); } });
+      add({ name: loc('shop.repair'), desc: loc('shop.repairDesc'), btn: '◆ ' + fmt(cost), btnCls: can ? '' : 'no',
+        onBuy: () => { if (!can) return SFX.deny(); profile.shards -= cost; core.hp = stats.maxHp; saveProfile(); SFX.buy(); toast(loc('shop.repaired')); renderShop(false); } });
     }
-    grp('// PERMANENT CORE AUGMENTS');
+    if (pityOn()) { const d = document.createElement('div'); d.className = 'pity'; d.textContent = loc('shop.pity'); list.appendChild(d); }
+    grp(loc('shop.grpCore'));
     SHOP_CORE.forEach(it => {
-      const lv = profile.shop[it.id], maxed = lv >= it.max, cost = shopCost(it, lv), can = !maxed && profile.shards >= cost;
-      add({ name: it.name, lvTxt: 'LV ' + lv, desc: it.desc, max: it.max, lv, btn: maxed ? 'MAX' : '◆ ' + fmt(cost), btnCls: maxed ? 'max' : can ? '' : 'no',
+      const lv = profile.shop[it.id], maxed = lv >= it.max, full = shopCost(it, lv), cost = coreCost(it, lv), can = !maxed && profile.shards >= cost;
+      add({ name: upName(it), lvTxt: loc('shop.lv', { n: lv }), desc: upDesc(it), max: it.max, lv, btn: maxed ? loc('shop.max') : priceTag(cost, full), btnCls: maxed ? 'max' : can ? '' : 'no',
         onBuy: () => buyLevel(profile.shop, it, cost, maxed) });
     });
   } else if (shopTab === 'skills') {
-    grp('// ACTIVE & AUTONOMOUS SKILLS');
+    grp(loc('shop.grpSkills'));
     SHOP_SKILL.forEach(it => {
       const lv = profile.skills[it.id], maxed = lv >= it.max, cost = shopCost(it, lv), can = !maxed && profile.shards >= cost;
-      let desc = it.desc;
-      if (it.id === 'lancer' || it.id === 'wisp') { const C = COMP[it.id], nl = Math.min(C.max, lv + 1); desc += maxed ? '<br><b>MAXED · ' + C.n(C.max) + '× ' + C.names[C.max] + '</b>' : `<br>NEXT: <b>${C.n(nl)}× ${C.names[nl]} FORM</b>`; }
-      if (it.id === 'orb') { const n = Math.min(5, lv + 1), tr = Math.min(5, Math.ceil((lv + 1) / 2)); desc += maxed ? '<br><b>MAXED · 5 SOLAR ORBS</b>' : `<br>NEXT: <b>${n} ORB${n > 1 ? 'S' : ''} · ${ORB_TIERS[tr]}</b> — ${ORB_DESC[tr]}`; }
-      add({ name: it.name, lvTxt: 'LV ' + lv, desc, max: it.max, lv, cls: 'skill', btn: maxed ? 'MAX' : '◆ ' + fmt(cost), btnCls: maxed ? 'max' : can ? '' : 'no',
+      let desc = upDesc(it);
+      if (it.id === 'lancer' || it.id === 'wisp') { const C = COMP[it.id], nl = Math.min(C.max, lv + 1); desc += maxed ? '<br><b>' + loc('shop.maxed') + ' · ' + loc('card.form', { n: C.n(C.max), name: C.names[C.max] }) + '</b>' : `<br>${loc('shop.next')}: <b>${loc('card.form', { n: C.n(nl), name: C.names[nl] })}</b>`; }
+      if (it.id === 'orb') { const n = Math.min(5, lv + 1), tr = Math.min(5, Math.ceil((lv + 1) / 2)); desc += maxed ? '<br><b>' + loc('shop.maxOrbs') + '</b>' : `<br>${loc('shop.next')}: <b>${loc(n > 1 ? 'card.orbs' : 'card.orb', { n, tier: ORB_TIERS[tr] })}</b> — ${loc('orb.' + tr)}`; }
+      add({ name: upName(it), lvTxt: loc('shop.lv', { n: lv }), desc, max: it.max, lv, cls: 'skill', btn: maxed ? loc('shop.max') : '◆ ' + fmt(cost), btnCls: maxed ? 'max' : can ? '' : 'no',
         sw: it.id === 'lancer' ? 'radial-gradient(circle,#fff 14%,#bff3ff 38%,#000 74%)' : it.id === 'wisp' ? 'radial-gradient(circle,#e9fbff 14%,#5ad7ff 38%,#000 74%)' : it.id === 'orb' ? `radial-gradient(circle,#fff 12%,${ORB_COL[Math.max(1, Math.min(5, Math.ceil(Math.max(1, lv) / 2)))]} 40%,#000 75%)` : 'radial-gradient(circle,#fff3c4 10%,#ffbe0b 40%,#ff8a00 60%,#000 80%)',
         onBuy: () => buyLevel(profile.skills, it, cost, maxed) });
     });
   } else {
-    [['shot', '// PROJECTILE SKINS'], ['kill', '// KILL EFFECTS']].forEach(([slot, label]) => {
-      grp(label);
+    [['shot', 'shop.grpShot'], ['kill', 'shop.grpKill']].forEach(([slot, label]) => {
+      grp(loc(label));
       FX_ITEMS[slot].forEach(it => {
         const owned = profile.fx.owned.includes(it.id), eq = profile.fx[slot] === it.id, can = owned || profile.shards >= it.cost;
-        add({ name: it.name, desc: it.desc, sw: it.sw, cls: eq ? 'eq' : '', btn: eq ? 'EQUIPPED' : owned ? 'EQUIP' : '◆ ' + fmt(it.cost), btnCls: eq ? 'eq' : owned ? '' : can ? '' : 'no',
+        add({ name: skinName(it), desc: skinDesc(it), sw: it.sw, cls: eq ? 'eq' : '', btn: eq ? loc('shop.equipped') : owned ? loc('shop.equip') : '◆ ' + fmt(it.cost), btnCls: eq ? 'eq' : owned ? '' : can ? '' : 'no',
           onBuy: () => {
             if (eq) return;
-            if (!owned) { if (profile.shards < it.cost) return SFX.deny(); profile.shards -= it.cost; profile.fx.owned.push(it.id); toast(it.name + ' UNLOCKED'); SFX.buy(); }
+            if (!owned) { if (profile.shards < it.cost) return SFX.deny(); profile.shards -= it.cost; profile.fx.owned.push(it.id); toast(loc('shop.unlocked', { name: skinName(it) })); SFX.buy(); }
             else SFX.equip();
             profile.fx[slot] = it.id; saveProfile(); renderShop(false);
           } });
@@ -3333,7 +4231,7 @@ function buyLevel(bag, it, cost, maxed) {
   if (maxed || profile.shards < cost) return SFX.deny();
   bag[it.id]++; profile.shards -= cost; saveProfile();
   if (state === 'play') recompute();
-  SFX.buy(); toast(it.name + ' → LV ' + bag[it.id]); renderShop(false);
+  SFX.buy(); toast(loc('shop.bought', { name: upName(it), n: bag[it.id] })); renderShop(false);
 }
 function closeShop() {
   showScreen('shop', false); SFX.click();
@@ -3345,17 +4243,24 @@ function closeShop() {
    SCREENS / FLOW
    ========================================================= */
 function showScreen(id, on = true) { $(id).classList.toggle('active', on); }
-function hideAll() { ['scrLogin', 'scrHub', 'scrOver', 'scrPause', 'shop'].forEach(s => showScreen(s, false)); $('draft').classList.remove('active'); }
-function refreshHub() {
+function hideAll() { ['scrLogin', 'scrHub', 'scrOver', 'scrPause', 'shop', 'scrSettings'].forEach(s => showScreen(s, false)); $('draft').classList.remove('active'); }
+function refreshHub(noFetch) {
   $('hubName').textContent = callsign;
   $('hubHs').textContent = fmt(profile.hs);
   $('hubShards').textContent = '◆ ' + fmt(profile.shards);
   $('hubLv').textContent = profile.bestLevel;
-  $('hubAsc').textContent = STAGES[profile.bestStage]; $('hubAsc').style.color = STAGE_COL[profile.bestStage];
-  $('btnHubMute').textContent = 'SFX: ' + (SFX.muted ? 'OFF' : 'ON');
-  $('btnHubMusic').textContent = 'MUSIC: ' + (MUSIC.on ? 'ON' : 'OFF');
+  $('hubAsc').textContent = stageName(profile.bestStage); $('hubAsc').style.color = STAGE_COL[profile.bestStage];
+  renderPity();
   renderAuth();
-  loadLeaderboard(); // live verified top 5 from Supabase (falls back to the local board when offline)
+  if (noFetch && lbLast) drawBoard(lbLast.rows, lbLast.online);
+  else loadLeaderboard(); // live verified top 5 from Supabase (falls back to the local board when offline)
+}
+// hub line for the Pity Protocol: active discount, or progress towards it (misses of the PERSONAL best)
+function renderPity() {
+  const el = $('hubPity'), f = profile.hsFails || 0;
+  if (profile.pity) { el.className = 'pity'; el.textContent = loc('hub.pity'); }
+  else if (f > 0 && f < PITY_FAILS) { el.className = 'pity dim'; el.textContent = loc('hub.pbStreak', { n: f }); }
+  else { el.className = 'pity hidden'; el.textContent = ''; }
 }
 function resetWorld() {
   enemies = []; bullets = []; eBullets = []; shards = []; parts = []; rings = []; texts = []; bolts = []; beams = [];
@@ -3374,7 +4279,7 @@ function goHub() {
   MUSIC.set('menu');
   refreshHub(); showScreen('scrHub');
 }
-function goLogin() { hideAll(); state = 'menu'; showScreen('scrLogin'); $('inName').value = callsign || ''; $('loginTerm').textContent = '_awaiting neural handshake'; }
+function goLogin() { hideAll(); state = 'menu'; showScreen('scrLogin'); $('inName').value = callsign || ''; $('loginTerm').style.color = ''; $('loginTerm').textContent = loc('login.idle'); }
 function startGame() {
   SFX.init(); hideAll(); resetWorld();
   draft = newDraft();
@@ -3391,7 +4296,7 @@ function startGame() {
   profile.runs++; saveProfile();
   beginRankedRun(); // signed in with Google → the server opens a verified run
   MUSIC.set('play'); SFX.levelUp(); dropInput();
-  texts.push({ x: core.x, y: core.y - core.R * 4.4, txt: document.body.classList.contains('touch') ? 'DRAG THE STICK TO AIM & FIRE' : 'AIM WITH THE MOUSE · HOLD TO FIRE', col: '#7ffaff', size: 13, life: 3.5, max: 3.5 });
+  texts.push({ x: core.x, y: core.y - core.R * 4.4, txt: document.body.classList.contains('touch') ? loc('float.hintTouch') : loc('float.hintMouse'), col: '#7ffaff', size: 13, life: 3.5, max: 3.5 });
 }
 function gameOver() {
   if (state !== 'play') return;
@@ -3400,22 +4305,38 @@ function gameOver() {
   for (let i = 0; i < 5; i++) rings.push({ x: core.x, y: core.y, r: core.R, vr: 300 + i * 200, life: 1.4, max: 1.4, col: i % 2 ? '#ff0055' : '#00f3ff', w: 5 });
   shake = 30; flash = .8; flashCol = '255,0,85'; chroma = 1; SFX.gameOver(); MUSIC.set('menu');
   $('volatility').classList.remove('on'); $('draft').classList.remove('active'); modal = null; paused = false;
-  showScreen('shop', false); showScreen('scrPause', false);
-  const fs = Math.floor(score), rec = fs > profile.hs;
+  showScreen('shop', false); showScreen('scrPause', false); showScreen('scrSettings', false);
+  const fs = Math.floor(score), rec = fs > profile.hs; // rec = this run beat the player's own PERSONAL best
   if (rec) profile.hs = fs;
   profile.bestLevel = Math.max(profile.bestLevel, level);
   profile.bestCombo = Math.max(profile.bestCombo || 0, combo.best);
-  const lost = decayProfile();
+  // CORE retention: 75% by default · 90% when this run reached a higher level than the previous run
+  const prevLv = profile.lastLevel, improved = typeof prevLv === 'number' && level > prevLv, keep = improved ? DECAY_BEST : DECAY;
+  profile.lastLevel = level;
+  const lost = decayProfile(keep); // skills are never lost
+  // PITY PROTOCOL — counts runs in a row that miss the PERSONAL best (never the global board)
+  if (profile.pity && profile.runs > profile.pityRun) profile.pity = false; // the discount covered exactly one run → it expires now
+  let pityNew = false;
+  if (rec) profile.hsFails = 0; // beating the personal best resets the counter → a new cycle can start
+  else {
+    profile.hsFails = (profile.hsFails || 0) + 1;
+    if (profile.hsFails === PITY_FAILS) { profile.pity = true; profile.pityRun = profile.runs; pityNew = true; } // granted ONLY on exactly the 3rd miss
+  }
   saveProfile();
-  $('goDecay').innerHTML = lost.length ? '<div class="h">// NEURAL DECAY — ONLY 75% OF YOUR AUGMENTS SURVIVE</div>' + lost.map(([n, a, b]) => `<div class="l"><span>${n}</span><span>${a} → <b>${b}</b></span></div>`).join('')
-    : '<div class="h">// NEURAL DECAY</div><div class="l"><span>NO PERMANENT AUGMENTS TO LOSE</span></div>';
+  let dh = `<div class="h">${loc('go.decayHead', { pct: Math.round(keep * 100) })}</div>`;
+  if (improved) dh += `<div class="n ok">${loc('go.decayBest', { lv: level, prev: prevLv })}</div>`;
+  dh += lost.length ? lost.map(([id, a, b]) => `<div class="l"><span>${loc('up.' + id + '.name')}</span><span>${a} → <b>${b}</b></span></div>`).join('')
+    : `<div class="l"><span>${loc('go.decayNone')}</span></div>`;
+  dh += `<div class="n ok">${loc('go.skillsKept')}</div>`;
+  dh += `<div class="n${pityNew ? ' g' : ''}">${pityNew ? loc('go.pity') : rec ? loc('go.pbReset') : profile.hsFails < PITY_FAILS ? loc('go.pbMiss', { n: profile.hsFails }) : loc('go.pbMissMore', { n: profile.hsFails })}</div>`;
+  $('goDecay').innerHTML = dh;
   // leaderboards: local copy right away · signed runs go to the server, which checks them before they count
   const entry = { name: callsign, score: fs, level, stage: core.stage, kills, date: Date.now() };
   const localRank = pushLocalBoard(entry);
   let net = { pending: !!(sb && run && fs > 0) }, overShown = false;
-  const recText = () => rec ? (net.ok ? `★ NEW RECORD · GLOBAL #${net.rank} ★` : '★ NEW PERSONAL RECORD ★')
-    : net.ok ? `RANKED #${net.rank} GLOBALLY` : localRank >= 0 ? `RANKED #${localRank + 1} ON LOCAL BOARD` : '';
-  const netText = () => net.pending ? 'VERIFYING RUN WITH SERVER…' : net.ok ? '✓ VERIFIED · PLAYER #' + (net.tag || tagOf(authUser && authUser.id)) : net.msg || '';
+  const recText = () => rec ? (net.ok ? loc('go.recGlobal', { n: net.rank }) : loc('go.recPersonal'))
+    : net.ok ? loc('go.rankGlobal', { n: net.rank }) : localRank >= 0 ? loc('go.rankLocal', { n: localRank + 1 }) : '';
+  const netText = () => net.pending ? loc('net.verifying') : net.ok ? loc('net.verified', { tag: net.tag || tagOf(authUser && authUser.id) }) : net.msg || '';
   const showNet = () => {
     $('goRec').textContent = recText(); const g = $('goNet'); g.textContent = netText();
     g.classList.toggle('bad', !!net.bad); g.classList.toggle('dim', !net.pending && !net.ok && !net.bad);
@@ -3424,14 +4345,53 @@ function gameOver() {
   setTimeout(() => {
     $('hud').classList.add('hidden'); $('bossbar').classList.add('hidden');
     $('goScore').textContent = fmt(fs); $('goLv').textContent = level;
-    $('goAsc').textContent = STAGES[core.stage]; $('goAsc').style.color = STAGE_COL[core.stage];
+    $('goAsc').textContent = stageName(core.stage); $('goAsc').style.color = STAGE_COL[core.stage];
     $('goKills').textContent = fmt(kills); $('goShards').textContent = '◆ ' + fmt(runShards); $('goCombo').textContent = fmt(combo.best);
     showNet(); overShown = true;
     showScreen('scrOver');
   }, 1600);
 }
 function pauseGame() { if (state !== 'play' || modal || cine) return; modal = 'pause'; paused = true; dropInput(); showScreen('scrPause'); }
-function resumeGame() { showScreen('scrPause', false); modal = null; paused = false; if (draftQueue.length && !cine) openDraft(); }
+function resumeGame() { showScreen('scrSettings', false); showScreen('scrPause', false); modal = null; paused = false; if (draftQueue.length && !cine) openDraft(); }
+
+/* =========================================================
+   SETTINGS HUB — language · audio · controls
+   (opens from the login screen, the Command Hub and the pause menu)
+   ========================================================= */
+const isOpen = id => $(id).classList.contains('active');
+const onOff = v => loc(v ? 'set.on' : 'set.off');
+function labelAssist() { const txt = loc('set.assist', { v: onOff(aimAssist) }); $('btnSetAssist').textContent = txt; $('btnPauseAssist').textContent = txt; }
+function renderSettings() {
+  const g = $('langGrid'); g.innerHTML = '';
+  LANGS.forEach(code => {
+    const b = document.createElement('button'); b.className = 'lang' + (code === lang ? ' on' : '');
+    const nm = document.createElement('span'); nm.lang = code; nm.textContent = (I18N[code] && I18N[code]['lang.name']) || code.toUpperCase();
+    const cd = document.createElement('small'); cd.textContent = code.toUpperCase();
+    b.append(nm, cd); b.addEventListener('click', () => setLang(code));
+    g.appendChild(b);
+  });
+  $('btnSetSfx').textContent = loc('set.sfx', { v: onOff(!SFX.muted) });
+  $('btnSetMusic').textContent = loc('set.music', { v: onOff(MUSIC.on) });
+  labelAssist();
+}
+function openSettings(from) {
+  if (from === 'pause' && modal !== 'pause') return;
+  SFX.init(); renderSettings(); showScreen('scrSettings', true); SFX.click();
+}
+function closeSettings() { if (!isOpen('scrSettings')) return; showScreen('scrSettings', false); SFX.click(); }
+function setLang(code) {
+  if (!LANGS.includes(code)) return;
+  if (code !== lang) { lang = code; store.set(KEY.lang, code); relabel(); SFX.equip(); toast(loc('set.langSet')); }
+  else renderSettings();
+}
+// re-draws every visible text after a language switch
+function relabel() {
+  applyI18n(); renderSettings(); renderAuth();
+  if (isOpen('scrHub')) refreshHub(true);
+  if (isOpen('shop')) { $('btnShopClose').textContent = shopFrom === 'game' ? loc('shop.return') : loc('shop.close'); renderShop(false); }
+  if (isOpen('scrLogin') && !$('loginTerm').style.color) $('loginTerm').textContent = loc('login.idle');
+  if (boss) { $('bossName').textContent = bossLabel(boss); $('bossPhase').textContent = bossPhaseLabel(boss); }
+}
 
 /* =========================================================
    INPUT
@@ -3485,10 +4445,9 @@ const stickUp = e => { if (e.pointerId === STICK.id) stickReset(); };
 // light aim assist — ON / OFF, remembered on this device
 function setAssist(v) {
   aimAssist = v; store.set(KEY.assist, v); assistLock = null;
-  const t = 'AIM ASSIST: ' + (v ? 'ON' : 'OFF');
-  $('btnHubAssist').textContent = t; $('btnPauseAssist').textContent = t;
+  labelAssist();
 }
-$('btnHubAssist').addEventListener('click', () => { SFX.init(); setAssist(!aimAssist); SFX.click(); });
+$('btnSetAssist').addEventListener('click', () => { SFX.init(); setAssist(!aimAssist); SFX.click(); });
 $('btnPauseAssist').addEventListener('click', () => { SFX.init(); setAssist(!aimAssist); SFX.click(); });
 document.addEventListener('touchmove', e => { if (!e.target.closest('.shop-list') && !e.target.closest('.panel')) e.preventDefault(); }, { passive: false });
 document.addEventListener('gesturestart', e => e.preventDefault());
@@ -3496,6 +4455,7 @@ window.addEventListener('resize', resize);
 window.addEventListener('orientationchange', () => setTimeout(resize, 200));
 document.addEventListener('visibilitychange', () => { if (document.hidden) { pauseGame(); saveProfile(); } else queueBoardRefresh(); });
 window.addEventListener('keydown', e => {
+  if (isOpen('scrSettings')) { if (e.key === 'Escape') closeSettings(); return; } // the settings hub sits on top: Esc closes it first
   if (e.key === 'Escape' || e.key === 'p') { if (modal === 'pause') resumeGame(); else pauseGame(); }
   if (e.key === ' ' && state === 'play') { e.preventDefault(); if (cine) skipCine(); else useNova(); }
   if (e.key === 'Enter' && $('scrLogin').classList.contains('active')) login();
@@ -3503,8 +4463,8 @@ window.addEventListener('keydown', e => {
 function login() {
   SFX.init();
   const n = $('inName').value.trim().toUpperCase().replace(/[^A-Z0-9_\-]/g, '').slice(0, 12);
-  if (n.length < 2) { $('loginTerm').textContent = '_error: callsign requires ≥ 2 chars [A-Z 0-9 _ -]'; $('loginTerm').style.color = '#ff0055'; SFX.deny(); return; }
-  $('loginTerm').style.color = ''; $('loginTerm').textContent = '_handshake verified. welcome, ' + n;
+  if (n.length < 2) { $('loginTerm').textContent = loc('login.err'); $('loginTerm').style.color = '#ff0055'; SFX.deny(); return; }
+  $('loginTerm').style.color = ''; $('loginTerm').textContent = loc('login.ok', { name: n });
   callsign = n; store.set(KEY.name, n); loadProfile(); SFX.buy();
   setTimeout(goHub, 350);
 }
@@ -3512,14 +4472,18 @@ $('btnLogin').addEventListener('click', login);
 $('btnChange').addEventListener('click', () => { SFX.click(); goLogin(); });
 $('btnStart').addEventListener('click', startGame);
 $('btnHubShop').addEventListener('click', () => { SFX.init(); openShop('hub'); });
-$('btnHubMute').addEventListener('click', () => { SFX.init(); SFX.setMute(!SFX.muted); refreshHub(); SFX.click(); });
-$('btnHubMusic').addEventListener('click', () => { SFX.init(); MUSIC.toggle(!MUSIC.on); refreshHub(); SFX.click(); });
+$('btnHubSettings').addEventListener('click', () => openSettings('hub'));
+$('btnLoginSettings').addEventListener('click', () => openSettings('login'));
+$('btnPauseSettings').addEventListener('click', () => openSettings('pause'));
+$('btnSetBack').addEventListener('click', closeSettings);
+$('btnSetSfx').addEventListener('click', () => { SFX.init(); SFX.setMute(!SFX.muted); $('btnMute').style.opacity = SFX.muted ? .4 : 1; renderSettings(); SFX.click(); });
+$('btnSetMusic').addEventListener('click', () => { SFX.init(); MUSIC.toggle(!MUSIC.on); renderSettings(); SFX.click(); });
 $('btnShop').addEventListener('click', () => openShop('game'));
 $('btnShopClose').addEventListener('click', closeShop);
 document.querySelectorAll('#shopTabs .tab').forEach(t => t.addEventListener('click', () => { shopTab = t.dataset.tab; SFX.click(); renderShop(true); }));
 $('btnPause').addEventListener('click', pauseGame);
 $('btnNova').addEventListener('click', () => { SFX.init(); useNova(); });
-$('btnMute').addEventListener('click', () => { SFX.init(); SFX.setMute(!SFX.muted); $('btnMute').style.opacity = SFX.muted ? .4 : 1; });
+$('btnMute').addEventListener('click', () => { SFX.init(); SFX.setMute(!SFX.muted); $('btnMute').style.opacity = SFX.muted ? .4 : 1; if (isOpen('scrSettings')) renderSettings(); });
 $('btnResume').addEventListener('click', resumeGame);
 $('btnAbort').addEventListener('click', () => { showScreen('scrPause', false); modal = null; paused = false; core.hp = 0; gameOver(); });
 $('btnRetry').addEventListener('click', startGame);
@@ -3552,7 +4516,9 @@ function frame(ts) {
 }
 profile = normProfile(defProfile());
 if ((window.matchMedia && matchMedia('(pointer: coarse)').matches) || navigator.maxTouchPoints > 0) document.body.classList.add('touch');
+applyI18n(); // localize all static UI before the first screen shows
 setAssist(aimAssist);
+$('btnMute').style.opacity = SFX.muted ? .4 : 1;
 resize();
 // live leaderboard: Supabase Realtime pushes every new score; a slow poll covers the case where Realtime is off
 if (sb) {
@@ -3566,7 +4532,7 @@ if (sb) {
   const back = new URLSearchParams(location.search + '&' + location.hash.replace(/^#/, ''));
   if (back.get('error_description')) {
     const msg = back.get('error_description'); history.replaceState(null, '', location.pathname);
-    setTimeout(() => toast('SIGN-IN: ' + msg.toUpperCase().slice(0, 36)), 900);
+    setTimeout(() => toast(loc('net.signInErr', { msg: msg.toUpperCase().slice(0, 36) })), 900);
   }
   sb.auth.onAuthStateChange((ev, session) => {
     authUser = session ? session.user : null; renderAuth();
