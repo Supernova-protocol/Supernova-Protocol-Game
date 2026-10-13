@@ -324,6 +324,12 @@ body.touch #toast{bottom:calc(var(--sab) + 250px)}
 #bossbar.apex .bn{flex-direction:column;align-items:center;gap:3px;letter-spacing:.24em}
 #bossbar.apex #bossPhase{color:#ffd166;opacity:.95;font-size:9px}
 #bossbar.apex #bossFill{background:linear-gradient(90deg,#ff8a00,#ff0055 55%,#b44dff);box-shadow:0 0 14px #ff0055}
+/* LV 200 · NULL SOVEREIGN */
+#bossbar.final .bn{color:#e8f9ff;text-shadow:0 0 10px #b8f7ff,0 0 22px #7a5cff}
+#bossbar.final #bossPhase{color:#b8f7ff}
+#bossbar.final .bb{height:10px;border-color:rgba(232,249,255,.7);background:rgba(122,92,255,.12);box-shadow:0 0 14px rgba(122,92,255,.45)}
+#bossbar.final #bossFill{background:linear-gradient(90deg,#ffffff,#b8f7ff 30%,#7a5cff 65%,#ff0055);box-shadow:0 0 16px #b8f7ff;animation:sovBar 1.6s ease-in-out infinite}
+@keyframes sovBar{50%{filter:brightness(1.35)}}
 
 /* ---------- Shop ---------- */
 #shop{z-index:45;justify-content:flex-start;background:linear-gradient(180deg,rgba(4,2,12,.97),rgba(1,1,3,.985))}
@@ -463,7 +469,7 @@ html[lang="th"] body *{letter-spacing:0!important}
     <button class="btn" id="btnStart" data-i18n="hub.start">[ START COMBAT ]</button>
     <button class="btn purple" id="btnHubShop" style="letter-spacing:.12em" data-i18n="hub.shop">UPGRADE HUB ✦ FX LAB</button>
     <button class="btn ghost small" id="btnHubSettings" data-i18n="hub.settings">⚙ SETTINGS · LANGUAGE</button>
-    <div class="foot-note"><span data-i18n="hub.foot1">MANUAL AIM · JOYSTICK ON PHONE · HOLD MOUSE ON PC · ✸ NOVA WHEN CHARGED</span><br><span data-i18n="hub.foot2">TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · APEX TITANS EVERY 20 LV FROM 150 · OVERCLOCK EVERY 3 LV</span><br><span data-i18n="hub.foot3">A BREACHED CORE KEEPS 75% OF ITS CORE AUGMENTS · 90% IF YOU BEAT YOUR LAST RUN'S LEVEL · SKILLS ARE NEVER LOST</span><br><span data-i18n="hub.foot4">HOSTILES ARE 15% WEAKER UNTIL LV 50 · AT LV 100 ALL BOTS SURGE +40% AND SWARM IN · THEN EVERY 15 LV THEY GROW FAR STRONGER</span><br><a href="terms.html" data-legal="terms.html" data-i18n="hub.rules">GIVEAWAY RULES</a> · <a href="privacy.html" data-legal="privacy.html" data-i18n="hub.privacy">PRIVACY</a></div>
+    <div class="foot-note"><span data-i18n="hub.foot1">MANUAL AIM · JOYSTICK ON PHONE · HOLD MOUSE ON PC · ✸ NOVA WHEN CHARGED</span><br><span data-i18n="hub.foot2">TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · APEX TITANS EVERY 20 LV FROM 150 · THE LAST TITAN AT LV 200 · OVERCLOCK EVERY 3 LV · EVERY 10 LV FROM LV 100</span><br><span data-i18n="hub.foot3">A BREACHED CORE KEEPS 75% OF ITS CORE AUGMENTS · 90% IF YOU BEAT YOUR LAST RUN'S LEVEL · SKILLS ARE NEVER LOST</span><br><span data-i18n="hub.foot4">HOSTILES ARE 15% WEAKER UNTIL LV 50 · FROM LV 80 EVERY LEVEL-UP TAKES LONGER · AT LV 100 ALL BOTS SURGE +40% AND SWARM IN · THEN EVERY 15 LV THEY GROW FAR STRONGER</span><br><a href="terms.html" data-legal="terms.html" data-i18n="hub.rules">GIVEAWAY RULES</a> · <a href="privacy.html" data-legal="privacy.html" data-i18n="hub.privacy">PRIVACY</a></div>
   </div>
 </section>
 
@@ -558,9 +564,9 @@ en: {
   "hub.pb": "PERSONAL BEST", "hub.bank": "SHARD BANK", "hub.peak": "PEAK LEVEL", "hub.maxAsc": "MAX ASCENSION",
   "hub.start": "[ START COMBAT ]", "hub.shop": "UPGRADE HUB ✦ FX LAB", "hub.settings": "⚙ SETTINGS · LANGUAGE",
   "hub.foot1": "MANUAL AIM · JOYSTICK ON PHONE · HOLD MOUSE ON PC · ✸ NOVA WHEN CHARGED",
-  "hub.foot2": "TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · APEX TITANS EVERY 20 LV FROM 150 · OVERCLOCK EVERY 3 LV",
+  "hub.foot2": "TITAN GATES AT LV 10 · 25 · 50 · 75 · 150 · APEX TITANS EVERY 20 LV FROM 150 · THE LAST TITAN AT LV 200 · OVERCLOCK EVERY 3 LV · EVERY 10 LV FROM LV 100",
   "hub.foot3": "A BREACHED CORE KEEPS 75% OF ITS CORE AUGMENTS · 90% IF YOU BEAT YOUR LAST RUN'S LEVEL · SKILLS ARE NEVER LOST",
-  "hub.foot4": "HOSTILES ARE 15% WEAKER UNTIL LV 50 · AT LV 100 ALL BOTS SURGE +40% AND SWARM IN · THEN EVERY 15 LV THEY GROW FAR STRONGER",
+  "hub.foot4": "HOSTILES ARE 15% WEAKER UNTIL LV 50 · FROM LV 80 EVERY LEVEL-UP TAKES LONGER · AT LV 100 ALL BOTS SURGE +40% AND SWARM IN · THEN EVERY 15 LV THEY GROW FAR STRONGER",
   "hub.rules": "GIVEAWAY RULES", "hub.privacy": "PRIVACY",
   "hub.pity": "✦ PITY PROTOCOL ACTIVE · −20% ON ALL CORE AUGMENTS · ENDS WITH YOUR NEXT RUN",
   "hub.pbStreak": "PERSONAL BEST MISSED {n}/3 IN A ROW · AT 3: ONE-TIME −20% ON CORE AUGMENTS",
@@ -692,7 +698,38 @@ en: {
   "apex.omega3": "ENRAGE",
   "ban.apexTop": "// APEX TITAN DOWN",
   "ban.apex": "APEX SLAIN",
-  "ban.apexSub": "+15% DAMAGE FOR THIS RUN · SHIELDS FULL"
+  "ban.apexSub": "+15% DAMAGE FOR THIS RUN · SHIELDS FULL",
+  // LV 80 XP drag · LV 100 overclock cadence · LV 200 NULL SOVEREIGN
+  "ban.dragTop": "// XP DRAG ENGAGED",
+  "ban.drag": "DATA SATURATION",
+  "ban.dragSub": "FROM LV 80 EVERY LEVEL NEEDS MORE XP · AND IT KEEPS GETTING SLOWER",
+  "float.lateDraft": "OVERCLOCK NOW EVERY 10 LV",
+  "boss.final": "THE LAST TITAN // {name}",
+  "boss.finalPhase": "PHASE {n}/5 // {phase}",
+  "boss.warnFinal": "⚠ THE LAST TITAN AWAKENS",
+  "boss.subFinal": "{name} · 5 PHASES · LV {lv}",
+  "boss.finalShift": "PHASE {n}/5 · {phase}",
+  "apex.sov1": "THORN CROWN",
+  "apex.sov2": "STARFALL",
+  "apex.sov3": "EVENT HORIZON",
+  "apex.sov4": "MIRROR COURT",
+  "apex.sov5": "CRITICAL MASS",
+  "sov.tip1": "SHATTER THE 6 PRISMS",
+  "sov.tip2": "SHOOT THE METEORS · BREAK THE LANCE",
+  "sov.tip3": "SHOOT TO RESIST THE PULL",
+  "sov.tip4": "ONLY THE REAL ONE BLEEDS",
+  "sov.tip5": "KILL IT BEFORE IT DETONATES",
+  "sov.hintWard": "CROWN WARDS 85% · SHATTER THE PRISMS",
+  "sov.hintExposed": "EXPOSED · +25% DAMAGE",
+  "sov.hintMeteor": "SHOOT THE METEORS BEFORE THEY FALL",
+  "sov.hintMirror": "MIRRORS REFLECT · FIND THE TRUE EYE",
+  "sov.exposed": "EXPOSED!",
+  "sov.reforged": "CROWN REFORGED",
+  "sov.detonate": "DETONATION {s}s",
+  "sov.collapse": "COLLAPSE",
+  "ban.finalTop": "// THE LAST TITAN FALLS",
+  "ban.final": "SOVEREIGN SLAIN",
+  "ban.finalSub": "+25% DAMAGE · FULL REPAIR · NOVA READY"
 },
 de: {
   "lang.name": "DEUTSCH",
@@ -712,9 +749,9 @@ de: {
   "hub.pb": "PERSÖNLICHER REKORD", "hub.bank": "SPLITTER-BANK", "hub.peak": "HÖCHSTES LEVEL", "hub.maxAsc": "MAX. AUFSTIEG",
   "hub.start": "[ KAMPF STARTEN ]", "hub.shop": "UPGRADE-HUB ✦ FX-LABOR", "hub.settings": "⚙ EINSTELLUNGEN · SPRACHE",
   "hub.foot1": "MANUELLES ZIELEN · JOYSTICK AM HANDY · MAUS GEDRÜCKT HALTEN AM PC · ✸ NOVA, WENN GELADEN",
-  "hub.foot2": "TITANENTORE BEI LV 10 · 25 · 50 · 75 · 150 · APEX-TITANEN ALLE 20 LV AB 150 · OVERCLOCK ALLE 3 LV",
+  "hub.foot2": "TITANENTORE BEI LV 10 · 25 · 50 · 75 · 150 · APEX-TITANEN ALLE 20 LV AB 150 · DER LETZTE TITAN BEI LV 200 · OVERCLOCK ALLE 3 LV · AB LV 100 ALLE 10 LV",
   "hub.foot3": "EIN DURCHBROCHENER KERN BEHÄLT 75% SEINER KERN-AUGMENTS · 90%, WENN DU DAS LEVEL DEINES LETZTEN RUNS ÜBERTRIFFST · SKILLS GEHEN NIE VERLOREN",
-  "hub.foot4": "GEGNER SIND BIS LV 50 UM 15% SCHWÄCHER · AB LV 100 WERDEN ALLE BOTS UM 40% STÄRKER UND STRÖMEN HEREIN · DANACH ALLE 15 LV DEUTLICH STÄRKER",
+  "hub.foot4": "GEGNER SIND BIS LV 50 UM 15% SCHWÄCHER · AB LV 80 DAUERT JEDES LEVEL-UP LÄNGER · AB LV 100 WERDEN ALLE BOTS UM 40% STÄRKER UND STRÖMEN HEREIN · DANACH ALLE 15 LV DEUTLICH STÄRKER",
   "hub.rules": "GEWINNSPIEL-REGELN", "hub.privacy": "DATENSCHUTZ",
   "hub.pity": "✦ PITY-PROTOKOLL AKTIV · −20% AUF ALLE KERN-AUGMENTS · ENDET MIT DEINEM NÄCHSTEN RUN",
   "hub.pbStreak": "PERSÖNLICHEN REKORD {n}/3 MAL IN FOLGE VERFEHLT · BEI 3: EINMALIG −20% AUF KERN-AUGMENTS",
@@ -846,7 +883,38 @@ de: {
   "apex.omega3": "RASEREI",
   "ban.apexTop": "// APEX-TITAN BESIEGT",
   "ban.apex": "APEX ERLEGT",
-  "ban.apexSub": "+15% SCHADEN FÜR DIESEN RUN · SCHILDE VOLL"
+  "ban.apexSub": "+15% SCHADEN FÜR DIESEN RUN · SCHILDE VOLL",
+  // LV 80 XP drag · LV 100 overclock cadence · LV 200 NULL SOVEREIGN
+  "ban.dragTop": "// XP-BREMSE AKTIV",
+  "ban.drag": "DATENSÄTTIGUNG",
+  "ban.dragSub": "AB LV 80 BRAUCHT JEDES LEVEL MEHR XP · UND ES WIRD IMMER LANGSAMER",
+  "float.lateDraft": "OVERCLOCK JETZT NUR ALLE 10 LV",
+  "boss.final": "DER LETZTE TITAN // {name}",
+  "boss.finalPhase": "PHASE {n}/5 // {phase}",
+  "boss.warnFinal": "⚠ DER LETZTE TITAN ERWACHT",
+  "boss.subFinal": "{name} · 5 PHASEN · LV {lv}",
+  "boss.finalShift": "PHASE {n}/5 · {phase}",
+  "apex.sov1": "DORNENKRONE",
+  "apex.sov2": "STERNENFALL",
+  "apex.sov3": "EREIGNISHORIZONT",
+  "apex.sov4": "SPIEGELHOF",
+  "apex.sov5": "KRITISCHE MASSE",
+  "sov.tip1": "ZERSCHIESS DIE 6 PRISMEN",
+  "sov.tip2": "SCHIESS DIE METEORE AB · BRICH DIE LANZE",
+  "sov.tip3": "SCHIESSEN GEGEN DEN SOG",
+  "sov.tip4": "NUR DER ECHTE BLUTET",
+  "sov.tip5": "TÖTE IHN VOR DER DETONATION",
+  "sov.hintWard": "KRONE BLOCKT 85% · ZERSCHIESS DIE PRISMEN",
+  "sov.hintExposed": "UNGESCHÜTZT · +25% SCHADEN",
+  "sov.hintMeteor": "SCHIESS DIE METEORE AB, BEVOR SIE FALLEN",
+  "sov.hintMirror": "SPIEGEL REFLEKTIEREN · FINDE DAS ECHTE AUGE",
+  "sov.exposed": "UNGESCHÜTZT!",
+  "sov.reforged": "KRONE NEU GESCHMIEDET",
+  "sov.detonate": "DETONATION {s}s",
+  "sov.collapse": "KOLLAPS",
+  "ban.finalTop": "// DER LETZTE TITAN FÄLLT",
+  "ban.final": "SOUVERÄN BESIEGT",
+  "ban.finalSub": "+25% SCHADEN · VOLLE REPARATUR · NOVA BEREIT"
 },
 fr: {
   "lang.name": "FRANÇAIS",
@@ -866,9 +934,9 @@ fr: {
   "hub.pb": "RECORD PERSONNEL", "hub.bank": "BANQUE D'ÉCLATS", "hub.peak": "NIVEAU MAX", "hub.maxAsc": "ASCENSION MAX",
   "hub.start": "[ LANCER LE COMBAT ]", "hub.shop": "HUB D'AMÉLIORATION ✦ LABO FX", "hub.settings": "⚙ PARAMÈTRES · LANGUE",
   "hub.foot1": "VISÉE MANUELLE · JOYSTICK SUR MOBILE · MAINTIENS LA SOURIS SUR PC · ✸ NOVA UNE FOIS CHARGÉE",
-  "hub.foot2": "PORTES DES TITANS AUX NIV 10 · 25 · 50 · 75 · 150 · TITANS APEX TOUS LES 20 NIV DÈS 150 · OVERCLOCK TOUS LES 3 NIV",
+  "hub.foot2": "PORTES DES TITANS AUX NIV 10 · 25 · 50 · 75 · 150 · TITANS APEX TOUS LES 20 NIV DÈS 150 · LE DERNIER TITAN AU NIV 200 · OVERCLOCK TOUS LES 3 NIV · TOUS LES 10 NIV DÈS LE NIV 100",
   "hub.foot3": "UN NOYAU BRISÉ GARDE 75% DE SES AUGMENTS DE NOYAU · 90% SI TU DÉPASSES LE NIVEAU DE TA DERNIÈRE PARTIE · LES COMPÉTENCES NE SONT JAMAIS PERDUES",
-  "hub.foot4": "LES ENNEMIS SONT 15% PLUS FAIBLES JUSQU'AU NIV 50 · AU NIV 100 TOUS LES BOTS GAGNENT +40% ET AFFLUENT · PUIS TOUS LES 15 NIV ILS DEVIENNENT BIEN PLUS FORTS",
+  "hub.foot4": "LES ENNEMIS SONT 15% PLUS FAIBLES JUSQU'AU NIV 50 · DÈS LE NIV 80 CHAQUE NIVEAU EST PLUS LONG À ATTEINDRE · AU NIV 100 TOUS LES BOTS GAGNENT +40% ET AFFLUENT · PUIS TOUS LES 15 NIV ILS DEVIENNENT BIEN PLUS FORTS",
   "hub.rules": "RÈGLES DU CONCOURS", "hub.privacy": "CONFIDENTIALITÉ",
   "hub.pity": "✦ PROTOCOLE DE CONSOLATION ACTIF · −20% SUR TOUS LES AUGMENTS DE NOYAU · PREND FIN AVEC TA PROCHAINE PARTIE",
   "hub.pbStreak": "RECORD PERSONNEL MANQUÉ {n}/3 FOIS DE SUITE · À 3 : −20% UNIQUE SUR LES AUGMENTS DE NOYAU",
@@ -1000,7 +1068,38 @@ fr: {
   "apex.omega3": "FUREUR",
   "ban.apexTop": "// TITAN APEX VAINCU",
   "ban.apex": "APEX ABATTU",
-  "ban.apexSub": "+15% DE DÉGÂTS POUR CETTE PARTIE · BOUCLIERS PLEINS"
+  "ban.apexSub": "+15% DE DÉGÂTS POUR CETTE PARTIE · BOUCLIERS PLEINS",
+  // LV 80 XP drag · LV 100 overclock cadence · LV 200 NULL SOVEREIGN
+  "ban.dragTop": "// FREIN D'XP ACTIVÉ",
+  "ban.drag": "SATURATION DE DONNÉES",
+  "ban.dragSub": "DÈS LE NIV 80 CHAQUE NIVEAU DEMANDE PLUS D'XP · ET ÇA RALENTIT TOUJOURS PLUS",
+  "float.lateDraft": "OVERCLOCK DÉSORMAIS TOUS LES 10 NIV",
+  "boss.final": "LE DERNIER TITAN // {name}",
+  "boss.finalPhase": "PHASE {n}/5 // {phase}",
+  "boss.warnFinal": "⚠ LE DERNIER TITAN S'ÉVEILLE",
+  "boss.subFinal": "{name} · 5 PHASES · NIV {lv}",
+  "boss.finalShift": "PHASE {n}/5 · {phase}",
+  "apex.sov1": "COURONNE D'ÉPINES",
+  "apex.sov2": "PLUIE D'ÉTOILES",
+  "apex.sov3": "HORIZON DES ÉVÉNEMENTS",
+  "apex.sov4": "COUR DES MIROIRS",
+  "apex.sov5": "MASSE CRITIQUE",
+  "sov.tip1": "BRISE LES 6 PRISMES",
+  "sov.tip2": "ABATS LES MÉTÉORES · BRISE LA LANCE",
+  "sov.tip3": "TIRE POUR RÉSISTER À L'ATTRACTION",
+  "sov.tip4": "SEUL LE VRAI SAIGNE",
+  "sov.tip5": "TUE-LE AVANT QU'IL N'EXPLOSE",
+  "sov.hintWard": "LA COURONNE BLOQUE 85% · BRISE LES PRISMES",
+  "sov.hintExposed": "EXPOSÉ · +25% DE DÉGÂTS",
+  "sov.hintMeteor": "ABATS LES MÉTÉORES AVANT LEUR CHUTE",
+  "sov.hintMirror": "LES MIROIRS RENVOIENT · TROUVE LE VRAI ŒIL",
+  "sov.exposed": "EXPOSÉ !",
+  "sov.reforged": "COURONNE REFORGÉE",
+  "sov.detonate": "DÉTONATION {s}s",
+  "sov.collapse": "EFFONDREMENT",
+  "ban.finalTop": "// LE DERNIER TITAN TOMBE",
+  "ban.final": "SOUVERAIN ABATTU",
+  "ban.finalSub": "+25% DE DÉGÂTS · RÉPARATION TOTALE · NOVA PRÊTE"
 },
 es: {
   "lang.name": "ESPAÑOL",
@@ -1020,9 +1119,9 @@ es: {
   "hub.pb": "RÉCORD PERSONAL", "hub.bank": "BANCO DE FRAGMENTOS", "hub.peak": "NIVEL MÁXIMO", "hub.maxAsc": "ASCENSIÓN MÁXIMA",
   "hub.start": "[ INICIAR COMBATE ]", "hub.shop": "CENTRO DE MEJORAS ✦ LAB FX", "hub.settings": "⚙ AJUSTES · IDIOMA",
   "hub.foot1": "PUNTERÍA MANUAL · JOYSTICK EN MÓVIL · MANTÉN PULSADO EL RATÓN EN PC · ✸ NOVA CUANDO ESTÉ CARGADA",
-  "hub.foot2": "PUERTAS DE TITÁN EN NV 10 · 25 · 50 · 75 · 150 · TITANES APEX CADA 20 NV DESDE EL 150 · OVERCLOCK CADA 3 NV",
+  "hub.foot2": "PUERTAS DE TITÁN EN NV 10 · 25 · 50 · 75 · 150 · TITANES APEX CADA 20 NV DESDE EL 150 · EL ÚLTIMO TITÁN EN EL NV 200 · OVERCLOCK CADA 3 NV · CADA 10 NV DESDE EL NV 100",
   "hub.foot3": "UN NÚCLEO DESTRUIDO CONSERVA EL 75% DE SUS MEJORAS DE NÚCLEO · EL 90% SI SUPERAS EL NIVEL DE TU ÚLTIMA PARTIDA · LAS HABILIDADES NUNCA SE PIERDEN",
-  "hub.foot4": "LOS ENEMIGOS SON UN 15% MÁS DÉBILES HASTA EL NV 50 · EN EL NV 100 TODOS LOS BOTS GANAN +40% Y LLEGAN EN MASA · LUEGO CADA 15 NV SE VUELVEN MUCHO MÁS FUERTES",
+  "hub.foot4": "LOS ENEMIGOS SON UN 15% MÁS DÉBILES HASTA EL NV 50 · DESDE EL NV 80 CADA SUBIDA DE NIVEL TARDA MÁS · EN EL NV 100 TODOS LOS BOTS GANAN +40% Y LLEGAN EN MASA · LUEGO CADA 15 NV SE VUELVEN MUCHO MÁS FUERTES",
   "hub.rules": "BASES DEL SORTEO", "hub.privacy": "PRIVACIDAD",
   "hub.pity": "✦ PROTOCOLO DE CONSUELO ACTIVO · −20% EN TODAS LAS MEJORAS DE NÚCLEO · TERMINA CON TU PRÓXIMA PARTIDA",
   "hub.pbStreak": "RÉCORD PERSONAL FALLADO {n}/3 VECES SEGUIDAS · A LAS 3: −20% ÚNICO EN MEJORAS DE NÚCLEO",
@@ -1154,7 +1253,38 @@ es: {
   "apex.omega3": "FURIA",
   "ban.apexTop": "// TITÁN APEX DERROTADO",
   "ban.apex": "APEX ABATIDO",
-  "ban.apexSub": "+15% DE DAÑO EN ESTA PARTIDA · ESCUDOS AL MÁXIMO"
+  "ban.apexSub": "+15% DE DAÑO EN ESTA PARTIDA · ESCUDOS AL MÁXIMO",
+  // LV 80 XP drag · LV 100 overclock cadence · LV 200 NULL SOVEREIGN
+  "ban.dragTop": "// FRENO DE XP ACTIVADO",
+  "ban.drag": "SATURACIÓN DE DATOS",
+  "ban.dragSub": "DESDE EL NV 80 CADA NIVEL PIDE MÁS XP · Y CADA VEZ ES MÁS LENTO",
+  "float.lateDraft": "OVERCLOCK AHORA CADA 10 NV",
+  "boss.final": "EL ÚLTIMO TITÁN // {name}",
+  "boss.finalPhase": "FASE {n}/5 // {phase}",
+  "boss.warnFinal": "⚠ EL ÚLTIMO TITÁN DESPIERTA",
+  "boss.subFinal": "{name} · 5 FASES · NV {lv}",
+  "boss.finalShift": "FASE {n}/5 · {phase}",
+  "apex.sov1": "CORONA DE ESPINAS",
+  "apex.sov2": "LLUVIA ESTELAR",
+  "apex.sov3": "HORIZONTE DE SUCESOS",
+  "apex.sov4": "CORTE DE ESPEJOS",
+  "apex.sov5": "MASA CRÍTICA",
+  "sov.tip1": "ROMPE LOS 6 PRISMAS",
+  "sov.tip2": "DERRIBA LOS METEOROS · ROMPE LA LANZA",
+  "sov.tip3": "DISPARA PARA RESISTIR LA ATRACCIÓN",
+  "sov.tip4": "SOLO EL VERDADERO SANGRA",
+  "sov.tip5": "MÁTALO ANTES DE QUE DETONE",
+  "sov.hintWard": "LA CORONA BLOQUEA 85% · ROMPE LOS PRISMAS",
+  "sov.hintExposed": "EXPUESTO · +25% DE DAÑO",
+  "sov.hintMeteor": "DERRIBA LOS METEOROS ANTES DE QUE CAIGAN",
+  "sov.hintMirror": "LOS ESPEJOS REFLEJAN · BUSCA EL OJO VERDADERO",
+  "sov.exposed": "¡EXPUESTO!",
+  "sov.reforged": "CORONA REFORJADA",
+  "sov.detonate": "DETONACIÓN {s}s",
+  "sov.collapse": "COLAPSO",
+  "ban.finalTop": "// CAE EL ÚLTIMO TITÁN",
+  "ban.final": "SOBERANO ABATIDO",
+  "ban.finalSub": "+25% DE DAÑO · REPARACIÓN TOTAL · NOVA LISTA"
 },
 th: {
   "lang.name": "ไทย",
@@ -1174,9 +1304,9 @@ th: {
   "hub.pb": "สถิติส่วนตัว", "hub.bank": "คลังชาร์ด", "hub.peak": "เลเวลสูงสุด", "hub.maxAsc": "การยกระดับสูงสุด",
   "hub.start": "[ เริ่มการต่อสู้ ]", "hub.shop": "ศูนย์อัปเกรด ✦ แล็บ FX", "hub.settings": "⚙ ตั้งค่า · ภาษา",
   "hub.foot1": "เล็งเอง · จอยสติกบนมือถือ · กดเมาส์ค้างบนพีซี · ✸ ใช้โนวาเมื่อชาร์จเต็ม",
-  "hub.foot2": "ประตูไททันที่เลเวล 10 · 25 · 50 · 75 · 150 · ไททันเอเพ็กซ์ทุก 20 เลเวลตั้งแต่ 150 · โอเวอร์คล็อกทุก 3 เลเวล",
+  "hub.foot2": "ประตูไททันที่เลเวล 10 · 25 · 50 · 75 · 150 · ไททันเอเพ็กซ์ทุก 20 เลเวลตั้งแต่ 150 · ไททันตนสุดท้ายที่เลเวล 200 · โอเวอร์คล็อกทุก 3 เลเวล · ทุก 10 เลเวลตั้งแต่เลเวล 100",
   "hub.foot3": "แกนที่ถูกทำลายจะเก็บอัปเกรดแกนไว้ 75% · 90% หากคุณทำเลเวลได้สูงกว่ารอบที่แล้ว · สกิลจะไม่หายไปเลย",
-  "hub.foot4": "ศัตรูอ่อนลง 15% จนถึงเลเวล 50 · ที่เลเวล 100 บอททั้งหมดแกร่งขึ้น 40% และบุกมาเป็นฝูง · จากนั้นทุก 15 เลเวลจะแกร่งขึ้นอย่างมาก",
+  "hub.foot4": "ศัตรูอ่อนลง 15% จนถึงเลเวล 50 · ตั้งแต่เลเวล 80 การเลเวลอัปจะนานขึ้นเรื่อยๆ · ที่เลเวล 100 บอททั้งหมดแกร่งขึ้น 40% และบุกมาเป็นฝูง · จากนั้นทุก 15 เลเวลจะแกร่งขึ้นอย่างมาก",
   "hub.rules": "กติกาแจกรางวัล", "hub.privacy": "ความเป็นส่วนตัว",
   "hub.pity": "✦ โปรโตคอลปลอบใจทำงานอยู่ · ลด 20% สำหรับอัปเกรดแกนทั้งหมด · สิ้นสุดเมื่อจบรอบถัดไป",
   "hub.pbStreak": "พลาดสถิติส่วนตัว {n}/3 ครั้งติดต่อกัน · ครบ 3 ครั้ง: ลด 20% ครั้งเดียวสำหรับอัปเกรดแกน",
@@ -1308,7 +1438,38 @@ th: {
   "apex.omega3": "คลั่ง",
   "ban.apexTop": "// ล้มไททันเอเพ็กซ์แล้ว",
   "ban.apex": "โค่นเอเพ็กซ์",
-  "ban.apexSub": "+15% ความเสียหายในรอบนี้ · โล่เต็ม"
+  "ban.apexSub": "+15% ความเสียหายในรอบนี้ · โล่เต็ม",
+  // LV 80 XP drag · LV 100 overclock cadence · LV 200 NULL SOVEREIGN
+  "ban.dragTop": "// ระบบหน่วง XP ทำงาน",
+  "ban.drag": "ข้อมูลอิ่มตัว",
+  "ban.dragSub": "ตั้งแต่เลเวล 80 ทุกเลเวลต้องใช้ XP มากขึ้น · และจะช้าลงเรื่อยๆ",
+  "float.lateDraft": "โอเวอร์คล็อกทุก 10 เลเวลแล้ว",
+  "boss.final": "ไททันตนสุดท้าย // {name}",
+  "boss.finalPhase": "เฟส {n}/5 // {phase}",
+  "boss.warnFinal": "⚠ ไททันตนสุดท้ายตื่นขึ้น",
+  "boss.subFinal": "{name} · 5 เฟส · เลเวล {lv}",
+  "boss.finalShift": "เฟส {n}/5 · {phase}",
+  "apex.sov1": "มงกุฎหนาม",
+  "apex.sov2": "ดาวตก",
+  "apex.sov3": "ขอบฟ้าเหตุการณ์",
+  "apex.sov4": "ราชสำนักกระจก",
+  "apex.sov5": "มวลวิกฤต",
+  "sov.tip1": "ทำลายปริซึมทั้ง 6",
+  "sov.tip2": "ยิงอุกกาบาต · ทำลายหอกสุริยะ",
+  "sov.tip3": "ยิงเพื่อต้านแรงดึง",
+  "sov.tip4": "มีแค่ตัวจริงที่เจ็บ",
+  "sov.tip5": "ฆ่ามันก่อนที่จะระเบิด",
+  "sov.hintWard": "มงกุฎกันได้ 85% · ทำลายปริซึม",
+  "sov.hintExposed": "เปิดจุดอ่อน · ความเสียหาย +25%",
+  "sov.hintMeteor": "ยิงอุกกาบาตก่อนที่จะตกลงมา",
+  "sov.hintMirror": "กระจกสะท้อนกลับ · หาดวงตาที่แท้จริง",
+  "sov.exposed": "เปิดจุดอ่อน!",
+  "sov.reforged": "มงกุฎฟื้นคืน",
+  "sov.detonate": "ระเบิดใน {s} วิ",
+  "sov.collapse": "ยุบตัว",
+  "ban.finalTop": "// ไททันตนสุดท้ายล่มสลาย",
+  "ban.final": "โค่นราชันย์",
+  "ban.finalSub": "ความเสียหาย +25% · ซ่อมเต็ม · โนวาพร้อม"
 },
 tl: {
   "lang.name": "TAGALOG",
@@ -1328,9 +1489,9 @@ tl: {
   "hub.pb": "PERSONAL BEST", "hub.bank": "SHARD BANK", "hub.peak": "PINAKAMATAAS NA LEVEL", "hub.maxAsc": "PINAKAMATAAS NA ASCENSION",
   "hub.start": "[ SIMULAN ANG LABAN ]", "hub.shop": "UPGRADE HUB ✦ FX LAB", "hub.settings": "⚙ SETTINGS · WIKA",
   "hub.foot1": "MANWAL NA PAGTUTOK · JOYSTICK SA PHONE · PINDUTIN NANG MATAGAL ANG MOUSE SA PC · ✸ NOVA KAPAG PUNO NA",
-  "hub.foot2": "MGA TITAN GATE SA LV 10 · 25 · 50 · 75 · 150 · APEX TITAN KADA 20 LV MULA 150 · OVERCLOCK KADA 3 LV",
+  "hub.foot2": "MGA TITAN GATE SA LV 10 · 25 · 50 · 75 · 150 · APEX TITAN KADA 20 LV MULA 150 · ANG HULING TITAN SA LV 200 · OVERCLOCK KADA 3 LV · KADA 10 LV MULA LV 100",
   "hub.foot3": "ANG NASIRANG CORE AY NAGTITIRA NG 75% NG MGA CORE AUGMENT NITO · 90% KUNG MALALAMPASAN MO ANG LEVEL NG HULING RUN MO · HINDI KAILANMAN NAWAWALA ANG MGA SKILL",
-  "hub.foot4": "MAS MAHINA NANG 15% ANG MGA KALABAN HANGGANG LV 50 · SA LV 100 +40% ANG LAKAS NG LAHAT NG BOT AT DUMADAGSA SILA · PAGKATAPOS KADA 15 LV MAS LUMALAKAS PA SILA",
+  "hub.foot4": "MAS MAHINA NANG 15% ANG MGA KALABAN HANGGANG LV 50 · MULA LV 80 MAS MATAGAL ANG BAWAT LEVEL-UP · SA LV 100 +40% ANG LAKAS NG LAHAT NG BOT AT DUMADAGSA SILA · PAGKATAPOS KADA 15 LV MAS LUMALAKAS PA SILA",
   "hub.rules": "MGA PATAKARAN NG GIVEAWAY", "hub.privacy": "PRIVACY",
   "hub.pity": "✦ AKTIBO ANG PITY PROTOCOL · −20% SA LAHAT NG CORE AUGMENT · MATATAPOS SA SUSUNOD MONG RUN",
   "hub.pbStreak": "HINDI NAABOT ANG PERSONAL BEST NANG {n}/3 SUNOD-SUNOD · SA IKA-3: ISANG BESES NA −20% SA CORE AUGMENTS",
@@ -1462,7 +1623,38 @@ tl: {
   "apex.omega3": "GALIT",
   "ban.apexTop": "// BUMAGSAK ANG APEX TITAN",
   "ban.apex": "NATALO ANG APEX",
-  "ban.apexSub": "+15% PINSALA SA RUN NA ITO · PUNO ANG KALASAG"
+  "ban.apexSub": "+15% PINSALA SA RUN NA ITO · PUNO ANG KALASAG",
+  // LV 80 XP drag · LV 100 overclock cadence · LV 200 NULL SOVEREIGN
+  "ban.dragTop": "// NAKA-ON ANG XP DRAG",
+  "ban.drag": "SATURASYON NG DATA",
+  "ban.dragSub": "MULA LV 80 MAS MARAMING XP ANG KAILANGAN KADA LEVEL · AT LALO PA ITONG BUMABAGAL",
+  "float.lateDraft": "OVERCLOCK NA LANG KADA 10 LV",
+  "boss.final": "ANG HULING TITAN // {name}",
+  "boss.finalPhase": "PHASE {n}/5 // {phase}",
+  "boss.warnFinal": "⚠ GUMISING ANG HULING TITAN",
+  "boss.subFinal": "{name} · 5 PHASE · LV {lv}",
+  "boss.finalShift": "PHASE {n}/5 · {phase}",
+  "apex.sov1": "KORONANG TINIK",
+  "apex.sov2": "ULAN NG BITUIN",
+  "apex.sov3": "EVENT HORIZON",
+  "apex.sov4": "KORTE NG SALAMIN",
+  "apex.sov5": "KRITIKAL NA MASA",
+  "sov.tip1": "BASAGIN ANG 6 NA PRISM",
+  "sov.tip2": "BARILIN ANG MGA METEOR · BASAGIN ANG SIBAT",
+  "sov.tip3": "BUMARIL PARA LABANAN ANG HILA",
+  "sov.tip4": "ANG TOTOO LANG ANG NASASAKTAN",
+  "sov.tip5": "PATAYIN BAGO ITO SUMABOG",
+  "sov.hintWard": "HARANG NG KORONA 85% · BASAGIN ANG MGA PRISM",
+  "sov.hintExposed": "NAKALANTAD · +25% PINSALA",
+  "sov.hintMeteor": "BARILIN ANG MGA METEOR BAGO BUMAGSAK",
+  "sov.hintMirror": "NAGBABALIK ANG SALAMIN · HANAPIN ANG TOTOONG MATA",
+  "sov.exposed": "NAKALANTAD!",
+  "sov.reforged": "BUMALIK ANG KORONA",
+  "sov.detonate": "PAGSABOG {s}s",
+  "sov.collapse": "PAGGUHO",
+  "ban.finalTop": "// BUMAGSAK ANG HULING TITAN",
+  "ban.final": "NATALO ANG SOBERANO",
+  "ban.finalSub": "+25% PINSALA · BUONG REPAIR · HANDA ANG NOVA"
 }
 };
 </script>
@@ -2069,9 +2261,17 @@ const STICK_DEAD = 0.2;   // the knob must leave the centre this far before the 
 const ASSIST_CONE = 0.2;  // ≈11°: only hostiles this close to where you aim get a nudge
 const ASSIST_PULL = 0.45; // bends the shot 45% of the way toward that hostile — a nudge, never a lock-on
 let aimAssist = store.get(KEY.assist, true), assistLock = null, aimFiring = false;
-const DRAFT_EVERY = 3;
+// OVERCLOCK drafts: every 3 levels below LV 100 · from LV 100 only every 10 levels (100 · 110 · 120 …)
+const DRAFT_EVERY = 3, DRAFT_LATE_LV = 100, DRAFT_LATE_EVERY = 10;
+const isDraftLv = L => L < DRAFT_LATE_LV ? L % DRAFT_EVERY === 0 : L % DRAFT_LATE_EVERY === 0;
+const draftIn = L => { let n = 1; while (!isDraftLv(L + n)) n++; return n; }; // levels until the next Overclock
 
-const xpNeed = L => Math.round(6 + 4.5 * L + 1.1 * Math.pow(L, 1.5));
+// XP DRAG — from LV 80 every level needs more XP than the normal curve, and the extra keeps growing
+// (quadratic): LV 90 ×1.6 · LV 100 ×2.3 · LV 120 ×4.6 · LV 150 ×9.5 · LV 200 ×22. Late runs can no longer
+// blast through levels just because the swarm is dense — each level-up has to be earned.
+const XP_DRAG_LV = 80, XP_DRAG_LIN = 0.045, XP_DRAG_QUAD = 0.0011;
+const xpDrag = L => { const k = L - XP_DRAG_LV; return k <= 0 ? 1 : 1 + XP_DRAG_LIN * k + XP_DRAG_QUAD * k * k; };
+const xpNeed = L => Math.round((6 + 4.5 * L + 1.1 * Math.pow(L, 1.5)) * xpDrag(L));
 const hpScale = L => 1 + 0.11 * (L - 1) + 0.0065 * (L - 1) * (L - 1);
 const comboMul = () => 1 + Math.min(4, combo.n * 0.02);
 const orbTier = () => stats.orbLv <= 0 ? 0 : Math.min(5, Math.ceil(stats.orbLv / 2));
@@ -2320,14 +2520,16 @@ function spawnBoss(idx, echo = 0) {
   SFX.bossSpawn(idx); MUSIC.set('boss'); shake = Math.max(shake, 14); warp = 3;
 }
 // boss bar labels (rebuilt on a language switch)
-const bossLabel = b => b.apex ? loc('boss.apex', { name: apexName(b) }) : loc(b.echo ? 'boss.echo' : 'boss.titan', { n: b.echo, name: b.form === 2 ? b.B.name2 : b.B.name });
-const bossPhaseLabel = b => b.apex ? loc('boss.apexPhase', { n: b.ph + 1, phase: apexPhaseName(b) })
+const bossLabel = b => b.final ? loc('boss.final', { name: b.A.name }) : b.apex ? loc('boss.apex', { name: apexName(b) }) : loc(b.echo ? 'boss.echo' : 'boss.titan', { n: b.echo, name: b.form === 2 ? b.B.name2 : b.B.name });
+const bossPhaseLabel = b => b.final ? loc('boss.finalPhase', { n: b.ph + 1, phase: apexPhaseName(b) })
+  : b.apex ? loc('boss.apexPhase', { n: b.ph + 1, phase: apexPhaseName(b) })
   : loc(b.B.forms > 1 ? (b.form === 2 ? 'boss.form2' : 'boss.form1') : (b.phase === 2 ? 'boss.phase2' : 'boss.phase1'));
 // queue entries: [titanIndex, echo] for classic Titans · [-1, 0, apexIndex] for the three-phase Apex Titans
+// · [-2, 0] for the five-phase LV 200 NULL SOVEREIGN
 function nextBoss() {
   if (state === 'play' && !boss && !cine && !modal && bossQueue.length) {
     const q = bossQueue.shift();
-    if (q[2] != null) spawnApex(q[2]); else spawnBoss(q[0], q[1]);
+    if (q[0] === -2) spawnFinal(); else if (q[2] != null) spawnApex(q[2]); else spawnBoss(q[0], q[1]);
   }
 }
 function updateSegs(b) {
@@ -2343,6 +2545,7 @@ function bossShards(b) { // Obelisk form II: six orbiting crystal shards
 }
 function bossHit(x, y) {
   const b = boss, rr = b.r + 4;
+  if (b.final) return sovHit(b, x, y);
   if ((b.x - x) ** 2 + (b.y - y) ** 2 < rr * rr) return true;
   if (b.idx === 1) for (const h of b.heads) if ((h.x - x) ** 2 + (h.y - y) ** 2 < (b.r * 0.5) ** 2) return true;
   if (b.idx === 3) for (let i = 0; i < b.segs.length; i++) { const s = b.segs[i], sr = b.r * Math.max(0.25, 0.6 - i * 0.02); if ((s.x - x) ** 2 + (s.y - y) ** 2 < sr * sr) return true; }
@@ -2491,7 +2694,8 @@ function updateBoss(d) {
 function damageBoss(dmg, crit, x, y, nova) {
   const b = boss; if (!b || b.entering || b.trans > 0) return;
   if (b.stun > 0 && !nova) dmg *= 1.5;
-  if (b.apex) dmg = apexIncoming(b, dmg, x, y, nova);
+  if (b.apex) { dmg = b.final ? sovIncoming(b, dmg, x, y, nova, crit) : apexIncoming(b, dmg, x, y, nova); if (!(dmg > 0)) return; }
+  if (b.final) b.dealt += dmg; // feeds the CRITICAL MASS timer (it adapts to how fast you have been hurting the Sovereign)
   b.hp -= dmg; b.flash = 0.06;
   if (b.charge) b.charge.dealt += dmg;
   if (b.dash && b.dash.st && b.dash.st < 3) b.dash.dealt += dmg;
@@ -2588,7 +2792,8 @@ function updateApex(b, d) {
   const stun = b.stun > 0; if (stun) b.stun -= d;
   const k = stun ? 0.25 : 1;
   b.fireCd -= d * k; b.atkCd -= d * k; b.spawnCd -= d * k; b.swarmCd -= d * k; b.ringCd -= d * k;
-  if (b.A.id === 'jug') updJuggernaut(b, d, b.sc, b.ph, stun);
+  if (b.final) updSovereign(b, d, b.sc, b.ph, stun);
+  else if (b.A.id === 'jug') updJuggernaut(b, d, b.sc, b.ph, stun);
   else if (b.A.id === 'weaver') updWeaver(b, d, b.sc, b.ph, stun);
   else updOmega(b, d, b.sc, b.ph, stun);
 }
@@ -2723,15 +2928,18 @@ function apexIncoming(b, dmg, x, y, nova) {
 }
 // a phase's health bar is empty → shift instantly to the next phase (fresh bar, new mechanics), or die after phase III
 function apexShift(b) {
-  if (b.ph >= 2) { killBoss(); return; }
+  if (b.ph >= b.A.split.length - 1) { killBoss(); return; }
   b.ph++; b.max = b.pool * b.A.split[b.ph]; b.hp = b.max; // overflow damage is discarded on purpose
-  b.trans = APEX_SHIFT; b.transMax = APEX_SHIFT;
+  b.trans = b.A.shift || APEX_SHIFT; b.transMax = b.trans;
   b.charge = null; b.dash = null; b.stun = 0; b.burst = 0; b.pull = 0; b.decoys = []; b.trail = [];
   b.fireCd = 1.0; b.atkCd = 2.4; b.spawnCd = 1.2; b.swarmCd = 2.5; b.ringCd = 2; b.tpCd = 1;
   b.ang = Math.atan2(b.y - core.y, b.x - core.x); b.dist = Math.hypot(b.x - core.x, b.y - core.y);
   for (const o of eBullets) o.hp = 0;
+  if (b.final) sovEnterPhase(b);
   $('bossPhase').textContent = bossPhaseLabel(b);
-  $('warnTitle').textContent = '⚠ ' + apexName(b); $('warnSub').textContent = loc('boss.shift', { n: b.ph + 1, phase: apexPhaseName(b) }); replay($('warn'), 'show');
+  $('warnTitle').textContent = '⚠ ' + (b.final ? b.A.name : apexName(b));
+  $('warnSub').textContent = b.final ? loc('boss.finalShift', { n: b.ph + 1, phase: apexPhaseName(b) }) + ' · ' + loc('sov.tip' + (b.ph + 1)) : loc('boss.shift', { n: b.ph + 1, phase: apexPhaseName(b) });
+  replay($('warn'), 'show');
   flash = 0.7; flashCol = '255,60,90'; shake = 24; chroma = 0.9; hitStop = 0.12;
   const col = apexCol(b);
   burst(b.x, b.y, 110, [col, '#ffffff', b.A.col2], 480, 3.6, 'sq');
@@ -2740,7 +2948,8 @@ function apexShift(b) {
   SFX.transform();
 }
 function killApex(b) {
-  $('bossbar').classList.remove('apex');
+  $('bossbar').classList.remove('apex'); $('bossbar').classList.remove('final');
+  if (b.final) { killSovereign(b); return; }
   score += 12000 * (1 + level * 0.05) * (1 + b.cycle * 0.5);
   burst(b.x, b.y, 160, [b.A.col, '#ffffff', '#ffbe0b', b.A.col2], 560, 4.4);
   for (let i = 0; i < 4; i++) rings.push({ x: b.x, y: b.y, r: 10, vr: 600 + i * 260, life: 1, max: 1, col: i % 2 ? '#ffffff' : b.A.col, w: 7 - i });
@@ -2759,12 +2968,279 @@ function killApex(b) {
 function pullCore(d) {
   let gx = 0, gy = 0;
   const b = boss;
-  if (b && b.apex && b.A.id === 'weaver' && b.ph === 2 && !b.entering && b.trans <= 0) {
+  if (b && b.apex && (b.A.id === 'weaver' || b.final) && b.ph === 2 && !b.entering && b.trans <= 0) { // Void Weaver III · Sovereign III EVENT HORIZON
     const dx = b.x - W / 2, dy = b.y - H * 0.5, dd = Math.hypot(dx, dy) || 1, m = b.pull * Math.min(MIN * 0.24, dd * 0.55);
     gx = dx / dd * m; gy = dy / dd * m;
   }
   const k = Math.min(1, d * 5);
   core.x += (W / 2 + gx - core.x) * k; core.y += (H * 0.5 + gy - core.y) * k;
+}
+
+/* =========================================================
+   LV 200 — THE NULL SOVEREIGN · THE LAST TITAN
+   A dead star that devoured every Titan before it. Five phases, each with its own health bar (same rules
+   as the Apex Titans: overflow damage is discarded and the 1.6 s phase shift is invulnerable).
+   I   THORN CROWN    six crown prisms ward it — it only takes 15% damage while one stands. Shatter all six
+                      and it is EXPOSED for 6 s (+25% damage taken), then the crown reforges.
+   II  STARFALL       meteors gather around the core, glow, then dive — shoot them down first ·
+                      SOLAR LANCE: a charged beam you have to BREAK · judgment rings
+   III EVENT HORIZON  it collapses into a black hole: drags the core in (every hit pushes back), a three-arm
+                      accretion spiral, gravity bombs and swarms. Fully dragged in = GRAVITY CRUSH.
+   IV  MIRROR COURT   splits into three. Only the real one bleeds (its eye has a pupil that tracks you, the
+                      mirrors' eyes are hollow) — a shot into a mirror is fired straight back at you.
+                      Every 5 s the court converges, the eyes shut and the real one is re-drawn.
+   V   CRITICAL MASS  the star goes critical: kill it before the countdown runs out. A detonation is a 60% hull
+                      hit and the countdown restarts shorter. The first countdown is sized from your own damage
+                      in phases I–IV, so it is always beatable — never comfortable.
+   The Supernova still works: 30% of the current phase, and it shatters the whole Thorn Crown at once.
+   ========================================================= */
+const FINAL_LV = 200;
+const SOV = { id: 'sov', final: true, name: 'NULL SOVEREIGN', col: '#e8f9ff', col2: '#7a5cff', rMul: 1.45, hpMul: 6.8, split: [0.18, 0.2, 0.2, 0.2, 0.22], sfx: 9, shift: 1.6 };
+const SOV_CROWN = 6, SOV_PRISM = 0.045, SOV_WARD = 0.15, SOV_EXPOSE = 6, SOV_EXPOSED_MUL = 1.25, SOV_SHUFFLE = 5, SOV_SHUFFLE_T = 0.9;
+function spawnFinal() {
+  const A = SOV, L = level, bs = bossBs();
+  const pool = 26 * L * L * A.hpMul * growBoss(L) * bs, max = pool * A.split[0];
+  const d = Math.hypot(W, H) / 2 + 120;
+  boss = {
+    apex: true, final: true, A, k: -1, cycle: 0, idx: -1, echo: 0, B: { name: A.name, col: A.col, col2: A.col2, forms: 1 },
+    ph: 0, pool, hp: max, max, bs, sc: 1 + L * 0.025 + 0.9,
+    x: core.x, y: core.y - d, ang: -Math.PI / 2, dist: d, orbit: Math.min(MIN * 0.36, 265), r: clamp(MIN * 0.07, 34, 60) * A.rMul,
+    rot: 0, t: 0, flash: 0, entering: true, dir: Math.random() < .5 ? 1 : -1, phase: 1, form: 1, trans: 0, transMax: A.shift, stun: 0,
+    charge: null, dash: null, heads: [], segs: [], shardA: 0, fireCd: 2.2, atkCd: 4, spawnCd: 6, swarmCd: 6, ringCd: 3.5, spiral: 0,
+    burst: 0, burstCd: 0, pull: 0, crushCd: 0, decoys: [], tpCd: 1.4, reflCd: 0, flipCd: 1.2, trail: [], atk: 0,
+    crown: [], exposed: 0, meteorCd: 1.4, real: 0, mA: 0, shuffleCd: SOV_SHUFFLE, shuffleT: 0, mflash: [0, 0, 0],
+    clock: 0, clockMax: 0, tick: 0, lastS: -1, blasts: 0, fightT: 0, dealt: 0
+  };
+  sovCrown(boss);
+  // it arrives by devouring the swarm on the field — no rewards, it eats them
+  for (const e of enemies) if (!e.dead) { e.dead = true; burst(e.x, e.y, 8, ['#e8f9ff', '#7a5cff'], 160, 2); }
+  enemies = enemies.filter(e => !e.dead);
+  for (const o of eBullets) o.hp = 0;
+  $('bossName').textContent = bossLabel(boss);
+  $('bossPhase').textContent = bossPhaseLabel(boss);
+  $('bossbar').classList.remove('hidden'); $('bossbar').classList.add('apex'); $('bossbar').classList.add('final');
+  $('warnTitle').textContent = loc('boss.warnFinal');
+  $('warnSub').textContent = loc('boss.subFinal', { name: A.name, lv: L }) + ' · ' + loc('sov.tip1');
+  replay($('warn'), 'show');
+  core.shield = stats.maxShield; core.shFlash = 0.6;
+  texts.push({ x: core.x, y: core.y + core.R * 3.4, txt: loc('float.shields'), col: '#c79bff', size: 12, life: 1.6, max: 1.6 });
+  for (let i = 0; i < 4; i++) rings.push({ x: core.x, y: core.y, r: MIN * 0.7, vr: -260 - i * 120, life: 1.4, max: 1.4, col: i % 2 ? '#7a5cff' : '#e8f9ff', w: 5 - i });
+  SFX.bossSpawn(A.sfx); SFX.roar(); MUSIC.set('boss');
+  shake = Math.max(shake, 28); warp = 4.2; flash = 0.8; flashCol = '232,249,255'; chroma = 1;
+}
+function sovCrown(b) { b.crown = []; for (let i = 0; i < SOV_CROWN; i++) b.crown.push({ i, hp: b.max * SOV_PRISM, max: b.max * SOV_PRISM, cd: rand(1, 2.6), flash: 0 }); }
+const prismR = b => b.r * 0.34;
+function prismPos(b, c) { const a = b.rot * 0.8 + c.i * TAU / SOV_CROWN; return { x: b.x + Math.cos(a) * b.r * 1.85, y: b.y + Math.sin(a) * b.r * 1.85, a }; }
+const crownUp = b => b.ph === 0 && b.exposed <= 0 && b.crown.some(c => c.hp > 0);
+// Mirror Court: three bodies 120° apart around the core · while shuffling they spiral in and back out
+function mirrorPos(b) {
+  const s = b.shuffleT > 0 ? Math.sin(Math.PI * (1 - b.shuffleT / SOV_SHUFFLE_T)) : 0, dist = b.dist * (1 - 0.62 * s), out = [];
+  for (let i = 0; i < 3; i++) { const a = b.mA + i * TAU / 3 + s * 2.6 * b.dir; out.push({ x: core.x + Math.cos(a) * dist, y: core.y + Math.sin(a) * dist, i }); }
+  return out;
+}
+// everything a player shot can hit on the Sovereign (also used by the aim assist)
+function sovTargets(b) {
+  if (b.ph === 3) return mirrorPos(b).map(p => ({ x: p.x, y: p.y, r: b.r, hp: 1 }));
+  const out = [b];
+  if (crownUp(b)) for (const c of b.crown) if (c.hp > 0) { const p = prismPos(b, c); out.push({ x: p.x, y: p.y, r: prismR(b), hp: c.hp }); }
+  return out;
+}
+function sovHit(b, x, y) { // called for every player bullet → cheap distance rejects first, no allocations on a miss
+  const rr = (b.r + 4) ** 2;
+  if (b.ph === 3) { for (const p of mirrorPos(b)) if ((p.x - x) ** 2 + (p.y - y) ** 2 < rr) return true; return false; }
+  const d2 = (b.x - x) ** 2 + (b.y - y) ** 2;
+  if (d2 < rr) return true;
+  if (d2 > (b.r * 2.4 + 4) ** 2 || !crownUp(b)) return false;
+  const pr = (prismR(b) + 4) ** 2;
+  for (const c of b.crown) if (c.hp > 0) { const p = prismPos(b, c); if ((p.x - x) ** 2 + (p.y - y) ** 2 < pr) return true; }
+  return false;
+}
+// incoming damage per phase · returns what the Sovereign's bar actually takes (0 = absorbed by a prism / mirror)
+function sovIncoming(b, dmg, x, y, nova, crit) {
+  const hx = x == null ? b.x : x, hy = y == null ? b.y : y;
+  if (b.ph === 0) {
+    if (nova) { // the Supernova shatters the entire crown
+      for (const c of b.crown) if (c.hp > 0) { c.hp = 0; const p = prismPos(b, c); burst(p.x, p.y, 24, ['#e8f9ff', '#b8f7ff', '#ffffff'], 300, 2.6, 'sq'); }
+      return dmg;
+    }
+    if (b.exposed > 0) return dmg * SOV_EXPOSED_MUL;
+    const pr = (prismR(b) * 1.6) ** 2;
+    for (const c of b.crown) {
+      if (c.hp <= 0) continue;
+      const p = prismPos(b, c);
+      if ((p.x - hx) ** 2 + (p.y - hy) ** 2 < pr) {
+        c.hp -= dmg; c.flash = 0.08; b.dealt += dmg;
+        novaCharge = Math.min(1, novaCharge + dmg / b.max * 0.18 * stats.novaGain);
+        if (crit || Math.random() < 0.12) dmgText(hx, hy, dmg, crit);
+        if (c.hp <= 0) {
+          burst(p.x, p.y, 30, ['#e8f9ff', '#b8f7ff', '#ffffff'], 320, 2.8, 'sq');
+          rings.push({ x: p.x, y: p.y, r: 6, vr: 300, life: .35, max: .35, col: '#b8f7ff', w: 4 });
+          SFX.breakSfx(); shake = Math.max(shake, 8);
+        }
+        return 0;
+      }
+    }
+    return crownUp(b) ? dmg * SOV_WARD : dmg; // a standing crown wards the Sovereign
+  }
+  if (b.ph === 2) b.pull = nova ? b.pull * 0.25 : Math.max(0, b.pull - dmg / b.max * 2.6);
+  if (b.ph === 3 && !nova) {
+    let best = b.real, bd = Infinity;
+    for (const p of mirrorPos(b)) { const dd = (p.x - hx) ** 2 + (p.y - hy) ** 2; if (dd < bd) { bd = dd; best = p.i; } }
+    if (best !== b.real) { // a mirror: your shot comes straight back
+      b.mflash[best] = 0.12;
+      if (b.reflCd <= 0 && eBullets.length < APEX_BULLETS) {
+        const a = Math.atan2(core.y - hy, core.x - hx);
+        eBullets.push({ x: hx, y: hy, vx: Math.cos(a) * 320, vy: Math.sin(a) * 320, r: 4.5, dmg: 3 * b.sc, hp: 1, home: 0.4, col: '#e8f9ff', age: 0, boss: 1 });
+        b.reflCd = 0.12;
+      }
+      return 0;
+    }
+  }
+  return dmg;
+}
+// called by apexShift right after the Sovereign moves into a new phase
+function sovEnterPhase(b) {
+  b.crown = []; b.exposed = 0; b.meteorCd = 1.6; b.shuffleT = 0; b.shuffleCd = 3; b.atk = 0; b.mflash = [0, 0, 0];
+  if (b.ph === 3) { b.mA = b.ang; b.real = 0; } // the real one starts where the Sovereign stood
+  if (b.ph === 4) { // CRITICAL MASS: the countdown is sized from your damage so far (conservative → always beatable)
+    const dps = b.dealt / Math.max(1, b.fightT);
+    b.clockMax = Math.round(clamp(b.max / Math.max(1, dps) * 1.2, 22, 90)); b.clock = b.clockMax; b.tick = 0; b.lastS = -1;
+  }
+}
+function updSovereign(b, d, sc, P, stun) {
+  b.fightT += d;
+  for (const c of b.crown) c.flash = Math.max(0, c.flash - d);
+  for (let i = 0; i < 3; i++) b.mflash[i] = Math.max(0, b.mflash[i] - d);
+  if (b.spawnCd <= 0 && P < 4) { spawnEnemy('seraph', null, { elite: true }); if (P >= 2) spawnEnemy('wraith', null, { elite: true }); b.spawnCd = 11 - P; }
+  if (P === 0) { // I · THORN CROWN
+    apexOrbit(b, d, stun ? 0.03 : 0.13, b.orbit);
+    if (b.exposed > 0) {
+      b.exposed -= d;
+      if (b.exposed <= 0) {
+        sovCrown(b); SFX.flare();
+        burst(b.x, b.y, 50, ['#e8f9ff', '#b8f7ff'], 320, 2.6, 'sq'); rings.push({ x: b.x, y: b.y, r: b.r, vr: 420, life: .5, max: .5, col: '#b8f7ff', w: 5 });
+        texts.push({ x: b.x, y: b.y - b.r * 2.5, txt: loc('sov.reforged'), col: '#b8f7ff', size: 16, life: 1.3, max: 1.3, pop: 1 });
+      }
+    } else if (!b.crown.some(c => c.hp > 0)) {
+      b.exposed = SOV_EXPOSE; SFX.roar(); shake = Math.max(shake, 18); chroma = 0.7; hitStop = Math.max(hitStop, 0.1);
+      texts.push({ x: b.x, y: b.y - b.r * 2.5, txt: loc('sov.exposed'), col: '#ffbe0b', size: 24, life: 1.5, max: 1.5, pop: 1 });
+      rings.push({ x: b.x, y: b.y, r: b.r, vr: 520, life: .6, max: .6, col: '#ffbe0b', w: 6 });
+    }
+    if (!stun && b.exposed <= 0) for (const c of b.crown) { // each prism fires homing thorns
+      if (c.hp <= 0) continue; c.cd -= d;
+      if (c.cd <= 0) { const p = prismPos(b, c); apexShot(p.x, p.y, 160, 3.2 * sc, { r: 5, home: 0.9, col: '#b8f7ff' }); c.cd = rand(1.7, 2.5); }
+    }
+    if (!stun && b.fireCd <= 0) {
+      const n = b.exposed > 0 ? 9 : 7;
+      for (let i = 0; i < n; i++) apexShot(b.x, b.y, 125, 4 * sc, { off: (i - (n - 1) / 2) * 0.15, r: 6, home: 0.2, col: '#7a5cff' });
+      b.fireCd = b.exposed > 0 ? 1.3 : 2.3; SFX.bossShot();
+    }
+    if (!stun && b.ringCd <= 0) { apexRing(b.x, b.y, 16, 110, 3.6 * sc, '#e8f9ff', b.t, 5); b.ringCd = 4.2; SFX.flare(); }
+  } else if (P === 1) { // II · STARFALL
+    apexOrbit(b, d, stun ? 0.05 : 0.24, b.orbit * 1.05);
+    b.meteorCd -= d * (stun ? 0.25 : 1);
+    if (!stun && b.meteorCd <= 0) { // meteors gather around the core, glow (shoot them!) and then dive one after another
+      const n = 5, a0 = rand(0, TAU);
+      for (let i = 0; i < n && eBullets.length < APEX_BULLETS; i++) {
+        const a = a0 + i / n * TAU + rand(-0.2, 0.2), rr = MIN * rand(0.4, 0.52);
+        eBullets.push({ x: core.x + Math.cos(a) * rr, y: core.y + Math.sin(a) * rr, vx: 0, vy: 0, spd: 230, delay: 1.0 + i * 0.16, r: 9, dmg: 4.5 * sc, hp: 2, home: 0, col: '#ffbe0b', age: 0, kind: 'meteor' });
+      }
+      b.meteorCd = 2.4; SFX.flare();
+    }
+    if (b.charge) { // SOLAR LANCE — deal enough damage during the wind-up to BREAK it
+      const c = b.charge; c.t += d;
+      if (c.dealt >= c.need) breakBoss(b, loc('boss.break'));
+      else if (c.t >= c.dur) {
+        b.charge = null;
+        beams.push({ x: b.x, y: b.y, life: 0.6, max: 0.6, col: '#ffbe0b', w: b.r * 0.6 });
+        damageCore(36 + level * 0.8, true);
+        SFX.beam(); shake = Math.max(shake, 24); chroma = 0.8; flash = Math.max(flash, 0.35); flashCol = '255,190,11';
+      }
+    } else if (!stun && b.atkCd <= 0) {
+      if (b.atk++ % 2 === 0) { b.charge = { t: 0, dur: 1.6, need: b.max * 0.045, dealt: 0 }; SFX.charge(1.6); }
+      else { // judgment: two rings of stars appear around the core and converge
+        for (let k = 0; k < 2; k++) {
+          const n = 12, rr = MIN * (0.46 - k * 0.1);
+          for (let i = 0; i < n && eBullets.length < APEX_BULLETS; i++) { const an = i / n * TAU + b.t + k * 0.26; eBullets.push({ x: core.x + Math.cos(an) * rr, y: core.y + Math.sin(an) * rr, vx: 0, vy: 0, spd: 150, delay: 1.1 + k * 0.35, r: 6, dmg: 4 * sc, hp: 1, home: 0, col: '#ffd166', age: 0 }); }
+        }
+        SFX.charge(1.1);
+      }
+      b.atkCd = 4.6;
+    }
+    if (!stun && !b.charge && b.fireCd <= 0) { for (let i = 0; i < 3; i++) apexShot(b.x, b.y, 200, 3.4 * sc, { off: (i - 1) * 0.12, r: 5, home: 0.3, col: '#ffd166' }); b.fireCd = 0.9; SFX.bossShot(); }
+  } else if (P === 2) { // III · EVENT HORIZON
+    apexOrbit(b, d, 0.08, b.orbit * 1.08, true);
+    if (!stun) b.pull = Math.min(1, b.pull + d * 0.19);
+    b.crushCd -= d;
+    if (b.pull >= 0.97 && b.crushCd <= 0) {
+      damageCore(8 * sc, true); b.crushCd = 0.45;
+      texts.push({ x: core.x, y: core.y - core.R * 2.6, txt: loc('boss.crush'), col: '#d580ff', size: 13, life: .8, max: .8 });
+    }
+    b.spiral += d * 1.5;
+    if (!stun && b.fireCd <= 0) { // accretion spiral
+      for (let i = 0; i < 3 && eBullets.length < APEX_BULLETS; i++) { const a = b.spiral + i * TAU / 3; eBullets.push({ x: b.x + Math.cos(a) * b.r * 1.2, y: b.y + Math.sin(a) * b.r * 1.2, vx: Math.cos(a) * 120, vy: Math.sin(a) * 120, r: 4.5, dmg: 3 * sc, hp: 1, home: 0, col: '#8a3dff', age: 0 }); }
+      b.fireCd = 0.15;
+    }
+    if (!stun && b.ringCd <= 0) { for (let i = 0; i < 3; i++) apexShot(b.x, b.y, 74, 9 * sc, { off: (i - 1) * 0.7, r: 10, hp: 4, home: 2.2, col: '#b44dff', kind: 'grav' }); b.ringCd = 2.8; SFX.flare(); }
+    if (!stun && b.swarmCd <= 0 && enemies.length < 150) { spawnSwarm(b.x, b.y, 12, b, '#8a3dff'); b.swarmCd = 9; }
+  } else if (P === 3) { // IV · MIRROR COURT
+    b.dist += (b.orbit - b.dist) * Math.min(1, d * 2.5);
+    b.mA += d * (stun ? 0.05 : 0.32) * b.dir;
+    b.shuffleCd -= d;
+    if (b.shuffleT > 0) { const was = b.shuffleT; b.shuffleT -= d; if (was > SOV_SHUFFLE_T / 2 && b.shuffleT <= SOV_SHUFFLE_T / 2) b.real = (Math.random() * 3) | 0; } // re-drawn while converged
+    else if (!stun && b.shuffleCd <= 0) { b.shuffleT = SOV_SHUFFLE_T; b.shuffleCd = SOV_SHUFFLE; SFX.glitch(); SFX.whoosh(0.8); }
+    const pos = mirrorPos(b); b.x = pos[b.real].x; b.y = pos[b.real].y; b.ang = b.mA + b.real * TAU / 3;
+    if (!stun && b.shuffleT <= 0 && b.fireCd <= 0) { for (const p of pos) apexShot(p.x, p.y, 225, 3.4 * sc, { r: 5, home: 0.25, col: '#e8f9ff' }); b.fireCd = 1.0; SFX.bossShot(); }
+    if (!stun && b.ringCd <= 0) { const p = pos[(Math.random() * 3) | 0]; apexRing(p.x, p.y, 14, 120, 3.6 * sc, '#7a5cff', b.t); b.ringCd = 3.3; SFX.flare(); }
+  } else { // V · CRITICAL MASS
+    b.clock -= d; b.tick -= d;
+    const s = Math.max(0, Math.ceil(b.clock));
+    if (s !== b.lastS) { b.lastS = s; $('bossPhase').textContent = bossPhaseLabel(b) + ' · ' + s + 's'; }
+    if (b.clock < 6 && b.tick <= 0) { SFX.chargeTick(1 - b.clock / 6); b.tick = b.clock < 3 ? 0.25 : 0.5; }
+    if (b.clock <= 0) sovDetonate(b);
+    if (!stun) { b.flipCd -= d; if (b.flipCd <= 0) { b.dir *= -1; b.flipCd = rand(1.4, 2.4); } }
+    apexOrbit(b, d, stun ? 0.2 : 1.25, b.orbit * (0.82 + 0.16 * Math.sin(b.t * 2.4)));
+    b.trail.push({ x: b.x, y: b.y, l: 0.25 }); if (b.trail.length > 12) b.trail.shift();
+    b.spiral += d * 2.4;
+    if (!stun && b.fireCd <= 0) { // four counter-rotating arms
+      for (let k = 0; k < 4 && eBullets.length < APEX_BULLETS; k++) { const a = (k % 2 ? b.spiral : -b.spiral) + k * TAU / 4; eBullets.push({ x: b.x, y: b.y, vx: Math.cos(a) * 150, vy: Math.sin(a) * 150, r: 4.5, dmg: 3 * sc, hp: 1, home: 0, col: k % 2 ? '#ff2a4d' : '#ffffff', age: 0 }); }
+      b.fireCd = 0.14;
+    }
+    if (!stun && b.ringCd <= 0) {
+      apexRing(b.x, b.y, 22, 135, 3.6 * sc, '#ff0055', b.t, 5.5);
+      for (let i = 0; i < 2; i++) apexShot(b.x, b.y, 140, 5 * sc, { off: (i - 0.5) * 0.6, r: 7, hp: 2, home: 1.4, col: '#ffbe0b' });
+      b.ringCd = 2.6; SFX.flare();
+    }
+  }
+  for (const tr of b.trail) tr.l -= d;
+  b.trail = b.trail.filter(tr => tr.l > 0);
+}
+// CRITICAL MASS ran out: the star detonates (the late-game hit cap turns it into a 60% hull hit) and re-arms shorter
+function sovDetonate(b) {
+  b.blasts++;
+  for (const o of eBullets) o.hp = 0;
+  damageCore(1e6, true);
+  if (state !== 'play') return;
+  flash = 1; flashCol = '255,255,255'; shake = 40; chroma = 1; hitStop = Math.max(hitStop, 0.2);
+  for (let i = 0; i < 5; i++) rings.push({ x: b.x, y: b.y, r: b.r, vr: 500 + i * 320, life: 1.1, max: 1.1, col: i % 2 ? '#ffffff' : '#ff0055', w: 8 - i });
+  burst(b.x, b.y, 160, ['#ffffff', '#ff0055', '#ffbe0b', '#7a5cff'], 620, 4);
+  texts.push({ x: core.x, y: core.y - core.R * 3, txt: loc('sov.collapse'), col: '#ff0055', size: 26, life: 1.6, max: 1.6, pop: 1 });
+  SFX.impact(); SFX.explode(true);
+  b.clockMax = Math.max(15, Math.round(b.clockMax * 0.75)); b.clock = b.clockMax; b.lastS = -1;
+}
+function killSovereign(b) {
+  score += 60000 * (1 + level * 0.05);
+  burst(b.x, b.y, 220, ['#ffffff', '#e8f9ff', '#7a5cff', '#ffbe0b', '#ff0055'], 700, 4.8);
+  for (let i = 0; i < 6; i++) rings.push({ x: b.x, y: b.y, r: 10, vr: 500 + i * 300, life: 1.3, max: 1.3, col: ['#ffffff', '#7a5cff', '#ffbe0b'][i % 3], w: 9 - i });
+  for (let i = 0; i < 80; i++) dropShard(b.x, b.y, 12, 30, 380);
+  SFX.explode(true); SFX.impact(); SFX.legendary();
+  if (state !== 'play') return;
+  flash = 1; flashCol = '255,255,255'; shake = 40; chroma = 1; hitStop = 0.35; slowmo = 0.8;
+  draft.dmg *= 1.25; recompute(); core.hp = stats.maxHp; core.shield = stats.maxShield; novaCharge = 1;
+  bannerShow(loc('ban.finalTop'), loc('ban.final'), loc('ban.finalSub'), '#e8f9ff');
+  for (const e of enemies) if (!e.dead) killEnemy(e, true); // the swarm dies with its king
+  MUSIC.set('play');
+  setTimeout(nextBoss, 3000);
 }
 
 /* =========================================================
@@ -2844,7 +3320,7 @@ function assistTarget(a) {
     if (s < bs) { bs = s; best = o; ba = ta; }
   };
   for (const e of enemies) if (!e.dead && e.x > -20 && e.x < W + 20 && e.y > -20 && e.y < H + 20) test(e, e.r);
-  if (boss && !boss.entering) test(boss, boss.r);
+  if (boss && !boss.entering) { if (boss.final) for (const p of sovTargets(boss)) test(p, p.r); else test(boss, boss.r); } // Sovereign: prisms & every mirror count too
   return best ? { t: best, a: ba } : null;
 }
 function fire() {
@@ -3148,19 +3624,24 @@ function update(dt) {
   const zone = Math.max(core.R * 4.2, MIN * 0.2);
   danger += ((closest < zone ? 1 : 0) - danger) * Math.min(1, dt * 6);
 
-  // level up — every level grows the core a little; every 3rd level grants an Overclock draft
-  let lv = false;
+  // level up — every level grows the core a little; Overclock draft every 3rd level (every 10th from LV 100)
+  let lv = false, dragHit = false, lateDraft = false;
   while (xp >= xpNeed(level)) {
     xp -= xpNeed(level); level++; lv = true;
-    if (level % DRAFT_EVERY === 0) draftQueue.push(level);
+    if (isDraftLv(level)) draftQueue.push(level);
+    if (level === XP_DRAG_LV) dragHit = true;
+    if (level === DRAFT_LATE_LV) lateDraft = true;
     const bi = BOSS_LEVELS.indexOf(level);
     if (bi >= 0 && !bossTriggered[bi]) { bossTriggered[bi] = true; bossQueue.push([bi, 0]); bossDelay = 1.6; }
+    if (level === FINAL_LV && !bossTriggered.final) { bossTriggered.final = true; bossQueue.push([-2, 0]); bossDelay = 2.2; } // LV 200: THE NULL SOVEREIGN
     const apexLv = level >= APEX_START && (level - APEX_START) % APEX_EVERY === 0; // 150 · 170 · 190 · 210 …
     if (apexLv) { bossQueue.push([-1, 0, (level - APEX_START) / APEX_EVERY]); bossDelay = 1.6; }
     if (level > 150 && (level - 150) % 15 === 0 && !apexLv) { echoes++; bossQueue.push([(Math.random() * 5) | 0, echoes]); bossDelay = 1.6; } // an Apex level replaces that echo
   }
   if (lv) {
     recompute(); syncBotScale(); replay($('hLevel'), 'bump'); SFX.levelUp(); BG.pulse = 1;
+    if (dragHit) { bannerShow(loc('ban.dragTop'), loc('ban.drag'), loc('ban.dragSub'), '#7ffaff'); SFX.elite(); }
+    if (lateDraft) texts.push({ x: core.x, y: core.y + core.R * 3.6, txt: loc('float.lateDraft'), col: '#ffd166', size: 13, life: 2.6, max: 2.6 });
     const tt = threatTier();
     if (tt > threat) { // a new THREAT tier was reached (LV 100, 115, 130 …)
       threat = tt; SFX.elite();
@@ -3169,7 +3650,7 @@ function update(dt) {
       shake = Math.max(shake, tt === 1 ? 16 : 8); if (tt === 1) { flash = 0.5; flashCol = '255,42,109'; }
     }
     rings.push({ x: core.x, y: core.y, r: core.R, vr: 600, life: .6, max: .6, col: '#00f3ff', w: 3 });
-    texts.push({ x: core.x, y: core.y - core.R * 3.2, txt: loc('float.growth') + (level % DRAFT_EVERY ? loc('float.overclockIn', { n: DRAFT_EVERY - level % DRAFT_EVERY }) : ''), col: '#7ffaff', size: 11, life: 1.3, max: 1.3 });
+    texts.push({ x: core.x, y: core.y - core.R * 3.2, txt: loc('float.growth') + (isDraftLv(level) ? '' : loc('float.overclockIn', { n: draftIn(level) })), col: '#7ffaff', size: 11, life: 1.3, max: 1.3 });
   }
   if (draftQueue.length && !modal && !cine) openDraft();
   else if (bossQueue.length && !boss && !cine && !modal) { bossDelay -= d; if (bossDelay <= 0) nextBoss(); }
@@ -3875,6 +4356,11 @@ function drawBossOverlays(b, t, top, col) {
 }
 /* ---------- Apex Titans ---------- */
 function apexCol(b) {
+  if (b.final) { // Sovereign: white corona · gold starfall · violet horizon · pale mirrors · critical white/red strobe (faster as the clock runs out)
+    if (b.ph < 4) return ['#e8f9ff', '#ffbe0b', '#8a3dff', '#b8f7ff'][b.ph];
+    const u = b.clockMax ? 1 - clamp(b.clock / b.clockMax, 0, 1) : 0;
+    return Math.sin(b.t * (6 + 22 * u)) > 0 ? '#ffffff' : '#ff2a4d';
+  }
   if (b.A.id === 'jug') return ['#ff8a00', '#ffbe0b', '#ff3d00'][b.ph];
   if (b.A.id === 'weaver') return ['#b44dff', '#d580ff', '#8a3dff'][b.ph];
   return b.ph === 2 ? (Math.sin(b.t * 22) > 0 ? '#ff0033' : '#ff8a9a') : b.ph === 1 ? '#00f3ff' : '#ff1744';
@@ -3884,6 +4370,7 @@ function drawApex(b, t) {
   ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = .45 + .2 * Math.sin(t * 4);
   ctx.drawImage(glow(col), b.x - R * 3.8, b.y - R * 3.8, R * 7.6, R * 7.6);
   ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+  if (b.final) { drawSovereign(b, t, R, col, body); return; }
   if (b.A.id === 'jug') drawJuggernaut(b, t, R, col, body);
   else if (b.A.id === 'weaver') drawWeaver(b, t, R, col, body);
   else drawOmega(b, t, R, col, body);
@@ -3894,6 +4381,113 @@ function drawApex(b, t) {
     ctx.fillStyle = col; ctx.font = 'bold 11px ui-monospace,Menlo,monospace'; ctx.textAlign = 'center'; ctx.fillText(hint, b.x, b.y + R * 2.15 + 14);
   }
 }
+/* ---------- LV 200 · NULL SOVEREIGN ---------- */
+// one body: a black eclipse disc inside a spiked white corona, rune rings and a single eye
+// real = the eye has a pupil that tracks the core · closed = eye shut (Mirror Court shuffle)
+function sovBody(x, y, R, col, body, t, P, real, closed, alpha) {
+  ctx.save(); ctx.translate(x, y); ctx.globalAlpha = alpha;
+  const rot = t * (0.3 + P * 0.12), crit = P === 4;
+  ctx.shadowColor = col; ctx.shadowBlur = 20; ctx.fillStyle = col;
+  ctx.beginPath(); // corona spikes
+  for (let i = 0; i < 24; i++) {
+    const a = rot + i / 24 * TAU, rr = i % 2 ? R * 0.98 : R * (i % 4 ? 1.28 : 1.55) * (crit ? 1 + 0.14 * Math.sin(t * 20 + i) : 1 + 0.04 * Math.sin(t * 3 + i));
+    i ? ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr) : ctx.moveTo(Math.cos(a) * rr, Math.sin(a) * rr);
+  }
+  ctx.closePath(); ctx.globalAlpha = alpha * 0.85; ctx.fill(); ctx.globalAlpha = alpha;
+  ctx.shadowBlur = 0;
+  if (crit && body !== '#ffffff') { // white-hot, cracking star
+    const g = ctx.createRadialGradient(0, 0, 0, 0, 0, R * 0.95);
+    g.addColorStop(0, '#ffffff'); g.addColorStop(0.45, '#ffe6a0'); g.addColorStop(0.8, '#ff6a3d'); g.addColorStop(1, '#ff0055');
+    ctx.fillStyle = g;
+  } else ctx.fillStyle = body;
+  ctx.beginPath(); ctx.arc(0, 0, R * 0.95, 0, TAU); ctx.fill();
+  ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.stroke();
+  if (crit) { // fault lines
+    ctx.strokeStyle = 'rgba(120,0,30,0.7)'; ctx.lineWidth = 1.5; ctx.beginPath();
+    for (let i = 0; i < 7; i++) { const a = i / 7 * TAU + t * 0.4; ctx.moveTo(Math.cos(a) * R * 0.3, Math.sin(a) * R * 0.3); ctx.lineTo(Math.cos(a + 0.2) * R * 0.62, Math.sin(a + 0.2) * R * 0.62); ctx.lineTo(Math.cos(a - 0.1) * R * 0.92, Math.sin(a - 0.1) * R * 0.92); }
+    ctx.stroke();
+  }
+  ctx.save(); ctx.rotate(-rot * 1.6); ctx.strokeStyle = crit ? 'rgba(255,0,85,0.6)' : col + '88'; ctx.lineWidth = 1.5; // rune ring + hexagram
+  ctx.setLineDash([R * 0.18, R * 0.1]); ctx.beginPath(); ctx.arc(0, 0, R * 0.74, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+  poly(3, R * 0.6); ctx.stroke(); ctx.rotate(Math.PI); poly(3, R * 0.6); ctx.stroke(); ctx.restore();
+  almond(R * 0.42, R * 0.2 * (closed ? 0.12 : 1)); ctx.fillStyle = '#000000'; ctx.fill(); ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 1.8; ctx.stroke();
+  if (!closed) {
+    if (real) { const ea = Math.atan2(core.y - y, core.x - x); ctx.fillStyle = crit ? '#ff0055' : '#ffffff'; ctx.beginPath(); ctx.ellipse(Math.cos(ea) * R * 0.17, Math.sin(ea) * R * 0.05, R * 0.055, R * 0.16, 0, 0, TAU); ctx.fill(); }
+    else { ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(0, 0, R * 0.1, 0, TAU); ctx.stroke(); } // hollow mirror eye
+  }
+  ctx.restore(); ctx.globalAlpha = 1;
+}
+function drawSovereign(b, t, R, col, body) {
+  const P = b.ph;
+  if (P === 2) { // EVENT HORIZON: accretion disc + streams dragging the core in
+    ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(-t * 1.2);
+    for (const [k, c] of [[2.7, '#8a3dff'], [2.15, '#d580ff']]) { ctx.save(); ctx.scale(1, 0.38); ctx.strokeStyle = c; ctx.lineWidth = 4; ctx.globalAlpha = 0.75; ctx.beginPath(); ctx.arc(0, 0, R * k, 0, TAU); ctx.stroke(); ctx.restore(); }
+    ctx.restore(); ctx.globalAlpha = 1;
+    if (b.pull > 0.02) {
+      const vx = b.x - core.x, vy = b.y - core.y, nl = Math.hypot(vx, vy) || 1, nx = -vy / nl, ny = vx / nl;
+      ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = '#b44dff'; ctx.lineWidth = 1.5;
+      for (let i = 0; i < 8; i++) {
+        const ph = (t * 1.6 + i / 8) % 1, off = (i - 3.5) * 10, sx = core.x + vx * ph, sy = core.y + vy * ph;
+        ctx.globalAlpha = b.pull * (1 - ph) * 0.8; ctx.beginPath(); ctx.moveTo(sx + nx * off, sy + ny * off); ctx.lineTo(sx + vx * 0.12 + nx * off * 0.7, sy + vy * 0.12 + ny * off * 0.7); ctx.stroke();
+      }
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    }
+  }
+  if (P === 4) { ctx.globalCompositeOperation = 'lighter'; for (const tr of b.trail) { ctx.globalAlpha = tr.l * 2; ctx.drawImage(glow('#ff2a4d'), tr.x - R * 1.4, tr.y - R * 1.4, R * 2.8, R * 2.8); } ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; }
+  if (b.charge) { // SOLAR LANCE telegraph
+    const p = b.charge.t / b.charge.dur;
+    ctx.strokeStyle = '#ffbe0b'; ctx.globalAlpha = 0.25 + 0.6 * p * (0.6 + 0.4 * Math.sin(t * 30)); ctx.lineWidth = 1 + p * 12; ctx.setLineDash(p > 0.7 ? [] : [12, 10]);
+    ctx.beginPath(); ctx.moveTo(b.x, b.y); ctx.lineTo(core.x, core.y); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'lighter'; ctx.drawImage(glow('#ffbe0b'), b.x - R * (1 + p), b.y - R * (1 + p), R * (2 + 2 * p), R * (2 + 2 * p)); ctx.globalCompositeOperation = 'source-over';
+  }
+  if (P === 0 && b.crown.length) { // THORN CROWN: ward tethers, then the prisms
+    const up = crownUp(b), pr = prismR(b);
+    if (up) {
+      ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(t * 0.5); ctx.strokeStyle = `rgba(184,247,255,${0.35 + 0.15 * Math.sin(t * 5)})`; ctx.lineWidth = 2; poly(6, R * 1.45); ctx.stroke(); ctx.restore();
+      ctx.strokeStyle = 'rgba(184,247,255,0.35)'; ctx.lineWidth = 1.5; ctx.beginPath();
+      for (const c of b.crown) if (c.hp > 0) { const p = prismPos(b, c); ctx.moveTo(b.x + Math.cos(p.a) * R * 1.45, b.y + Math.sin(p.a) * R * 1.45); ctx.lineTo(p.x, p.y); }
+      ctx.stroke();
+    }
+    for (const c of b.crown) {
+      if (c.hp <= 0) continue;
+      const p = prismPos(b, c);
+      ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 0.7; ctx.drawImage(glow('#b8f7ff'), p.x - pr * 2.6, p.y - pr * 2.6, pr * 5.2, pr * 5.2); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a + Math.PI / 2); ctx.fillStyle = c.flash > 0 ? '#ffffff' : 'rgba(8,18,30,0.92)'; ctx.strokeStyle = '#b8f7ff'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(0, -pr * 1.3); ctx.lineTo(pr * 0.7, 0); ctx.lineTo(0, pr * 1.3); ctx.lineTo(-pr * 0.7, 0); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, -pr * 1.3); ctx.lineTo(0, pr * 1.3); ctx.moveTo(-pr * 0.7, 0); ctx.lineTo(pr * 0.7, 0); ctx.strokeStyle = 'rgba(184,247,255,0.45)'; ctx.lineWidth = 1; ctx.stroke(); ctx.restore();
+      ctx.strokeStyle = '#b8f7ff'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(p.x, p.y, pr * 1.55, -Math.PI / 2, -Math.PI / 2 + TAU * clamp(c.hp / c.max, 0, 1)); ctx.stroke();
+    }
+  }
+  if (P === 3) { // MIRROR COURT: the mirrors are drawn exactly like the real one, except for the hollow eye
+    const pos = mirrorPos(b), closed = b.shuffleT > 0;
+    for (const p of pos) {
+      if (p.i === b.real) continue;
+      ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = .45 + .2 * Math.sin(t * 4); ctx.drawImage(glow(col), p.x - R * 3.8, p.y - R * 3.8, R * 7.6, R * 7.6); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+      sovBody(p.x, p.y, R, col, b.mflash[p.i] > 0 ? '#ffffff' : 'rgba(16,0,10,0.94)', t, P, false, closed, 1);
+      drawBossOverlays(Object.assign({}, b, { x: p.x, y: p.y }), t, R * 1.9, col);
+      sovPips(p.x, p.y, R, col, P);
+    }
+    sovBody(b.x, b.y, R, col, body, t, P, true, closed, 1);
+  } else sovBody(b.x, b.y, R, col, P === 2 && b.flash <= 0 ? '#000000' : body, t, P, true, false, 1);
+  drawBossOverlays(b, t, R * 1.9, col);
+  sovPips(b.x, b.y, R, col, P);
+  ctx.font = 'bold 11px ui-monospace,Menlo,monospace'; ctx.textAlign = 'center';
+  if (P === 4 && b.clockMax > 0 && b.trans <= 0) { // CRITICAL MASS countdown ring
+    const f = clamp(b.clock / b.clockMax, 0, 1), cr = R * 2.3, urgent = b.clock < 6, c2 = urgent && Math.sin(t * 20) > 0 ? '#ffffff' : '#ff2a4d';
+    ctx.strokeStyle = 'rgba(255,0,85,0.2)'; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(b.x, b.y, cr, 0, TAU); ctx.stroke();
+    ctx.strokeStyle = c2; ctx.shadowColor = '#ff0055'; ctx.shadowBlur = 12; ctx.beginPath(); ctx.arc(b.x, b.y, cr, -Math.PI / 2, -Math.PI / 2 + TAU * f); ctx.stroke(); ctx.shadowBlur = 0;
+    ctx.fillStyle = c2; ctx.font = `bold ${urgent ? 15 : 12}px ui-monospace,Menlo,monospace`; ctx.fillText(loc('sov.detonate', { s: Math.max(0, b.clock).toFixed(1) }), b.x, b.y + cr + 18);
+    return;
+  }
+  const hint = b.trans > 0 || b.entering ? '' : P === 0 ? (b.exposed > 0 ? loc('sov.hintExposed') : loc('sov.hintWard')) : P === 1 ? loc('sov.hintMeteor')
+    : P === 2 ? (b.pull > 0.35 ? loc('boss.resist') : '') : P === 3 ? loc('sov.hintMirror') : '';
+  if (hint && !b.charge && Math.sin(t * 8) > -0.4) {
+    ctx.fillStyle = P === 0 && b.exposed > 0 ? '#ffbe0b' : col;
+    if (P === 3) for (const p of mirrorPos(b)) ctx.fillText(hint, p.x, p.y + R * 2.15 + 14); // identical under every body — no giveaway
+    else ctx.fillText(hint, b.x, b.y + R * 2.15 + 14);
+  }
+}
+function sovPips(x, y, R, col, P) { for (let i = 0; i < 5; i++) { ctx.fillStyle = i < P ? 'rgba(255,255,255,0.18)' : col; ctx.fillRect(x - 24 + i * 10, y - R * 1.9 - 22, 7, 4); } }
 function drawJuggernaut(b, t, R, col, body) {
   const P = b.ph, aim = Math.atan2(core.y - b.y, core.x - b.x);
   ctx.save(); ctx.translate(b.x, b.y); ctx.shadowColor = col; ctx.shadowBlur = 20;
@@ -4238,6 +4832,11 @@ function drawWorld(o) {
     const gr = o2.kind === 'spore' ? o2.r * (3.4 + 0.6 * Math.sin(t * 9 + o2.x)) : o2.r * 3;
     ctx.drawImage(glow(c), o2.x - gr, o2.y - gr, gr * 2, gr * 2);
     if (o2.kind === 'spore') { ctx.strokeStyle = c; ctx.lineWidth = 1.2; ctx.beginPath(); for (let i = 0; i < 6; i++) { const a = i / 6 * TAU + t * 3; ctx.moveTo(o2.x + Math.cos(a) * o2.r * 0.7, o2.y + Math.sin(a) * o2.r * 0.7); ctx.lineTo(o2.x + Math.cos(a) * o2.r * 1.5, o2.y + Math.sin(a) * o2.r * 1.5); } ctx.stroke(); }
+    if (o2.kind === 'meteor') { // Sovereign STARFALL: dashed impact line while it gathers, a burning tail once it dives
+      ctx.strokeStyle = c;
+      if (pend) { ctx.lineWidth = 1.2; ctx.setLineDash([4, 8]); ctx.beginPath(); ctx.moveTo(o2.x, o2.y); ctx.lineTo(core.x, core.y); ctx.stroke(); ctx.setLineDash([]); }
+      else { const sp = Math.hypot(o2.vx, o2.vy) || 1; ctx.lineWidth = o2.r * 0.9; ctx.beginPath(); ctx.moveTo(o2.x, o2.y); ctx.lineTo(o2.x - o2.vx / sp * o2.r * 4.5, o2.y - o2.vy / sp * o2.r * 4.5); ctx.stroke(); }
+    }
     if (o2.kind === 'grav') { // gravity bomb: dark core with spinning event-horizon arcs
       ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(o2.x, o2.y, o2.r * (1.5 + 0.2 * Math.sin(t * 10)), 0, TAU); ctx.stroke();
       for (let i = 0; i < 3; i++) { const a = t * 4 + i * TAU / 3; ctx.beginPath(); ctx.arc(o2.x, o2.y, o2.r * 2.2, a, a + 0.8); ctx.stroke(); }
@@ -4608,7 +5207,7 @@ function updateHud() {
   setTxt('hScore', fmt(score));
   setW('hXp', clamp(xp / xpNeed(level), 0, 1));
   setTxt('hStage', loc('hud.stage', { stage: stageName(core.stage) }) + (orbs.length ? ' · ' + orbs.length + '◉ ' + ORB_TIERS[orbTier()] : '') + (comps.length ? ' · ' + comps.length + '✦' : ''));
-  setTxt('hDraft', loc('hud.overclockIn', { n: DRAFT_EVERY - level % DRAFT_EVERY }));
+  setTxt('hDraft', loc('hud.overclockIn', { n: draftIn(level) }));
   const th = threatTier();
   setTxt('hThreat', th ? loc('hud.threat', { n: th, hp: fmtMul(lateHp()), dmg: fmtMul(lateDmg()), bots: lateCount() }) : '');
   setTxt('hHpTxt', Math.ceil(core.hp) + '/' + Math.round(stats.maxHp));
@@ -4883,7 +5482,7 @@ function resetWorld() {
   combo = { n: 0, t: 0, best: 0 }; comps = []; legends = 0; epicGiven = false; legGiven = false; draftPhase = 'idle'; bossDelay = 0; assistLock = null; aimFiring = false;
   ['hud'].forEach(id => $(id).classList.remove('cine'));
   $('lbTop').classList.remove('on'); $('lbBot').classList.remove('on'); $('cineSkip').classList.remove('on'); $('cineCap').textContent = '';
-  $('bossbar').classList.add('hidden'); $('bossbar').classList.remove('apex'); $('volatility').classList.remove('on');
+  $('bossbar').classList.add('hidden'); $('bossbar').classList.remove('apex'); $('bossbar').classList.remove('final'); $('volatility').classList.remove('on');
 }
 function goHub() {
   state = 'menu'; paused = false; modal = null; hideAll(); resetWorld();
